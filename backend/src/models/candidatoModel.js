@@ -26,4 +26,13 @@ async function criar({ cpf, nome, email, senhaHash }) {
     }
 }
 
-module.exports = { criar, CpfJaCadastradoError };
+async function buscarPorCpf(cpf) {
+    // O CPF ? um parâmetro, separado do código SQL.
+    const resultado = await pool.query("SELECT id, senha_hash, versao_sessao FROM tbcandidato WHERE cpf = $1", [cpf]);
+    return resultado.rows[0];
+}
+async function buscarPorId(id) {
+    const resultado = await pool.query("SELECT id, nome_completo AS nome, versao_sessao FROM tbcandidato WHERE id = $1", [id]);
+    return resultado.rows[0];
+}
+module.exports = { criar, CpfJaCadastradoError, buscarPorCpf, buscarPorId };

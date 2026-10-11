@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --test",
     "start": "node server.js"
   },
   "keywords": [],
@@ -17,6 +17,8 @@
   "dependencies": {
     "dotenv": "^18.0.5",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "nodemailer": "^10.1.0",
     "pg": "^8.23.1"
   }
 }

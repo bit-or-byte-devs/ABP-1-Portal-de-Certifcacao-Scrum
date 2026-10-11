@@ -31,6 +31,7 @@ function validar(dados) {
   if (nome.split(/\s+/).length < 2) return "Informe nome e sobrenome.";
   if (!cpfValido(somenteDigitos(dados.cpf))) return "Informe um CPF válido.";
   if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Informe um e-mail válido.";
+  if (senha.length > 1024) return "A senha deve ter no máximo 1024 caracteres.";
   if (senha.length < 8) return "A senha deve ter pelo menos 8 caracteres.";
   if (!/[A-Za-z]/.test(senha) || !/\d/.test(senha)) return "A senha deve ter letras e números.";
   if (dados.aceiteTermos !== true) return "É preciso aceitar os termos para criar a conta.";
