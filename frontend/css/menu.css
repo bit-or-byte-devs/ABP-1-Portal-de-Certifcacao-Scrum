@@ -1,0 +1,5 @@
+/* Reaproveita as cores, fontes e componentes de login.css. */
+.menu__acoes { display: flex; flex-direction: column; gap: 16px; }
+.menu__acoes .btn { width: 100%; margin-top: 0; padding: 0 16px; }
+.menu__sair { background: var(--roxo-base); }
+#aviso-menu { margin-top: 24px; }

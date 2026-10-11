@@ -53,7 +53,8 @@
 
   // Retorna a mensagem de erro do campo (vazia quando está válido)
   function validarCampo(form, campo) {
-    const valor = campo.type === "checkbox" ? campo.checked : campo.value.trim();
+    const valor = campo.type === "checkbox" ? campo.checked
+      : (campo.name === "senha" || campo.name === "confirmarSenha") ? campo.value : campo.value.trim();
 
     if (campo.required && !valor) {
       return campo.dataset.msgObrigatorio || MSG_OBRIGATORIO;
@@ -69,6 +70,7 @@
     if (campo.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor)) {
       return "Informe um e-mail válido.";
     }
+    if (campo.name === "senha" && valor.length > 1024) return "A senha deve ter no máximo 1024 caracteres.";
     if (campo.dataset.min && valor.length < Number(campo.dataset.min)) {
       return "A senha deve ter pelo menos " + campo.dataset.min + " caracteres.";
     }
@@ -104,6 +106,7 @@
       if (campo.hasAttribute("data-nao-enviar")) return;
       if (campo.type === "checkbox") dados[campo.name] = campo.checked;
       else if (campo.hasAttribute("data-cpf")) dados[campo.name] = somenteDigitos(campo.value);
+      else if (campo.name === "senha" || campo.name === "confirmarSenha") dados[campo.name] = campo.value;
       else dados[campo.name] = campo.value.trim();
     });
     return dados;
@@ -216,10 +219,17 @@
       return;
     }
 
+    // O cadastro mantém o fluxo de notificação acima.
+    if (resposta.ok && form.dataset.redirecionar) {
+      window.location.href = form.dataset.redirecionar;
+      return;
+    }
     if (botao) botao.disabled = false;
 
     if (resposta.status === 409) {
       mostrarCpfDuplicado(form, corpo.mensagem || MSG_CPF_DUPLICADO);
+    } else if (resposta.status === 401 && form.dataset.redirecionar) {
+      mostrarAviso(form, "CPF ou senha incorretos", "erro");
     } else if (resposta.ok) {
       mostrarAviso(form, corpo.mensagem || "", "sucesso");
     } else {
