@@ -1,3 +1,5 @@
+-- Instalação inicial: execute em um banco vazio.
+-- Para atualizar um banco existente, use database/migrations/001_recuperacao_senha.sql.
 BEGIN;
 
 -- 1. Candidatos
@@ -7,6 +9,7 @@ CREATE TABLE tbcandidato (
     nome_completo VARCHAR(150) NOT NULL,
     email VARCHAR(254) NOT NULL,
     senha_hash TEXT NOT NULL,
+    versao_sessao INTEGER NOT NULL DEFAULT 0,
     data_cadastro TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     data_aceite_termos TIMESTAMPTZ,
 
@@ -222,6 +225,24 @@ CREATE TABLE tbcertificado (
 
     CONSTRAINT ck_certificado_aprovacao
         CHECK (percentual_acertos_emitido BETWEEN 65 AND 100)
+);
+
+-- 10. Recuperação de senha e controle de tentativas
+CREATE TABLE tbrecuperacao_senha (
+    candidato_id INTEGER PRIMARY KEY REFERENCES tbcandidato(id) ON DELETE CASCADE,
+    solicitacao_id UUID NOT NULL UNIQUE,
+    codigo_hmac VARCHAR(64) NOT NULL,
+    expira_em TIMESTAMPTZ NOT NULL,
+    tentativas INTEGER NOT NULL DEFAULT 0 CHECK (tentativas BETWEEN 0 AND 5),
+    enviada BOOLEAN NOT NULL DEFAULT FALSE,
+    invalidada BOOLEAN NOT NULL DEFAULT FALSE,
+    consumida_em TIMESTAMPTZ
+);
+-- Chaves HMAC: não precisamos guardar CPF nem IP nesta tabela.
+CREATE TABLE tblimite_recuperacao (
+    chave VARCHAR(64) PRIMARY KEY,
+    quantidade INTEGER NOT NULL,
+    reinicia_em TIMESTAMPTZ NOT NULL
 );
 
 -- Índices para consultas pelos relacionamentos.
