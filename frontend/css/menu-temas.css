@@ -1,0 +1,344 @@
+:root {
+    --bg-blue: #3d519b;
+    --card-bg: #111726;
+    --inner-box: #0b0f19;
+    --text-white: #ffffff;
+    --text-muted: #8c95a5;
+    --green-accent: #00ff66;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-blue);
+    background-image: linear-gradient(135deg, #4358a9 0%, #314282 100%);
+    color: var(--text-white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Navbar Superior */
+.top-nav {
+    background-color: #111827;
+    border-radius: 40px;
+    margin: 20px 50px;
+    padding: 12px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-icon {
+    background-color: #00ff66;
+    color: #111;
+    font-weight: 800;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.logo-text h2 {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.logo-text small {
+    font-size: 9px;
+    color: var(--text-muted);
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-nav {
+    background-color: #1f2937;
+    color: var(--text-white);
+    border: none;
+    padding: 8px 22px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-nav:hover {
+    background-color: #374151;
+}
+
+/* Conteúdo Principal */
+.main-container {
+    flex: 1;
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 20px 50px 40px 50px;
+}
+
+.welcome-title {
+    font-size: 46px;
+    font-weight: 800;
+    margin-bottom: 50px;
+    letter-spacing: -0.5px;
+}
+
+.highlight {
+    color: var(--green-accent);
+}
+
+/* Grid de Cards da Página Inicial */
+.cards-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: 22px;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 270px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.card-temas {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card-temas:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 255, 102, 0.3);
+}
+
+.card-title-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.icon-box {
+    background-color: #1f2937;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.card-title-row h2 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.card-body-content p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.card-counter {
+    align-self: flex-end;
+    font-size: 34px;
+    font-weight: 700;
+    color: #6b7280;
+}
+
+/* Grid de Exames */
+.exams-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.exam-item {
+    background-color: var(--inner-box);
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.ver-mais {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text-white);
+}
+
+/* Página de Temas */
+.top-header-row {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.btn-voltar {
+    background-color: #1f2937;
+    color: var(--text-white);
+    padding: 8px 22px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-voltar:hover {
+    background-color: #374151;
+}
+
+.page-title {
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.themes-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.theme-card {
+    background-color: var(--card-bg);
+    border-radius: 18px;
+    padding: 22px 28px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-main-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.theme-main-row h3 {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.theme-controls {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.progress-badge {
+    background-color: var(--inner-box);
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--text-muted);
+    display: none; /* Recolhidos ficam ocultos */
+}
+
+.btn-iniciar {
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    display: none; /* Recolhidos ficam ocultos */
+    transition: all 0.2s;
+}
+
+.btn-iniciar:hover {
+    border-color: var(--green-accent);
+    color: #fff;
+}
+
+.theme-desc {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, margin-top 0.3s ease;
+}
+
+.theme-desc p {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    line-height: 1.5;
+}
+
+/* Estado Ativo (Tema 1 aberto por padrão) */
+.theme-card.active {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.theme-card.active .progress-badge,
+.theme-card.active .btn-iniciar {
+    display: inline-flex;
+}
+
+.theme-card.active .theme-desc {
+    max-height: 100px;
+    margin-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding-top: 15px;
+}
+
+/* Rodapé */
+.footer-bar {
+    background-color: #0b0f19;
+    padding: 22px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.footer-left {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-brand {
+    font-weight: 700;
+    color: var(--text-white);
+}
+
+.footer-right {
+    display: flex;
+    gap: 25px;
+}
+
+.green-text {
+    color: var(--green-accent);
+}
