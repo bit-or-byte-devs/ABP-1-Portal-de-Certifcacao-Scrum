@@ -19,13 +19,15 @@
         </div>
         <div class="nav-buttons">
             <button class="btn-nav">Perfil</button>
-            <button class="btn-nav">Log Out</button>
+            <button class="btn-nav" id="sair" type="button">Log Out</button>
         </div>
     </header>
 
     <!-- Conteúdo Principal -->
     <main class="main-container">
-        <h1 class="welcome-title">Olá <span class="highlight">usuário</span>!!</h1>
+        <h1 class="welcome-title" id="boas-vindas">Olá <span class="highlight">usuário</span>!!</h1>
+
+        <p id="aviso-menu" role="status" aria-live="polite"></p>
 
         <div class="cards-wrapper">
             <!-- Card Temas (Com link para a página de exames/temas) -->
@@ -73,5 +75,6 @@
         </div>
     </footer>
 
+    <script src="../js/menu.js"></script>
 </body>
 </html>
