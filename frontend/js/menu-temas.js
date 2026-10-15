@@ -15,13 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Ação do botão "Iniciar tema"
+    // Ação do botão de abertura do tema/certificado
     const btnIniciars = document.querySelectorAll('.btn-iniciar');
     btnIniciars.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             const tituloTema = e.target.closest('.theme-card').querySelector('h3').innerText;
-            alert(`A iniciar: ${tituloTema}`);
+            const label = btn.dataset.label || 'A iniciar';
+            alert(`${label}: ${tituloTema}`);
         });
     });
 });
