@@ -31,6 +31,7 @@ app.use((req, res, next) => {
     } catch { return res.sendStatus(400); }
     next();
 });
+app.use("/imagens", express.static(path.join(__dirname, "../../imagens")));
 app.use(express.static(path.join(__dirname, "../../frontend")));
 app.use("/temas", temasRoutes);
 app.use("/api/candidatos", candidatosRoutes);

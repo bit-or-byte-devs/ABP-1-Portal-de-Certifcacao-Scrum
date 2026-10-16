@@ -69,7 +69,7 @@ test("login, sessão, proteção e saída sem modificar o banco", async (t) => {
     for (let i = 0; i < 2; i++) {
         resposta = await pedir("/pages/menu.html", { headers: { Cookie: cookie } });
         assert.equal(resposta.status, 200);
-        assert.match(await resposta.text(), /Iniciar certificação/);
+        assert.match(await resposta.text(), /href="temas\.html"/);
     }
     const anterior = cookie;
     resposta = await entrar("52998224725", "Senha123", cookie);

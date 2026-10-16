@@ -1,0 +1,140 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 440px);
+}
+
+.modal-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 40px 30px;
+  border: 3px solid #3b82f6;
+  border-radius: 24px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay.active .modal-card {
+  transform: scale(1);
+}
+
+.modal-card h2 {
+  margin: 0 0 20px;
+  color: #111;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.modal-card p {
+  margin: 0 0 30px;
+  padding: 0 10px;
+  color: #444;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.modal-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn-modal-primary,
+.btn-modal-secondary {
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 25px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-modal-primary {
+  background: #b4c6fc;
+  color: #2b4598;
+}
+
+.btn-modal-primary:hover {
+  background: #9fb5fb;
+}
+
+.btn-modal-secondary {
+  background: #d1d1d1;
+  color: #111;
+}
+
+.btn-modal-secondary:hover {
+  background: #c2c2c2;
+}
+
+.btn-modal-primary:focus-visible,
+.btn-modal-secondary:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 3px;
+}
+
+.mascot-container {
+  position: absolute;
+  top: 50%;
+  left: -190px;
+  z-index: 1;
+  width: 240px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) translateX(60px) scale(0.8);
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.225) 0.1s;
+}
+
+.mascot-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.modal-overlay.active .mascot-container {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0) scale(1);
+}
+
+@media (max-width: 650px) {
+  .mascot-container {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay,
+  .modal-card,
+  .mascot-container {
+    transition: none;
+  }
+}
