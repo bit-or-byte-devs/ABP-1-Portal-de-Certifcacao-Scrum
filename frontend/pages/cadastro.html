@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/cadastro.css">
+  <link rel="stylesheet" href="../css/cadastro-modal.css">
 </head>
 <body>
   <main class="pagina">
@@ -96,7 +97,7 @@
           <span class="campo__erro" id="aceite-erro" aria-live="polite"></span>
         </div>
 
-        <p class="aviso" role="status"></p>
+        <p class="aviso" role="status" aria-live="polite"></p>
 
         <button class="btn" type="submit">Cadastrar</button>
       </form>
@@ -107,6 +108,23 @@
     Já tem uma conta? <a href="login.html">Faça Login</a>
   </footer>
 
-  <script src="js/form.js"></script>
+  <div class="modal-overlay" id="successModal" aria-hidden="true">
+    <section class="modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="successTitle" aria-describedby="successMessage">
+      <div class="mascot-container">
+        <img src="../../imagens/BorB(sem fundo_corpo).png" alt="Mascote BorB">
+      </div>
+
+      <div class="modal-card">
+        <h2 id="successTitle">Conta criada<br>com sucesso!!</h2>
+        <p id="successMessage">Você pode iniciar seus testes de certificação agora!! Caso não queira, poderá realizar em outro momento.</p>
+        <div class="modal-buttons">
+          <button class="btn-modal-primary" id="btnIniciar" type="button">Iniciar testes</button>
+          <button class="btn-modal-secondary" id="btnFechar" type="button">Não quero</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/cadastro.js"></script>
 </body>
 </html>
