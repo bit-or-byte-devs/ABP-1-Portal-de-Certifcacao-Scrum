@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../css/cadastro.css">
   <link rel="stylesheet" href="../css/notificacao.css">
   <link rel="stylesheet" href="../css/auth-tema.css">
+  <link rel="stylesheet" href="../css/cadastro-modal.css">
 </head>
 <body>
   <header class="auth-header">
@@ -28,7 +29,7 @@
 
       <form class="form" data-validar data-endpoint="/api/candidatos"
             data-sucesso-titulo="Conta criada!"
-            data-sucesso="Seu cadastro foi concluído. Redirecionando para o login..." novalidate>
+            data-sucesso="Seu cadastro foi concluído. Faça login para continuar." novalidate>
 
         <div class="campo campo--linha">
           <label class="campo__rotulo" for="nome">Nome completo:</label>
@@ -95,7 +96,7 @@
           <span class="campo__erro" id="aceite-erro" aria-live="polite"></span>
         </div>
 
-        <p class="aviso" role="status"></p>
+        <p class="aviso" role="status" aria-live="polite"></p>
 
         <button class="btn" type="submit">Cadastrar</button>
       </form>
@@ -106,7 +107,25 @@
     Já tem uma conta? <a href="login.html">Faça Login</a>
   </footer>
 
+  <div class="modal-overlay" id="successModal" aria-hidden="true">
+    <section class="modal-wrapper" role="dialog" aria-modal="true" aria-labelledby="successTitle" aria-describedby="successMessage">
+      <div class="mascot-container">
+        <img src="../../imagens/BorB(sem fundo_corpo).png" alt="Mascote BorB">
+      </div>
+
+      <div class="modal-card">
+        <h2 id="successTitle">Conta criada<br>com sucesso!!</h2>
+        <p id="successMessage">Faça login para acessar seus temas e iniciar os testes de certificação.</p>
+        <div class="modal-buttons">
+          <button class="btn-modal-primary" id="btnIniciar" type="button">Fazer login</button>
+          <button class="btn-modal-secondary" id="btnFechar" type="button">Voltar ao início</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <script src="../js/notificacao.js"></script>
+  <script src="../js/cadastro.js"></script>
   <script src="../js/form.js"></script>
 </body>
 </html>

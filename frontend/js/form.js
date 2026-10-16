@@ -148,9 +148,12 @@
     if (senha) senha.focus();
   }
 
-  // Só o 201 mostra a notificação e leva ao login
+  // Só o 201 conclui o cadastro e mostra a confirmação
   function concluirCadastro(form, dados) {
     if (dados.cpf) salvarCpfCadastrado(dados.cpf);
+
+    const evento = new CustomEvent("cadastro:sucesso", { cancelable: true });
+    if (!form.dispatchEvent(evento)) return;
 
     function irParaLogin() {
       window.location.href = PAGINA_LOGIN;
