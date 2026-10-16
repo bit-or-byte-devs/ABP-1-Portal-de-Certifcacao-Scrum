@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BorB - Certificados</title>
+    <title>BorB - Certificado</title>
     <link rel="stylesheet" href="../css/menu-temas.css">
 </head>
 <body>
@@ -22,166 +22,28 @@
         </div>
     </header>
 
-    <main class="main-container">
+    <main class="main-container" data-tela="certificado">
         <div class="top-header-row">
             <a href="menu.html" class="btn-voltar">&larr; Voltar</a>
-            <h1 class="page-title">Escolha o certificado:</h1>
+            <h1 class="page-title">Certificado</h1>
         </div>
 
         <div class="themes-wrapper">
             <div class="theme-card active" data-id="1">
                 <div class="theme-main-row">
-                    <h3>1. Fundamentos da Agilidade</h3>
+                    <h3>Scrum BorB Certification</h3>
                     <div class="theme-controls">
-                        <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Abrir certificado">Consultar certificado</button>
+                        <div class="progress-badge">Progresso <span class="green-text" data-certificate-progress>0%</span></div>
+                        <button class="btn-iniciar" type="button" data-label="Abrir certificado">
+                            <svg class="certificate-lock" viewBox="0 0 16 16" aria-hidden="true">
+                                <path fill="currentColor" d="M4.5 6V4.5a3.5 3.5 0 0 1 7 0V6h.75A1.75 1.75 0 0 1 14 7.75v6.5A1.75 1.75 0 0 1 12.25 16h-8.5A1.75 1.75 0 0 1 2 14.25v-6.5A1.75 1.75 0 0 1 3.75 6H4.5Zm1.5 0h4V4.5a2 2 0 0 0-4 0V6Zm2 3a1.25 1.25 0 0 0-.75 2.25V13h1.5v-1.75A1.25 1.25 0 0 0 8 9Z"/>
+                            </svg>
+                            <span>Consultar certificado</span>
+                        </button>
                     </div>
                 </div>
                 <div class="theme-desc">
-                    <p>Crise do software, desenvolvimento tradicional e ágil e benefícios da agilidade.</p>
-                </div>
-            </div>
-
-            <div class="theme-card" data-id="2">
-                <div class="theme-main-row">
-                    <h3>2. Manifesto Ágil</h3>
-                    <div class="theme-controls">
-                        <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Abrir certificado">Consultar certificado</button>
-                    </div>
-                </div>
-                <div class="theme-desc">
-                    <p>Os quatro valores e os doze princípios do Manifesto Ágil.</p>
-                </div>
-            </div>
-
-            <div class="theme-card" data-id="3">
-                <div class="theme-main-row">
-                    <h3>3. Introdução ao Scrum</h3>
-                    <div class="theme-controls">
-                        <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Abrir certificado">Consultar certificado</button>
-                    </div>
-                </div>
-                <div class="theme-desc">
-                    <p>Framework Scrum, empirismo, transparência, inspeção e adaptação.</p>
-                </div>
-            </div>
-
-            <div class="theme-card" data-id="4">
-                <div class="theme-main-row">
-                    <h3>4. Papéis do Scrum</h3>
-                    <div class="theme-controls">
-                        <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Abrir certificado">Consultar certificado</button>
-                    </div>
-                </div>
-                <div class="theme-desc">
-                    <p>Responsabilidades do Product Owner, Scrum Master e Developers.</p>
-                </div>
-            </div>
-
-            <div class="theme-card" data-id="5">
-                <div class="theme-main-row">
-                    <h3>5. Eventos do Scrum</h3>
-                    <div class="theme-controls">
-                        <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Abrir certificado">Consultar certificado</button>
-                    </div>
-                </div>
-                <div class="theme-desc">
-                    <p>Sprint, Sprint Planning, Daily Scrum, Sprint Review e Sprint Retrospective.</p>
-                </div>
-            </div>
-
-            <div class="theme-card" data-id="6">
-                <div class="theme-main-row">
-                    <h3>6. Artefatos do Scrum</h3>
-                    <div class="theme-controls">
-                        <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Abrir certificado">Consultar certificado</button>
-                    </div>
-                </div>
-                <div class="theme-desc">
-                    <p>Product Backlog, Sprint Backlog, Incremento e seus compromissos.</p>
-                </div>
-            </div>
-
-            <div class="theme-card" data-id="7">
-                <div class="theme-main-row">
-                    <h3>7. User Stories</h3>
-                    <div class="theme-controls">
-                        <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Abrir certificado">Consultar certificado</button>
-                    </div>
-                </div>
-                <div class="theme-desc">
-                    <p>Estrutura de histórias de usuário e critérios de aceitação.</p>
-                </div>
-            </div>
-
-            <div class="theme-card" data-id="8">
-                <div class="theme-main-row">
-                    <h3>8. Gestão do Product Backlog</h3>
-                    <div class="theme-controls">
-                        <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Abrir certificado">Consultar certificado</button>
-                    </div>
-                </div>
-                <div class="theme-desc">
-                    <p>Priorização, refinamento, organização e evolução do backlog.</p>
-                </div>
-            </div>
-
-            <div class="theme-card" data-id="9">
-                <div class="theme-main-row">
-                    <h3>9. Kanban</h3>
-                    <div class="theme-controls">
-                        <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Abrir certificado">Consultar certificado</button>
-                    </div>
-                </div>
-                <div class="theme-desc">
-                    <p>Fluxo contínuo, quadro Kanban, limites de trabalho em progresso e gargalos.</p>
-                </div>
-            </div>
-
-            <div class="theme-card" data-id="10">
-                <div class="theme-main-row">
-                    <h3>10. Planejamento Ágil</h3>
-                    <div class="theme-controls">
-                        <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Abrir certificado">Consultar certificado</button>
-                    </div>
-                </div>
-                <div class="theme-desc">
-                    <p>Sprint Planning, Story Points, Planning Poker e planejamento de releases.</p>
-                </div>
-            </div>
-
-            <div class="theme-card" data-id="11">
-                <div class="theme-main-row">
-                    <h3>11. Métricas Ágeis</h3>
-                    <div class="theme-controls">
-                        <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Abrir certificado">Consultar certificado</button>
-                    </div>
-                </div>
-                <div class="theme-desc">
-                    <p>Velocity, Burndown, Burnup, Lead Time e Cycle Time.</p>
-                </div>
-            </div>
-
-            <div class="theme-card" data-id="12">
-                <div class="theme-main-row">
-                    <h3>12. Qualidade em Projetos Ágeis</h3>
-                    <div class="theme-controls">
-                        <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Abrir certificado">Consultar certificado</button>
-                    </div>
-                </div>
-                <div class="theme-desc">
-                    <p>Definition of Done, testes automatizados, integração contínua, refatoração e dívida técnica.</p>
+                    <p>Seu certificado Scrum BorB.</p>
                 </div>
             </div>
         </div>

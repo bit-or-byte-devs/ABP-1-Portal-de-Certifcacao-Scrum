@@ -127,7 +127,8 @@ body {
 }
 
 .card-temas,
-.card-certificados {
+.card-certificados,
+.card-exames {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
@@ -135,7 +136,8 @@ body {
 }
 
 .card-temas:hover,
-.card-certificados:hover {
+.card-certificados:hover,
+.card-exames:hover {
     transform: translateY(-3px);
     border-color: rgba(0, 255, 102, 0.3);
 }
@@ -283,6 +285,17 @@ body {
 .btn-iniciar:hover {
     border-color: var(--green-accent);
     color: #fff;
+}
+
+.btn-iniciar:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.certificate-lock {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
 }
 
 .theme-desc {
