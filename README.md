@@ -18,6 +18,19 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 
 ---
 
+## 📐 Modelagem de Dados
+
+Para estruturar a base de dados do projeto, desenvolvemos as seguintes modelagens:
+
+### 1. Modelo Conceitual
+[![Modelo Conceitual do Projeto](./imagens/modelo_conceitual.png)]
+*(Clique na imagem acima para abrir a versão em tamanho real)*
+
+### 2. Modelo Lógico
+[![Modelo Lógico do Projeto](./imagens/modelo_logico.png)]
+*(Clique na imagem acima para abrir a versão em tamanho real)*
+---
+
 ## 📋 Backlog do Produto - SPRINT 1
 
 | Rank | Prioridade | User Story | Story Points | Sprint | Requisito Relacionado | Status |
@@ -55,14 +68,12 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 | Sprint | Período da Sprint | Documentação da Sprint | Vídeo do Incremento (YouTube) | Status |
 | --- | --- | --- | --- | --- |
 | 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1](https://www.google.com/search?q=docs/sprint1.md) | [Vídeo do Incremento 1](https://www.google.com/search?q=https://youtube.com) | 🛠️ Em Andamento |
-| 🔖 **Sprint 2** | 23/10/2026 - 05/11/2026 | [Documentação Sprint 2](https://www.google.com/search?q=docs/sprint2.md) | [Vídeo do Incremento 2](https://www.google.com/search?q=https://youtube.com) | ⏳ Planejado |
-| 🔖 **Sprint 3** | 06/11/2026 - 25/11/2026 | [Documentação Sprint 3](https://www.google.com/search?q=docs/sprint3.md) | [Vídeo do Incremento 3](https://www.google.com/search?q=https://youtube.com) | ⏳ Planejado |
 
 ---
 
 ## 💻 Tecnologias Utilizadas
 
-* **Front-End:** HTML5, CSS3, JavaScript (Vanilla ES6 — Sem Frameworks)
+* **Front-End:** HTML5, CSS3, JavaScript (Sem Frameworks)
 * **Back-End:** Node.js
 * **Banco de Dados:** PostgreSQL
 * **DevOps & Containers:** Docker, Docker Compose
