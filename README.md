@@ -23,12 +23,13 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 Para estruturar a base de dados do projeto, desenvolvemos as seguintes modelagens:
 
 ### 1. Modelo Conceitual
-[![Modelo Conceitual do Projeto](./imagens/modelo_conceitual.png)]
-*(Clique na imagem acima para abrir a versão em tamanho real)*
+![Modelo Conceitual do Projeto](./imagens/modelo_conceitual.png)
+
+
 
 ### 2. Modelo Lógico
-[![Modelo Lógico do Projeto](./imagens/modelo_logico.png)]
-*(Clique na imagem acima para abrir a versão em tamanho real)*
+![Modelo Lógico do Projeto](./imagens/modelo_logico.png)
+
 ---
 
 ## 📋 Backlog do Produto - SPRINT 1
