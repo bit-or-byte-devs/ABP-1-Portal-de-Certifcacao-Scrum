@@ -2,100 +2,70 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#052350">
-  <meta
-    name="description"
-    content="Aprenda Scrum com a BorB em uma experiência imersiva e gamificada."
-  >
-
-  <title>BorB — Início</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cousine:wght@400&family=Inter:wght@400;600;700;800&display=swap"
-    rel="stylesheet"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BorB — plataforma de aprendizagem sobre Scrum.">
+  <title>BorB | Desvende o Código do Scrum</title>
   <link rel="stylesheet" href="../css/inicial.css">
+  <script src="../js/inicial.js" defer></script>
 </head>
-
 <body>
-  <div class="page">
-    <header class="site-header">
-      <a class="brand" href="./" aria-label="BorB — página inicial">
-        <span class="brand-emblem" aria-hidden="true">B</span>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="BorB — página inicial">
+      <span class="brand-logo-slot" aria-hidden="true"><!-- Insira aqui a imagem do logo, se desejar --></span>
+      <span class="brand-text">BorB<small>Learn it. Build it.</small></span>
+    </a>
+    <a class="top-link" href="#sobre">Conheça hoje</a>
+  </header>
 
-        <span class="brand-copy">
-          <span class="brand-name">BorB</span>
-          <span class="brand-version">SCRUM_v0.1</span>
-        </span>
-      </a>
-
-      <a class="header-cta" href="login.html">
-        Comece Aqui
-      </a>
-    </header>
-
-    <main>
-      <section class="hero" aria-labelledby="hero-title">
-        <h1 id="hero-title">
-          <span class="title-line">Desvende o Código do</span>
-          <span class="title-line">
-            <span class="scrum-highlight">Scrum</span> com a BorB
-          </span>
-        </h1>
-
-        <p class="hero-description">
-          Entre na matriz do ensino ágil. Simule Sprints, domine Backlogs,
-          responda Dailies e conquiste o distintivo máximo de Scrum Master
-          em uma experiência imersiva e gamificada.
-        </p>
-      </section>
-
-      <section class="study-section" aria-labelledby="study-title">
-        <div class="study-content">
-          <h2 id="study-title">Comece agora seus estudos!!</h2>
-
-          <p class="study-description">
-            Inicie agora sua jornada pelos <strong>12 temas</strong><br>
-            da plataforma, e domine essa metodologia.
-          </p>
-
-          <a class="study-cta" href="login.html">
-            <svg
-              viewBox="0 0 29 29"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M7 4.5C7 3.5 8.1 2.9 9 3.4L24 12.5C25.5 13.4 25.5 15.6 24 16.5L9 25.6C8.1 26.1 7 25.5 7 24.5V4.5Z"
-                stroke="currentColor"
-                stroke-width="1.4"
-                stroke-linejoin="round"
-              />
-            </svg>
-
-            <span>Iniciar Estudos</span>
-          </a>
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <h1>Desvende o Código do<br><span>Scrum</span> com a BorB</h1>
+        <p class="welcome">Bem-vindo à BorB nossa plataforma de ensino sobre a<br class="desktop-break"> metodologia Scrum!</p>
+        <div class="description">
+          <p>Nosso objetivo é tornar o aprendizado sobre agilidade e gestão de projetos mais simples, dinâmico e acessível, combinando conteúdos didáticos com atividades interativas que ajudam você a aprender na prática.</p>
+          <p>Ao longo do curso, você dominará os fundamentos da Agilidade e o Manifesto Ágil, compreendendo os princípios que orientam o desenvolvimento de projetos modernos. Você aprenderá os conceitos essenciais do Scrum, seus papéis, eventos e artefatos — além de temas fundamentais como User Stories, Gestão do Product Backlog, Kanban, Planejamento, Métricas Ágeis e Qualidade.</p>
+          <p>Nossa proposta transforma conceitos teóricos em experiências envolventes para preparar você para situações reais de trabalho e para conquistar sua certificação.</p>
         </div>
-      </section>
-    </main>
-  </div>
+      </div>
 
-  <footer class="site-footer">
-    <div class="copyright">
-      <span class="footer-brand">Bor<span>B</span></span>
-      <p>
-        © 2026 Scrum Learning Platform. Todos os direitos reservados.
-      </p>
-    </div>
+      <div class="hero-side">
+        <!-- Espaço reservado para você inserir posteriormente a imagem original do mascote -->
+        <div class="image-slot hero-mascot" aria-label="Espaço reservado para a imagem do mascote"></div>
+        <h2>Comece agora seus estudos!!</h2>
+        <a class="button" href="login.html"><span aria-hidden="true">▶</span> Iniciar Estudos</a>
+        <p class="tiny">Inicie agora sua jornada pelos <strong>12 temas</strong><br>da plataforma, e domine essa metodologia.</p>
+      </div>
+    </section>
 
-    <div class="platform-status" aria-label="Estado da plataforma">
-      <span>STATUS: SECURE_MATRIX</span>
-      <span>FRAMEWORK: SCRUM.ORG COMPLIANT</span>
-    </div>
+    <section class="learning" id="sobre">
+      <h2>Aprenda com<br>Bor<span>B</span></h2>
+      <div class="learning-grid">
+        <div class="objectives">
+          <h3>Sua certificação consta com os<br>seguintes objetivos:</h3>
+          <p><strong>Compreender a Agilidade:</strong> Dominar os valores e princípios do Manifesto Ágil aplicados a projetos modernos.</p>
+          <p><strong>Domínio do Framework Scrum:</strong> Entender em detalhes os papéis (Product Owner, Scrum Master, Developers), eventos (Sprint Planning, Daily, Review, Retrospective) e artefatos.</p>
+          <p><strong>Aplicação Prática:</strong> Saber criar e gerenciar User Stories, Product Backlog, quadros Kanban e aplicar métricas de acompanhamento.</p>
+          <p><strong>Garantia de Qualidade e Entrega de Valor:</strong> Desenvolver habilidades para promover a colaboração em equipe, organização e entrega contínua de valor.</p>
+        </div>
+        <div class="learning-description">
+          <p>Nesta plataforma, você passará por <strong>12 temas fundamentais</strong> com questões práticas e teóricas sobre a metodologia Scrum. O aprendizado ocorre em uma progressão totalmente interativa, permitindo que você acompanhe e gerencie seu progresso passo a passo, tanto ao longo de cada tema quanto na evolução geral do curso.</p>
+          <p>Prepare-se para testar seus conhecimentos e evoluir no próprio ritmo!</p>
+          <!-- Espaço reservado para você inserir posteriormente a imagem original do mascote -->
+          <div class="image-slot learning-mascot" aria-label="Espaço reservado para a imagem do mascote"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span><strong>BorB</strong> © 2026 Scrum Learning Platform. Todos os direitos reservados.</span>
+    <nav aria-label="Links do rodapé">
+      <a href="#inicio">AJUDA</a>
+      <a href="#sobre">GUIA RÁPIDO</a>
+      <a href="#sobre">PRIVACIDADE</a>
+      <a href="#sobre">TERMOS DE USO</a>
+    </nav>
   </footer>
 </body>
 </html>
