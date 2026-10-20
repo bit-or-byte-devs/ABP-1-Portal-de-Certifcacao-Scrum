@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BorB — Redefinir senha</title>
+  <link rel="stylesheet" href="../css/recuperarsenha.css">
+</head>
+<body>
+  <header class="auth-header">
+    <a class="auth-brand" href="index.html" aria-label="BorB — página inicial">
+      <span class="auth-brand__icon" aria-hidden="true">B</span>
+      <span class="auth-brand__copy">
+        <span class="auth-brand__name">BorB</span>
+        <span class="auth-brand__version">SCRUM_v0.1</span>
+      </span>
+    </a>
+    <a class="auth-header__link" href="login.html">Entrar</a>
+  </header>
+
+  <main class="pagina">
+    <section class="card" aria-labelledby="titulo-redefinir">
+      <h1 class="card__titulo" id="titulo-redefinir">Redefinir senha</h1>
+
+      <!-- O token chega pela URL do link enviado por e-mail (?token=...) -->
+      <form class="form" id="form-redefinir" novalidate>
+        <p class="card__descricao">Crie uma nova senha para acessar o portal.</p>
+
+        <div class="campo">
+          <label class="sr-only" for="senha">Nova senha</label>
+          <div class="campo__caixa campo__caixa--icone">
+            <svg class="campo__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="4.5" y="10.5" width="15" height="10" rx="2"/>
+              <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>
+            </svg>
+            <input class="campo__input" type="password" id="senha" name="senha"
+                   placeholder="Nova senha" minlength="8" maxlength="128"
+                   autocomplete="new-password" required aria-describedby="regra-senha senha-erro">
+          </div>
+          <small class="campo__ajuda" id="regra-senha">Pelo menos 8 caracteres, incluindo letras e números.</small>
+          <span class="campo__erro" id="senha-erro" aria-live="polite"></span>
+        </div>
+
+        <div class="campo">
+          <label class="sr-only" for="confirmarSenha">Confirme a nova senha</label>
+          <div class="campo__caixa campo__caixa--icone">
+            <svg class="campo__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="4.5" y="10.5" width="15" height="10" rx="2"/>
+              <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>
+            </svg>
+            <input class="campo__input" type="password" id="confirmarSenha" name="confirmarSenha"
+                   placeholder="Confirme a nova senha" minlength="8" maxlength="128"
+                   autocomplete="new-password" required aria-describedby="confirmarSenha-erro">
+          </div>
+          <span class="campo__erro" id="confirmarSenha-erro" aria-live="polite"></span>
+        </div>
+
+        <p class="aviso" id="aviso-redefinir" role="status"></p>
+
+        <button class="btn" id="redefinir" type="submit">Alterar senha</button>
+      </form>
+    </section>
+
+    <a class="link-secundario" href="login.html">Voltar para o login</a>
+  </main>
+
+  <footer class="rodape">
+    Ainda não tem uma conta? <a href="cadastro.html">Cadastre-se</a>
+  </footer>
+
+  <script src="../js/redefinicao.js"></script>
+</body>
+</html>
