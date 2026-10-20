@@ -4,7 +4,7 @@
   "use strict";
 
   const CHAVE_CPF = "borb:cpfCadastrado";
-  const PAGINA_LOGIN = "login.html";
+  const PAGINA_MENU = "menu.html";
   const DURACAO_SUCESSO = 3000;
 
   const MSG_OBRIGATORIO = "Preencha este campo.";
@@ -120,15 +120,6 @@
     aviso.textContent = mensagem;
   }
 
-  // Guarda o CPF para o login sem expor o dado na URL
-  function salvarCpfCadastrado(cpf) {
-    try {
-      sessionStorage.setItem(CHAVE_CPF, cpf);
-    } catch (e) {
-      // Sem storage o login apenas abre com o campo vazio
-    }
-  }
-
   function lerCpfCadastrado() {
     try {
       const cpf = sessionStorage.getItem(CHAVE_CPF);
@@ -149,23 +140,21 @@
   }
 
   // Só o 201 conclui o cadastro e mostra a confirmação
-  function concluirCadastro(form, dados) {
-    if (dados.cpf) salvarCpfCadastrado(dados.cpf);
-
+  function concluirCadastro(form) {
     const evento = new CustomEvent("cadastro:sucesso", { cancelable: true });
     if (!form.dispatchEvent(evento)) return;
 
-    function irParaLogin() {
-      window.location.href = PAGINA_LOGIN;
+    function irParaMenu() {
+      window.location.href = PAGINA_MENU;
     }
 
     if (!window.Notificacao) {
-      irParaLogin();
+      irParaMenu();
       return;
     }
     window.Notificacao.sucesso(form.dataset.sucessoTitulo || "", form.dataset.sucesso || "", {
       duracao: DURACAO_SUCESSO,
-      aoFechar: irParaLogin,
+      aoFechar: irParaMenu,
     });
   }
 
@@ -218,7 +207,7 @@
 
     // O botão continua desabilitado até o redirecionamento
     if (resposta.status === 201 && form.dataset.sucesso) {
-      concluirCadastro(form, dados);
+      concluirCadastro(form);
       return;
     }
 

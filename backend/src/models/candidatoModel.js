@@ -14,7 +14,7 @@ async function criar({ cpf, nome, email, senhaHash }) {
             `INSERT INTO tbcandidato
                 (cpf, nome_completo, email, senha_hash, data_aceite_termos)
              VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP)
-             RETURNING id, cpf, nome_completo, email, data_cadastro`,
+             RETURNING id, cpf, nome_completo, email, data_cadastro, versao_sessao`,
             [cpf, nome, email, senhaHash]
         );
         return resultado.rows[0];

@@ -20,6 +20,12 @@ test("login, sessão, proteção e saída sem modificar o banco", async (t) => {
     // Simula apenas a resposta do banco; o Express e a sessão são reais.
     pool.query = async (sql, parametros) => {
         if (falharBanco) throw new Error("Banco indisponível");
+        if (sql.includes("INSERT INTO tbcandidato")) {
+            assert.match(sql, /RETURNING .*versao_sessao/);
+            assert.equal(parametros[0], "52998224725");
+            assert.equal(await verificarSenha("Senha123", parametros[3]), true);
+            return { rows: [{ id: 7, versao_sessao: 0 }] };
+        }
         assert.match(sql, /WHERE (cpf|id) = \$1/);
         assert.equal(parametros.length, 1);
         if (sql.includes("WHERE cpf")) {
@@ -57,7 +63,19 @@ test("login, sessão, proteção e saída sem modificar o banco", async (t) => {
         assert.deepEqual(await resposta.json(), { mensagem: "CPF ou senha incorretos" });
         assert.equal(resposta.headers.get("set-cookie"), null);
     }
-    let resposta = await entrar("529.982.247-25", "Senha123");
+    let resposta = await pedir("/api/candidatos", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nome: "Maria Silva", cpf: "52998224725", email: "maria@example.com", senha: "Senha123", aceiteTermos: true }),
+    });
+    assert.equal(resposta.status, 201);
+    const cookieCadastro = resposta.headers.get("set-cookie").split(";")[0];
+    resposta = await pedir("/api/auth/usuario", { headers: { Cookie: cookieCadastro } });
+    assert.equal(resposta.status, 200);
+    assert.deepEqual(await resposta.json(), { id: 7, nome: "Maria Silva" });
+    for (const url of ["/pages/menu.html", "/pages/temas.html"]) {
+        assert.equal((await pedir(url, { headers: { Cookie: cookieCadastro } })).status, 200);
+    }
+    resposta = await entrar("529.982.247-25", "Senha123");
     assert.equal(resposta.status, 200);
     const cabecalho = resposta.headers.get("set-cookie");
     assert.match(cabecalho, /HttpOnly/); assert.match(cabecalho, /SameSite=Lax/);

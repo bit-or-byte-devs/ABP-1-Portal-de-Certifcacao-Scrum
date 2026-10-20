@@ -46,11 +46,21 @@ async function cadastrar(req, res) {
   }
 
   try {
-    await candidatoModel.criar({
+    const candidato = await candidatoModel.criar({
       cpf: somenteDigitos(dados.cpf),
       nome: String(dados.nome).trim(),
       email: String(dados.email).trim(),
       senhaHash: await gerarHash(dados.senha),
+    });
+
+    // Renova e persiste a sessão antes de liberar a navegação no pop-up.
+    await new Promise((resolve, reject) => {
+      req.session.regenerate((erroSessao) => {
+        if (erroSessao) return reject(erroSessao);
+        req.session.candidatoId = candidato.id;
+        req.session.versaoSessao = candidato.versao_sessao;
+        req.session.save((erroSalvar) => erroSalvar ? reject(erroSalvar) : resolve());
+      });
     });
 
     return res.status(201).json({ mensagem: "Cadastro realizado com sucesso." });

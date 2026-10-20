@@ -29,7 +29,7 @@
 
       <form class="form" data-validar data-endpoint="/api/candidatos"
             data-sucesso-titulo="Conta criada!"
-            data-sucesso="Seu cadastro foi concluído. Faça login para continuar." novalidate>
+            data-sucesso="Seu cadastro foi concluído e você já está conectado." novalidate>
 
         <div class="campo campo--linha">
           <label class="campo__rotulo" for="nome">Nome completo:</label>
@@ -115,10 +115,10 @@
 
       <div class="modal-card">
         <h2 id="successTitle">Conta criada<br>com sucesso!!</h2>
-        <p id="successMessage">Faça login para acessar seus temas e iniciar os testes de certificação.</p>
+        <p id="successMessage">Você já está conectado! Deseja iniciar um exame ou ir para o menu do candidato?</p>
         <div class="modal-buttons">
-          <button class="btn-modal-primary" id="btnIniciar" type="button">Fazer login</button>
-          <button class="btn-modal-secondary" id="btnFechar" type="button">Voltar ao início</button>
+          <button class="btn-modal-primary" id="btnIniciar" type="button">Iniciar exame</button>
+          <button class="btn-modal-secondary" id="btnFechar" type="button">Agora não, ir para o menu</button>
         </div>
       </div>
     </section>

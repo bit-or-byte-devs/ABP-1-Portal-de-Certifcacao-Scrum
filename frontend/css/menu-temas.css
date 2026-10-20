@@ -127,6 +127,7 @@ body {
 }
 
 .card-temas,
+.card-exames,
 .card-certificados {
     text-decoration: none;
     color: inherit;
@@ -135,6 +136,7 @@ body {
 }
 
 .card-temas:hover,
+.card-exames:hover,
 .card-certificados:hover {
     transform: translateY(-3px);
     border-color: rgba(0, 255, 102, 0.3);

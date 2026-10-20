@@ -6,20 +6,20 @@
   if (!form || !modal) return;
   const iniciar = document.getElementById("btnIniciar");
   const fechar = document.getElementById("btnFechar");
-  function irParaLogin() { window.location.href = "login.html"; }
+  function irParaMenu() { window.location.href = "menu.html"; }
   form.addEventListener("cadastro:sucesso", function (evento) {
     evento.preventDefault();
     modal.classList.add("active");
     modal.setAttribute("aria-hidden", "false");
     iniciar.focus();
   });
-  iniciar.addEventListener("click", irParaLogin);
-  fechar.addEventListener("click", function () { window.location.href = "index.html"; });
+  iniciar.addEventListener("click", function () { window.location.href = "exames.html"; });
+  fechar.addEventListener("click", irParaMenu);
   modal.addEventListener("click", function (evento) {
-    if (evento.target === modal) irParaLogin();
+    if (evento.target === modal) irParaMenu();
   });
   modal.addEventListener("keydown", function (evento) {
-    if (evento.key === "Escape") irParaLogin();
+    if (evento.key === "Escape") irParaMenu();
     if (evento.key === "Tab") {
       evento.preventDefault();
       (document.activeElement === iniciar ? fechar : iniciar).focus();
