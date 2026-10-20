@@ -6,7 +6,7 @@
 > 
 > **Curso:** Desenvolvimento de Software Multiplataforma — FATEC Jacareí
 > 
-> **Orientação:** Prof. Marcelo Augusto Sudo
+> **Orientação:** Prof. Marcelo Augusto Sudo e Prof. Antonio Egydio São Thiago Graça
 
 ---
 
@@ -137,7 +137,7 @@ Abra o navegador no endereço: `http://localhost:3000`
 ## 📂 Link para Pasta de Documentação
 
 Toda a documentação complementar, checklists, manuais e critérios de qualidade do projeto estão centralizados em nossa pasta oficial:
-👉 **[Acessar Pasta de Documentação completa](https://www.google.com/search?q=./docs)**
+👉 https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I
 
 ---
 
