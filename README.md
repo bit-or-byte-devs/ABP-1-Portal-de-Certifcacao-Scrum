@@ -133,12 +133,12 @@ Toda a documentação complementar, checklists, manuais e critérios de qualidad
 | Foto | Nome Completo | Papel no Scrum | GitHub | LinkedIn |
 | --- | --- | --- | --- | --- |
 |  | **Matheus Oliveira Dantas de Souza** | Product Owner | https://github.com/Matheus7souza | [LinkedIn](https://www.google.com/search?q=https://linkedin.com) |
-|  | **Sarah Cristiny de Souza Mendes** | Scrum Master | https://github.com/sarahcris152 | [LinkedIn](https://www.google.com/search?q=https://linkedin.com) |
+|  | **Sarah Cristiny de Souza Mendes** | Scrum Master | https://github.com/sarahcris152 | [LinkedIn](https://www.linkedin.com/in/sarah-cristiny-de-souza-mendes-74aa881b7) |
 |  | **João Vitor Maximiano de Carvalho** | Desenvolvedor | https://github.com/JoaoCbca | [LinkedIn](https://www.google.com/search?q=https://linkedin.com) |
-|  | **Luiz Felipe Nogueira** | Desenvolvedor | https://github.com/luiz274 | [LinkedIn](https://www.google.com/search?q=https://linkedin.com) |
+|  | **Luiz Felipe Nogueira** | Desenvolvedor | https://github.com/luiz274 | [LinkedIn](https://www.linkedin.com/in/luiz-felipe-nogueira-bb2430270) |
 |  | **Nikolas Gabriel Alves de Araujo** | Desenvolvedor | https://github.com/NikoRamid | [LinkedIn](https://www.google.com/search?q=https://linkedin.com) |
 |  | **Pedro Lucas Matias** | Desenvolvedor | [GitHub](https://github.com) | [LinkedIn](https://www.google.com/search?q=https://linkedin.com) |
-|  | **Ryan Cesar Candido Alves** | Desenvolvedor | https://github.com/ryancesar22 | [LinkedIn](https://www.google.com/search?q=https://linkedin.com) |
+|  | **Ryan Cesar Candido Alves** | Desenvolvedor | https://github.com/ryancesar22 | [LinkedIn](https://www.linkedin.com/in/ryan-cesar-candido-alves-814887231) |
 |  | **Willian de Paula Barreto** | Desenvolvedor | https://github.com/will1907 | [LinkedIn](https://www.google.com/search?q=https://linkedin.com) |
 
 
