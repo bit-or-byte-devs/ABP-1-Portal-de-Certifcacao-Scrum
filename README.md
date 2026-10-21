@@ -16,19 +16,6 @@
 
 A falta de ferramentas práticas e interativas para mensurar o aprendizado gera uma lacuna no processo de formação. O **Portal de Certificação em Metodologias Ágeis** visa resolver esse problema oferecendo uma trilha de simulados randômicos e cronometrados, acompanhada de uma Área de Estudos completa com 12 temas fundamentais, validando o conhecimento adquirido por meio da emissão de um certificado digital autêntico.
 
----
-
-## 📐 Modelagem de Dados
-
-Para estruturar a base de dados do projeto, desenvolvemos as seguintes modelagens:
-
-### 1. Modelo Conceitual
-![Modelo Conceitual do Projeto](./imagens/modelo_conceitual.png)
-
-
-
-### 2. Modelo Lógico
-![Modelo Lógico do Projeto](./imagens/modelo_logico.png)
 
 ---
 
@@ -71,7 +58,7 @@ Para estruturar a base de dados do projeto, desenvolvemos as seguintes modelagen
 
 | Sprint | Período da Sprint | Documentação da Sprint | Vídeo do Incremento (YouTube) | Status |
 | --- | --- | --- | --- | --- |
-| 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1](https://www.google.com/search?q=docs/sprint1.md) | [Vídeo do Incremento 1](https://www.google.com/search?q=https://youtube.com) | 🛠️ Em Andamento |
+| 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1]  https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I | [Vídeo do Incremento 1](https://www.google.com/search?q=https://youtube.com) | 🛠️ Em Andamento |
 
 ---
 
@@ -116,8 +103,8 @@ Portal-Certificacao-Agiles/
 
 1. **Clonar o Repositório:**
 ```bash
-git clone https://github.com/seu-usuario/Portal-Certificacao-Agiles.git
-cd Portal-Certificacao-Agiles
+git clone [https://github.com/seu-usuario/Portal-Certificacao-Agiles.git](https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum )
+cd ABP-1-Portal-de-Certifcacao-Scru
 
 ```
 
