@@ -89,6 +89,9 @@ body {
 
 /* Botão Voltar */
 .btn-back {
+    position: sticky;
+    top: 12px;
+    z-index: 10;
     background-color: #1c2b36;
     color: #00cec9;
     border: none;
@@ -131,7 +134,7 @@ body {
     min-height: 0;
     overflow-y: auto;
     position: sticky;
-    top: 20px;
+    top: 60px;
     align-self: start;
 }
 
@@ -167,6 +170,38 @@ body {
 
 .sub-topics li.active {
     background-color: #c9e9d9;
+}
+
+.topic-progress {
+    display: block;
+    color: #24764f;
+    font-size: 10px;
+    font-weight: 800;
+    text-align: right;
+}
+
+.subtopic-links {
+    clear: both;
+    list-style: none;
+    margin: 8px 0 4px 8px;
+    padding-left: 10px;
+    border-left: 1px solid #9acbb2;
+}
+
+.subtopic-links li {
+    margin: 0 0 7px;
+    padding: 0;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.subtopic-links a {
+    color: #284338;
+    text-decoration: none;
+}
+
+.subtopic-links a:hover {
+    text-decoration: underline;
 }
 
 .topic-link {
@@ -239,6 +274,11 @@ body {
     font-size: 16px;
 }
 
+.study-text h3,
+.study-text h4 {
+    scroll-margin-top: 20px;
+}
+
 .study-text ul,
 .study-text ol {
     margin: 0 0 14px 22px;
@@ -263,6 +303,22 @@ body {
     border-radius: 8px;
 }
 
+.study-image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin: 18px 0 24px;
+}
+
+.study-image-grid figure {
+    min-width: 0;
+    margin: 0;
+}
+
+.study-image-grid figure img {
+    max-height: 180px;
+}
+
 .study-text figcaption {
     margin-top: 6px;
     color: #44505a;
@@ -279,21 +335,6 @@ body {
 .study-reference a {
     color: #123b5d;
     font-weight: 700;
-}
-
-.pdf-viewer {
-    display: block;
-    width: 100%;
-    height: 68vh;
-    min-height: 460px;
-    margin-top: 14px;
-    border: 0;
-    border-radius: 12px;
-    background: #ffffff;
-}
-
-.pdf-viewer[hidden] {
-    display: none;
 }
 
 @media (max-width: 560px) {
@@ -317,11 +358,6 @@ body {
     .sidebar {
         max-height: 240px;
         min-height: 0;
-    }
-
-    .pdf-viewer {
-        height: 70vh;
-        min-height: 450px;
     }
 
     .main-title {

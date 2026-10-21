@@ -1,6 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeCards = document.querySelectorAll('.theme-card');
 
+    themeCards.forEach(card => {
+        const numeroTema = card.dataset.id;
+        const conteudo = window.conteudoTemas?.[numeroTema];
+        const indicador = card.querySelector('.progress-badge .green-text');
+        if (!conteudo || !indicador) return;
+
+        const temporario = document.createElement('div');
+        temporario.innerHTML = conteudo;
+        const totalSubtitulos = temporario.querySelectorAll('h3, h4').length;
+        let vistos = [];
+        try {
+            vistos = JSON.parse(localStorage.getItem(`borb-progresso-tema-${numeroTema}`) || '[]');
+        } catch {
+            vistos = [];
+        }
+        const percentual = totalSubtitulos
+            ? Math.round((new Set(vistos).size / totalSubtitulos) * 100)
+            : 0;
+        indicador.textContent = `${percentual}%`;
+    });
+
     // Comportamento de Acordeão ao clicar nos temas
     themeCards.forEach(card => {
         card.addEventListener('click', (e) => {

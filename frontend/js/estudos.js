@@ -16,33 +16,109 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const numeroTema = Number(new URLSearchParams(window.location.search).get('tema'));
     const tema = temas[numeroTema] ? numeroTema : 1;
-    const arquivoPdf = `../pdf/temas/tema-${tema}.pdf`;
-
     document.title = `BorB - ${temas[tema].titulo}`;
     document.getElementById('tema-titulo').textContent = temas[tema].titulo;
     document.getElementById('conteudo-titulo').textContent = temas[tema].titulo;
     document.getElementById('conteudo-descricao').textContent = temas[tema].descricao;
 
-    const visualizador = document.getElementById('visualizador-pdf');
     const descricao = document.getElementById('conteudo-descricao');
     const artigo = document.getElementById('conteudo-texto');
 
     if (window.conteudoTemas && window.conteudoTemas[tema]) {
         descricao.hidden = true;
-        visualizador.hidden = true;
         artigo.innerHTML = window.conteudoTemas[tema];
         artigo.hidden = false;
     } else {
         artigo.hidden = true;
-        visualizador.hidden = false;
-        visualizador.src = arquivoPdf;
+        descricao.hidden = false;
     }
+
+    const chaveProgresso = `borb-progresso-tema-${tema}`;
+    let vistos = new Set();
+    try {
+        vistos = new Set(JSON.parse(localStorage.getItem(chaveProgresso) || '[]'));
+    } catch {
+        vistos = new Set();
+    }
+
+    const contarSubtitulos = numero => {
+        const conteudo = window.conteudoTemas?.[numero];
+        if (!conteudo) return 0;
+        const temporario = document.createElement('div');
+        temporario.innerHTML = conteudo;
+        return temporario.querySelectorAll('h3, h4').length;
+    };
 
     document.querySelectorAll('.topic-link').forEach(link => {
         const linkTema = Number(new URL(link.href).searchParams.get('tema'));
+        const itemTema = link.parentElement;
+        let indicador = itemTema.querySelector('.topic-progress');
+        if (!indicador) {
+            indicador = document.createElement('span');
+            indicador.className = 'topic-progress';
+            indicador.setAttribute('aria-label', 'Progresso do tema');
+            itemTema.appendChild(indicador);
+        }
+
+        let subtitulosVistos = [];
+        try {
+            subtitulosVistos = JSON.parse(localStorage.getItem(`borb-progresso-tema-${linkTema}`) || '[]');
+        } catch {
+            subtitulosVistos = [];
+        }
+        const totalSubtitulos = contarSubtitulos(linkTema);
+        const percentual = totalSubtitulos
+            ? Math.round((new Set(subtitulosVistos).size / totalSubtitulos) * 100)
+            : 0;
+        indicador.textContent = `${percentual}%`;
+
         if (linkTema === tema) {
             link.parentElement.classList.add('active');
             link.setAttribute('aria-current', 'page');
         }
     });
+
+    const subtitulos = [...artigo.querySelectorAll('h3, h4')];
+    const itemAtivo = document.querySelector('.topic-link[aria-current="page"]')?.parentElement;
+    if (subtitulos.length && itemAtivo) {
+        const menuSubtitulos = document.createElement('ul');
+        menuSubtitulos.className = 'subtopic-links';
+        const indicadorAtivo = itemAtivo.querySelector('.topic-progress');
+
+        const atualizarProgresso = () => {
+            try {
+                localStorage.setItem(chaveProgresso, JSON.stringify([...vistos]));
+            } catch {}
+            const percentual = Math.round((vistos.size / subtitulos.length) * 100);
+            if (indicadorAtivo) indicadorAtivo.textContent = `${percentual}%`;
+        };
+
+        subtitulos.forEach((subtitulo, indice) => {
+            const id = `tema-${tema}-subtema-${indice + 1}`;
+            subtitulo.id = id;
+            const item = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = `#${id}`;
+            link.textContent = subtitulo.textContent;
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                subtitulo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                history.replaceState(null, '', `#${id}`);
+            });
+            item.appendChild(link);
+            menuSubtitulos.appendChild(item);
+        });
+        itemAtivo.appendChild(menuSubtitulos);
+
+        const observador = new IntersectionObserver(entradas => {
+            entradas.forEach(entrada => {
+                if (entrada.isIntersecting) {
+                    vistos.add(subtitulos.indexOf(entrada.target));
+                    atualizarProgresso();
+                }
+            });
+        }, { threshold: 0.25 });
+        subtitulos.forEach(subtitulo => observador.observe(subtitulo));
+        atualizarProgresso();
+    }
 });
