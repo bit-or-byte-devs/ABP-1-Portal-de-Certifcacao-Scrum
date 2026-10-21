@@ -36,9 +36,9 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 | **11** | Alta (5) | **US04 - Cadastrar candidato:** Como candidato, quero registrar meus dados com validação de CPF único. | 5 | 1 | RF03 | Concluído |
 | **12** | Alta (8) | **US36 - Banco PostgreSQL:** Como equipe, queremos persistir os dados da aplicação no PostgreSQL. | 8 | 1 | RP02 | Concluído |
 | **13** | Alta (8) | **US37 - Arquitetura Web:** Como equipe, queremos conectar Front-End, Back-End e Banco de Dados. | 8 | 1 | RP01 / RP05 | Concluído |
-| **14** | Alta (8) | **US40 - Protótipo Figma:** Como equipe, queremos visualizar o design de todas as telas em um protótipo no Figma.| 8 | 1 | RF01 / RF07 | 🛠️ Em Progresso |
+| **14** | Alta (8) | **US40 - Protótipo Figma:** Como equipe, queremos visualizar o design de todas as telas em um protótipo no Figma.| 8 | 1 | RF01 / RF07 | Concluído |
 | **15** | Alta (2) | **US41 - Pesquisa dos temas:** Como candidato, quero ter acesso a conteúdos pesquisados, confiáveis e organizados sobre os 12 temas previstos, para estudar os conceitos antes de realizar a avaliação.| 2 | 1 | RF08 | Concluído |
-| **16** | Alta (8) | **US42 - Recuperar senha:** Como candidato cadastrado que esqueceu sua senha, quero redefinir minha senha por meio do e-mail cadastrado para recuperar o acesso ao Portal de Certificação Scrum.| 8 | 1 | RF03 /  RF04 | 🛠️ Em Progresso |
+| **16** | Alta (8) | **US42 - Recuperar senha:** Como candidato cadastrado que esqueceu sua senha, quero redefinir minha senha por meio do e-mail cadastrado para recuperar o acesso ao Portal de Certificação Scrum.| 8 | 1 | RF03 /  RF04 | Concluído |
 
 ---
 
