@@ -1,0 +1,352 @@
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: linear-gradient(180deg, #4969c8 0%, #2d4079 100%);
+    min-height: 100vh;
+    color: #0d1b2a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 18px 18px;
+}
+
+/* --- Cabeçalho --- */
+.navbar {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #071f4d;
+    border-radius: 40px;
+    padding: 8px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0 16px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    font-size: 32px;
+    background: #6c5ce7;
+    border-radius: 12px;
+    padding: 4px 8px;
+}
+
+.logo-text h2 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.logo-text span {
+    color: #00cec9;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-dark {
+    background-color: #172a45;
+    color: #00cec9;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+
+.btn-dark:hover {
+    background-color: #203a60;
+}
+
+/* --- Container Principal --- */
+.main-container {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #7588ba;
+    border-radius: 30px;
+    padding: 18px 20px 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    flex: 1;
+}
+
+/* Botão Voltar */
+.btn-back {
+    background-color: #1c2b36;
+    color: #00cec9;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+/* Título da Página */
+.main-title {
+    color: #ffffff;
+    font-size: 34px;
+    font-weight: 800;
+    margin: 0 0 14px 4px;
+}
+
+/* --- Layout da Área de Conteúdo --- */
+.content-grid {
+    display: grid;
+    grid-template-columns: minmax(150px, 24%) minmax(0, 1fr);
+    gap: 8px;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    background-color: #ddf5eb;
+    border-radius: 18px;
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: min(560px, calc(100vh - 165px));
+    min-height: 0;
+    overflow-y: auto;
+    position: sticky;
+    top: 20px;
+    align-self: start;
+}
+
+.toc h3 {
+    font-size: 14px;
+    color: #000;
+    font-weight: 700;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.toc h3:first-child {
+    margin-top: 0;
+}
+
+.sub-topics {
+    list-style: none;
+    padding-left: 12px;
+    border-left: 2px solid #b8dfcb;
+    margin-left: 4px;
+}
+
+.sub-topics li {
+    font-size: 12px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 8px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.sub-topics li.active {
+    background-color: #c9e9d9;
+}
+
+.topic-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Botão Iniciar Exame */
+.btn-exam {
+    background-color: #72cc53;
+    color: #ffffff;
+    border: none;
+    padding: 12px 0;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
+    transition: background 0.2s;
+    display: block;
+    text-decoration: none;
+}
+
+.btn-exam:hover {
+    background-color: #61b844;
+}
+
+/* --- Área de Conteúdo Principal --- */
+.content-body {
+    background-color: #ddf5eb;
+    border-radius: 18px;
+    padding: 18px 16px;
+    min-width: 0;
+}
+
+.content-body h2 {
+    font-size: 21px;
+    font-weight: 800;
+    color: #000;
+    margin-bottom: 12px;
+}
+
+.content-body h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.content-body p {
+    font-size: 15px;
+    color: #222;
+    line-height: 1.5;
+}
+
+.study-text p {
+    margin-bottom: 12px;
+}
+
+.study-text h3 {
+    margin-top: 24px;
+}
+
+.study-text h4 {
+    margin: 16px 0 8px;
+    color: #102f36;
+    font-size: 16px;
+}
+
+.study-text ul,
+.study-text ol {
+    margin: 0 0 14px 22px;
+    color: #222;
+    line-height: 1.6;
+}
+
+.study-text li {
+    margin-bottom: 5px;
+}
+
+.study-text figure {
+    margin: 18px 0 24px;
+    text-align: center;
+}
+
+.study-text figure img {
+    display: block;
+    width: 100%;
+    max-height: 360px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.study-text figcaption {
+    margin-top: 6px;
+    color: #44505a;
+    font-size: 13px;
+}
+
+.study-reference {
+    margin-top: 24px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(13, 27, 42, 0.15);
+    font-size: 13px !important;
+}
+
+.study-reference a {
+    color: #123b5d;
+    font-weight: 700;
+}
+
+.pdf-viewer {
+    display: block;
+    width: 100%;
+    height: 68vh;
+    min-height: 460px;
+    margin-top: 14px;
+    border: 0;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.pdf-viewer[hidden] {
+    display: none;
+}
+
+@media (max-width: 560px) {
+    body {
+        padding: 0 10px 10px;
+    }
+
+    .navbar {
+        padding: 8px 18px;
+    }
+
+    .main-container {
+        padding: 16px 12px;
+        border-radius: 24px;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        max-height: 240px;
+        min-height: 0;
+    }
+
+    .pdf-viewer {
+        height: 70vh;
+        min-height: 450px;
+    }
+
+    .main-title {
+        font-size: 30px;
+    }
+}
+
+/* Imagem e Legenda */
+.media-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.image-placeholder {
+    width: 380px;
+    height: 220px;
+    background-color: #d1d1d1;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.image-caption {
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 5px;
+}

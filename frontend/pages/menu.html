@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BorB - Menu Principal</title>
+    <link rel="stylesheet" href="../css/menu-temas.css">
+</head>
+<body>
+
+    <!-- Barra de Navegação Superior -->
+    <header class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">B</div>
+            <div class="logo-text">
+                <h2>BorB</h2>
+                <small>SCRUM_v8.1</small>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button class="btn-nav">Perfil</button>
+            <button class="btn-nav" id="sair" type="button">Log Out</button>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-container">
+        <h1 class="welcome-title" id="boas-vindas">Olá <span class="highlight">usuário</span>!!</h1>
+
+        <p id="aviso-menu" role="status" aria-live="polite"></p>
+
+        <div class="cards-wrapper">
+            <!-- Card Temas -->
+            <a href="temas.html" class="card card-temas">
+                <div class="card-title-row">
+                    <div class="icon-box">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+                    </div>
+                    <h2>Temas</h2>
+                </div>
+                <div class="card-body-content">
+                    <p>✓ Inicie seus estudos por aqui!</p>
+                    <p>✓ 12 temas para descobrir!</p>
+                </div>
+                <div class="card-counter">0/12</div>
+            </a>
+
+            <!-- Card Certificados -->
+            <a href="certificados.html" class="card card-certificados">
+                <div class="card-title-row">
+                    <div class="icon-box">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm1 7h5v2h-5V9zm-7 7h10v2H8v-2zm0-4h12v2H8v-2zM8 7h5V5H8v2z"/></svg>
+                    </div>
+                    <h2>Certificados</h2>
+                </div>
+                <div class="card-body-content">
+                    <p>✓ Valide seu certificado de conclusão.</p>
+                    <p>Validação disponível em breve.</p>
+                </div>
+            </a>
+
+            <!-- Card Exames -->
+            <a href="exames.html" class="card card-exames">
+                <div class="card-title-row">
+                    <div class="icon-box">
+                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
+                    </div>
+                    <h2>Exames</h2>
+                </div>
+                <div class="exams-grid">
+                    <div class="exam-item">Exame 1</div>
+                    <div class="exam-item">Exame 2</div>
+                    <div class="exam-item">Exame 3</div>
+                    <div class="exam-item ver-mais">Ver mais &rarr;</div>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer-bar">
+        <div class="footer-left">
+            <span class="footer-brand">BorB</span>
+            <span class="footer-copy">&copy; 2026 Scrum Learning Platform. Todos os direitos reservados.</span>
+        </div>
+        <div class="footer-right">
+            <span>STATUS: <span class="green-text">SECURE_MATRIX</span></span>
+            <span>FRAMEWORK: <span class="green-text">SCRUM.ORG COMPLIANT</span></span>
+        </div>
+    </footer>
+
+    <script src="../js/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BorB - Estudos</title>
+    <link rel="stylesheet" href="../css/estudos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo-container">
+            <div class="logo-icon">B</div>
+            <div class="logo-text">
+                <h2>BorB</h2>
+                <span>SCRUM_v0.1</span>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button class="btn-dark" type="button">Perfil</button>
+            <button class="btn-dark" type="button">Log Out</button>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <a class="btn-back" href="temas.html"><span>&larr;</span> Voltar</a>
+        <h1 class="main-title" id="tema-titulo">1. Fundamentos da Agilidade</h1>
+
+        <div class="content-grid">
+            <aside class="sidebar">
+                <nav class="toc">
+                    <h3>Temas de estudo</h3>
+                    <ul class="sub-topics">
+                        <li><a class="topic-link" href="estudos.html?tema=1">1. Fundamentos da Agilidade</a></li>
+                        <li><a class="topic-link" href="estudos.html?tema=2">2. Manifesto Ágil</a></li>
+                        <li><a class="topic-link" href="estudos.html?tema=3">3. Introdução ao Scrum</a></li>
+                        <li><a class="topic-link" href="estudos.html?tema=4">4. Papéis do Scrum</a></li>
+                        <li><a class="topic-link" href="estudos.html?tema=5">5. Eventos do Scrum</a></li>
+                        <li><a class="topic-link" href="estudos.html?tema=6">6. Artefatos do Scrum</a></li>
+                        <li><a class="topic-link" href="estudos.html?tema=7">7. User Stories</a></li>
+                        <li><a class="topic-link" href="estudos.html?tema=8">8. Gestão do Product Backlog</a></li>
+                        <li><a class="topic-link" href="estudos.html?tema=9">9. Kanban</a></li>
+                        <li><a class="topic-link" href="estudos.html?tema=10">10. Planejamento Ágil</a></li>
+                        <li><a class="topic-link" href="estudos.html?tema=11">11. Métricas Ágeis</a></li>
+                        <li><a class="topic-link" href="estudos.html?tema=12">12. Qualidade em Projetos Ágeis</a></li>
+                    </ul>
+                </nav>
+                <a class="btn-exam" href="exames.html">Iniciar exame</a>
+            </aside>
+
+            <section class="content-body">
+                <h2 id="conteudo-titulo">Conteúdo do tema</h2>
+                <p id="conteudo-descricao">Selecione um tema para consultar o material completo do PDF.</p>
+                <article class="study-text" id="conteudo-texto" hidden></article>
+                <iframe class="pdf-viewer" id="visualizador-pdf" title="Conteúdo completo do tema em PDF"></iframe>
+            </section>
+        </div>
+    </main>
+
+    <script src="../js/estudos-conteudo.js"></script>
+    <script src="../js/estudos.js"></script>
+</body>
+</html>

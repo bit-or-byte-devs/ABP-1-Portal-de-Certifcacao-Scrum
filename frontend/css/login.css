@@ -1,0 +1,398 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --roxo: #7c3aed;
+  --roxo-hover: #6d28d9;
+  --roxo-claro: #a9a4f7;
+  --roxo-base: #5b51c9;
+  --ciano: #22d3ee;
+
+  --fundo: #f7f8fb;
+  --card: #dcdcdc;
+  --campo: #ffffff;
+  --texto: #3a3a40;
+  --texto-suave: #6b6b75;
+  --borda-foco: #7c3aed;
+
+  --erro: #c81e1e;
+  --sucesso: #15803d;
+
+  --raio-card: 32px;
+  --raio-campo: 6px;
+  --sombra-card: 0 12px 32px rgba(30, 20, 60, 0.1);
+
+  --fonte-titulo: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --fonte-texto: "Jost", "Segoe UI", Roboto, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--fonte-texto);
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+a {
+  color: var(--roxo);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Estrutura */
+.pagina {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px 48px;
+}
+
+/* Logo */
+.logo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  margin-bottom: 12px;
+  text-decoration: none;
+}
+
+.logo__texto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.85;
+}
+
+.logo__sub {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: var(--roxo);
+  margin-bottom: 6px;
+}
+
+.logo__nome {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 88px;
+  letter-spacing: 0.01em;
+  background: linear-gradient(
+    180deg,
+    var(--roxo) 10%,
+    #6c7cf0 50%,
+    var(--ciano) 95%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.logo__icone {
+  width: 92px;
+  height: 92px;
+  margin-bottom: -22px;
+}
+
+.card {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  background: var(--card);
+  border-radius: var(--raio-card);
+  box-shadow: var(--sombra-card);
+  padding: 60px 44px 48px;
+}
+
+.card__titulo {
+  margin: 0 0 38px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.card__descricao {
+  margin: -12px 0 28px;
+  text-align: center;
+  font-size: 18px;
+  color: var(--texto-suave);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.campo__rotulo {
+  font-size: 18px;
+}
+
+.campo__caixa {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.campo__input {
+  width: 100%;
+  height: 34px;
+  padding: 0 12px;
+  border: 1.5px solid transparent;
+  border-radius: var(--raio-campo);
+  background: var(--campo);
+  color: var(--texto);
+  font: inherit;
+  font-size: 16px;
+  outline: none;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.campo__input::placeholder {
+  color: #8a8a93;
+}
+
+.campo__input:focus {
+  border-color: var(--borda-foco);
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.18);
+}
+
+.campo__input[aria-invalid="true"] {
+  border-color: var(--erro);
+}
+
+.campo__erro {
+  min-height: 0;
+  font-size: 15px;
+  color: var(--erro);
+}
+
+.campo__erro:empty {
+  display: none;
+}
+
+.btn-olho {
+  position: absolute;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--texto-suave);
+  cursor: pointer;
+}
+
+.btn-olho:hover {
+  color: var(--roxo);
+}
+
+.btn-olho:focus-visible {
+  outline: 2px solid var(--roxo);
+}
+
+.btn-olho svg {
+  width: 24px;
+  height: 24px;
+}
+
+.btn-olho .icone-ocultar {
+  display: none;
+}
+
+.btn-olho[aria-pressed="true"] .icone-mostrar {
+  display: none;
+}
+
+.btn-olho[aria-pressed="true"] .icone-ocultar {
+  display: block;
+}
+
+/* Botão Principal (AUMENTADO +35%) */
+.btn {
+  align-self: center;
+  min-width: 190px;
+  height: 58px;
+  margin-top: 20px;
+  padding: 0 44px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--roxo);
+  color: #fff;
+  font: inherit;
+  font-size: 22px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    transform 0.1s;
+}
+
+.btn:hover {
+  background: var(--roxo-hover);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:focus-visible {
+  outline: 4px solid rgba(124, 58, 237, 0.4);
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Alertas/Avisos */
+.aviso {
+  margin: 0;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.aviso:empty {
+  display: none;
+}
+
+.aviso--sucesso {
+  background: #dcfce7;
+  color: var(--sucesso);
+}
+
+.aviso--erro {
+  background: #fee2e2;
+  color: var(--erro);
+}
+
+.link-secundario {
+  margin-top: 30px;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.link-secundario:hover {
+  text-decoration: underline;
+}
+
+/* Rodapé */
+.rodape {
+  background: var(--roxo);
+  color: #fff;
+  text-align: center;
+  padding: 14px 20px;
+  font-size: 18px;
+}
+
+.rodape a {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.rodape a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 740px) {
+  .logo__nome {
+    font-size: 68px;
+  }
+
+  .logo__icone {
+    width: 72px;
+    height: 72px;
+  }
+
+  .card {
+    max-width: 100%;
+    padding: 40px 24px 32px;
+  }
+
+  .campo__caixa--icone .campo__input {
+    height: 52px !important;
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo__nome {
+    font-size: 54px;
+  }
+
+  .card {
+    padding: 30px 16px 24px;
+    border-radius: 20px;
+  }
+
+  .btn {
+    width: 100%;
+    height: 50px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+.campo__icone {
+  position: absolute;
+  left: 18px;
+  width: 24px;
+  height: 24px;
+  color: var(--texto);
+  pointer-events: none;
+}
+
+.campo__caixa--icone .campo__input {
+  padding-left: 56px;
+  height: 62px;
+  font-size: 18px;
+}
+
+.campo__caixa--senha .campo__input {
+  padding-right: 58px;
+}
