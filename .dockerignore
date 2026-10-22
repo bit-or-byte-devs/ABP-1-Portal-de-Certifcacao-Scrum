@@ -1,0 +1,12 @@
+.git
+.gitignore
+.idea
+.vscode
+**/node_modules
+.env
+**/.env
+*.log
+*.bundle
+tmp
+output
+docs

@@ -1,0 +1,50 @@
+# Sobe o Portal de Certificação (app + PostgreSQL) sem nenhuma configuração manual:
+#   docker compose up -d --build
+# Depois acesse http://localhost:3000/pages/index.html
+#
+# Os valores abaixo servem apenas para demonstração e desenvolvimento local.
+# Para usar outros segredos, defina SESSION_SECRET e RECUPERACAO_SECRET
+# (32 caracteres ou mais) no ambiente ou em um arquivo .env ao lado deste arquivo.
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: portal_certificacao
+      POSTGRES_USER: portal
+      POSTGRES_PASSWORD: portal_dev_123
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Executados apenas na primeira criação do volume, em ordem alfabética.
+      - ./database/ddl/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./database/dml/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U portal -d portal_certificacao"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: development
+      PORT: "3000"
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: portal_certificacao
+      DB_USER: portal
+      DB_PASSWORD: portal_dev_123
+      SESSION_SECRET: ${SESSION_SECRET:-3f9a1c7e5b2d48a6c0e1f7b93d5a2c84e6f10b7a9c3d5e2f48a1b6c7d9e0f123}
+      RECUPERACAO_SECRET: ${RECUPERACAO_SECRET:-a7c2e9d4b1f6038c5e7a2d9b4f1c6e83d0a5b7c9e2f4a6d8b1c3e5f70912a4b6}
+      # Sem servidor SMTP: o código de recuperação aparece nos logs (docker compose logs app).
+      RECUPERACAO_MODO: console
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+volumes:
+  pgdata:

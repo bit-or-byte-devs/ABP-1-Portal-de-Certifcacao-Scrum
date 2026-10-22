@@ -98,27 +98,39 @@ Portal-Certificacao-Agiles/
 ### 🛠️ Pré-requisitos
 
 * [Git](https://git-scm.com) instalado.
-* [Docker Desktop](https://www.google.com/search?q=https://www.docker.com/) em execução.
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/) em execução (inclui o Docker Compose).
+
+Não é preciso instalar Node.js nem PostgreSQL, nem criar arquivos `.env`: o `docker-compose.yml` já traz toda a configuração.
 
 ### 🚀 Executando a Aplicação
 
 1. **Clonar o Repositório:**
 ```bash
-git clone [https://github.com/seu-usuario/Portal-Certificacao-Agiles.git](https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum )
-cd ABP-1-Portal-de-Certifcacao-Scru
-
+git clone https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum.git
+cd ABP-1-Portal-de-Certifcacao-Scrum
 ```
-
 
 2. **Subir os Contêineres (Docker Compose):**
 ```bash
-docker-compose up -d --build
-
+docker compose up -d --build
 ```
-
+Dois serviços sobem: `db` (PostgreSQL 16, com o schema e os temas carregados automaticamente na primeira execução) e `app` (API Node.js que também serve o front-end). A primeira execução baixa as imagens e pode levar alguns minutos.
 
 3. **Acessar a Aplicação:**
-Abra o navegador no endereço: `http://localhost:3000`
+Abra o navegador em `http://localhost:3000/pages/index.html`
+
+### 🔧 Comandos úteis
+
+```bash
+docker compose logs -f app     # acompanhar o log (os códigos de recuperação de senha aparecem aqui)
+docker compose down            # parar os serviços (os dados do banco são mantidos)
+docker compose down -v         # parar e apagar o banco, para recomeçar do zero
+```
+
+Observações:
+* A recuperação de senha roda em modo `console`: sem servidor SMTP, o código de verificação é impresso no log do serviço `app`.
+* Se a porta 3000 já estiver em uso, altere o mapeamento `ports` do serviço `app` no `docker-compose.yml` (por exemplo, `"3001:3000"`).
+* Os segredos do `docker-compose.yml` servem apenas para demonstração local. Para usar outros valores, defina `SESSION_SECRET` e `RECUPERACAO_SECRET` (32 caracteres ou mais) no ambiente.
 
 ---
 
