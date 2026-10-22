@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
   <title>BorB — Redefinir senha</title>
   <link rel="stylesheet" href="../css/recuperarsenha.css">
+  <link rel="stylesheet" href="../css/notificacao.css">
+  <link rel="stylesheet" href="../css/auth-tema.css">
 </head>
 <body>
   <header class="auth-header">
@@ -22,7 +25,7 @@
     <section class="card" aria-labelledby="titulo-redefinir">
       <h1 class="card__titulo" id="titulo-redefinir">Redefinir senha</h1>
 
-      <!-- O token chega pela URL do link enviado por e-mail (?token=...) -->
+      <!-- Só chega aqui quem confirmou o código na tela anterior; ID e token vêm do sessionStorage -->
       <form class="form" id="form-redefinir" novalidate>
         <p class="card__descricao">Crie uma nova senha para acessar o portal.</p>
 
@@ -34,7 +37,7 @@
               <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>
             </svg>
             <input class="campo__input" type="password" id="senha" name="senha"
-                   placeholder="Nova senha" minlength="8" maxlength="128"
+                   placeholder="Nova senha" minlength="8" maxlength="1024"
                    autocomplete="new-password" required aria-describedby="regra-senha senha-erro">
           </div>
           <small class="campo__ajuda" id="regra-senha">Pelo menos 8 caracteres, incluindo letras e números.</small>
@@ -49,7 +52,7 @@
               <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>
             </svg>
             <input class="campo__input" type="password" id="confirmarSenha" name="confirmarSenha"
-                   placeholder="Confirme a nova senha" minlength="8" maxlength="128"
+                   placeholder="Confirme a nova senha" minlength="8" maxlength="1024"
                    autocomplete="new-password" required aria-describedby="confirmarSenha-erro">
           </div>
           <span class="campo__erro" id="confirmarSenha-erro" aria-live="polite"></span>
@@ -61,6 +64,7 @@
       </form>
     </section>
 
+    <a class="link-secundario" id="novo-codigo" href="recuperar_senha.html" hidden>Solicitar novo código</a>
     <a class="link-secundario" href="login.html">Voltar para o login</a>
   </main>
 
@@ -68,6 +72,8 @@
     Ainda não tem uma conta? <a href="cadastro.html">Cadastre-se</a>
   </footer>
 
+  <script src="../js/notificacao.js"></script>
+  <script src="../js/recuperacao-fluxo.js"></script>
   <script src="../js/redefinicao.js"></script>
 </body>
 </html>

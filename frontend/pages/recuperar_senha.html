@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
   <title>BorB — Recuperar senha</title>
   <link rel="stylesheet" href="../css/recuperarsenha.css">
+  <link rel="stylesheet" href="../css/auth-tema.css">
 </head>
 <body>
   <header class="auth-header">
@@ -23,7 +25,7 @@
       <h1 class="card__titulo" id="titulo-recuperar">Recuperar senha</h1>
 
       <form class="form" id="form-solicitar" novalidate>
-        <p class="card__descricao">Informe o e-mail cadastrado. Se ele tiver uma conta no portal, você receberá um link para redefinir sua senha.</p>
+        <p class="card__descricao">Informe o e-mail cadastrado. Se ele tiver uma conta no portal, você receberá um código de seis dígitos para redefinir sua senha.</p>
 
         <div class="campo">
           <label class="sr-only" for="email">E-mail cadastrado</label>
@@ -41,7 +43,7 @@
 
         <p class="aviso" id="aviso-solicitar" role="status"></p>
 
-        <button class="btn" id="solicitar" type="submit">Enviar link</button>
+        <button class="btn" id="solicitar" type="submit">Enviar código</button>
       </form>
     </section>
 
@@ -52,6 +54,7 @@
     Ainda não tem uma conta? <a href="cadastro.html">Cadastre-se</a>
   </footer>
 
+  <script src="../js/recuperacao-fluxo.js"></script>
   <script src="../js/recuperacao.js"></script>
 </body>
 </html>
