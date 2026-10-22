@@ -56,13 +56,10 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 ---
 
 ## 🗓️ Tabela Descritiva das Sprints
-
 | Sprint | Período da Sprint | Documentação da Sprint | Vídeo do Incremento (YouTube) | Status |
 | --- | --- | --- | --- | --- |
-| 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1]  https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I | [Vídeo de Apresentação 1]
- (https://youtu.be/FVt_IMNGXu8) | Concluído |
+| 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1](https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I) | [Vídeo de Apresentação 1](https://youtu.be/FVt_IMNGXu8) | Concluído |
 
----
 
 ## 💻 Tecnologias Utilizadas
 
