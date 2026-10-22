@@ -139,13 +139,15 @@ ABP-1-Portal-de-Certifcacao-Scrum/
 ├── .env.example                    # Modelo de variáveis de ambiente (execução fora do Docker)
 ├── package.json, package-lock.json # Metadados npm da raiz do repositório
 └── README.md                       # Documentação principal
-```
+
 
 ### 🧭 Como as partes se conectam
 
 * O **backend** serve a API em `/api/...` e entrega o **front-end** na mesma origem (`/pages/...`), por isso o navegador chama a API sem configuração extra.
 * O **banco** é criado pelos scripts de `database/ddl` e `database/dml`, que o Docker executa automaticamente na primeira subida.
-* O **Docker Compose** liga os dois serviços (`app` e `db`): basta `docker compose up -d --build`.
+* O **Docker Compose** liga os dois serviços (`app` e `db`): basta executar
+docker compose up -d --build
+
 
 ---
 
