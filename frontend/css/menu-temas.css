@@ -268,7 +268,6 @@ body {
     font-size: 12px;
     color: var(--text-muted);
     display: none; /* Recolhidos ficam ocultos */
-    gap: 4px;
 }
 
 .btn-iniciar {
@@ -311,10 +310,21 @@ body {
 }
 
 .theme-card.active .theme-desc {
-    max-height: 100px;
+    max-height: 2000px;
     margin-top: 15px;
     border-top: 1px solid rgba(255, 255, 255, 0.04);
     padding-top: 15px;
+}
+
+.theme-desc h4 {
+    color: var(--text-white);
+    font-size: 14px;
+    margin-top: 14px;
+    margin-bottom: 6px;
+}
+
+.theme-desc p + p {
+    margin-top: 8px;
 }
 
 /* Rodapé */

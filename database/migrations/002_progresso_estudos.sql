@@ -1,0 +1,9 @@
+BEGIN;
+CREATE TABLE IF NOT EXISTS tbprogresso_estudo (
+ idcandidato INTEGER NOT NULL REFERENCES tbcandidato(id) ON DELETE CASCADE,
+ idtema INTEGER NOT NULL REFERENCES tbtema(id) ON DELETE CASCADE,
+ subtitulos INTEGER[] NOT NULL DEFAULT '{}',
+ atualizado_em TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ PRIMARY KEY (idcandidato, idtema)
+);
+COMMIT;

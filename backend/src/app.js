@@ -12,25 +12,22 @@ app.use(express.json({ limit: "16kb" }));
 app.use(sessao);
 app.use("/api/auth", authRoutes);
 app.use("/api/auth/recuperacao", require("./routes/recuperacao"));
-// A rota protegida vem antes dos arquivos estáticos.
-app.get("/pages/menu.html", protegerMenu, (req, res) => {
-    res.sendFile(path.join(__dirname, "../../frontend/pages/menu.html"));
-});
-// Serve o front pela mesma origem da API, para o fetch("/api/...") funcionar
-// Impede que caminhos alternativos sirvam o menu como arquivo público.
+// Normaliza antes de servir arquivos para que aliases também exijam sessão.
+const paginasPrivadas = new Set(["menu.html", "temas.html", "estudos.html", "exames.html", "exame.html", "certificados.html", "perfil.html"]);
 app.use((req, res, next) => {
     try {
-        const caminho = decodeURIComponent(req.path).replace(/\\/g, "/");
-        const caminhoNormalizado = path.posix.normalize(caminho)
-            .split("/")
-            .map(parte => parte.replace(/[. ]+$/, ""))
-            .join("/").toLowerCase();
-        if (caminhoNormalizado === "/pages/menu.html") {
-            return res.redirect("/pages/menu.html");
+        const caminho = path.posix.normalize(decodeURIComponent(req.path).replace(/\\/g, "/"))
+            .split("/").map(parte => parte.replace(/[. ]+$/, "")).join("/").toLowerCase();
+        const arquivo = caminho.replace(/\/$/, "").replace(/^\/pages\//, "");
+        if (paginasPrivadas.has(arquivo) && caminho.startsWith("/pages/")) {
+            if (req.path !== "/pages/" + arquivo) return res.redirect("/pages/" + arquivo);
+            return protegerMenu(req, res, next);
         }
     } catch { return res.sendStatus(400); }
     next();
 });
+app.use("/api/estudos", require("./routes/estudos"));
+app.use("/api/exames", require("./routes/exames"));
 app.use("/imagens", express.static(path.join(__dirname, "../../imagens")));
 app.use(express.static(path.join(__dirname, "../../frontend")));
 app.use("/temas", temasRoutes);

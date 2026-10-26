@@ -253,4 +253,12 @@ CREATE INDEX idx_questao_imagem ON tbquestao(idimagem);
 CREATE INDEX idx_resposta_questao ON tbresposta(idquestao);
 CREATE INDEX idx_resposta_alternativa ON tbresposta(idalternativa);
 
+CREATE TABLE IF NOT EXISTS tbprogresso_estudo (
+ idcandidato INTEGER NOT NULL REFERENCES tbcandidato(id) ON DELETE CASCADE,
+ idtema INTEGER NOT NULL REFERENCES tbtema(id) ON DELETE CASCADE,
+ subtitulos INTEGER[] NOT NULL DEFAULT '{}',
+ atualizado_em TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ PRIMARY KEY (idcandidato, idtema)
+);
+
 COMMIT;
