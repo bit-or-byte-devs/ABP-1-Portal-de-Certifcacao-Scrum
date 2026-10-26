@@ -1,100 +1,107 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BorB - Exame: Fundamentos de Agilidade</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/menu-temas.css">
     <link rel="stylesheet" href="../css/exame.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Cabeçalho / Navbar -->
-    <header class="navbar">
-        <div class="logo-container">
-            <div class="logo-icon">🤖</div>
+    <header class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon" aria-hidden="true">B</div>
             <div class="logo-text">
-                <h2>BorB</h2>
-                <span>SCRUM_v0.1</span>
+                <p class="logo-nome">BorB</p>
+                <small>SCRUM_v8.1</small>
             </div>
         </div>
-        <div class="nav-buttons">
-            <button class="btn-dark">Perfil</button>
-            <button class="btn-dark">Log Out</button>
-        </div>
+        <nav class="nav-buttons" aria-label="Conta">
+            <button class="btn-nav" type="button">Perfil</button>
+            <button class="btn-nav" type="button" data-logout>Log Out</button>
+        </nav>
     </header>
 
-    <!-- Contentor Principal -->
-    <main class="main-container">
-        
-        <!-- Barra Superior com Botões de Navegação -->
-        <div class="top-bar">
-            <button class="btn-pill btn-back">
-                <span>&larr;</span> Voltar
-            </button>
-
-            <!-- Mascote -->
-            <div class="mascot-container">
-                <img src="mascot.png" alt="Mascote BorB" class="mascot-img">
-            </div>
-
-            <button class="btn-pill btn-next">
-                Proximo <span>&rarr;</span>
-            </button>
+    <main class="main-container exame">
+        <div class="top-header-row exame__topo">
+            <a href="exames.html" class="btn-voltar">&larr; Voltar</a>
+            <h1 class="page-title">1. Fundamentos de Agilidade</h1>
+            <img class="exame__mascote" src="/imagens/BorB(sem fundo_corpo).png" alt="" width="110" height="128">
         </div>
 
-        <!-- Título Principal -->
-        <h1 class="main-title">1. Fundamentos de Agilidade</h1>
+        <!-- Uma questão por tema, sorteada entre as quatro do tema no banco de dados -->
+        <article class="questao" aria-labelledby="questao-titulo">
+            <header class="questao__cabecalho">
+                <h2 id="questao-titulo" class="questao__titulo">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor?</h2>
+                <!-- Cronômetro: anuncia só nos marcos (60, 30 e 10 s) pela região abaixo -->
+                <p class="cronometro" role="timer" aria-live="off" aria-label="Tempo restante">
+                    <time id="cronometro-tempo" datetime="PT150S">2:30</time>
+                </p>
+                <p id="cronometro-aviso" class="sr-only" aria-live="polite"></p>
+            </header>
 
-        <!-- Cartão do Questionário -->
-        <section class="quiz-card">
-            
-            <!-- Cabeçalho da Pergunta e Botão Confirmar -->
-            <div class="question-header">
-                <h2 class="question-text">
-                    1. O que caracterizou a chamada “crise do software”, discutida a partir de 1968?
-                </h2>
-                <button class="btn-confirm">
-                    Confirmar <span>&rarr;</span>
-                </button>
-            </div>
+            <form id="form-questao" class="questao__form">
+                <div class="questao__corpo">
+                    <figure class="questao__figura">
+                        <img id="questao-imagem" src="/imagens/imagem1-tema1-questoes.jpg" width="1024" height="559" alt="Lorem ipsum dolor sit amet.">
+                        <figcaption id="questao-legenda">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+                    </figure>
 
-            <!-- Corpo do Quiz (Imagem + Opções) -->
-            <div class="quiz-body">
-                
-                <!-- Área da Imagem Placeholder -->
-                <div class="image-placeholder"></div>
+                    <fieldset id="alternativas" class="alternativas">
+                        <legend class="sr-only">Alternativas</legend>
 
-                <!-- Lista de Opções -->
-                <div class="options-container">
-                    
-                    <label class="option-card">
-                        <input type="radio" name="quiz-option" value="A">
-                        <span class="option-letter">A.</span>
-                        <span class="option-text">A falta de computadores para executar os programas existentes</span>
-                    </label>
+                        <label class="alternativa">
+                            <input type="radio" name="resposta" value="A">
+                            <span class="alternativa__letra">A.</span>
+                            <span class="alternativa__texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                        </label>
 
-                    <label class="option-card">
-                        <input type="radio" name="quiz-option" value="B">
-                        <span class="option-letter">B.</span>
-                        <span class="option-text">Projetos de software frequentemente atrasados, acima do orçamento e com baixa qualidade.</span>
-                    </label>
+                        <label class="alternativa">
+                            <input type="radio" name="resposta" value="B">
+                            <span class="alternativa__letra">B.</span>
+                            <span class="alternativa__texto">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+                        </label>
 
-                    <label class="option-card">
-                        <input type="radio" name="quiz-option" value="C">
-                        <span class="option-letter">C.</span>
-                        <span class="option-text">A proibição do uso de linguagens de programação de alto nível.</span>
-                    </label>
+                        <label class="alternativa">
+                            <input type="radio" name="resposta" value="C">
+                            <span class="alternativa__letra">C.</span>
+                            <span class="alternativa__texto">Ut enim ad minim veniam, quis nostrud exercitation ullamco.</span>
+                        </label>
 
-                    <label class="option-card">
-                        <input type="radio" name="quiz-option" value="D">
-                        <span class="option-letter">D.</span>
-                        <span class="option-text">O excesso de programadores disponíveis no mercado</span>
-                    </label>
-
+                        <label class="alternativa">
+                            <input type="radio" name="resposta" value="D">
+                            <span class="alternativa__letra">D.</span>
+                            <span class="alternativa__texto">Duis aute irure dolor in reprehenderit in voluptate velit esse.</span>
+                        </label>
+                    </fieldset>
                 </div>
-            </div>
 
-            <!-- Tempor
+                <!-- Feedback de resposta (RF09/RF11) -->
+                <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+
+                <div class="questao__acoes">
+                    <button id="btn-interromper" class="btn-nav" type="button">Interromper</button>
+                    <button id="btn-confirmar" class="btn-confirmar" type="submit">Confirmar &rarr;</button>
+                    <a id="link-continuar" class="btn-confirmar" href="exames.html" hidden>Continuar &rarr;</a>
+                </div>
+            </form>
+        </article>
+    </main>
+
+    <footer class="footer-bar">
+        <div class="footer-left">
+            <span class="footer-brand">BorB</span>
+            <span class="footer-copy">&copy; 2026 Scrum Learning Platform. Todos os direitos reservados.</span>
+        </div>
+        <div class="footer-right">
+            <span>STATUS: <span class="green-text">SECURE_MATRIX</span></span>
+            <span>FRAMEWORK: <span class="green-text">SCRUM.ORG COMPLIANT</span></span>
+        </div>
+    </footer>
+
+    <script src="../js/cronometro.js"></script>
+    <script src="../js/logout.js"></script>
+</body>
+</html>
