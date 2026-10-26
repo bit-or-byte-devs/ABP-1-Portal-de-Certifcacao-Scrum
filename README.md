@@ -1,4 +1,4 @@
-#SPRINT 1 
+#SPRINT 2
 
 # 🎯 BorB - Plataforma de Estudos Scrum
 
@@ -56,12 +56,10 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 ---
 
 ## 🗓️ Tabela Descritiva das Sprints
-
 | Sprint | Período da Sprint | Documentação da Sprint | Vídeo do Incremento (YouTube) | Status |
 | --- | --- | --- | --- | --- |
-| 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1]  https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I | [Vídeo do Incremento 1](https://www.google.com/search?q=https://youtube.com) | 🛠️ Em Andamento |
+| 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1](https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I) | [Vídeo de Apresentação 1](https://youtu.be/FVt_IMNGXu8) | Concluído |
 
----
 
 ## 💻 Tecnologias Utilizadas
 
@@ -76,20 +74,78 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 
 ## 🏗️ Estrutura do Projeto
 
-```text
-Portal-Certificacao-Agiles/
-├── docs/                       # Pasta de Documentação do Projeto
-│   ├── DoR-DoD.md             # Definições de DoR e DoD por Sprint
-│   ├── manual-usuario.md      # Manual do Usuário
-│   └── checklist.md           # Checklist de Validação
-├── src/
-│   ├── backend/               # Código-fonte da API Node.js
-│   ├── frontend/              # Interface HTML/CSS/JS puro
-│   └── database/              # Scripts DDL/DML do PostgreSQL
-├── docker-compose.yml         # Orquestração dos serviços
-└── README.md                  # Documentação Principal
+ABP-1-Portal-de-Certifcacao-Scrum/
+├── backend/                        # API Node.js (Express) que também serve o front-end
+│   ├── server.js                   # Ponto de entrada: sobe o servidor na porta configurada
+│   ├── package.json                # Dependências e scripts do backend
+│   ├── src/
+│   │   ├── app.js                  # Configuração do Express: sessão, rotas, arquivos estáticos
+│   │   ├── config/
+│   │   │   ├── db.js               # Conexão com o PostgreSQL (pool)
+│   │   │   └── sessao.js           # Sessão e cookie de autenticação
+│   │   ├── controllers/
+│   │   │   ├── authController.js         # Login, logout e usuário logado
+│   │   │   ├── candidatoController.js    # Cadastro de candidato e validações
+│   │   │   └── recuperacaoController.js  # Recuperação de senha
+│   │   ├── middlewares/
+│   │   │   └── autenticacao.js     # Proteção de rotas e páginas (menu) e checagem de JSON
+│   │   ├── models/
+│   │   │   ├── candidatoModel.js         # Acesso aos dados de candidatos
+│   │   │   └── recuperacaoModel.js       # Acesso aos dados de recuperação de senha
+│   │   ├── routes/
+│   │   │   ├── auth.js             # /api/auth (login, logout, usuário)
+│   │   │   ├── candidatos.js       # /api/candidatos (cadastro)
+│   │   │   ├── recuperacao.js      # /api/auth/recuperacao
+│   │   │   └── temas.js            # /temas (12 temas de estudo)
+│   │   └── services/
+│   │       ├── senha.js                  # Hash e verificação de senha
+│   │       ├── codigoRecuperacao.js      # Geração e validação do código de recuperação
+│   │       └── emailRecuperacao.js       # Envio do código (SMTP ou console, em desenvolvimento)
+│   └── tests/                      # Testes automatizados (node --test)
+│       ├── auth.test.js
+│       ├── recuperacao.test.js
+│       └── recuperacao.postgres.test.js  # Teste com PostgreSQL real (opcional)
+│
+├── frontend/                       # Interface em HTML, CSS e JavaScript puro
+│   ├── pages/                      # Telas
+│   │   ├── index.html              # Tela inicial
+│   │   ├── cadastro.html, login.html
+│   │   ├── menu.html               # Menu principal (exige login)
+│   │   ├── temas.html              # Área de estudos: 12 temas
+│   │   ├── exames.html, certificados.html, pop-up.html
+│   │   └── recuperar_senha.html, verificar_codigo.html, redefinir_senha.html
+│   ├── css/                        # Estilos de cada tela e componente
+│   ├── js/                         # Scripts de cadastro, formulário, menu, temas, logout e recuperação
+│   └── assets/                     # Reservado para ícones e imagens do front-end
+│
+├── database/                       # Banco de dados PostgreSQL
+│   ├── ddl/schema.sql              # Criação das tabelas
+│   ├── dml/seed.sql                # Carga inicial: os 12 temas de estudo
+│   ├── migrations/                 # Atualizações para bancos já existentes
+│   │   └── 001_recuperacao_senha.sql
+│   └── diagrams/                   # Reservado para diagramas do banco
+│
+├── imagens/                        # Logos do BorB, modelos conceitual e lógico, imagens das questões (temas 1 a 3)
+├── docs/                           # Documentação técnica
+│   ├── login.md                    # Fluxo de autenticação
+│   ├── recuperacao-senha.md        # Fluxo de recuperação de senha
+│   └── api/, installation/, requirements/   # Reservadas para as próximas sprints
+│
+├── Dockerfile                      # Imagem da aplicação (Node.js 22)
+├── docker-compose.yml              # Orquestração: app + PostgreSQL, sem configuração manual
+├── .dockerignore                   # Arquivos excluídos da imagem
+├── .env.example                    # Modelo de variáveis de ambiente (execução fora do Docker)
+├── package.json, package-lock.json # Metadados npm da raiz do repositório
+└── README.md                       # Documentação principal
 
-```
+
+### 🧭 Como as partes se conectam
+
+* O **backend** serve a API em `/api/...` e entrega o **front-end** na mesma origem (`/pages/...`), por isso o navegador chama a API sem configuração extra.
+* O **banco** é criado pelos scripts de `database/ddl` e `database/dml`, que o Docker executa automaticamente na primeira subida.
+* O **Docker Compose** liga os dois serviços (`app` e `db`): basta executar
+docker compose up -d --build
+
 
 ---
 
