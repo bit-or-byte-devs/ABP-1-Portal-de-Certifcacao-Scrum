@@ -19,26 +19,26 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 
 ---
 
-## 📋 Backlog do Produto - SPRINT 1
+## 📋 Backlog do Produto - SPRINT 2
 
 | Rank | Prioridade | User Story | Story Points | Sprint | Requisito Relacionado | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| **1** | Alta (1) | **US03 - Acessar cadastro:** Como candidato, quero acessar a tela de cadastro para iniciar o registro. | 1 | 1 | RF03 | Concluído |
-| **2** | Alta (2) | **US01 - Visualizar informações:** Como candidato, quero ler as regras da certificação antes de iniciar. | 2 | 1 | RF01 | Concluído |
-| **3** | Alta (2) | **US05 - Ação pós-cadastro:** Como candidato, quero escolher entre ir ao menu ou iniciar a prova. | 2 | 1 | RF01 | Concluído |
-| **4** | Alta (2) | **US06 - Acessar Menu Principal:** Como candidato, quero navegar pelo menu após autenticado. | 2 | 1 | RF01 | Concluído |
-| **5** | Alta (2) | **US07 - Navegar entre áreas:** Como candidato, quero alternar entre as sessões do portal. | 2 | 1 | RF01 | Concluído |
-| **6** | Alta (2) | **US08 - Visualizar temas:** Como candidato, quero ver os 12 temas disponíveis para estudo. | 2 | 1 | RF08 | Concluído |
-| **7** | Alta (2) | **US10 - Navegar no conteúdo:** Como candidato, quero alternar entre os temas de estudo livremente. | 2 | 1 | RF08 | Concluído |
-| **8** | Alta (2) | **US41 - Pesquisar 12 temas** Como candidato, quero ter acesso aos conteúdos sobre os 12 temas. | 2 | 1 | RF05 | Concluído |
-| **9** | Alta (3) | **US02 - Realizar login:** Como candidato, quero autenticar com CPF e senha para acessar o portal. | 3 | 1 | RF04 | Concluído |
-| **10** | Alta (3) | **US09 - Acessar conteúdo de estudo:** Como candidato, quero ler o material didático de um tema. | 3 | 1 | RF08 | Concluído |
-| **11** | Alta (5) | **US04 - Cadastrar candidato:** Como candidato, quero registrar meus dados com validação de CPF único. | 5 | 1 | RF03 | Concluído |
-| **12** | Alta (8) | **US36 - Banco PostgreSQL:** Como equipe, queremos persistir os dados da aplicação no PostgreSQL. | 8 | 1 | RP02 | Concluído |
-| **13** | Alta (8) | **US37 - Arquitetura Web:** Como equipe, queremos conectar Front-End, Back-End e Banco de Dados. | 8 | 1 | RP01 / RP05 | Concluído |
-| **14** | Alta (8) | **US40 - Protótipo Figma:** Como equipe, queremos visualizar o design de todas as telas em um protótipo no Figma.| 8 | 1 | RF01 / RF07 | Concluído |
-| **15** | Alta (2) | **US41 - Pesquisa dos temas:** Como candidato, quero ter acesso a conteúdos pesquisados, confiáveis e organizados sobre os 12 temas previstos, para estudar os conceitos antes de realizar a avaliação.| 2 | 1 | RF08 | Concluído |
-| **16** | Alta (8) | **US42 - Recuperar senha:** Como candidato cadastrado que esqueceu sua senha, quero redefinir minha senha por meio do e-mail cadastrado para recuperar o acesso ao Portal de Certificação Scrum.| 8 | 1 | RF03 /  RF04 | Concluído |
+| **1** | Alta (1) | **US11 -  Organizar questões por tema:** Como responsável pelo sistema, quero que as questões sejam organizadas por tema para manter a base de questões estruturada conforme a certificação. | 1 | 1 | RF03 | Em progresso |
+| **2** | Alta (2) | **US12 - Visualizar informações:** Como candidato, quero ler as regras da certificação antes de iniciar. | 2 | 1 | RF01 | Em progresso |
+| **3** | Alta (2) | **US13 - Ação pós-cadastro:** Como candidato, quero escolher entre ir ao menu ou iniciar a prova. | 2 | 1 | RF01 | Em progresso |
+| **4** | Alta (2) | **US14 - Acessar Menu Principal:** Como candidato, quero navegar pelo menu após autenticado. | 2 | 1 | RF01 | Em progresso |
+| **5** | Alta (2) | **US15 - Navegar entre áreas:** Como candidato, quero alternar entre as sessões do portal. | 2 | 1 | RF01 | Em progresso |
+| **6** | Alta (2) | **US16 - Visualizar temas:** Como candidato, quero ver os 12 temas disponíveis para estudo. | 2 | 1 | RF08 | Em progresso |
+| **7** | Alta (2) | **US17 - Navegar no conteúdo:** Como candidato, quero alternar entre os temas de estudo livremente. | 2 | 1 | RF08 | Em progresso |
+| **8** | Alta (2) | **US18 - Pesquisar 12 temas** Como candidato, quero ter acesso aos conteúdos sobre os 12 temas. | 2 | 1 | RF05 | Em progresso |
+| **9** | Alta (3) | **US19 - Realizar login:** Como candidato, quero autenticar com CPF e senha para acessar o portal. | 3 | 1 | RF04 | Em progresso |
+| **10** | Alta (3) | **US20 - Acessar conteúdo de estudo:** Como candidato, quero ler o material didático de um tema. | 3 | 1 | RF08 | Em progresso |
+| **11** | Alta (5) | **US21 - Cadastrar candidato:** Como candidato, quero registrar meus dados com validação de CPF único. | 5 | 1 | RF03 | Em progresso |
+| **12** | Alta (8) | **US22 - Banco PostgreSQL:** Como equipe, queremos persistir os dados da aplicação no PostgreSQL. | 8 | 1 | RP02 | Em progresso |
+| **13** | Alta (8) | **US23 - Arquitetura Web:** Como equipe, queremos conectar Front-End, Back-End e Banco de Dados. | 8 | 1 | RP01 / RP05 | Em progresso |
+| **14** | Alta (8) | **US24 - Protótipo Figma:** Como equipe, queremos visualizar o design de todas as telas em um protótipo no Figma.| 8 | 1 | RF01 / RF07 | Em progresso |
+| **15** | Alta (2) | **US25 - Pesquisa dos temas:** Como candidato, quero ter acesso a conteúdos pesquisados, confiáveis e organizados sobre os 12 temas previstos, para estudar os conceitos antes de realizar a avaliação.| 2 | 1 | RF08 | Em progresso |
+
 
 ---
 
