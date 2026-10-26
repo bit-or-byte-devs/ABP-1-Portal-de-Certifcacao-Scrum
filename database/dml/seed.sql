@@ -64,4 +64,7 @@ VALUES
 )
 ON CONFLICT (ordem) DO NOTHING;
 
+INSERT INTO tbmaterial (idtema, titulo, conteudo_ou_url, tipo, ordem)
+SELECT t.id, t.nome, '/api/estudos/' || t.ordem, 'html', 1 FROM tbtema t
+WHERE NOT EXISTS (SELECT 1 FROM tbmaterial m WHERE m.idtema=t.id AND m.ordem=1);
 COMMIT;
