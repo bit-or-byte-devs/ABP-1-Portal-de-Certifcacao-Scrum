@@ -110,3 +110,4 @@ Roteiro manual:
    possui cadastro, sem criar uma segunda conta.
 6. Volte a abrir o menu; para confirmar que a sessão permite entrar, não deve
    ser necessário preencher novamente as credenciais.
+
