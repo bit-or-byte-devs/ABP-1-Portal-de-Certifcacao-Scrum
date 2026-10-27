@@ -191,12 +191,14 @@ Observações:
 
 ---
 
-## 📂 Link para Pasta de Documentação
+## 📂 Link para Pasta de Documentação 
 
 Toda a documentação complementar, checklists, manuais e critérios de qualidade do projeto estão centralizados em nossa pasta oficial:
 👉 https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I
+
 Para imagens complementares como modelo conceitual, lógico, e Diagramas de Classe, Casos de Uso e Sequência, segue o link para a pasta do GitHub:
 👉 https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/tree/develop/docs-sprint-1
+
 ---
 
 ## 👥 Equipe **[Bit or Byte]**
