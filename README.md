@@ -23,21 +23,21 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 
 | Rank | Prioridade | User Story | Story Points | Sprint | Requisito Relacionado | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| **1** | Alta (1) | **US11 -  Organizar questões por tema:** Como responsável pelo sistema, quero que as questões sejam organizadas por tema para manter a base de questões estruturada conforme a certificação. | 1 | 1 | RF03 | Em progresso |
-| **2** | Alta (2) | **US12 - Visualizar informações:** Como candidato, quero ler as regras da certificação antes de iniciar. | 2 | 1 | RF01 | Em progresso |
-| **3** | Alta (2) | **US13 - Ação pós-cadastro:** Como candidato, quero escolher entre ir ao menu ou iniciar a prova. | 2 | 1 | RF01 | Em progresso |
-| **4** | Alta (2) | **US14 - Acessar Menu Principal:** Como candidato, quero navegar pelo menu após autenticado. | 2 | 1 | RF01 | Em progresso |
-| **5** | Alta (2) | **US15 - Navegar entre áreas:** Como candidato, quero alternar entre as sessões do portal. | 2 | 1 | RF01 | Em progresso |
-| **6** | Alta (2) | **US16 - Visualizar temas:** Como candidato, quero ver os 12 temas disponíveis para estudo. | 2 | 1 | RF08 | Em progresso |
-| **7** | Alta (2) | **US17 - Navegar no conteúdo:** Como candidato, quero alternar entre os temas de estudo livremente. | 2 | 1 | RF08 | Em progresso |
-| **8** | Alta (2) | **US18 - Pesquisar 12 temas** Como candidato, quero ter acesso aos conteúdos sobre os 12 temas. | 2 | 1 | RF05 | Em progresso |
-| **9** | Alta (3) | **US19 - Realizar login:** Como candidato, quero autenticar com CPF e senha para acessar o portal. | 3 | 1 | RF04 | Em progresso |
-| **10** | Alta (3) | **US20 - Acessar conteúdo de estudo:** Como candidato, quero ler o material didático de um tema. | 3 | 1 | RF08 | Em progresso |
-| **11** | Alta (5) | **US21 - Cadastrar candidato:** Como candidato, quero registrar meus dados com validação de CPF único. | 5 | 1 | RF03 | Em progresso |
-| **12** | Alta (8) | **US22 - Banco PostgreSQL:** Como equipe, queremos persistir os dados da aplicação no PostgreSQL. | 8 | 1 | RP02 | Em progresso |
-| **13** | Alta (8) | **US23 - Arquitetura Web:** Como equipe, queremos conectar Front-End, Back-End e Banco de Dados. | 8 | 1 | RP01 / RP05 | Em progresso |
-| **14** | Alta (8) | **US24 - Protótipo Figma:** Como equipe, queremos visualizar o design de todas as telas em um protótipo no Figma.| 8 | 1 | RF01 / RF07 | Em progresso |
-| **15** | Alta (2) | **US25 - Pesquisa dos temas:** Como candidato, quero ter acesso a conteúdos pesquisados, confiáveis e organizados sobre os 12 temas previstos, para estudar os conceitos antes de realizar a avaliação.| 2 | 1 | RF08 | Em progresso |
+| **1** | Alta (2) | **US11 -  Organizar questões por tema:** Como responsável pelo sistema, quero que as questões sejam organizadas por tema para manter a base de questões estruturada conforme a certificação. | 1 | 1 | RF03 | Em progresso |
+| **2** | Alta (3) | **US12 -  Estruturar questão da certificação** Como responsável pelo sistema, quero que cada questão possua os elementos obrigatórios para que possa ser utilizada na certificação. | 2 | 1 | RF01 | Em progresso |
+| **3** | Alta (5) | **US13 - Sortear questão para o candidato** Como candidato, quero receber uma questão sorteada aleatoriamente para cada tema para realizar a certificação conforme as regras da avaliação. | 2 | 1 | RF01 | Em progresso |
+| **4** | Alta (3) | **US14 - Armazenar alternativas e resposta correta** Armazenar alternativas e resposta correta | 2 | 1 | RF01 | Em progresso |
+| **5** | Alta (3) | **US15 - Visualizar temas da certificação** CComo candidato, quero visualizar os temas da certificação para acompanhar quais ainda preciso responder. | 2 | 1 | RF01 | Em progresso |
+| **6** | Alta (5) | **US16 - Iniciar questão de um tema** Como candidato, quero iniciar a questão de um tema pendente para avançar na certificação. | 2 | 1 | RF08 | Em progresso |
+| **7** | Alta (5) | **US17 - Responder questão da certificação** Como candidato, quero selecionar e enviar uma alternativa para registrar minha resposta à questão. | 2 | 1 | RF08 | Em progresso |
+| **8** | Alta (3) | **US18 - Visualizar correção da questão** Como candidato, quero visualizar a resposta correta após responder uma questão para saber qual era a alternativa correta. | 2 | 1 | RF05 | Em progresso |
+| **9** | Alta (3) | **US19 - Escolher continuidade da certificação** Como candidato, quero decidir após cada questão se desejo continuar a certificação ou encerrar a sessão para poder realizá-la em momentos diferentes. | 3 | 1 | RF04 | Em progresso |
+| **10** | Alta (5) | **US20 - Controlar tempo de resposta da questão** Como candidato, quero visualizar o tempo restante para responder uma questão para saber quanto tempo tenho disponível. | 3 | 1 | RF08 | Em progresso |
+| **11** | Alta (5) | **US21 - Encerrar questão por tempo esgotado** Como candidato, quero ser informado quando o tempo da questão terminar para saber que aquela tentativa foi encerrada. | 5 | 1 | RF03 | Em progresso |
+| **12** | Alta (8) | **US22 - Tratar interrupção durante uma questão** Como sistema, quero encerrar uma questão quando ocorrer uma interrupção durante sua resolução para garantir que cada tema tenha apenas uma tentativa. | 8 | 1 | RP02 | Em progresso |
+| **13** | Alta (5) | **US23 - Retomar certificação interrompida** Como candidato, quero retomar uma certificação interrompida para continuar respondendo aos temas ainda pendentes. | 8 | 1 | RP01 / RP05 | Em progresso |
+| **14** | Alta (3) | **US24 -Acompanhar progresso da certificação** CComo candidato, quero acompanhar meu progresso na certificação para saber quais temas já concluí e quais ainda preciso responder.| 8 | 1 | RF01 / RF07 | Em progresso |
+| **15** | Alta (2) | **US25 - Registrar histórico das respostas** Como candidato, quero que minhas respostas sejam registradas no histórico para manter um registro da certificação realizada.| 2 | 1 | RF08 | Em progresso |
 
 
 ---
