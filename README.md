@@ -227,3 +227,7 @@ Scripts DDL/DML para criação e povoamento das tabelas de Usuários, Temas e Qu
 Telas estáticas e fluxo de navegação entre Login, Cadastro e Menu Principal funcionais em HTML/CSS/JS nativo.
 
 Endpoints de autenticação (CPF e Senha) e cadastro integrados com o banco de dados.
+
+## Organização e comandos locais
+
+Consulte [a estrutura e os comandos pela raiz](docs/estrutura.md), [a carga de questões](docs/carga-questoes.md) e [a correspondência dos PDFs com os temas](docs/questoes/mapeamento-temas.md). As dependências da aplicação ficam no backend; o package.json da raiz apenas encaminha os comandos.

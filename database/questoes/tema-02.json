@@ -1,0 +1,130 @@
+{
+  "tema": 2,
+  "fonte": "docs/questoes/questoes-pdf/Tema 2 - Manifesto Ágil.pdf",
+  "questoes": [
+    {
+      "codigo": "tema-02-q01",
+      "enunciado": "Qual das opções é um dos quatro valores do Manifesto Ágil?",
+      "justificativa": "As demais alternativas invertem a ordem dos valores.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem1-tema2-questoes.png",
+        "alt": "Equipe colaborando com símbolos de pessoas, comunicação, planejamento e software."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Processos e ferramentas mais que indivíduos e interações.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Seguir um plano mais que responder a mudanças.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Colaboração com o cliente mais que negociação de contratos.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "Documentação abrangente mais que software em funcionamento.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-02-q02",
+      "enunciado": "Segundo o Manifesto Ágil, qual é a principal medida de progresso?",
+      "justificativa": "Princípio 7: software funcionando é a principal medida de progresso.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem2-tema2-questoes.png",
+        "alt": "Cenas de software, documentos, horas de trabalho e cronograma para comparar medidas de progresso."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Software em funcionamento.",
+          "correta": true
+        },
+        {
+          "letra": "B",
+          "texto": "Número de documentos aprovados.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Quantidade de horas trabalhadas.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Percentual do cronograma concluído.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-02-q03",
+      "enunciado": "Uma equipe faz horas extras todos os dias há semanas para cumprir prazos. Qual princípio está sendo desrespeitado?",
+      "justificativa": "Princípio 8: a equipe deve manter um ritmo constante indefinidamente.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem3-tema2-questoes.png",
+        "alt": "Comparação entre uma equipe trabalhando até tarde e cenas de colaboração e organização do trabalho."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Simplicidade.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Ritmo sustentável.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "Excelência técnica.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Entregas frequentes.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-02-q04",
+      "enunciado": "Sobre a frase “os itens da direita têm valor, mas valorizamos mais os da esquerda”, é correto afirmar:",
+      "justificativa": "O manifesto define prioridades; os itens da direita continuam tendo valor.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem4-tema2-questoes.png",
+        "alt": "Quadro com símbolos de software, pessoas, comunicação, documentos e processos."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "O manifesto proíbe documentação e contratos.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "O manifesto considera os itens da direita inúteis.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "O manifesto só vale para equipes com menos de 5 pessoas.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "O manifesto estabelece prioridades, sem eliminar os itens da direita.",
+          "correta": true
+        }
+      ]
+    }
+  ]
+}

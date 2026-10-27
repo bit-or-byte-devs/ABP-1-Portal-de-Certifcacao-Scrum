@@ -1,0 +1,118 @@
+{
+  "tema": 4,
+  "fonte": "docs/questoes/questoes-pdf/Tema 4 - Papéis do Scrum.pdf",
+  "questoes": [
+    {
+      "codigo": "tema-04-q01",
+      "enunciado": "Quem é responsável por ordenar os itens do Product Backlog?",
+      "justificativa": "Ordenar o Product Backlog é responsabilidade do PO.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "O Scrum Master.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Os Developers.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "O Product Owner.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "Os stakeholders, por votação.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-04-q02",
+      "enunciado": "Qual afirmação descreve corretamente o Scrum Master?",
+      "justificativa": "O SM não é gerente; serve ao time e responde pela eficácia do Scrum.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "É o gerente que distribui tarefas aos Developers.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "É um líder que serve ao time e é responsável pela eficácia do Scrum Team.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "É quem decide o que entra em cada Sprint.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "É o desenvolvedor mais experiente do time.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-04-q03",
+      "enunciado": "Quem cria o Sprint Backlog, ou seja, o plano de como entregar a Meta da Sprint?",
+      "justificativa": "Os Developers criam e ajustam o Sprint Backlog.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Os Developers.",
+          "correta": true
+        },
+        {
+          "letra": "B",
+          "texto": "O Product Owner.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "O Scrum Master.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "O gerente de projetos.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-04-q04",
+      "enunciado": "Sobre o Scrum Team, é correto afirmar:",
+      "justificativa": "O Scrum Team não tem sub-times nem comitês de PO.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Pode ter vários Product Owners que decidem em comitê.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Tem sub-times especializados, como time de testes e time de banco de dados.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "É formado apenas por programadores.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "É multifuncional, autogerenciável e geralmente tem até 10 pessoas.",
+          "correta": true
+        }
+      ]
+    }
+  ]
+}

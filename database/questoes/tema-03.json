@@ -1,0 +1,130 @@
+{
+  "tema": 3,
+  "fonte": "docs/questoes/questoes-pdf/Tema 3 - Introdução ao Scrum.pdf",
+  "questoes": [
+    {
+      "codigo": "tema-03-q01",
+      "enunciado": "Por que o Scrum é chamado de framework?",
+      "justificativa": "O Scrum é intencionalmente incompleto: define a estrutura e deixa as práticas ao time.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem1-tema3-questoes.png",
+        "alt": "Equipe discutindo um diagrama com elementos do framework Scrum."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Porque define todas as práticas de programação que o time deve usar.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Porque é uma estrutura mínima de papéis, eventos e artefatos, deixando as práticas a critério do time.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "Porque é uma ferramenta de software para gerenciar tarefas.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Porque substitui completamente a gestão de projetos tradicional.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-03-q02",
+      "enunciado": "O empirismo afirma que:",
+      "justificativa": "Empirismo é decidir com base na experiência e na observação.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem2-tema3-questoes.png",
+        "alt": "Equipe discutindo um ciclo de observação, análise, decisão e ação."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "O conhecimento vem da experiência e as decisões se baseiam no que é observado.",
+          "correta": true
+        },
+        {
+          "letra": "B",
+          "texto": "Todo o projeto deve ser planejado em detalhe antes de começar.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "A opinião do gerente é a principal fonte de decisão.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "A documentação é a principal fonte de conhecimento.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-03-q03",
+      "enunciado": "Um time esconde do Product Owner que o trabalho está atrasado. Qual pilar está sendo violado diretamente?",
+      "justificativa": "Esconder informação compromete a transparência; sem ela, inspeção e adaptação falham.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem3-tema3-questoes.png",
+        "alt": "Equipe reunida diante de um quadro de trabalho e de um aviso de prazo atrasado."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Adaptação.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Inspeção.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Transparência.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "Coragem.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-03-q04",
+      "enunciado": "Quais são os valores do Scrum?",
+      "justificativa": "Transparência, Inspeção e Adaptação são pilares, não valores.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem4-tema3-questoes.png",
+        "alt": "Equipe diante de um quadro com o título Valores do Scrum e símbolos para discussão."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Velocidade, Qualidade, Custo, Prazo e Escopo.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Transparência, Inspeção, Adaptação, Foco e Respeito.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Planejamento, Execução, Controle, Encerramento e Coragem.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Compromisso, Foco, Abertura, Respeito e Coragem.",
+          "correta": true
+        }
+      ]
+    }
+  ]
+}
