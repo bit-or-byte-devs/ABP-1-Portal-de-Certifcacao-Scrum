@@ -59,6 +59,7 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 | Sprint | Período da Sprint | Documentação da Sprint | Vídeo do Incremento (YouTube) | Status |
 | --- | --- | --- | --- | --- |
 | 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1](https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I) | [Vídeo de Apresentação 1](https://youtu.be/FVt_IMNGXu8) | Concluído |
+| 🔖 **Sprint 2** | 23/10/2026 - 05/11/2026 | [Documentação Sprint 1]  | [Vídeo de Apresentação 1]  | Em andamento |
 
 
 ## 💻 Tecnologias Utilizadas
@@ -194,7 +195,8 @@ Observações:
 
 Toda a documentação complementar, checklists, manuais e critérios de qualidade do projeto estão centralizados em nossa pasta oficial:
 👉 https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I
-
+Para imagens complementares como modelo conceitual, lógico, e Diagramas de Classe, Casos de Uso e Sequência, segue o link para a pasta do GitHub:
+👉 https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/tree/develop/docs-sprint-1
 ---
 
 ## 👥 Equipe **[Bit or Byte]**
@@ -210,20 +212,18 @@ Toda a documentação complementar, checklists, manuais e critérios de qualidad
 |  | **Ryan Cesar Candido Alves** | Desenvolvedor | https://github.com/ryancesar22 | [LinkedIn](https://www.linkedin.com/in/ryan-cesar-candido-alves-814887231) |
 |  | **Willian de Paula Barreto** | Desenvolvedor | https://github.com/will1907 | [LinkedIn](https://www.linkedin.com/in/willian-barreto-183aa2445) |
 
+---
 
-## 🔖 SPRINT 1 – Fundações, Infraestrutura e Base de Dados
-Período: 28/09/2026 a 22/10/2026
+## 🔖 SPRINT 2 – Desenvolvimento do Núcleo da Certificação e Área de Estudos
+**Período:** 23/10/2026 a 05/11/2026
 
-🏃 DoR da Sprint 1
-Protótipos das telas de Login, Cadastro, Menu Principal e Área de Estudos finalizados no Figma.
+🏃 **DoR da Sprint 2 (Definition of Ready)**
+* Modelagem do banco de dados validada para suportar o armazenamento de questões, alternativas, imagens e histórico de respostas dos candidatos.
+* Definição clara dos 12 temas da certificação (com base na listagem de conteúdos ágeis) e estruturação do banco de questões (4 questões por tema, contendo imagens e alternativas).
+* Protótipos de alta fidelidade no Figma aprovados para as telas da Área de Estudos, Fluxo da Prova (com cronômetro e exibição de imagens) e Emissão de Certificado.
 
-Modelagem conceitual e lógica do banco de dados PostgreSQL aprovada pelo desenvolvedor responsável.
-
-Arquitetura em contêineres isolados (Front-End, Back-End e PostgreSQL) definida no docker-compose.yml.
-
-🏆 DoD da Sprint 1
-Scripts DDL/DML para criação e povoamento das tabelas de Usuários, Temas e Questões rodando perfeitamente no PostgreSQL via Docker.
-
-Telas estáticas e fluxo de navegação entre Login, Cadastro e Menu Principal funcionais em HTML/CSS/JS nativo.
-
-Endpoints de autenticação (CPF e Senha) e cadastro integrados com o banco de dados.
+🏆 **DoD da Sprint 2 (Definition of Done)**
+* Povoamento completo do banco de dados PostgreSQL (via scripts DML) com os 12 temas da certificação e suas respectivas questões (4 por tema, totalizando 48 questões com imagens e alternativas validadas).
+* Implementação dos endpoints e lógica de back-end para o sorteio aleatório de uma questão por tema e controle do fluxo da avaliação.
+* Desenvolvimento da **Área de Estudos** no front-end, organizada pelos 12 temas com materiais didáticos e recursos visuais correspondentes.
+* Implementação do mecanismo da prova no front-end e back-end, contendo o cronômetro regressivo de 150 segundos por questão, feedback imediato da resposta correta e opções para prosseguir ou interromper a sessão.
