@@ -219,13 +219,17 @@ Para imagens complementares como modelo conceitual, lógico, e Diagramas de Clas
 ## 🔖 SPRINT 2 – Desenvolvimento do Núcleo da Certificação e Área de Estudos
 **Período:** 23/10/2026 a 05/11/2026
 
-🏃 **DoR da Sprint 2 (Definition of Ready)**
-* Modelagem do banco de dados validada para suportar o armazenamento de questões, alternativas, imagens e histórico de respostas dos candidatos.
-* Definição clara dos 12 temas da certificação (com base na listagem de conteúdos ágeis) e estruturação do banco de questões (4 questões por tema, contendo imagens e alternativas).
-* Protótipos de alta fidelidade no Figma aprovados para as telas da Área de Estudos, Fluxo da Prova (com cronômetro e exibição de imagens) e Emissão de Certificado.
+### 🏃 DoR da Sprint 2 (Definition of Ready)
+- [x] Modelagem do banco de dados validada para suportar o armazenamento de questões, alternativas, imagens e histórico de respostas dos candidatos.
+- [x] Definição clara dos 12 temas da certificação (com base na listagem de conteúdos ágeis) e estruturação do banco de questões (4 questões por tema, contendo imagens e alternativas).
+- [x] Protótipos de alta fidelidade no Figma aprovados para as telas da Área de Estudos, Fluxo da Prova (com cronômetro e exibição de imagens) e Emissão de Certificado.
 
-🏆 **DoD da Sprint 2 (Definition of Done)**
-* Povoamento completo do banco de dados PostgreSQL (via scripts DML) com os 12 temas da certificação e suas respectivas questões (4 por tema, totalizando 48 questões com imagens e alternativas validadas).
-* Implementação dos endpoints e lógica de back-end para o sorteio aleatório de uma questão por tema e controle do fluxo da avaliação.
-* Desenvolvimento da **Área de Estudos** no front-end, organizada pelos 12 temas com materiais didáticos e recursos visuais correspondentes.
-* Implementação do mecanismo da prova no front-end e back-end, contendo o cronômetro regressivo de 150 segundos por questão, feedback imediato da resposta correta e opções para prosseguir ou interromper a sessão.
+
+### 🏆 DoD da Sprint 2 (Definition of Done) – Checklist e Resultados por Entrega
+
+| Entrega / Funcionalidade | Critérios de Aceite (Checklist DoD) | Status | Resultados Esperados / Evidências |
+| :--- | :--- | :---: | :--- |
+| **1. Banco de Dados e Povoamento (PostgreSQL)** | - [ ] Povoamento via scripts DML executado com sucesso no PostgreSQL.<br>- [ ] Cadastro dos 12 temas da certificação.<br>- [ ] Inserção de exatamente 4 questões por tema (total de 48 questões), todas vinculadas a imagens ilustrativas e 4 alternativas (sendo uma correta). | `Pendente` | • Banco PostgreSQL populado e estruturado.<br>• Integridade referencial validada para temas, questões, imagens e alternativas. |
+| **2. Núcleo de Back-end (Sorteio e Regras da Prova)** | - [ ] Implementação de rotas/endpoints para o sorteio aleatório de uma questão por tema.<br>- [ ] Regras de controle para tentativa única por tema e salvamento de histórico.<br>- [ ] Gestão do cronômetro regressivo de 150 segundos no servidor e tratamento de encerramento por tempo esgotado ou interrupção. | `Pendente` | • API funcional integrando banco de dados e front-end.<br>• Fluxo de sorteio e validação de respostas operando sem falhas de manipulação no front-end. |
+| **3. Área de Estudos (Front-end)** | - [ ] Interface desenvolvida em HTML, CSS e JavaScript puros conforme restrições de projeto.<br>- [ ] Organização estruturada exatamente nos 12 temas da certificação.<br>- [ ] Disponibilização de conteúdo didático, imagens e recursos de apoio à aprendizagem antes da prova. | `Pendente` | • Tela da Área de Estudos responsiva e integrada.<br>• Acesso fluido aos conteúdos teóricos correspondentes aos temas da avaliação. |
+| **4. Mecanismo da Prova e Fluxo de Interrupção** | - [ ] Tela de exibição da questão contendo a imagem obrigatória e as quatro alternativas (A, B, C e D).<br>- [ ] Cronômetro regressivo visível de 150 segundos funcionando em tempo real.<br>- [ ] Feedback imediato informando a resposta correta após o envio.<br>- [ ] Opções ativas para prosseguir para o próximo tema ou encerrar/interromper a sessão com segurança. | `Pendente` | • Prova interativa rodando integralmente no navegador.<br>• Encerramento automático de questões por tempo esgotado ou perda de conexão validado de acordo com as regras de negócio. |
