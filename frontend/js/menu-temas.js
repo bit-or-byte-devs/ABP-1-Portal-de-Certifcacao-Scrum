@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
         card.querySelector('.btn-iniciar')?.addEventListener('click', e => {
             e.stopPropagation();
-            const pagina = e.currentTarget.dataset.label === 'Iniciar exame' ? 'exame' : 'estudos';
-            location.href = `${pagina}.html?tema=${card.dataset.id}`;
+            if (e.currentTarget.dataset.label === 'Iniciar exame') return;
+            location.href = `estudos.html?tema=${card.dataset.id}`;
         });
     });
     try {
