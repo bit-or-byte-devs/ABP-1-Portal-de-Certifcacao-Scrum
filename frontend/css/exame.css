@@ -53,6 +53,11 @@
 }
 
 .questao__cabecalho {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--menta);
+    padding-block: 12px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
