@@ -3,7 +3,7 @@ const pool = require("../config/db");
 const { exigirSessao, exigirJson } = require("../middlewares/autenticacao");
 const {
     DURACAO_QUESTAO_SEGUNDOS, TOLERANCIA_REDE_SEGUNDOS,
-    encerrarQuestoesVencidasDaCertificacao,
+    encerrarQuestoesVencidasDaCertificacao, interromperQuestoesEmAndamento,
 } = require("../services/encerramentoQuestao");
 const { recalcularCertificacao, buscarProximoTemaPendente } = require("../services/certificacao");
 const router = express.Router();
@@ -39,7 +39,7 @@ router.param("ordem", (req, res, next, valor) => {
     if (!/^(?:[1-9]|1[0-2])$/.test(valor)) return res.status(400).json({ mensagem: "Tema inválido." });
     req.ordem = Number(valor); next();
 });
-// Inicia ou retoma a mesma questão por tema na certificação do candidato.
+// Encerra questões pendentes antes de iniciar um tema ainda não sorteado.
 router.post("/:ordem/iniciar", exigirJson, async (req, res) => {
     let db;
     try {
@@ -48,7 +48,9 @@ router.post("/:ordem/iniciar", exigirJson, async (req, res) => {
             ON CONFLICT (idcandidato) DO UPDATE SET idcandidato=EXCLUDED.idcandidato RETURNING id`, [req.candidato.id]);
         const id = cert.rows[0].id;
         await db.query("SELECT id FROM tbcertificacao WHERE id=$1 FOR UPDATE", [id]);
-        await atualizarQuestoesVencidas(db, id);
+        const vencidas = await encerrarQuestoesVencidasDaCertificacao(db, id);
+        const interrompidas = await interromperQuestoesEmAndamento(db, id);
+        if (vencidas.length || interrompidas) await recalcularCertificacao(db, id);
         const tema = await db.query("SELECT id, nome FROM tbtema WHERE ordem=$1", [req.ordem]);
         if (!tema.rows.length) { await db.query("ROLLBACK"); return res.status(404).json({ mensagem: "Tema não cadastrado." }); }
         await db.query(`INSERT INTO tbresposta (idcertificacao, idtema, idquestao)

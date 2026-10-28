@@ -51,6 +51,7 @@ test('progresso por conta, sessão, material e validação dos exames', async t 
             if (sql === 'BEGIN' || sql === 'COMMIT') return { rows: [] };
             if (sql === 'ROLLBACK') { rollbacks++; return { rows: [] }; }
             if (sql.includes('INSERT INTO tbcertificacao')) return { rows: [{ id: 9 }] };
+            if (sql.includes("SET situacao='interrompida'")) return { rows: [], rowCount: 0 };
             if (sql.includes('WITH certificacoes AS MATERIALIZED')) return { rows: [] };
             if (sql.includes('SELECT id FROM tbcertificacao')) return { rows: [{ id: 9 }] };
             if (sql.includes('SELECT t.ordem')) return { rows: [{ ordem: 6 }] };

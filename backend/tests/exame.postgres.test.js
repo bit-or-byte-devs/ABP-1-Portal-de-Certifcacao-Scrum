@@ -166,7 +166,11 @@ test("Varredura: respeita tolerância, horário final e conclusão da 12ª quest
     const ultima = await iniciar(cookie, 12);
     const outroCookie = await criarCandidato("11144477735");
     const vencida = await iniciar(outroCookie, 1);
-    const noPrazo = await iniciar(outroCookie, 2);
+    // Prepara duas pendências sem chamar iniciar, que agora interrompe a anterior.
+    const noPrazo = (await banco.query(`INSERT INTO tbresposta (idcertificacao, idtema, idquestao)
+        SELECT r.idcertificacao, q.idtema, q.id FROM tbresposta r
+        JOIN tbquestao q ON q.idtema=(SELECT id FROM tbtema WHERE ordem=2)
+        WHERE r.id=$1 RETURNING id`, [vencida.id])).rows[0];
     await recuarExibicao(ultima.id, 153);
     await recuarExibicao(vencida.id, 153);
     await recuarExibicao(noPrazo.id, 151);
@@ -213,4 +217,41 @@ test("Dono da resposta: GET de outro candidato devolve 404", opcoes, async () =>
     assert.equal(resposta.status, 404);
     assert.deepEqual(resposta.corpo, { mensagem: "Resposta não encontrada." });
     assert.equal((await lerResposta(questao.id)).situacao, "em_andamento");
+});
+
+
+test("Interrupção: reiniciar encerra pendências e preserva o tempo esgotado", opcoes, async () => {
+    for (let ordem = 1; ordem <= 3; ordem++) await criarTema(ordem);
+    const cookie = await criarCandidato();
+    const primeira = await iniciar(cookie);
+    const repetida = await iniciar(cookie);
+    assert.equal(repetida.id, primeira.id);
+    assert.equal(repetida.situacao, "interrompida");
+    assert.deepEqual(repetida.alternativa_correta, primeira.alternativas[0]);
+    const segunda = await iniciar(cookie, 2);
+    const terceira = await iniciar(cookie, 3);
+    assert.equal(terceira.situacao, "em_andamento");
+    for (const questao of [primeira, segunda]) {
+        const encerrada = await lerResposta(questao.id);
+        assert.equal(encerrada.situacao, "interrompida");
+        assert.equal(encerrada.acertou, false);
+        assert.equal(encerrada.idalternativa, null);
+        assert.equal(encerrada.data_hora_resposta, null);
+        assert.ok(encerrada.data_hora_encerramento);
+        const recusada = await solicitar(`/api/exames/respostas/${questao.id}`, cookie, { alternativa: questao.alternativas[0].id });
+        assert.equal(recusada.status, 409);
+        assert.equal(recusada.corpo.situacao, "interrompida");
+        assert.deepEqual(recusada.corpo.alternativa_correta, questao.alternativas[0]);
+    }
+    await recuarExibicao(terceira.id, 153);
+    const vencida = await iniciar(cookie, 3);
+    assert.equal(vencida.id, terceira.id);
+    assert.equal(vencida.situacao, "tempo_esgotado");
+    assert.deepEqual(vencida.alternativa_correta, terceira.alternativas[0]);
+    assert.equal((await iniciar(cookie)).id, primeira.id);
+    const certificacao = (await banco.query("SELECT * FROM tbcertificacao")).rows[0];
+    assert.equal(certificacao.total_acertos, 0);
+    assert.equal(Number(certificacao.percentual_acertos), 0);
+    assert.equal(certificacao.status, "em_andamento");
+    assert.equal((await banco.query("SELECT count(*)::integer AS total FROM tbresposta")).rows[0].total, 3);
 });
