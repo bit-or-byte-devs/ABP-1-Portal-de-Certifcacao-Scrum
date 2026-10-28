@@ -255,3 +255,54 @@ test("Interrupção: reiniciar encerra pendências e preserva o tempo esgotado",
     assert.equal(certificacao.status, "em_andamento");
     assert.equal((await banco.query("SELECT count(*)::integer AS total FROM tbresposta")).rows[0].total, 3);
 });
+
+
+test("Progresso: preserva questões abertas, encerra vencidas e não cria certificação", opcoes, async () => {
+    for (let ordem = 1; ordem <= 12; ordem++) await criarTema(ordem);
+    const cookie = await criarCandidato();
+    const primeira = await iniciar(cookie);
+    assert.equal((await solicitar(`/api/exames/respostas/${primeira.id}`, cookie,
+        { alternativa: primeira.alternativas[0].id })).status, 200);
+    const segunda = await iniciar(cookie, 2);
+    await recuarExibicao(segunda.id, 153);
+    const terceira = await iniciar(cookie, 3);
+    const progresso = await solicitar("/api/exames/progresso", cookie);
+    assert.equal(progresso.status, 200);
+    assert.deepEqual(progresso.corpo, {
+        temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1),
+            estado: indice < 2 ? "concluido" : indice === 2 ? "em_andamento" : "pendente" })),
+        proximo_tema: 4, certificacao_concluida: false,
+    });
+    assert.equal((await lerResposta(segunda.id)).situacao, "tempo_esgotado");
+    assert.equal((await lerResposta(terceira.id)).situacao, "em_andamento");
+    await recuarExibicao(terceira.id, 153);
+    const atualizado = await solicitar("/api/exames/progresso", cookie);
+    assert.equal(atualizado.status, 200);
+    assert.equal(atualizado.corpo.temas[2].estado, "concluido");
+    assert.equal(atualizado.corpo.proximo_tema, 4);
+    assert.equal((await lerResposta(terceira.id)).situacao, "tempo_esgotado");
+
+    const outroCookie = await criarCandidato("11144477735");
+    const semCertificacao = await solicitar("/api/exames/progresso", outroCookie);
+    assert.equal(semCertificacao.status, 200);
+    assert.deepEqual(semCertificacao.corpo, {
+        temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1), estado: "pendente" })),
+        proximo_tema: 1, certificacao_concluida: false,
+    });
+    const quantidade = await banco.query(`SELECT count(*)::integer AS total FROM tbcertificacao c
+        JOIN tbcandidato candidato ON candidato.id=c.idcandidato WHERE candidato.cpf='11144477735'`);
+    assert.equal(quantidade.rows[0].total, 0);
+    assert.equal((await solicitar("/api/exames/progresso")).status, 401);
+
+    // As interrupções também concluem temas; com o último aberto não há tema novo para continuar.
+    for (let ordem = 4; ordem <= 12; ordem++) await iniciar(cookie, ordem);
+    const semPendentes = await solicitar("/api/exames/progresso", cookie);
+    assert.equal(semPendentes.corpo.proximo_tema, null);
+    assert.equal(semPendentes.corpo.certificacao_concluida, false);
+    assert.equal(semPendentes.corpo.temas[11].estado, "em_andamento");
+    await iniciar(cookie, 12);
+    const concluida = await solicitar("/api/exames/progresso", cookie);
+    assert.equal(concluida.corpo.certificacao_concluida, true);
+    assert.equal(concluida.corpo.proximo_tema, null);
+    assert.ok(concluida.corpo.temas.every(tema => tema.estado === "concluido"));
+});
