@@ -35,6 +35,33 @@ async function buscarEstadoResposta(db, id) {
     return resposta;
 }
 router.use(exigirSessao);
+router.get("/progresso", async (req, res) => {
+    let db;
+    try {
+        db = await pool.connect(); await db.query("BEGIN");
+        const certificacao = await db.query("SELECT id FROM tbcertificacao WHERE idcandidato=$1 FOR UPDATE", [req.candidato.id]);
+        const idcertificacao = certificacao.rows[0]?.id ?? null;
+        if (idcertificacao !== null) await atualizarQuestoesVencidas(db, idcertificacao);
+        const { rows: temas } = await db.query(`SELECT t.ordem, t.nome,
+            CASE WHEN r.id IS NULL THEN 'pendente'
+                WHEN r.situacao='em_andamento' THEN 'em_andamento'
+                ELSE 'concluido' END AS estado
+            FROM tbtema t LEFT JOIN tbresposta r ON r.idtema=t.id AND r.idcertificacao=$1
+            ORDER BY t.ordem`, [idcertificacao]);
+        let proximoTema = null;
+        if (temas.some(tema => tema.estado === 'pendente')) {
+            proximoTema = await buscarProximoTemaPendente(db, idcertificacao, 0);
+            // O serviço também inclui questões abertas; continuar oferece só temas não sorteados.
+            while (temas.find(tema => tema.ordem === proximoTema)?.estado === 'em_andamento') {
+                proximoTema = await buscarProximoTemaPendente(db, idcertificacao, proximoTema);
+            }
+        }
+        await db.query("COMMIT");
+        res.json({ temas, proximo_tema: proximoTema,
+            certificacao_concluida: temas.length === 12 && temas.every(tema => tema.estado === 'concluido') });
+    } catch { if (db) await db.query("ROLLBACK").catch(() => {}); res.status(503).json({ mensagem: "Não foi possível consultar o progresso da certificação." }); }
+    finally { db?.release(); }
+});
 router.param("ordem", (req, res, next, valor) => {
     if (!/^(?:[1-9]|1[0-2])$/.test(valor)) return res.status(400).json({ mensagem: "Tema inválido." });
     req.ordem = Number(valor); next();
