@@ -21,11 +21,21 @@ async function encerrarQuestoesVencidasDaCertificacao(db, idcertificacao) {
     return [...new Set(rows.map(resposta => resposta.idcertificacao))];
 }
 
+async function interromperQuestoesEmAndamento(db, idcertificacao) {
+    // O chamador trava a certificação e encerra as vencidas antes desta consulta.
+    const { rowCount } = await db.query(`UPDATE tbresposta SET situacao='interrompida', acertou=FALSE,
+        idalternativa=NULL, data_hora_resposta=NULL, data_hora_encerramento=CURRENT_TIMESTAMP
+        WHERE idcertificacao=$1 AND situacao='em_andamento'
+        AND clock_timestamp() <= data_hora_exibicao + ($2::integer + $3::integer) * INTERVAL '1 second'`,
+    [idcertificacao, DURACAO_QUESTAO_SEGUNDOS, TOLERANCIA_REDE_SEGUNDOS]);
+    return rowCount;
+}
+
 async function encerrarQuestoesVencidas(db) {
     return encerrarQuestoesVencidasDaCertificacao(db, null);
 }
 
 module.exports = {
     DURACAO_QUESTAO_SEGUNDOS, TOLERANCIA_REDE_SEGUNDOS,
-    encerrarQuestoesVencidas, encerrarQuestoesVencidasDaCertificacao,
+    encerrarQuestoesVencidas, encerrarQuestoesVencidasDaCertificacao, interromperQuestoesEmAndamento,
 };
