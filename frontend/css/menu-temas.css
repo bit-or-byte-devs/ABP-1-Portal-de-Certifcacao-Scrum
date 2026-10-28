@@ -357,3 +357,20 @@ body {
 .green-text {
     color: var(--green-accent);
 }
+
+/* Estados do exame ficam visíveis também nos cards recolhidos. */
+.pagina-exames .theme-card .btn-iniciar {
+    display: inline-flex;
+}
+
+.pagina-exames .btn-iniciar:disabled {
+    cursor: default;
+    border-color: rgba(255, 255, 255, 0.12);
+    color: var(--text-muted);
+}
+
+#btn-continuar-certificacao {
+    background-color: var(--green-accent);
+    color: var(--inner-box);
+    font-weight: 700;
+}

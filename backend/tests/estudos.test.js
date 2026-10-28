@@ -51,10 +51,23 @@ test('progresso por conta, sessão, material e validação dos exames', async t 
             if (sql === 'BEGIN' || sql === 'COMMIT') return { rows: [] };
             if (sql === 'ROLLBACK') { rollbacks++; return { rows: [] }; }
             if (sql.includes('INSERT INTO tbcertificacao')) return { rows: [{ id: 9 }] };
+            if (sql.includes("SET situacao='interrompida'")) return { rows: [], rowCount: 0 };
+            if (sql.includes('WITH certificacoes AS MATERIALIZED')) return { rows: [] };
+            if (sql.includes('SELECT id FROM tbcertificacao')) return { rows: [{ id: 9 }] };
+            if (sql.includes('SELECT t.ordem')) return { rows: [{ ordem: 6 }] };
             if (sql.includes('FROM tbtema')) return { rows: [{ id: 50, nome: 'Eventos' }] };
             if (sql.includes('INSERT INTO tbresposta')) return { rows: [] };
-            if (sql.includes('FROM tbresposta r JOIN tbquestao')) return { rows: semQuestao ? [] : [{ id: 70, questao: 80, situacao: 'em_andamento' }] };
-            if (sql.includes('SELECT id, letra, texto')) { assert.doesNotMatch(sql, /correta/); return { rows: [{ id: 90, letra: 'A', texto: 'Opção' }] }; }
+            if (sql.includes('SELECT id FROM tbresposta')) return { rows: semQuestao ? [] : [{ id: 70 }] };
+            if (sql.includes('FROM tbresposta r JOIN tbtema')) return { rows: [{
+                id: 70, questao: 80, idcertificacao: 9, ordem: 5,
+                situacao: respondida ? 'respondida' : 'em_andamento',
+                acertou: respondida ? true : null, justificativa: respondida ? 'Explicação' : null,
+                segundos_restantes: 150,
+            }] };
+            if (sql.includes('SELECT id, letra, texto')) {
+                if (!respondida) assert.doesNotMatch(sql, /correta/);
+                return { rows: [{ id: 90, letra: 'A', texto: 'Opção' }] };
+            }
             if (sql.includes('FOR UPDATE OF c')) return { rows: p[1] === 1 ? [{ id: 9 }] : [] };
             if (sql.includes('UPDATE tbresposta')) {
                 if (respondida || p[1] !== 90) return { rows: [] };
@@ -72,10 +85,16 @@ test('progresso por conta, sessão, material e validação dos exames', async t 
     assert.equal(respondida, false);
     assert.equal((await pedir('/api/exames/respostas/70', um, 'POST', { alternativa: 999 })).status, 409);
     r = await pedir('/api/exames/respostas/70', um, 'POST', { alternativa: 90 });
-    assert.deepEqual(await r.json(), { acertou: true, justificativa: 'Explicação' });
+    assert.equal(r.status, 200);
+    const resultado = await r.json();
+    assert.equal(resultado.acertou, true);
+    assert.equal(resultado.justificativa, 'Explicação');
+    assert.equal(resultado.situacao, 'respondida');
+    assert.deepEqual(resultado.alternativa_correta, { id: 90, letra: 'A', texto: 'Opção' });
+    assert.equal(resultado.proximo_tema, 6);
     assert.equal((await pedir('/api/exames/respostas/70', um, 'POST', { alternativa: 90 })).status, 409);
     semQuestao = true;
     assert.equal((await pedir('/api/exames/5/iniciar', um, 'POST', {})).status, 404);
-    assert.equal(rollbacks, 4); assert.equal(liberacoes, 6);
+    assert.equal(rollbacks, 2); assert.equal(liberacoes, 6);
     falhar = true; r = await pedir('/api/estudos', um); assert.equal(r.status, 503); assert.doesNotMatch(await r.text(), /segredo do banco/);
 });

@@ -6,7 +6,7 @@
     <title>BorB - Exames</title>
     <link rel="stylesheet" href="../css/menu-temas.css">
 </head>
-<body>
+<body class="pagina-exames">
 
     <header class="top-nav">
         <div class="logo-area">
@@ -28,13 +28,18 @@
             <h1 class="page-title">Escolha o exame:</h1>
         </div>
 
+        <div class="top-header-row">
+            <button id="btn-continuar-certificacao" class="btn-nav" type="button" hidden disabled>Continuar certificação</button>
+            <p id="mensagem-certificacao" role="status">Carregando progresso da certificação...</p>
+        </div>
+
         <div class="themes-wrapper">
             <div class="theme-card active" data-id="1">
                 <div class="theme-main-row">
                     <h3>1. Fundamentos da Agilidade</h3>
                     <div class="theme-controls">
                         <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Iniciar exame">Iniciar exame</button>
+                        <button class="btn-iniciar" type="button" data-label="Iniciar exame" disabled>Iniciar exame</button>
                     </div>
                 </div>
                 <div class="theme-desc">
@@ -47,7 +52,7 @@
                     <h3>2. Manifesto Ágil</h3>
                     <div class="theme-controls">
                         <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Iniciar exame">Iniciar exame</button>
+                        <button class="btn-iniciar" type="button" data-label="Iniciar exame" disabled>Iniciar exame</button>
                     </div>
                 </div>
                 <div class="theme-desc">
@@ -60,7 +65,7 @@
                     <h3>3. Introdução ao Scrum</h3>
                     <div class="theme-controls">
                         <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Iniciar exame">Iniciar exame</button>
+                        <button class="btn-iniciar" type="button" data-label="Iniciar exame" disabled>Iniciar exame</button>
                     </div>
                 </div>
                 <div class="theme-desc">
@@ -73,7 +78,7 @@
                     <h3>4. Papéis do Scrum</h3>
                     <div class="theme-controls">
                         <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Iniciar exame">Iniciar exame</button>
+                        <button class="btn-iniciar" type="button" data-label="Iniciar exame" disabled>Iniciar exame</button>
                     </div>
                 </div>
                 <div class="theme-desc">
@@ -86,7 +91,7 @@
                     <h3>5. Eventos do Scrum</h3>
                     <div class="theme-controls">
                         <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Iniciar exame">Iniciar exame</button>
+                        <button class="btn-iniciar" type="button" data-label="Iniciar exame" disabled>Iniciar exame</button>
                     </div>
                 </div>
                 <div class="theme-desc">
@@ -99,7 +104,7 @@
                     <h3>6. Artefatos do Scrum</h3>
                     <div class="theme-controls">
                         <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Iniciar exame">Iniciar exame</button>
+                        <button class="btn-iniciar" type="button" data-label="Iniciar exame" disabled>Iniciar exame</button>
                     </div>
                 </div>
                 <div class="theme-desc">
@@ -112,7 +117,7 @@
                     <h3>7. User Stories</h3>
                     <div class="theme-controls">
                         <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Iniciar exame">Iniciar exame</button>
+                        <button class="btn-iniciar" type="button" data-label="Iniciar exame" disabled>Iniciar exame</button>
                     </div>
                 </div>
                 <div class="theme-desc">
@@ -125,7 +130,7 @@
                     <h3>8. Gestão do Product Backlog</h3>
                     <div class="theme-controls">
                         <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Iniciar exame">Iniciar exame</button>
+                        <button class="btn-iniciar" type="button" data-label="Iniciar exame" disabled>Iniciar exame</button>
                     </div>
                 </div>
                 <div class="theme-desc">
@@ -138,7 +143,7 @@
                     <h3>9. Kanban</h3>
                     <div class="theme-controls">
                         <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Iniciar exame">Iniciar exame</button>
+                        <button class="btn-iniciar" type="button" data-label="Iniciar exame" disabled>Iniciar exame</button>
                     </div>
                 </div>
                 <div class="theme-desc">
@@ -151,7 +156,7 @@
                     <h3>10. Planejamento Ágil</h3>
                     <div class="theme-controls">
                         <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Iniciar exame">Iniciar exame</button>
+                        <button class="btn-iniciar" type="button" data-label="Iniciar exame" disabled>Iniciar exame</button>
                     </div>
                 </div>
                 <div class="theme-desc">
@@ -164,7 +169,7 @@
                     <h3>11. Métricas Ágeis</h3>
                     <div class="theme-controls">
                         <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Iniciar exame">Iniciar exame</button>
+                        <button class="btn-iniciar" type="button" data-label="Iniciar exame" disabled>Iniciar exame</button>
                     </div>
                 </div>
                 <div class="theme-desc">
@@ -177,7 +182,7 @@
                     <h3>12. Qualidade em Projetos Ágeis</h3>
                     <div class="theme-controls">
                         <div class="progress-badge">Progresso <span class="green-text">0%</span></div>
-                        <button class="btn-iniciar" type="button" data-label="Iniciar exame">Iniciar exame</button>
+                        <button class="btn-iniciar" type="button" data-label="Iniciar exame" disabled>Iniciar exame</button>
                     </div>
                 </div>
                 <div class="theme-desc">
@@ -201,5 +206,6 @@
     <script src="../js/menu-temas.js"></script>
     <script src="../js/logout.js"></script>
 <script src="../js/sessao-estudos.js"></script>
+    <script src="../js/exames.js"></script>
 </body>
 </html>

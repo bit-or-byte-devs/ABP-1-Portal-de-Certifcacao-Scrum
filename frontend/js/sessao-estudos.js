@@ -3,7 +3,12 @@ window.portal = {
         const resposta = await fetch(url, { cache: 'no-store', ...opcoes });
         if (resposta.status === 401) { location.replace('/pages/login.html'); throw new Error('Faça login para continuar.'); }
         const dados = await resposta.json();
-        if (!resposta.ok) throw new Error(dados.mensagem || 'Não foi possível concluir a solicitação.');
+        if (!resposta.ok) {
+            const erro = new Error(dados.mensagem || 'Não foi possível concluir a solicitação.');
+            erro.status = resposta.status;
+            erro.resposta = dados;
+            throw erro;
+        }
         return dados;
     },
     avisar(mensagem) {
