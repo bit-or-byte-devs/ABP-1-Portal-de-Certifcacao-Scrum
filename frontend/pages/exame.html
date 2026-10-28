@@ -1,1 +1,111 @@
+<<<<<<< HEAD
 <!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>BorB - Exame por tema</title><link rel="stylesheet" href="../css/estudos.css"></head><body><header class="navbar"><a href="menu.html">BorB</a><nav><a href="perfil.html">Perfil</a> <button data-logout class="btn-dark">Log Out</button></nav></header><main class="main-container"><a href="temas.html">← Voltar aos temas</a><h1>Exame por tema</h1><p id="aviso-estudos" role="status"></p><section id="questao" hidden><h2 id="enunciado"></h2><img id="imagem-questao" alt="" style="max-width:100%"><form id="responder"><fieldset id="alternativas"><legend>Escolha uma alternativa</legend></fieldset><button id="confirmar" type="submit">Confirmar resposta</button></form><p id="resultado" role="status"></p></section></main><script src="../js/sessao-estudos.js"></script><script src="../js/logout.js"></script><script src="../js/exame.js"></script></body></html>
+=======
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BorB - Exame: Fundamentos de Agilidade</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/menu-temas.css">
+    <link rel="stylesheet" href="../css/exame.css">
+</head>
+<body>
+
+    <header class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon" aria-hidden="true">B</div>
+            <div class="logo-text">
+                <p class="logo-nome">BorB</p>
+                <small>SCRUM_v8.1</small>
+            </div>
+        </div>
+        <nav class="nav-buttons" aria-label="Conta">
+            <button class="btn-nav" type="button">Perfil</button>
+            <button class="btn-nav" type="button" data-logout>Log Out</button>
+        </nav>
+    </header>
+
+    <main class="main-container exame">
+        <div class="top-header-row exame__topo">
+            <a href="exames.html" class="btn-voltar">&larr; Voltar</a>
+            <h1 class="page-title">1. Fundamentos de Agilidade</h1>
+            <img class="exame__mascote" src="/imagens/BorB(sem fundo_corpo).png" alt="" width="110" height="128">
+        </div>
+
+        <!-- Uma questão por tema, sorteada entre as quatro do tema no banco de dados -->
+        <article class="questao" aria-labelledby="questao-titulo">
+            <header class="questao__cabecalho">
+                <h2 id="questao-titulo" class="questao__titulo">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor?</h2>
+                <!-- Cronômetro: anuncia só nos marcos (60, 30 e 10 s) pela região abaixo -->
+                <p class="cronometro" role="timer" aria-live="off" aria-label="Tempo restante">
+                    <time id="cronometro-tempo" datetime="PT150S">2:30</time>
+                </p>
+                <p id="cronometro-aviso" class="sr-only" aria-live="polite"></p>
+            </header>
+
+            <form id="form-questao" class="questao__form">
+                <div class="questao__corpo">
+                    <figure class="questao__figura">
+                        <img id="questao-imagem" src="/imagens/imagem1-tema1-questoes.jpg" width="1024" height="559" alt="Lorem ipsum dolor sit amet.">
+                        <figcaption id="questao-legenda">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</figcaption>
+                    </figure>
+
+                    <fieldset id="alternativas" class="alternativas">
+                        <legend class="sr-only">Alternativas</legend>
+
+                        <label class="alternativa">
+                            <input type="radio" name="resposta" value="A">
+                            <span class="alternativa__letra">A.</span>
+                            <span class="alternativa__texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input type="radio" name="resposta" value="B">
+                            <span class="alternativa__letra">B.</span>
+                            <span class="alternativa__texto">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input type="radio" name="resposta" value="C">
+                            <span class="alternativa__letra">C.</span>
+                            <span class="alternativa__texto">Ut enim ad minim veniam, quis nostrud exercitation ullamco.</span>
+                        </label>
+
+                        <label class="alternativa">
+                            <input type="radio" name="resposta" value="D">
+                            <span class="alternativa__letra">D.</span>
+                            <span class="alternativa__texto">Duis aute irure dolor in reprehenderit in voluptate velit esse.</span>
+                        </label>
+                    </fieldset>
+                </div>
+
+                <!-- Feedback de resposta (RF09/RF11) -->
+                <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+
+                <div class="questao__acoes">
+                    <button id="btn-interromper" class="btn-nav" type="button">Interromper</button>
+                    <button id="btn-confirmar" class="btn-confirmar" type="submit">Confirmar &rarr;</button>
+                    <a id="link-continuar" class="btn-confirmar" href="exames.html" hidden>Continuar &rarr;</a>
+                </div>
+            </form>
+        </article>
+    </main>
+
+    <footer class="footer-bar">
+        <div class="footer-left">
+            <span class="footer-brand">BorB</span>
+            <span class="footer-copy">&copy; 2026 Scrum Learning Platform. Todos os direitos reservados.</span>
+        </div>
+        <div class="footer-right">
+            <span>STATUS: <span class="green-text">SECURE_MATRIX</span></span>
+            <span>FRAMEWORK: <span class="green-text">SCRUM.ORG COMPLIANT</span></span>
+        </div>
+    </footer>
+
+    <script src="../js/cronometro.js"></script>
+    <script src="../js/logout.js"></script>
+</body>
+</html>
+>>>>>>> bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/feature/exame

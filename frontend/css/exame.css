@@ -1,150 +1,58 @@
-/* Reset Básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-}
+/* Página de exame. Cabeçalho, rodapé, .btn-nav e .btn-voltar vêm de menu-temas.css;
+   cores, fontes e raios vêm de global.css. */
 
-body {
-    background: linear-gradient(180deg, #1d2b56 0%, #304481 100%);
-    min-height: 100vh;
-    color: #0d1b2a;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
-
-/* --- Cabeçalho --- */
-.navbar {
-    width: 100%;
-    max-width: 1100px;
-    background-color: #091a34;
-    border-radius: 40px;
-    padding: 10px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.logo-icon {
-    font-size: 28px;
-    background: #6c5ce7;
-    border-radius: 12px;
-    padding: 2px 6px;
-}
-
-.logo-text h2 {
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.logo-text span {
-    color: #00cec9;
-    font-size: 10px;
-    font-weight: 600;
-}
-
-.nav-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.btn-dark {
-    background-color: #172a45;
-    color: #00cec9;
-    border: none;
-    padding: 6px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 12px;
-    transition: background 0.2s;
-}
-
-.btn-dark:hover {
-    background-color: #203a60;
-}
-
-/* --- Container Principal --- */
-.main-container {
-    width: 100%;
-    max-width: 1100px;
-    background-color: #6a7db5;
-    border-radius: 35px;
-    padding: 24px 30px 30px;
-    position: relative;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-}
-
-/* Barra Superior de Ações */
-.top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    margin-bottom: 10px;
-}
-
-.btn-pill {
-    background-color: #1a2936;
-    color: #00cec9;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 13px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.btn-pill:hover {
-    background-color: #253849;
-}
-
-/* Mascote sobreposto na direita */
-.mascot-container {
+.sr-only {
     position: absolute;
-    right: 120px;
-    top: -15px;
-    z-index: 10;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Marca do cabeçalho em <p> para não criar título antes do <h1> */
+.logo-text .logo-nome {
+    font-size: var(--fs-md);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* --- Topo: voltar, título e mascote --- */
+.exame__topo {
+    position: relative;
+    margin-bottom: 20px;
+    padding-right: 130px;
+    /* Altura do mascote, para ele não cobrir o cronômetro da questão */
+    min-height: 108px;
+}
+
+.exame__topo .btn-voltar {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.exame__mascote {
+    position: absolute;
+    right: 0;
+    top: -20px;
+    width: 110px;
+    height: auto;
     pointer-events: none;
 }
 
-.mascot-img {
-    width: 110px;
-    height: auto;
-}
-
-/* Título Principal */
-.main-title {
-    color: #ffffff;
-    font-size: 38px;
-    font-weight: 800;
-    margin-bottom: 20px;
-}
-
-/* --- Cartão do Quiz --- */
-.quiz-card {
-    background-color: #d8f2e6;
-    border-radius: 25px;
+/* --- Cartão da questão --- */
+.questao {
+    background-color: var(--menta);
+    color: var(--texto-escuro);
+    border-radius: var(--raio-card);
     padding: 30px;
-    position: relative;
+    box-shadow: var(--sombra-card);
 }
 
-/* Pergunta e Botão Confirmar */
-.question-header {
+.questao__cabecalho {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -152,102 +60,266 @@ body {
     margin-bottom: 25px;
 }
 
-.question-text {
-    font-size: 24px;
+.questao__titulo {
+    font-size: var(--fs-xl);
     font-weight: 800;
-    color: #111111;
     line-height: 1.25;
     max-width: 650px;
 }
 
-.btn-confirm {
-    background-color: #cccccc;
-    color: #222222;
-    border: 1px solid #a3a3a3;
-    padding: 10px 22px;
-    border-radius: 25px;
-    font-size: 18px;
-    font-weight: 700;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+.cronometro {
+    font-size: var(--fs-2xl);
+    font-weight: 900;
+    color: var(--alerta);
+    font-variant-numeric: tabular-nums;
     white-space: nowrap;
-    transition: background 0.2s;
 }
 
-.btn-confirm:hover {
-    background-color: #bebebe;
-}
-
-/* Layout do Quiz (Imagem x Opções) */
-.quiz-body {
+.questao__corpo {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 25px;
     align-items: start;
 }
 
-.image-placeholder {
+/* Imagem da questão */
+.questao__figura img {
+    display: block;
     width: 100%;
-    height: 250px;
-    background-color: #d1d1d1;
+    height: auto;
+    background-color: var(--placeholder);
     border-radius: 4px;
 }
 
-/* Opções de Resposta */
-.options-container {
+.questao__figura figcaption {
+    margin-top: 8px;
+    font-size: var(--fs-sm);
+    color: var(--texto-escuro-suave);
+}
+
+/* --- Alternativas --- */
+.alternativas {
     display: flex;
     flex-direction: column;
     gap: 14px;
+    border: none;
+    min-width: 0;
 }
 
-.option-card {
-    background-color: #cfd8d3;
-    border-radius: 20px;
-    padding: 10px 16px;
+.alternativa {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 12px;
+    min-height: 48px;
+    padding: 10px 16px;
+    background-color: var(--menta-alternativa);
+    border: 2px solid transparent;
+    border-radius: var(--raio-pill);
+    box-shadow: var(--sombra-leve);
     cursor: pointer;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.15s, background-color 0.2s;
 }
 
-.option-card:hover {
-    background-color: #c4d0cb;
+.alternativa:hover {
+    background-color: var(--menta-hover);
     transform: translateY(-1px);
 }
 
-.option-card input[type="radio"] {
+/* Rádio oculto visualmente, mas focável por teclado */
+.alternativa input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+.alternativa:has(input:checked) {
+    background-color: var(--menta-marcada);
+    border-color: var(--borda-escura);
+}
+
+.alternativa:has(input:focus-visible) {
+    outline: 3px solid var(--texto-escuro);
+    outline-offset: 2px;
+}
+
+.alternativa__letra {
+    font-size: var(--fs-lg);
+    font-weight: 800;
+    color: var(--texto-escuro-suave);
+}
+
+.alternativa__texto {
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.alternativa--correta,
+.alternativa--correta:has(input:checked) {
+    border-color: var(--sucesso-escuro);
+}
+
+.alternativa--correta .alternativa__letra {
+    color: var(--sucesso-escuro);
+}
+
+.alternativa--incorreta,
+.alternativa--incorreta:has(input:checked) {
+    border-color: var(--erro-escuro);
+}
+
+.alternativa--incorreta .alternativa__letra {
+    color: var(--erro-escuro);
+}
+
+.alternativas:disabled .alternativa {
+    cursor: default;
+    transform: none;
+}
+
+/* --- Feedback e ações --- */
+.feedback {
+    min-height: 1.5em;
+    margin-top: 20px;
+    font-size: var(--fs-md);
+    font-weight: 700;
+}
+
+.feedback--sucesso {
+    color: var(--sucesso-escuro);
+}
+
+.feedback--erro {
+    color: var(--erro-escuro);
+}
+
+.questao__acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.btn-confirmar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 8px 22px;
+    background-color: var(--card-bg);
+    color: var(--green-accent);
+    border: none;
+    border-radius: var(--raio-pill);
+    font-size: var(--fs-md);
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-confirmar:hover {
+    background-color: var(--btn-escuro);
+}
+
+.questao__acoes [hidden] {
     display: none;
 }
 
-.option-letter {
-    font-size: 22px;
-    font-weight: 800;
-    color: #333333;
+.questao__acoes .btn-nav {
+    min-height: 44px;
 }
 
-.option-text {
-    font-size: 11px;
-    font-weight: 800;
-    color: #111111;
-    line-height: 1.2;
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
-/* Estilo para opção selecionada */
-.option-card:has(input[type="radio"]:checked) {
-    background-color: #b5c7bd;
-    border: 2px solid #555555;
+/* --- Responsividade --- */
+@media (max-width: 740px) {
+    .top-nav {
+        margin: 12px 16px;
+        padding: 10px 16px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .main-container {
+        padding: 12px 16px 32px;
+    }
+
+    .exame__topo {
+        flex-wrap: wrap;
+        gap: 12px 20px;
+        padding-right: 90px;
+    }
+
+    .exame__mascote {
+        width: 80px;
+        top: -10px;
+    }
+
+    .page-title {
+        font-size: var(--fs-xl);
+    }
+
+    .questao {
+        padding: 20px;
+    }
+
+    .questao__corpo {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 18px 16px;
+    }
+
+    .footer-left,
+    .footer-right {
+        flex-wrap: wrap;
+        gap: 6px 15px;
+    }
 }
 
-/* Temporizador */
-.timer {
-    position: absolute;
-    bottom: 20px;
-    right: 30px;
-    font-size: 32px;
-    font-weight: 900;
-    color: #d62828;
+@media (max-width: 480px) {
+    .questao {
+        padding: 16px;
+    }
+
+    .questao__cabecalho {
+        flex-direction: column-reverse;
+        gap: 8px;
+    }
+
+    .questao__titulo {
+        font-size: var(--fs-lg);
+    }
+
+    .cronometro {
+        font-size: var(--fs-xl);
+    }
+
+    .questao__acoes {
+        flex-direction: column-reverse;
+    }
+
+    .questao__acoes > * {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .alternativa,
+    .btn-confirmar {
+        transition: none;
+    }
+
+    .alternativa:hover {
+        transform: none;
+    }
 }
