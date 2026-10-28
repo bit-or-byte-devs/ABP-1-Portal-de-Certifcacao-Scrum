@@ -34,6 +34,8 @@
         feedback.classList.add(dados.acertou ? 'feedback--sucesso' : 'feedback--erro');
         const resultado = dados.situacao === 'tempo_esgotado'
             ? 'O tempo acabou. A questão conta como incorreta.'
+            : dados.situacao === 'interrompida'
+                ? 'A questão foi encerrada por interrupção e conta como incorreta.'
             : dados.acertou ? 'Resposta correta.' : 'Resposta incorreta.';
         const correta = dados.alternativa_correta;
         feedback.textContent = `${resultado} Alternativa correta: ${correta.letra}. ${correta.texto}. ${dados.justificativa || ''}`;
@@ -49,6 +51,7 @@
     }
 
     try {
+        // Uma única chamada por carregamento: repetir iniciar interromperia a própria questão.
         const questao = await portal.pedir(`/api/exames/${encodeURIComponent(tema)}/iniciar`, json({}));
         document.getElementById('exame-titulo').textContent = `Exame: ${questao.nome}`;
         document.getElementById('questao-titulo').textContent = questao.enunciado;
