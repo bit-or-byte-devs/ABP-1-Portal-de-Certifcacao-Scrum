@@ -1,0 +1,118 @@
+{
+  "tema": 8,
+  "fonte": "docs/questoes/questoes-pdf/Tema 8 - Pilares e Valores do Scrum.pdf",
+  "questoes": [
+    {
+      "codigo": "tema-08-q01",
+      "enunciado": "Quais são os três pilares do controle empírico de processos em que o Scrum se baseia?",
+      "justificativa": "O empirismo no Scrum é sustentado pela Transparência, Inspeção e Adaptação.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Planejamento, Execução e Entrega.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Transparência, Inspeção e Adaptação.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "Inovação, Qualidade e Velocidade.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Revisão, Retrospectiva e Refinamento.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-08-q02",
+      "enunciado": "Quais são os cinco valores fundamentais do Scrum?",
+      "justificativa": "Estes cinco valores guiam o trabalho, as ações e o comportamento do Scrum Team.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Coragem, Foco, Compromisso, Respeito e Abertura.",
+          "correta": true
+        },
+        {
+          "letra": "B",
+          "texto": "Velocidade, Eficiência, Qualidade, Entrega e Inovação.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Transparência, Inspeção, Adaptação, Empatia e Liderança.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Confiança, Comunicação, Colaboração, Planejamento e Controle.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-08-q03",
+      "enunciado": "Segundo o Scrum Guide, a Inspeção sem qual outro pilar é considerada enganosa e geradora de desperdício?",
+      "justificativa": "Sem transparência, a inspeção é falha, pois não se pode inspecionar o que não está visível ou compreendido.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Adaptação.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Abertura.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Coragem.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Transparência.",
+          "correta": true
+        }
+      ]
+    },
+    {
+      "codigo": "tema-08-q04",
+      "enunciado": "Quando o Scrum Team se depara com um problema difícil ou um desafio técnico complexo, qual valor do Scrum mais os incentiva a enfrentá-lo e fazer a coisa certa?",
+      "justificativa": "A coragem permite que os membros do time trabalhem nos problemas mais difíceis e façam a coisa certa.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Foco.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Compromisso.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Coragem.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "Respeito.",
+          "correta": false
+        }
+      ]
+    }
+  ]
+}
