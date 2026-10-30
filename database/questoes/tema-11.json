@@ -1,0 +1,118 @@
+{
+  "tema": 11,
+  "fonte": "docs/questoes/questoes-pdf/Tema 11 - Scrum em Escala.pdf",
+  "questoes": [
+    {
+      "codigo": "tema-11-q01",
+      "enunciado": "Qual é o objetivo principal de frameworks de escala como Nexus e LeSS (Large-Scale Scrum)?",
+      "justificativa": "O propósito central de escalar o Scrum é coordenar e sincronizar múltiplos times que constroem juntos o mesmo produto.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Substituir o Scrum tradicional por uma metodologia preditiva (em cascata).",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Permitir que o Scrum seja aplicado de forma eficaz quando múltiplos times trabalham no desenvolvimento de um único produto.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "Eliminar definitivamente a necessidade do papel do Product Owner na organização.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Aumentar a duração da Sprint para vários meses, acomodando mais trabalho e integração.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-11-q02",
+      "enunciado": "No framework Nexus, qual é o principal objetivo do \"Nexus Integration Team\"?",
+      "justificativa": "O Nexus Integration Team atua para resolver dependências complexas e garantir a integração contínua do trabalho de todos os times.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Codificar todas as funcionalidades complexas do produto isoladamente.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Gerenciar os recursos humanos, férias e salários de todos os desenvolvedores.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Garantir que um Incremento Integrado, pronto e utilizável seja produzido no final de cada Sprint.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "Substituir o Scrum Master de todas as equipes de desenvolvimento individuais.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-11-q03",
+      "enunciado": "Quando escalamos o Scrum, o que acontece com o Product Backlog no modelo LeSS?",
+      "justificativa": "Uma regra de ouro do Scrum (e do LeSS) é: um produto = um único Product Backlog e um único Product Owner, garantindo foco unificado.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Cada time possui seu próprio Product Backlog isolado e independente.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Existe um único Product Backlog e um único Product Owner para todos os times que trabalham no mesmo produto.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "O Product Backlog é dividido em vários documentos gerenciados por múltiplos gerentes de projeto.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "O Product Backlog é substituído por um cronograma tradicional e planilhas de longo prazo.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-11-q04",
+      "enunciado": "Qual é o maior desafio e fonte de risco que os frameworks de escalada ágil buscam mitigar?",
+      "justificativa": "Múltiplos times no mesmo código geram atritos e dependências; a escalada ágil foca em resolver a integração contínua para evitar falhas.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "A falta de reuniões diárias em diferentes departamentos da empresa.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "O gerenciamento de dependências cruzadas entre times e a integração técnica do código e do produto.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "A ausência de documentação detalhada e assinada no início do desenvolvimento do projeto.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "A dificuldade de contratar desenvolvedores e especialistas para compor os times ágeis.",
+          "correta": false
+        }
+      ]
+    }
+  ]
+}
