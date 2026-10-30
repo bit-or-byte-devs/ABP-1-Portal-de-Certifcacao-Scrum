@@ -1,0 +1,118 @@
+{
+  "tema": 9,
+  "fonte": "docs/questoes/questoes-pdf/Tema 9 - Estimativas e Métricas Ágeis.pdf",
+  "questoes": [
+    {
+      "codigo": "tema-09-q01",
+      "enunciado": "Qual é o principal objetivo da técnica de Planning Poker?",
+      "justificativa": "O Planning Poker utiliza o debate e estimativas relativas para criar um entendimento unificado e consenso sobre o esforço de um item.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Determinar exatamente quantas horas cada tarefa levará para ser concluída.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Chegar a um consenso da equipe sobre a complexidade e o esforço dos itens do Product Backlog.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "Atribuir tarefas aos desenvolvedores com base em suas habilidades individuais.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Definir a Meta da Sprint junto ao Product Owner sem intervenção do Scrum Master.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-09-q02",
+      "enunciado": "O que um gráfico de Burndown (Burndown Chart) da Sprint ilustra?",
+      "justificativa": "O Burndown mostra uma tendência visual de quanto trabalho falta ser feito conforme os dias da Sprint passam.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "A quantidade exata de trabalho concluído a cada dia.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "O número de defeitos e bugs encontrados durante a Sprint.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "O trabalho restante estimado ao longo do tempo até o final da Sprint.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "A velocidade média do time nas últimas três Sprints.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-09-q03",
+      "enunciado": "Ao utilizar Story Points para estimar itens do Product Backlog, a equipe está medindo principalmente o quê?",
+      "justificativa": "Story points são estimativas relativas (e não baseadas em tempo) que englobam volume de trabalho, risco, complexidade e incerteza.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "O esforço relativo, a complexidade e a incerteza associada ao item.",
+          "correta": true
+        },
+        {
+          "letra": "B",
+          "texto": "O número exato de dias úteis de trabalho necessários para a entrega.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "A prioridade de negócios que o item representa para o cliente final.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "O custo financeiro direto para desenvolver a funcionalidade.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-09-q04",
+      "enunciado": "O que representa a \"Velocidade\" (Velocity) de um Scrum Team?",
+      "justificativa": "A Velocidade é uma métrica histórica usada para ajudar a equipe a prever quanto trabalho consegue realizar em Sprints futuras.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "A rapidez com que o Scrum Master consegue remover impedimentos organizacionais.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "O número de horas trabalhadas por dia pelos Developers da equipe.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "A quantidade de trabalho (frequentemente em Story Points) concluída pelo time em Sprints anteriores.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "O tempo total necessário para entregar o projeto completo ao mercado.",
+          "correta": false
+        }
+      ]
+    }
+  ]
+}
