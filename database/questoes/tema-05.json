@@ -1,0 +1,118 @@
+{
+  "tema": 5,
+  "fonte": "docs/questoes/questoes-pdf/Tema 5 - Eventos do Scrum.pdf",
+  "questoes": [
+    {
+      "codigo": "tema-05-q01",
+      "enunciado": "Qual é o timebox da Daily Scrum?",
+      "justificativa": "A Daily Scrum tem 15 minutos.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "5 minutos.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "15 minutos.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "30 minutos.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "1 hora.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-05-q02",
+      "enunciado": "Quem pode cancelar uma Sprint?",
+      "justificativa": "Só o PO pode cancelar, se a Meta da Sprint ficar obsoleta.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "O Scrum Master.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Os Developers, por maioria.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "O Product Owner.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "Qualquer stakeholder.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-05-q03",
+      "enunciado": "Em qual evento o time inspeciona seu próprio processo de trabalho e planeja melhorias?",
+      "justificativa": "A Retrospective trata do processo; a Review trata do produto.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Sprint Review.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Daily Scrum.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Sprint Planning.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Sprint Retrospective.",
+          "correta": true
+        }
+      ]
+    },
+    {
+      "codigo": "tema-05-q04",
+      "enunciado": "Qual é a ordem correta dos eventos dentro de uma Sprint?",
+      "justificativa": "Planning abre, Dailies acontecem durante, Review e Retrospective encerram.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Sprint Planning → Daily Scrums → Sprint Review → Sprint Retrospective.",
+          "correta": true
+        },
+        {
+          "letra": "B",
+          "texto": "Sprint Review → Sprint Planning → Daily Scrums → Sprint Retrospective.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Daily Scrums → Sprint Planning → Sprint Retrospective → Sprint Review.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Sprint Retrospective → Sprint Planning → Daily Scrums → Sprint Review.",
+          "correta": false
+        }
+      ]
+    }
+  ]
+}
