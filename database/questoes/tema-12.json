@@ -1,0 +1,118 @@
+{
+  "tema": 12,
+  "fonte": "docs/questoes/questoes-pdf/Tema 12 - Antipadrões e Transformação Ágil.pdf",
+  "questoes": [
+    {
+      "codigo": "tema-12-q01",
+      "enunciado": "Qual das alternativas abaixo descreve um clássico antipadrão (prática inadequada) da Daily Scrum?",
+      "justificativa": "A Daily é um evento para os Developers inspecionarem o progresso entre si, não para prestação de contas a líderes.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Focar a reunião no plano para as próximas 24 horas rumo à Meta da Sprint.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Transformar o evento em uma reunião de prestação de contas (status report) para o Scrum Master.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "Realizar a reunião sempre no mesmo horário e local.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Encerrar a reunião antes dos 15 minutos se o alinhamento já foi concluído.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-12-q02",
+      "enunciado": "O termo \"Water-Scrum-Fall\" (ou Cascata-Scrum-Cascata) refere-se a qual cenário em uma organização?",
+      "justificativa": "É um antipadrão de grandes empresas manter a burocracia antes e depois do desenvolvimento, criando uma \"falsa agilidade\".",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Uma adoção perfeita e híbrida que mescla as melhores partes de todos os frameworks.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "O uso de fluxo contínuo (Kanban) para substituir inteiramente as Sprints do Scrum.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Uma adoção parcial onde apenas o desenvolvimento usa Sprints, enquanto o planejamento inicial e o lançamento final seguem fases longas e engessadas.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "A prática de usar Scrum apenas para projetos relacionados a infraestrutura e redes.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-12-q03",
+      "enunciado": "Em uma Transformação Ágil bem-sucedida, qual é o papel fundamental da liderança organizacional?",
+      "justificativa": "A liderança ágil atua como facilitadora; a mudança exige transformação cultural e descentralização do controle.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Cobrar relatórios diários de horas trabalhadas de cada desenvolvedor.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Aprovar pessoalmente todas as histórias de usuário antes que a equipe comece a trabalhar nelas.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Promover uma cultura de segurança psicológica e remover ativamente impedimentos sistêmicos.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "Garantir que a empresa continue utilizando os mesmos processos tradicionais sem alterações.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-12-q04",
+      "enunciado": "O que caracteriza o fenômeno conhecido como \"Zombie Scrum\" (Scrum Zumbi)?",
+      "justificativa": "No Zombie Scrum, a equipe \"finge\" ser ágil realizando as cerimônias, mas falta o \"coração\" ágil: a entrega contínua de valor.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Equipes que preferem trabalhar predominantemente durante o período noturno.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "A ausência completa de qualquer evento ou artefato do framework Scrum.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Executar os eventos do Scrum de forma mecânica, sem gerar valor real, sem conexão com o cliente e sem empirismo.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "A adoção de Sprints com durações que ultrapassam o limite de 30 dias.",
+          "correta": false
+        }
+      ]
+    }
+  ]
+}
