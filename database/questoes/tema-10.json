@@ -1,0 +1,118 @@
+{
+  "tema": 10,
+  "fonte": "docs/questoes/questoes-pdf/Tema 10 - Histórias de Usuário e Refinamento.pdf",
+  "questoes": [
+    {
+      "codigo": "tema-10-q01",
+      "enunciado": "Qual é o formato padrão mais utilizado para descrever uma História de Usuário (User Story)?",
+      "justificativa": "O formato \"Como um... eu quero... para que...\" coloca o foco no valor gerado para o usuário final.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Como um [sistema], eu devo [executar ação] para [evitar erros].",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Como um [tipo de usuário], eu quero [uma funcionalidade/ação] para que [eu alcance um objetivo/valor].",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "Se [ação], então [resultado esperado] para que [teste passe].",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Eu preciso de [tempo] para entregar [código] para o [cliente].",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-10-q02",
+      "enunciado": "O que são os Critérios de Aceite (Acceptance Criteria) de uma História de Usuário?",
+      "justificativa": "Critérios de aceite garantem que a equipe saiba exatamente quais condições devem ser atendidas para a história ser aceita.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "A linguagem de programação que será utilizada para desenvolver o item.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "O prazo final exato em que a história deve ser entregue ao cliente.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Uma lista de condições e regras de negócio específicas que a história deve satisfazer para ser considerada pronta.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "O número de Story Points atribuídos à história durante o Planning Poker.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-10-q03",
+      "enunciado": "O que acontece durante a atividade de Refinamento (Refinement) do Product Backlog?",
+      "justificativa": "O refinamento é o ato contínuo de adicionar detalhes, estimativas e ordem aos itens do Product Backlog.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "O Scrum Master define quem fará cada tarefa na próxima Sprint.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "O Product Owner e os Developers detalham, estimam, dividem e ordenam os itens do Product Backlog.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "O time revisa os erros cometidos na Sprint anterior para melhorar seu comportamento humano.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "O cliente homologa e aprova o Incremento gerado no fim da Sprint.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-10-q04",
+      "enunciado": "Em uma História de Usuário muito grande (também conhecida como Épico), qual é a melhor prática no Scrum?",
+      "justificativa": "Épicos são grandes demais para uma Sprint e devem ser divididos (quebrados) em itens menores durante o refinamento.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Desenvolvê-la em uma única Sprint, mesmo que precise de horas extras.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Quebrá-la em histórias de usuário menores e mais gerenciáveis que possam ser concluídas em uma única Sprint.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "Repassá-la para outra equipe mais sênior realizar o trabalho.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Ignorá-la até que o cliente cobre a entrega.",
+          "correta": false
+        }
+      ]
+    }
+  ]
+}
