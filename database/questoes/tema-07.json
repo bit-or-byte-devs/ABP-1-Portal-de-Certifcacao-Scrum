@@ -1,0 +1,118 @@
+{
+  "tema": 7,
+  "fonte": "docs/questoes/questoes-pdf/Tema 7 - Responsabilidades no Scrum.pdf",
+  "questoes": [
+    {
+      "codigo": "tema-07-q01",
+      "enunciado": "Qual é a principal responsabilidade do Product Owner?",
+      "justificativa": "O PO foca no valor do produto através da gestão do Product Backlog.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Gerenciar as tarefas diárias dos Developers.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Maximizar o valor do produto resultante do trabalho do Scrum Team.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "Garantir que os eventos do Scrum ocorram dentro do tempo limite.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Estimar detalhadamente o esforço necessário para cada item do Product Backlog.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-07-q02",
+      "enunciado": "Segundo o Scrum Guide, quem é responsável por dimensionar (estimar) os itens do Product Backlog?",
+      "justificativa": "As pessoas que farão o trabalho (Developers) são as responsáveis por estimá-lo.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "O Product Owner.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "O Scrum Master.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Os Developers.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "O Gerente de Projetos.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-07-q03",
+      "enunciado": "Qual das alternativas NÃO é uma responsabilidade do Scrum Master?",
+      "justificativa": "O Scrum Team é autogerenciável; ninguém atribui tarefas individuais.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Remover impedimentos para o progresso do Scrum Team.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Treinar o time em autogerenciamento e interfuncionalidade.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Atribuir tarefas específicas para cada Developer durante a Sprint.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "Ajudar stakeholders a compreender e aplicar uma abordagem empírica.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-07-q04",
+      "enunciado": "O que significa dizer que o Scrum Team é \"interfuncional\"?",
+      "justificativa": "Interfuncionalidade significa ter as capacidades necessárias de ponta a ponta para entregar o Incremento.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Os membros do time possuem exatamente as mesmas habilidades técnicas.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "O time possui internamente todas as habilidades necessárias para criar valor a cada Sprint.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "Os membros do time precisam trabalhar em vários projetos simultaneamente.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "O time é obrigatoriamente composto por representantes de todos os departamentos da empresa.",
+          "correta": false
+        }
+      ]
+    }
+  ]
+}
