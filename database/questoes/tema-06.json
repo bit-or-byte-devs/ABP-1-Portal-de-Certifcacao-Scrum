@@ -1,0 +1,118 @@
+{
+  "tema": 6,
+  "fonte": "docs/questoes/questoes-pdf/Tema 6 - Artefatos do Scrum.pdf",
+  "questoes": [
+    {
+      "codigo": "tema-06-q01",
+      "enunciado": "Qual é o compromisso associado ao Product Backlog?",
+      "justificativa": "Product Backlog ↔ Meta do Produto; Sprint Backlog ↔ Meta da Sprint; Incremento ↔ DoD.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Meta da Sprint.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Definition of Done.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Meta do Produto.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "Velocity.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-06-q02",
+      "enunciado": "O Sprint Backlog é composto por:",
+      "justificativa": "Porquê (meta), o quê (itens) e como (plano).",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "A Meta da Sprint, os itens selecionados do Product Backlog e o plano para entregá-los.",
+          "correta": true
+        },
+        {
+          "letra": "B",
+          "texto": "Todos os itens do Product Backlog, ordenados pelo PO.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "A lista de impedimentos registrados na Daily.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "As melhorias definidas na Retrospectiva anterior, apenas.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-06-q03",
+      "enunciado": "Um item foi programado, mas não passou nos testes exigidos pela Definition of Done até o fim da Sprint. O que acontece?",
+      "justificativa": "Trabalho que não atende à DoD não é Incremento.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "É apresentado na Review como parte do Incremento.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Não faz parte do Incremento e volta ao Product Backlog.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "A Sprint é estendida até o item ficar pronto.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "O Scrum Master conclui o item.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-06-q04",
+      "enunciado": "Sobre o Incremento, é correto afirmar:",
+      "justificativa": "Pode haver vários Incrementos por Sprint, entregues inclusive antes da Review.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Só pode existir um Incremento por Sprint.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Só pode ser entregue ao cliente após a Retrospectiva.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "É criado apenas no último dia da Sprint.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Soma-se aos Incrementos anteriores e deve ser utilizável.",
+          "correta": true
+        }
+      ]
+    }
+  ]
+}

@@ -21,7 +21,7 @@ async function buscarEstadoResposta(db, id) {
         GREATEST(0, EXTRACT(EPOCH FROM (r.data_hora_exibicao
             + $2 * INTERVAL '1 second' - clock_timestamp())))::double precision AS segundos_restantes
         FROM tbresposta r JOIN tbtema t ON t.id=r.idtema
-        JOIN tbquestao q ON q.id=r.idquestao JOIN tbimagem i ON i.id=q.idimagem
+        JOIN tbquestao q ON q.id=r.idquestao LEFT JOIN tbimagem i ON i.id=q.idimagem
         WHERE r.id=$1`, [id, DURACAO_QUESTAO_SEGUNDOS]);
     const { idcertificacao, ordem, ...resposta } = rows[0];
     const alternativas = await db.query("SELECT id, letra, texto FROM tbalternativa WHERE idquestao=$1 ORDER BY letra", [resposta.questao]);

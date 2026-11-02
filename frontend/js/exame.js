@@ -58,9 +58,11 @@
 
         const imagem = document.getElementById('questao-imagem');
         // URLs de imagens cadastradas devem ser caminhos locais ou HTTPS.
+        if (questao.imagem) {
         const url = new URL(questao.imagem, location.origin);
         if (url.origin === location.origin || url.protocol === 'https:') { imagem.src = url.href; imagem.alt = questao.imagem_alt; }
         else imagem.remove();
+        } else imagem.remove();
 
         questao.alternativas.forEach(alternativa => {
             alternativas.append(montarAlternativa(alternativa, questao.idalternativa === alternativa.id));

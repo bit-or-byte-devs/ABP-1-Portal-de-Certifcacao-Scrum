@@ -306,3 +306,35 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     assert.equal(concluida.corpo.proximo_tema, null);
     assert.ok(concluida.corpo.temas.every(tema => tema.estado === "concluido"));
 });
+
+
+test('Integracao da carga: migracao repetivel, imagens opcionais e respostas preservadas', opcoes, async () => {
+    const { carregar, importar } = require('../scripts/importar-questoes');
+    const migracao = fs.readFileSync(path.join(__dirname, '../../database/migrations/003_carga_questoes.sql'), 'utf8');
+    await banco.query(migracao);
+    await banco.query(migracao);
+    await banco.query(fs.readFileSync(path.join(__dirname, '../../database/dml/seed.sql'), 'utf8'));
+    const db = await banco.connect();
+    try {
+        assert.deepEqual(await importar(db, carregar()), { inseridas: 41, existentes: 0 });
+        assert.deepEqual(await importar(db, carregar()), { inseridas: 0, existentes: 41 });
+        assert.equal(Number((await db.query('SELECT count(*) FROM tbalternativa')).rows[0].count), 164);
+    } finally { db.release(); }
+    const cookie = await criarCandidato();
+    const questao = await iniciar(cookie, 4);
+    assert.equal(questao.imagem, null);
+    assert.equal(questao.alternativas.length, 4);
+    const consulta = await solicitar('/api/exames/respostas/' + questao.id, cookie);
+    assert.equal(consulta.status, 200);
+    const resultado = await solicitar('/api/exames/respostas/' + questao.id, cookie, { alternativa: questao.alternativas[0].id });
+    assert.equal(resultado.status, 200);
+    assert.equal(resultado.corpo.situacao, 'respondida');
+    const cliente = await banco.connect();
+    try { assert.deepEqual(await importar(cliente, carregar()), { inseridas: 0, existentes: 41 }); }
+    finally { cliente.release(); }
+    assert.equal((await lerResposta(questao.id)).situacao, 'respondida');
+    const comImagem = await iniciar(cookie, 1);
+    const arquivo = await fetch(base + comImagem.imagem);
+    assert.equal(arquivo.status, 200);
+    assert.match(arquivo.headers.get('content-type'), /^image\//);
+});

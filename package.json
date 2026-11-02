@@ -1,6 +1,10 @@
 {
-  "dependencies": {
-    "dotenv": "^18.0.8",
-    "express": "^5.3.0"
+  "name": "portal-certificacao-scrum",
+  "private": true,
+  "scripts": {
+    "setup": "npm --prefix backend ci",
+    "start": "npm --prefix backend start",
+    "test": "npm --prefix backend test",
+    "db:questoes": "npm --prefix backend run db:questoes --"
   }
 }

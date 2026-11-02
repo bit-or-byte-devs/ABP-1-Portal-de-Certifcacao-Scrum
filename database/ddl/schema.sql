@@ -61,13 +61,17 @@ CREATE TABLE tbmaterial_por_imagem (
 CREATE TABLE tbquestao (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     idtema INTEGER NOT NULL REFERENCES tbtema(id),
-    idimagem INTEGER NOT NULL REFERENCES tbimagem(id),
+    idimagem INTEGER REFERENCES tbimagem(id),
+    codigo_origem VARCHAR(100),
+    hash_origem VARCHAR(64),
     enunciado TEXT NOT NULL,
     justificativa TEXT NOT NULL,
 
     -- Necessária para a referência composta de tbresposta.
     CONSTRAINT uq_questao_tema UNIQUE (id, idtema)
 );
+
+CREATE UNIQUE INDEX uq_questao_codigo_origem ON tbquestao(codigo_origem);
 
 -- 6. Alternativas
 CREATE TABLE tbalternativa (
