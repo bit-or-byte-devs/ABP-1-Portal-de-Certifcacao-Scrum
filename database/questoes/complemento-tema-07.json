@@ -1,0 +1,34 @@
+{
+  "tema": 7,
+  "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+  "questoes": [
+    {
+      "codigo": "tema-07-q50",
+      "enunciado": "Qual critério de aceitação torna uma história sobre recuperação de senha verificável?",
+      "justificativa": "Uma condição observável permite verificar o resultado esperado; adjetivos subjetivos não definem um teste de aceitação.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "A tela deve ser agradável.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "A solução deve ser moderna.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Um código expirado deve ser recusado sem alterar a senha.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "O desenvolvimento deve ser rápido.",
+          "correta": false
+        }
+      ]
+    }
+  ]
+}

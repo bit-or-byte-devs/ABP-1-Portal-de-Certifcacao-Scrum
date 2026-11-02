@@ -316,9 +316,9 @@ test('Integracao da carga: migracao repetivel, imagens opcionais e respostas pre
     await banco.query(fs.readFileSync(path.join(__dirname, '../../database/dml/seed.sql'), 'utf8'));
     const db = await banco.connect();
     try {
-        assert.deepEqual(await importar(db, carregar()), { inseridas: 41, existentes: 0 });
-        assert.deepEqual(await importar(db, carregar()), { inseridas: 0, existentes: 41 });
-        assert.equal(Number((await db.query('SELECT count(*) FROM tbalternativa')).rows[0].count), 164);
+        assert.deepEqual(await importar(db, carregar()), { inseridas: 56, existentes: 0 });
+        assert.deepEqual(await importar(db, carregar()), { inseridas: 0, existentes: 56 });
+        assert.equal(Number((await db.query('SELECT count(*) FROM tbalternativa')).rows[0].count), 224);
     } finally { db.release(); }
     const cookie = await criarCandidato();
     const questao = await iniciar(cookie, 4);
@@ -330,9 +330,15 @@ test('Integracao da carga: migracao repetivel, imagens opcionais e respostas pre
     assert.equal(resultado.status, 200);
     assert.equal(resultado.corpo.situacao, 'respondida');
     const cliente = await banco.connect();
-    try { assert.deepEqual(await importar(cliente, carregar()), { inseridas: 0, existentes: 41 }); }
+    try { assert.deepEqual(await importar(cliente, carregar()), { inseridas: 0, existentes: 56 }); }
     finally { cliente.release(); }
     assert.equal((await lerResposta(questao.id)).situacao, 'respondida');
+    for (const ordem of [7,8,9,10,11,12]) {
+        const adicional = await iniciar(cookie, ordem);
+        assert.equal(adicional.alternativas.length, 4);
+        const enviada = await solicitar('/api/exames/respostas/' + adicional.id, cookie, { alternativa: adicional.alternativas[0].id });
+        assert.equal(enviada.status, 200);
+    }
     const comImagem = await iniciar(cookie, 1);
     const arquivo = await fetch(base + comImagem.imagem);
     assert.equal(arquivo.status, 200);

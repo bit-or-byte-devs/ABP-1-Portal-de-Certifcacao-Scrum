@@ -1,5 +1,7 @@
 # Relatório do projeto — 02/11/2026
 
+> Estado atual após o complemento: 56 questões importáveis, com pelo menos quatro em cada um dos 12 temas. As 48 questões dos PDFs foram preservadas (41 importáveis e sete complementares) e receberam 15 novas questões autorais. Os números do diagnóstico inicial abaixo são históricos.
+
 ## Comparação das branches
 
 Análise das referências locais: develop em 8d3624e e feature/questoes-db em 38f0cb3, com árvore de trabalho inicialmente limpa. Não foi feito fetch ou push; este relatório não afirma sincronização com o estado remoto atual.
@@ -21,7 +23,7 @@ Correções funcionais: LEFT JOIN na consulta de imagens; tratamento de imagem n
 - Não foi realizada carga nem migração no schema da aplicação. Os testes criam e removem seus próprios schemas.
 - Docker não está disponível no ambiente; build e execução em contêiner não foram validados. Não houve validação visual em navegador.
 
-## Cobertura do banco de questões
+## Cobertura original do banco de questões (antes do complemento)
 
 Há 48 questões nos documentos: 41 importáveis e 7 complementares. A tabela descreve os arquivos integrados, não a população atual do banco da aplicação.
 
@@ -49,3 +51,11 @@ O núcleo de estudos e exames está implementado e coberto pelos testes executad
 Prioridades: completar e revisar pedagogicamente o catálogo; validar as imagens e gabaritos contra os documentos; aplicar a migração e a carga no ambiente de destino após revisar cadastros prévios; homologar o fluxo completo no navegador e em Docker; atualizar o backlog com aceite da equipe. A emissão e validação de certificados ainda aparecem como indisponíveis na interface e não têm rotas implementadas na API examinada, permanecendo como trabalho futuro.
 
 O merge é local. A publicação da develop no remoto não foi realizada.
+
+## Atualização — complemento dos temas atuais
+
+Após o diagnóstico acima, foram adicionadas 15 questões autorais, sem remover as existentes. O catálogo atual tem 56 questões importáveis, 224 alternativas e sete questões documentais complementares. Distribuição por tema: 4, 4, 8, 7, 5, 4, 4, 4, 4, 4, 4, 4. Kanban e Qualidade agora têm quatro questões cada. Todos os temas atingem o mínimo de quatro; a ausência de questões deixa de ser um impedimento após carregar o catálogo atualizado no banco.
+
+Os números e pendências das seções anteriores registram o diagnóstico inicial. As novas questões não vieram dos PDFs: origem, referências e critérios estão em [complemento curricular](questoes/complemento-curricular.md). A exigência de imagens em todas as questões e o aceite pedagógico continuam pendentes. A população do banco da aplicação não é alterada pela edição dos arquivos.
+
+Validação do complemento: 28 testes aprovados, zero falhas e zero ignorados, incluindo PostgreSQL isolado, carga de 56 questões/224 alternativas e início/envio de respostas nos temas 7–12. O validador confirmou 56 questões sem modificar o banco da aplicação.

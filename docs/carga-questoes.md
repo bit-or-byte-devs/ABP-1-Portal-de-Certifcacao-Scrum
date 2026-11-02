@@ -1,6 +1,6 @@
 # Carga de questões
 
-Os 12 JSONs preservam 48 questões dos PDFs originais. A carga aplica o [mapeamento curricular](questoes/mapeamento-temas.md): 41 questões importáveis, 164 alternativas e 7 questões complementares sem equivalência no catálogo. Os campos de destino preservam os documentos e indicam o tema e código efetivamente usados no banco. São 12 questões com imagens e 29 sem imagens; a aplicação aceita ambas.
+Os 12 JSONs preservam 48 questões dos PDFs originais. A carga aplica o [mapeamento curricular](questoes/mapeamento-temas.md): 41 questões originais importáveis e 15 novas questões autorais, totalizando 56 questões importáveis e 224 alternativas e 7 questões complementares sem equivalência no catálogo. Os campos de destino preservam os documentos e indicam o tema e código efetivamente usados no banco. São 12 questões com imagens e 44 sem imagens; a aplicação aceita ambas.
 
 ## Execução
 
@@ -31,6 +31,8 @@ O Docker inclui database e imagens. A carga é manual após iniciar os serviços
 
 As imagens documentais ficam em docs/questoes/questoes-imagens. As públicas ficam em imagens/questoes; os caminhos antigos de imagens/ também foram preservados para bancos existentes. A API usa LEFT JOIN e a tela omite a imagem quando nula. Créditos não informados permanecem nulos. Algumas ilustrações dão pistas da resposta e precisam de revisão pedagógica.
 
-## Cobertura pendente
+## Cobertura atual
 
-Kanban (9) e Qualidade (12) ainda não têm questões compatíveis. User Stories (7), Gestão do Product Backlog (8), Planejamento (10) e Métricas (11) têm menos de quatro questões. As imagens do PDF 4 permanecem documentais, sem vínculo validado. A certificação completa dos 12 temas depende dessas pendências.
+Todos os 12 temas têm pelo menos quatro questões importáveis. Foram acrescentadas 15 questões autorais nos arquivos complemento-tema-XX.json, preservando as originais. Consulte [a origem e a distribuição do complemento](questoes/complemento-curricular.md). O total de 56 preserva as questões extras dos temas 3, 4 e 5; sete questões dos PDFs continuam apenas como material complementar.
+
+A exigência de exatamente quatro questões por tema e imagem em todas ainda difere do catálogo atual: há questões extras e imagens opcionais. As imagens do PDF 4 permanecem documentais. A revisão pedagógica e a carga no ambiente de destino continuam necessárias.

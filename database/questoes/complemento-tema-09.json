@@ -1,0 +1,118 @@
+{
+  "tema": 9,
+  "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+  "questoes": [
+    {
+      "codigo": "tema-09-q50",
+      "enunciado": "Qual é a finalidade de visualizar o fluxo em um quadro Kanban?",
+      "justificativa": "Visualizar o fluxo ajuda a entender onde os itens estão; o quadro não elimina obstáculos por si só.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Mostrar somente o nome dos integrantes.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Tornar visíveis as etapas e a situação dos itens de trabalho.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "Substituir todo diálogo por relatórios.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Garantir que não existam bloqueios.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-09-q51",
+      "enunciado": "Uma etapa atingiu seu limite de trabalho em progresso. Qual ação é mais coerente?",
+      "justificativa": "Controlar o trabalho em progresso favorece um sistema puxado e incentiva terminar atividades antes de começar novas.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Iniciar mais itens para manter todos ocupados.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Retirar o limite sem investigar.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Colaborar para concluir ou desbloquear os itens antes de iniciar outros.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "Esconder itens bloqueados do quadro.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-09-q52",
+      "enunciado": "Vários itens se acumulam continuamente antes de uma etapa. O que isso sugere?",
+      "justificativa": "O acúmulo persistente pode indicar uma restrição de fluxo; é necessário observar capacidade e bloqueios para decidir melhorias.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Um possível gargalo que deve ser investigado.",
+          "correta": true
+        },
+        {
+          "letra": "B",
+          "texto": "Que o fluxo está necessariamente equilibrado.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Que é obrigatório aumentar todas as filas.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Que os itens anteriores não precisam ser concluídos.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-09-q53",
+      "enunciado": "Para que servem políticas explícitas em um fluxo Kanban?",
+      "justificativa": "Políticas explícitas estabelecem um entendimento comum sobre o fluxo e apoiam decisões consistentes.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Para proibir melhorias no processo.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Para definir a avaliação individual por quantidade de cartões.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Para dispensar critérios de conclusão.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Para tornar claros os critérios de movimentação e gestão dos itens.",
+          "correta": true
+        }
+      ]
+    }
+  ]
+}

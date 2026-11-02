@@ -1,0 +1,90 @@
+{
+  "tema": 8,
+  "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+  "questoes": [
+    {
+      "codigo": "tema-08-q50",
+      "enunciado": "Quem responde pela ordenação dos itens do Product Backlog?",
+      "justificativa": "O Product Owner é responsável pela gestão eficaz do Product Backlog, incluindo sua ordenação.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "O Product Owner.",
+          "correta": true
+        },
+        {
+          "letra": "B",
+          "texto": "Apenas os stakeholders.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "O Scrum Master sozinho.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Um gerente externo obrigatório.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-08-q51",
+      "enunciado": "O que caracteriza o refinamento do Product Backlog?",
+      "justificativa": "O refinamento aumenta a clareza dos itens e pode incluir divisão, descrição e estimativa; não é um evento formal prescrito.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Congelar todos os requisitos no início.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Detalhar e dividir itens continuamente para melhorar seu entendimento.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "Executar um evento obrigatório com duração fixa.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Eliminar a necessidade de conversar com usuários.",
+          "correta": false
+        }
+      ]
+    },
+    {
+      "codigo": "tema-08-q52",
+      "enunciado": "Uma necessidade nova surge durante o desenvolvimento. Como tratar o Product Backlog?",
+      "justificativa": "O Product Backlog evolui conforme o produto e seu contexto; novas informações orientam decisões de ordenação.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Ignorar mudanças até terminar o produto.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Adicionar a necessidade diretamente à Sprint sem discussão.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Apagar automaticamente os itens antigos.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Avaliar a necessidade e ajustar a ordenação considerando valor e contexto.",
+          "correta": true
+        }
+      ]
+    }
+  ]
+}
