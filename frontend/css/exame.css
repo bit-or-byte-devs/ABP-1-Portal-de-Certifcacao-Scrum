@@ -158,6 +158,8 @@
 
 .alternativa--correta,
 .alternativa--correta:has(input:checked) {
+    background-color: #dcfce7;
+    color: #14532d;
     border-color: var(--sucesso-escuro);
 }
 
@@ -167,11 +169,33 @@
 
 .alternativa--incorreta,
 .alternativa--incorreta:has(input:checked) {
+    background-color: #fee2e2;
+    color: #7f1d1d;
     border-color: var(--erro-escuro);
 }
 
 .alternativa--incorreta .alternativa__letra {
     color: var(--erro-escuro);
+}
+
+.alternativa__resultado {
+    margin-left: auto;
+    font-size: var(--fs-sm);
+    font-weight: 800;
+    flex-shrink: 0;
+    max-width: 40%;
+}
+
+.alternativas:disabled .alternativa:hover {
+    background-color: var(--menta-alternativa);
+}
+
+.alternativas:disabled .alternativa--correta:hover {
+    background-color: #dcfce7;
+}
+
+.alternativas:disabled .alternativa--incorreta:hover {
+    background-color: #fee2e2;
 }
 
 .alternativas:disabled .alternativa {

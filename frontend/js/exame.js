@@ -38,6 +38,22 @@
                 ? 'A questão foi encerrada por interrupção e conta como incorreta.'
             : dados.acertou ? 'Resposta correta.' : 'Resposta incorreta.';
         const correta = dados.alternativa_correta;
+        alternativas.querySelectorAll('.alternativa').forEach(label => {
+            const radio = label.querySelector('input');
+            const id = Number(radio.value);
+            const ehCorreta = id === correta.id;
+            const ehEscolhida = id === dados.idalternativa;
+            radio.checked = ehEscolhida;
+            label.classList.toggle('alternativa--correta', ehCorreta);
+            label.classList.toggle('alternativa--incorreta', ehEscolhida && !ehCorreta);
+            label.querySelector('.alternativa__resultado')?.remove();
+            if (ehCorreta || ehEscolhida) {
+                const indicacao = document.createElement('span');
+                indicacao.className = 'alternativa__resultado';
+                indicacao.textContent = ehCorreta ? 'Correta' : 'Sua resposta: incorreta';
+                label.append(indicacao);
+            }
+        });
         feedback.textContent = `${resultado} Alternativa correta: ${correta.letra}. ${correta.texto}. ${dados.justificativa || ''}`;
         botaoConfirmar.hidden = true;
         linkContinuar.textContent = 'Próximo tema';
