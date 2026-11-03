@@ -1,6 +1,6 @@
 {
   "tema": 1,
-  "fonte": "docs/questoes/questoes-pdf/Tema 1 - Fundamentos da Agilidade.pdf",
+  "fonte": "Fontes individuais em cada questão; mapeamento em docs/questoes/mapeamento-temas.md",
   "questoes": [
     {
       "codigo": "tema-01-q01",
@@ -31,7 +31,9 @@
           "texto": "O excesso de programadores disponíveis no mercado.",
           "correta": false
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 1 - Fundamentos da Agilidade.pdf",
+      "questao_origem": "tema-01-q01"
     },
     {
       "codigo": "tema-01-q02",
@@ -62,7 +64,9 @@
           "texto": "Participação contínua do cliente durante todo o projeto.",
           "correta": false
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 1 - Fundamentos da Agilidade.pdf",
+      "questao_origem": "tema-01-q02"
     },
     {
       "codigo": "tema-01-q03",
@@ -93,7 +97,9 @@
           "texto": "Nenhuma, pois erros de regra de negócio só aparecem após a implantação.",
           "correta": false
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 1 - Fundamentos da Agilidade.pdf",
+      "questao_origem": "tema-01-q03"
     },
     {
       "codigo": "tema-01-q04",
@@ -124,7 +130,9 @@
           "texto": "Agilidade envolve planejamento contínuo e adaptação a partir do feedback.",
           "correta": true
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 1 - Fundamentos da Agilidade.pdf",
+      "questao_origem": "tema-01-q04"
     }
   ]
 }

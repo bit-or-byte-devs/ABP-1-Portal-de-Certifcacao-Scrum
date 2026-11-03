@@ -1,6 +1,6 @@
 {
   "tema": 6,
-  "fonte": "docs/questoes/questoes-pdf/Tema 6 - Artefatos do Scrum.pdf",
+  "fonte": "Fontes individuais em cada questão; mapeamento em docs/questoes/mapeamento-temas.md",
   "questoes": [
     {
       "codigo": "tema-06-q01",
@@ -28,7 +28,9 @@
           "texto": "Velocity.",
           "correta": false
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 6 - Artefatos do Scrum.pdf",
+      "questao_origem": "tema-06-q01"
     },
     {
       "codigo": "tema-06-q02",
@@ -56,7 +58,9 @@
           "texto": "As melhorias definidas na Retrospectiva anterior, apenas.",
           "correta": false
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 6 - Artefatos do Scrum.pdf",
+      "questao_origem": "tema-06-q02"
     },
     {
       "codigo": "tema-06-q03",
@@ -84,7 +88,9 @@
           "texto": "O Scrum Master conclui o item.",
           "correta": false
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 6 - Artefatos do Scrum.pdf",
+      "questao_origem": "tema-06-q03"
     },
     {
       "codigo": "tema-06-q04",
@@ -112,7 +118,9 @@
           "texto": "Soma-se aos Incrementos anteriores e deve ser utilizável.",
           "correta": true
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 6 - Artefatos do Scrum.pdf",
+      "questao_origem": "tema-06-q04"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "tema": 5,
-  "fonte": "docs/questoes/questoes-pdf/Tema 5 - Eventos do Scrum.pdf",
+  "fonte": "Fontes individuais em cada questão; mapeamento em docs/questoes/mapeamento-temas.md",
   "questoes": [
     {
       "codigo": "tema-05-q01",
@@ -28,7 +28,9 @@
           "texto": "1 hora.",
           "correta": false
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 5 - Eventos do Scrum.pdf",
+      "questao_origem": "tema-05-q01"
     },
     {
       "codigo": "tema-05-q02",
@@ -56,7 +58,9 @@
           "texto": "Qualquer stakeholder.",
           "correta": false
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 5 - Eventos do Scrum.pdf",
+      "questao_origem": "tema-05-q02"
     },
     {
       "codigo": "tema-05-q03",
@@ -84,7 +88,9 @@
           "texto": "Sprint Retrospective.",
           "correta": true
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 5 - Eventos do Scrum.pdf",
+      "questao_origem": "tema-05-q03"
     },
     {
       "codigo": "tema-05-q04",
@@ -112,7 +118,39 @@
           "texto": "Sprint Retrospective → Sprint Planning → Daily Scrums → Sprint Review.",
           "correta": false
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 5 - Eventos do Scrum.pdf",
+      "questao_origem": "tema-05-q04"
+    },
+    {
+      "codigo": "tema-05-q05",
+      "enunciado": "Qual das alternativas abaixo descreve um clássico antipadrão (prática inadequada) da Daily Scrum?",
+      "justificativa": "A Daily é um evento para os Developers inspecionarem o progresso entre si, não para prestação de contas a líderes.",
+      "imagem": null,
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Focar a reunião no plano para as próximas 24 horas rumo à Meta da Sprint.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Transformar o evento em uma reunião de prestação de contas (status report) para o Scrum Master.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "Realizar a reunião sempre no mesmo horário e local.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Encerrar a reunião antes dos 15 minutos se o alinhamento já foi concluído.",
+          "correta": false
+        }
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 12 - Antipadrões e Transformação Ágil.pdf",
+      "questao_origem": "tema-12-q01"
     }
   ]
 }

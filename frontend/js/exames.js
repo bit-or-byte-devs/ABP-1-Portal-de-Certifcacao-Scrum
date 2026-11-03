@@ -18,7 +18,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             const tema = progresso.temas.find(tema => tema.ordem === Number(card.dataset.id));
             const botao = card.querySelector('.btn-iniciar');
             botao.disabled = !tema || tema.estado === 'concluido';
+            card.querySelector('.progress-badge .green-text').textContent = tema?.estado === 'concluido' ? '100%' : '0%';
             if (!tema) return;
+            card.querySelector('h3').textContent = `${tema.ordem}. ${tema.nome}`;
             botao.textContent = rotulos[tema.estado];
             botao.addEventListener('click', evento => {
                 evento.stopPropagation();

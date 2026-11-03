@@ -1,134 +1,126 @@
 {
   "tema": 9,
-  "fonte": "docs/questoes/questoes-pdf/Tema 9 - Estimativas e Métricas Ágeis.pdf",
+  "fonte": "Fontes individuais em cada questão; mapeamento em docs/questoes/mapeamento-temas.md",
   "questoes": [
     {
-      "codigo": "tema-09-q01",
-      "enunciado": "Qual é o principal objetivo da técnica de Planning Poker?",
-      "justificativa": "O Planning Poker utiliza o debate e estimativas relativas para criar um entendimento unificado e consenso sobre o esforço de um item.",
+      "codigo": "tema-09-q50",
+      "enunciado": "Qual é a finalidade de visualizar o fluxo em um quadro Kanban?",
+      "justificativa": "Visualizar o fluxo ajuda a entender onde os itens estão; o quadro não elimina obstáculos por si só.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "Determinar exatamente quantas horas cada tarefa levará para ser concluída.",
+          "texto": "Mostrar somente o nome dos integrantes.",
           "correta": false
         },
         {
           "letra": "B",
-          "texto": "Chegar a um consenso da equipe sobre a complexidade e o esforço dos itens do Product Backlog.",
+          "texto": "Tornar visíveis as etapas e a situação dos itens de trabalho.",
           "correta": true
         },
         {
           "letra": "C",
-          "texto": "Atribuir tarefas aos desenvolvedores com base em suas habilidades individuais.",
+          "texto": "Substituir todo diálogo por relatórios.",
           "correta": false
         },
         {
           "letra": "D",
-          "texto": "Definir a Meta da Sprint junto ao Product Owner sem intervenção do Scrum Master.",
+          "texto": "Garantir que não existam bloqueios.",
           "correta": false
         }
       ],
-      "destino": {
-        "tema": 10,
-        "codigo": "tema-10-q02"
-      }
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-09-q50"
     },
     {
-      "codigo": "tema-09-q02",
-      "enunciado": "O que um gráfico de Burndown (Burndown Chart) da Sprint ilustra?",
-      "justificativa": "O Burndown mostra uma tendência visual de quanto trabalho falta ser feito conforme os dias da Sprint passam.",
+      "codigo": "tema-09-q51",
+      "enunciado": "Uma etapa atingiu seu limite de trabalho em progresso. Qual ação é mais coerente?",
+      "justificativa": "Controlar o trabalho em progresso favorece um sistema puxado e incentiva terminar atividades antes de começar novas.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "A quantidade exata de trabalho concluído a cada dia.",
+          "texto": "Iniciar mais itens para manter todos ocupados.",
           "correta": false
         },
         {
           "letra": "B",
-          "texto": "O número de defeitos e bugs encontrados durante a Sprint.",
+          "texto": "Retirar o limite sem investigar.",
           "correta": false
         },
         {
           "letra": "C",
-          "texto": "O trabalho restante estimado ao longo do tempo até o final da Sprint.",
+          "texto": "Colaborar para concluir ou desbloquear os itens antes de iniciar outros.",
           "correta": true
         },
         {
           "letra": "D",
-          "texto": "A velocidade média do time nas últimas três Sprints.",
+          "texto": "Esconder itens bloqueados do quadro.",
           "correta": false
         }
       ],
-      "destino": {
-        "tema": 11,
-        "codigo": "tema-11-q01"
-      }
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-09-q51"
     },
     {
-      "codigo": "tema-09-q03",
-      "enunciado": "Ao utilizar Story Points para estimar itens do Product Backlog, a equipe está medindo principalmente o quê?",
-      "justificativa": "Story points são estimativas relativas (e não baseadas em tempo) que englobam volume de trabalho, risco, complexidade e incerteza.",
+      "codigo": "tema-09-q52",
+      "enunciado": "Vários itens se acumulam continuamente antes de uma etapa. O que isso sugere?",
+      "justificativa": "O acúmulo persistente pode indicar uma restrição de fluxo; é necessário observar capacidade e bloqueios para decidir melhorias.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "O esforço relativo, a complexidade e a incerteza associada ao item.",
+          "texto": "Um possível gargalo que deve ser investigado.",
           "correta": true
         },
         {
           "letra": "B",
-          "texto": "O número exato de dias úteis de trabalho necessários para a entrega.",
+          "texto": "Que o fluxo está necessariamente equilibrado.",
           "correta": false
         },
         {
           "letra": "C",
-          "texto": "A prioridade de negócios que o item representa para o cliente final.",
+          "texto": "Que é obrigatório aumentar todas as filas.",
           "correta": false
         },
         {
           "letra": "D",
-          "texto": "O custo financeiro direto para desenvolver a funcionalidade.",
+          "texto": "Que os itens anteriores não precisam ser concluídos.",
           "correta": false
         }
       ],
-      "destino": {
-        "tema": 10,
-        "codigo": "tema-10-q03"
-      }
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-09-q52"
     },
     {
-      "codigo": "tema-09-q04",
-      "enunciado": "O que representa a \"Velocidade\" (Velocity) de um Scrum Team?",
-      "justificativa": "A Velocidade é uma métrica histórica usada para ajudar a equipe a prever quanto trabalho consegue realizar em Sprints futuras.",
+      "codigo": "tema-09-q53",
+      "enunciado": "Para que servem políticas explícitas em um fluxo Kanban?",
+      "justificativa": "Políticas explícitas estabelecem um entendimento comum sobre o fluxo e apoiam decisões consistentes.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "A rapidez com que o Scrum Master consegue remover impedimentos organizacionais.",
+          "texto": "Para proibir melhorias no processo.",
           "correta": false
         },
         {
           "letra": "B",
-          "texto": "O número de horas trabalhadas por dia pelos Developers da equipe.",
+          "texto": "Para definir a avaliação individual por quantidade de cartões.",
           "correta": false
         },
         {
           "letra": "C",
-          "texto": "A quantidade de trabalho (frequentemente em Story Points) concluída pelo time em Sprints anteriores.",
-          "correta": true
+          "texto": "Para dispensar critérios de conclusão.",
+          "correta": false
         },
         {
           "letra": "D",
-          "texto": "O tempo total necessário para entregar o projeto completo ao mercado.",
-          "correta": false
+          "texto": "Para tornar claros os critérios de movimentação e gestão dos itens.",
+          "correta": true
         }
       ],
-      "destino": {
-        "tema": 11,
-        "codigo": "tema-11-q02"
-      }
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-09-q53"
     }
   ]
 }

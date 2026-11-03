@@ -1,134 +1,126 @@
 {
   "tema": 8,
-  "fonte": "docs/questoes/questoes-pdf/Tema 8 - Pilares e Valores do Scrum.pdf",
+  "fonte": "Fontes individuais em cada questão; mapeamento em docs/questoes/mapeamento-temas.md",
   "questoes": [
     {
       "codigo": "tema-08-q01",
-      "enunciado": "Quais são os três pilares do controle empírico de processos em que o Scrum se baseia?",
-      "justificativa": "O empirismo no Scrum é sustentado pela Transparência, Inspeção e Adaptação.",
+      "enunciado": "O que acontece durante a atividade de Refinamento (Refinement) do Product Backlog?",
+      "justificativa": "O refinamento é o ato contínuo de adicionar detalhes, estimativas e ordem aos itens do Product Backlog.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "Planejamento, Execução e Entrega.",
+          "texto": "O Scrum Master define quem fará cada tarefa na próxima Sprint.",
           "correta": false
         },
         {
           "letra": "B",
-          "texto": "Transparência, Inspeção e Adaptação.",
+          "texto": "O Product Owner e os Developers detalham, estimam, dividem e ordenam os itens do Product Backlog.",
           "correta": true
         },
         {
           "letra": "C",
-          "texto": "Inovação, Qualidade e Velocidade.",
+          "texto": "O time revisa os erros cometidos na Sprint anterior para melhorar seu comportamento humano.",
           "correta": false
         },
         {
           "letra": "D",
-          "texto": "Revisão, Retrospectiva e Refinamento.",
+          "texto": "O cliente homologa e aprova o Incremento gerado no fim da Sprint.",
           "correta": false
         }
       ],
-      "destino": {
-        "tema": 3,
-        "codigo": "tema-03-q05"
-      }
+      "fonte": "docs/questoes/questoes-pdf/Tema 10 - Histórias de Usuário e Refinamento.pdf",
+      "questao_origem": "tema-10-q03"
     },
     {
-      "codigo": "tema-08-q02",
-      "enunciado": "Quais são os cinco valores fundamentais do Scrum?",
-      "justificativa": "Estes cinco valores guiam o trabalho, as ações e o comportamento do Scrum Team.",
+      "codigo": "tema-08-q50",
+      "enunciado": "Quem responde pela ordenação dos itens do Product Backlog?",
+      "justificativa": "O Product Owner é responsável pela gestão eficaz do Product Backlog, incluindo sua ordenação.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "Coragem, Foco, Compromisso, Respeito e Abertura.",
+          "texto": "O Product Owner.",
           "correta": true
         },
         {
           "letra": "B",
-          "texto": "Velocidade, Eficiência, Qualidade, Entrega e Inovação.",
+          "texto": "Apenas os stakeholders.",
           "correta": false
         },
         {
           "letra": "C",
-          "texto": "Transparência, Inspeção, Adaptação, Empatia e Liderança.",
+          "texto": "O Scrum Master sozinho.",
           "correta": false
         },
         {
           "letra": "D",
-          "texto": "Confiança, Comunicação, Colaboração, Planejamento e Controle.",
+          "texto": "Um gerente externo obrigatório.",
           "correta": false
         }
       ],
-      "destino": {
-        "tema": 3,
-        "codigo": "tema-03-q06"
-      }
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-08-q50"
     },
     {
-      "codigo": "tema-08-q03",
-      "enunciado": "Segundo o Scrum Guide, a Inspeção sem qual outro pilar é considerada enganosa e geradora de desperdício?",
-      "justificativa": "Sem transparência, a inspeção é falha, pois não se pode inspecionar o que não está visível ou compreendido.",
+      "codigo": "tema-08-q51",
+      "enunciado": "O que caracteriza o refinamento do Product Backlog?",
+      "justificativa": "O refinamento aumenta a clareza dos itens e pode incluir divisão, descrição e estimativa; não é um evento formal prescrito.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "Adaptação.",
+          "texto": "Congelar todos os requisitos no início.",
           "correta": false
         },
         {
           "letra": "B",
-          "texto": "Abertura.",
-          "correta": false
+          "texto": "Detalhar e dividir itens continuamente para melhorar seu entendimento.",
+          "correta": true
         },
         {
           "letra": "C",
-          "texto": "Coragem.",
+          "texto": "Executar um evento obrigatório com duração fixa.",
           "correta": false
         },
         {
           "letra": "D",
-          "texto": "Transparência.",
-          "correta": true
+          "texto": "Eliminar a necessidade de conversar com usuários.",
+          "correta": false
         }
       ],
-      "destino": {
-        "tema": 3,
-        "codigo": "tema-03-q07"
-      }
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-08-q51"
     },
     {
-      "codigo": "tema-08-q04",
-      "enunciado": "Quando o Scrum Team se depara com um problema difícil ou um desafio técnico complexo, qual valor do Scrum mais os incentiva a enfrentá-lo e fazer a coisa certa?",
-      "justificativa": "A coragem permite que os membros do time trabalhem nos problemas mais difíceis e façam a coisa certa.",
+      "codigo": "tema-08-q52",
+      "enunciado": "Uma necessidade nova surge durante o desenvolvimento. Como tratar o Product Backlog?",
+      "justificativa": "O Product Backlog evolui conforme o produto e seu contexto; novas informações orientam decisões de ordenação.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "Foco.",
+          "texto": "Ignorar mudanças até terminar o produto.",
           "correta": false
         },
         {
           "letra": "B",
-          "texto": "Compromisso.",
+          "texto": "Adicionar a necessidade diretamente à Sprint sem discussão.",
           "correta": false
         },
         {
           "letra": "C",
-          "texto": "Coragem.",
-          "correta": true
+          "texto": "Apagar automaticamente os itens antigos.",
+          "correta": false
         },
         {
           "letra": "D",
-          "texto": "Respeito.",
-          "correta": false
+          "texto": "Avaliar a necessidade e ajustar a ordenação considerando valor e contexto.",
+          "correta": true
         }
       ],
-      "destino": {
-        "tema": 3,
-        "codigo": "tema-03-q08"
-      }
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-08-q52"
     }
   ]
 }

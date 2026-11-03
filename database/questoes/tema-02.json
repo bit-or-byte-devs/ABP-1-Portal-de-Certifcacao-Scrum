@@ -1,6 +1,6 @@
 {
   "tema": 2,
-  "fonte": "docs/questoes/questoes-pdf/Tema 2 - Manifesto Ágil.pdf",
+  "fonte": "Fontes individuais em cada questão; mapeamento em docs/questoes/mapeamento-temas.md",
   "questoes": [
     {
       "codigo": "tema-02-q01",
@@ -31,7 +31,9 @@
           "texto": "Documentação abrangente mais que software em funcionamento.",
           "correta": false
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 2 - Manifesto Ágil.pdf",
+      "questao_origem": "tema-02-q01"
     },
     {
       "codigo": "tema-02-q02",
@@ -62,7 +64,9 @@
           "texto": "Percentual do cronograma concluído.",
           "correta": false
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 2 - Manifesto Ágil.pdf",
+      "questao_origem": "tema-02-q02"
     },
     {
       "codigo": "tema-02-q03",
@@ -93,7 +97,9 @@
           "texto": "Entregas frequentes.",
           "correta": false
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 2 - Manifesto Ágil.pdf",
+      "questao_origem": "tema-02-q03"
     },
     {
       "codigo": "tema-02-q04",
@@ -124,7 +130,9 @@
           "texto": "O manifesto estabelece prioridades, sem eliminar os itens da direita.",
           "correta": true
         }
-      ]
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 2 - Manifesto Ágil.pdf",
+      "questao_origem": "tema-02-q04"
     }
   ]
 }

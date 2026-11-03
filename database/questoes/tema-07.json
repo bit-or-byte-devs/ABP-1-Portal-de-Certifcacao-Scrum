@@ -1,134 +1,126 @@
 {
   "tema": 7,
-  "fonte": "docs/questoes/questoes-pdf/Tema 7 - Responsabilidades no Scrum.pdf",
+  "fonte": "Fontes individuais em cada questão; mapeamento em docs/questoes/mapeamento-temas.md",
   "questoes": [
     {
       "codigo": "tema-07-q01",
-      "enunciado": "Qual é a principal responsabilidade do Product Owner?",
-      "justificativa": "O PO foca no valor do produto através da gestão do Product Backlog.",
+      "enunciado": "Qual é o formato padrão mais utilizado para descrever uma História de Usuário (User Story)?",
+      "justificativa": "O formato \"Como um... eu quero... para que...\" coloca o foco no valor gerado para o usuário final.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "Gerenciar as tarefas diárias dos Developers.",
+          "texto": "Como um [sistema], eu devo [executar ação] para [evitar erros].",
           "correta": false
         },
         {
           "letra": "B",
-          "texto": "Maximizar o valor do produto resultante do trabalho do Scrum Team.",
+          "texto": "Como um [tipo de usuário], eu quero [uma funcionalidade/ação] para que [eu alcance um objetivo/valor].",
           "correta": true
         },
         {
           "letra": "C",
-          "texto": "Garantir que os eventos do Scrum ocorram dentro do tempo limite.",
+          "texto": "Se [ação], então [resultado esperado] para que [teste passe].",
           "correta": false
         },
         {
           "letra": "D",
-          "texto": "Estimar detalhadamente o esforço necessário para cada item do Product Backlog.",
+          "texto": "Eu preciso de [tempo] para entregar [código] para o [cliente].",
           "correta": false
         }
       ],
-      "destino": {
-        "tema": 4,
-        "codigo": "tema-04-q05"
-      }
+      "fonte": "docs/questoes/questoes-pdf/Tema 10 - Histórias de Usuário e Refinamento.pdf",
+      "questao_origem": "tema-10-q01"
     },
     {
       "codigo": "tema-07-q02",
-      "enunciado": "Segundo o Scrum Guide, quem é responsável por dimensionar (estimar) os itens do Product Backlog?",
-      "justificativa": "As pessoas que farão o trabalho (Developers) são as responsáveis por estimá-lo.",
+      "enunciado": "O que são os Critérios de Aceite (Acceptance Criteria) de uma História de Usuário?",
+      "justificativa": "Critérios de aceite garantem que a equipe saiba exatamente quais condições devem ser atendidas para a história ser aceita.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "O Product Owner.",
+          "texto": "A linguagem de programação que será utilizada para desenvolver o item.",
           "correta": false
         },
         {
           "letra": "B",
-          "texto": "O Scrum Master.",
+          "texto": "O prazo final exato em que a história deve ser entregue ao cliente.",
           "correta": false
         },
         {
           "letra": "C",
-          "texto": "Os Developers.",
+          "texto": "Uma lista de condições e regras de negócio específicas que a história deve satisfazer para ser considerada pronta.",
           "correta": true
         },
         {
           "letra": "D",
-          "texto": "O Gerente de Projetos.",
+          "texto": "O número de Story Points atribuídos à história durante o Planning Poker.",
           "correta": false
         }
       ],
-      "destino": {
-        "tema": 10,
-        "codigo": "tema-10-q01"
-      }
+      "fonte": "docs/questoes/questoes-pdf/Tema 10 - Histórias de Usuário e Refinamento.pdf",
+      "questao_origem": "tema-10-q02"
     },
     {
       "codigo": "tema-07-q03",
-      "enunciado": "Qual das alternativas NÃO é uma responsabilidade do Scrum Master?",
-      "justificativa": "O Scrum Team é autogerenciável; ninguém atribui tarefas individuais.",
+      "enunciado": "Em uma História de Usuário muito grande (também conhecida como Épico), qual é a melhor prática no Scrum?",
+      "justificativa": "Épicos são grandes demais para uma Sprint e devem ser divididos (quebrados) em itens menores durante o refinamento.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "Remover impedimentos para o progresso do Scrum Team.",
+          "texto": "Desenvolvê-la em uma única Sprint, mesmo que precise de horas extras.",
           "correta": false
         },
         {
           "letra": "B",
-          "texto": "Treinar o time em autogerenciamento e interfuncionalidade.",
-          "correta": false
-        },
-        {
-          "letra": "C",
-          "texto": "Atribuir tarefas específicas para cada Developer durante a Sprint.",
+          "texto": "Quebrá-la em histórias de usuário menores e mais gerenciáveis que possam ser concluídas em uma única Sprint.",
           "correta": true
         },
         {
+          "letra": "C",
+          "texto": "Repassá-la para outra equipe mais sênior realizar o trabalho.",
+          "correta": false
+        },
+        {
           "letra": "D",
-          "texto": "Ajudar stakeholders a compreender e aplicar uma abordagem empírica.",
+          "texto": "Ignorá-la até que o cliente cobre a entrega.",
           "correta": false
         }
       ],
-      "destino": {
-        "tema": 4,
-        "codigo": "tema-04-q06"
-      }
+      "fonte": "docs/questoes/questoes-pdf/Tema 10 - Histórias de Usuário e Refinamento.pdf",
+      "questao_origem": "tema-10-q04"
     },
     {
-      "codigo": "tema-07-q04",
-      "enunciado": "O que significa dizer que o Scrum Team é \"interfuncional\"?",
-      "justificativa": "Interfuncionalidade significa ter as capacidades necessárias de ponta a ponta para entregar o Incremento.",
+      "codigo": "tema-07-q50",
+      "enunciado": "Qual critério de aceitação torna uma história sobre recuperação de senha verificável?",
+      "justificativa": "Uma condição observável permite verificar o resultado esperado; adjetivos subjetivos não definem um teste de aceitação.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "Os membros do time possuem exatamente as mesmas habilidades técnicas.",
+          "texto": "A tela deve ser agradável.",
           "correta": false
         },
         {
           "letra": "B",
-          "texto": "O time possui internamente todas as habilidades necessárias para criar valor a cada Sprint.",
-          "correta": true
+          "texto": "A solução deve ser moderna.",
+          "correta": false
         },
         {
           "letra": "C",
-          "texto": "Os membros do time precisam trabalhar em vários projetos simultaneamente.",
-          "correta": false
+          "texto": "Um código expirado deve ser recusado sem alterar a senha.",
+          "correta": true
         },
         {
           "letra": "D",
-          "texto": "O time é obrigatoriamente composto por representantes de todos os departamentos da empresa.",
+          "texto": "O desenvolvimento deve ser rápido.",
           "correta": false
         }
       ],
-      "destino": {
-        "tema": 4,
-        "codigo": "tema-04-q07"
-      }
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-07-q50"
     }
   ]
 }

@@ -33,6 +33,6 @@ As imagens documentais ficam em docs/questoes/questoes-imagens. As públicas fic
 
 ## Cobertura atual
 
-Todos os 12 temas têm pelo menos quatro questões importáveis. Foram acrescentadas 15 questões autorais nos arquivos complemento-tema-XX.json, preservando as originais. Consulte [a origem e a distribuição do complemento](questoes/complemento-curricular.md). O total de 56 preserva as questões extras dos temas 3, 4 e 5; sete questões dos PDFs continuam apenas como material complementar.
+Todos os 12 temas têm pelo menos quatro questões importáveis. As 15 questões autorais foram incorporadas aos respectivos arquivos tema-XX.json. Consulte [a origem e a distribuição do complemento](questoes/complemento-curricular.md). O total de 56 inclui as questões extras dos temas 3, 4 e 5.
 
 A exigência de exatamente quatro questões por tema e imagem em todas ainda difere do catálogo atual: há questões extras e imagens opcionais. As imagens do PDF 4 permanecem documentais. A revisão pedagógica e a carga no ambiente de destino continuam necessárias.

@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             location.href = `estudos.html?tema=${card.dataset.id}`;
         });
     });
+    // Na tela de exames, os dados são carregados por exames.js.
+    if (document.getElementById('btn-continuar-certificacao')) return;
+
     try {
         const temas = await portal.pedir('/api/estudos');
         cards.forEach(card => {

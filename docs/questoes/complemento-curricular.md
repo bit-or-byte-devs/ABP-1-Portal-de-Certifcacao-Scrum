@@ -2,7 +2,7 @@
 
 Foram criadas 15 questões autorais para os temas atuais do portal: User Stories (1), Gestão do Product Backlog (3), Kanban (4), Planejamento Ágil (1), Métricas Ágeis (2) e Qualidade em Projetos Ágeis (4).
 
-Os arquivos complemento-tema-XX.json usam códigos q50 em diante para não colidir com os códigos originais dos PDFs nem com os destinos já reservados. Nenhuma questão antiga, alternativa, hash ou resposta foi substituída. As sete questões sem equivalência continuam preservadas como complementares.
+As questões autorais usam códigos q50 em diante e estão nos respectivos arquivos tema-XX.json, junto às questões dos PDFs. Os antigos arquivos complemento-tema-XX.json foram removidos após a consolidação. As sete questões sem equivalência foram removidas do catálogo JSON. Os códigos, conteúdos e hashes das 56 questões importáveis foram preservados.
 
 O catálogo passa a ter 56 questões importáveis e 224 alternativas, com pelo menos quatro questões por tema. Preservar as questões extras dos temas 3, 4 e 5 faz o total superar 48. São 12 questões com imagem e 44 sem imagem. As novas questões possuem quatro alternativas, uma correta e uma justificativa; são autorais e não transcrições dos PDFs.
 

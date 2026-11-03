@@ -1,122 +1,126 @@
 {
   "tema": 11,
-  "fonte": "docs/questoes/questoes-pdf/Tema 11 - Scrum em Escala.pdf",
+  "fonte": "Fontes individuais em cada questão; mapeamento em docs/questoes/mapeamento-temas.md",
   "questoes": [
     {
       "codigo": "tema-11-q01",
-      "enunciado": "Qual é o objetivo principal de frameworks de escala como Nexus e LeSS (Large-Scale Scrum)?",
-      "justificativa": "O propósito central de escalar o Scrum é coordenar e sincronizar múltiplos times que constroem juntos o mesmo produto.",
+      "enunciado": "O que um gráfico de Burndown (Burndown Chart) da Sprint ilustra?",
+      "justificativa": "O Burndown mostra uma tendência visual de quanto trabalho falta ser feito conforme os dias da Sprint passam.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "Substituir o Scrum tradicional por uma metodologia preditiva (em cascata).",
+          "texto": "A quantidade exata de trabalho concluído a cada dia.",
           "correta": false
         },
         {
           "letra": "B",
-          "texto": "Permitir que o Scrum seja aplicado de forma eficaz quando múltiplos times trabalham no desenvolvimento de um único produto.",
-          "correta": true
+          "texto": "O número de defeitos e bugs encontrados durante a Sprint.",
+          "correta": false
         },
         {
           "letra": "C",
-          "texto": "Eliminar definitivamente a necessidade do papel do Product Owner na organização.",
-          "correta": false
+          "texto": "O trabalho restante estimado ao longo do tempo até o final da Sprint.",
+          "correta": true
         },
         {
           "letra": "D",
-          "texto": "Aumentar a duração da Sprint para vários meses, acomodando mais trabalho e integração.",
+          "texto": "A velocidade média do time nas últimas três Sprints.",
           "correta": false
         }
       ],
-      "destino": null
+      "fonte": "docs/questoes/questoes-pdf/Tema 9 - Estimativas e Métricas Ágeis.pdf",
+      "questao_origem": "tema-09-q02"
     },
     {
       "codigo": "tema-11-q02",
-      "enunciado": "No framework Nexus, qual é o principal objetivo do \"Nexus Integration Team\"?",
-      "justificativa": "O Nexus Integration Team atua para resolver dependências complexas e garantir a integração contínua do trabalho de todos os times.",
+      "enunciado": "O que representa a \"Velocidade\" (Velocity) de um Scrum Team?",
+      "justificativa": "A Velocidade é uma métrica histórica usada para ajudar a equipe a prever quanto trabalho consegue realizar em Sprints futuras.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "Codificar todas as funcionalidades complexas do produto isoladamente.",
+          "texto": "A rapidez com que o Scrum Master consegue remover impedimentos organizacionais.",
           "correta": false
         },
         {
           "letra": "B",
-          "texto": "Gerenciar os recursos humanos, férias e salários de todos os desenvolvedores.",
+          "texto": "O número de horas trabalhadas por dia pelos Developers da equipe.",
           "correta": false
         },
         {
           "letra": "C",
-          "texto": "Garantir que um Incremento Integrado, pronto e utilizável seja produzido no final de cada Sprint.",
+          "texto": "A quantidade de trabalho (frequentemente em Story Points) concluída pelo time em Sprints anteriores.",
           "correta": true
         },
         {
           "letra": "D",
-          "texto": "Substituir o Scrum Master de todas as equipes de desenvolvimento individuais.",
+          "texto": "O tempo total necessário para entregar o projeto completo ao mercado.",
           "correta": false
         }
       ],
-      "destino": null
+      "fonte": "docs/questoes/questoes-pdf/Tema 9 - Estimativas e Métricas Ágeis.pdf",
+      "questao_origem": "tema-09-q04"
     },
     {
-      "codigo": "tema-11-q03",
-      "enunciado": "Quando escalamos o Scrum, o que acontece com o Product Backlog no modelo LeSS?",
-      "justificativa": "Uma regra de ouro do Scrum (e do LeSS) é: um produto = um único Product Backlog e um único Product Owner, garantindo foco unificado.",
+      "codigo": "tema-11-q50",
+      "enunciado": "O que um gráfico Burndown permite acompanhar?",
+      "justificativa": "O Burndown apresenta trabalho restante e sua evolução; ele apoia acompanhamento, mas não garante o resultado futuro.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "Cada time possui seu próprio Product Backlog isolado e independente.",
+          "texto": "O salário dos integrantes ao longo do projeto.",
           "correta": false
         },
         {
           "letra": "B",
-          "texto": "Existe um único Product Backlog e um único Product Owner para todos os times que trabalham no mesmo produto.",
-          "correta": true
+          "texto": "A quantidade de reuniões por semana.",
+          "correta": false
         },
         {
           "letra": "C",
-          "texto": "O Product Backlog é dividido em vários documentos gerenciados por múltiplos gerentes de projeto.",
-          "correta": false
+          "texto": "A evolução do trabalho restante ao longo do tempo.",
+          "correta": true
         },
         {
           "letra": "D",
-          "texto": "O Product Backlog é substituído por um cronograma tradicional e planilhas de longo prazo.",
+          "texto": "Uma garantia de que o prazo será cumprido.",
           "correta": false
         }
       ],
-      "destino": null
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-11-q50"
     },
     {
-      "codigo": "tema-11-q04",
-      "enunciado": "Qual é o maior desafio e fonte de risco que os frameworks de escalada ágil buscam mitigar?",
-      "justificativa": "Múltiplos times no mesmo código geram atritos e dependências; a escalada ágil foca em resolver a integração contínua para evitar falhas.",
+      "codigo": "tema-11-q51",
+      "enunciado": "Um time concluiu 12 itens em uma semana. Qual métrica representa essa contagem por período?",
+      "justificativa": "A vazão conta itens concluídos por unidade de tempo, enquanto tempo de ciclo e idade medem intervalos.",
       "imagem": null,
       "alternativas": [
         {
           "letra": "A",
-          "texto": "A falta de reuniões diárias em diferentes departamentos da empresa.",
-          "correta": false
-        },
-        {
-          "letra": "B",
-          "texto": "O gerenciamento de dependências cruzadas entre times e a integração técnica do código e do produto.",
+          "texto": "Vazão (Throughput).",
           "correta": true
         },
         {
+          "letra": "B",
+          "texto": "Idade de um item aberto.",
+          "correta": false
+        },
+        {
           "letra": "C",
-          "texto": "A ausência de documentação detalhada e assinada no início do desenvolvimento do projeto.",
+          "texto": "Limite de WIP.",
           "correta": false
         },
         {
           "letra": "D",
-          "texto": "A dificuldade de contratar desenvolvedores e especialistas para compor os times ágeis.",
+          "texto": "Tempo de ciclo de um único item.",
           "correta": false
         }
       ],
-      "destino": null
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-11-q51"
     }
   ]
 }
