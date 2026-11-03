@@ -25,7 +25,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (!botao.disabled) abrirTema(tema.ordem);
             });
         });
-        mensagem.textContent = progresso.certificacao_concluida ? 'Certificação concluída.' : '';
+        if (progresso.certificacao_concluida) {
+            const percentual = Number(progresso.percentual_acertos ?? 0).toFixed(2);
+            mensagem.textContent = `Certificação concluída. ${progresso.total_acertos}/12 acertos (${percentual}%) — ${progresso.aprovado ? 'Aprovado' : 'Reprovado'}.`;
+        } else {
+            mensagem.textContent = '';
+        }
         botaoContinuar.hidden = progresso.certificacao_concluida || progresso.proximo_tema === null;
         botaoContinuar.disabled = botaoContinuar.hidden;
         botaoContinuar.addEventListener('click', () => abrirTema(progresso.proximo_tema));

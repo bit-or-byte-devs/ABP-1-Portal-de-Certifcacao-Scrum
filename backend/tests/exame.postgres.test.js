@@ -268,10 +268,15 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     const terceira = await iniciar(cookie, 3);
     const progresso = await solicitar("/api/exames/progresso", cookie);
     assert.equal(progresso.status, 200);
+    assert.equal(progresso.corpo.total_acertos, 1);
+    assert.equal(Number(progresso.corpo.percentual_acertos), 8.33);
+    assert.equal(Number(progresso.corpo.nota_final), 8.33);
+    assert.equal(progresso.corpo.aprovado, false);
     assert.deepEqual(progresso.corpo, {
         temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1),
             estado: indice < 2 ? "concluido" : indice === 2 ? "em_andamento" : "pendente" })),
         proximo_tema: 4, certificacao_concluida: false,
+        total_acertos: 1, percentual_acertos: 8.33, nota_final: 8.33, aprovado: false,
     });
     assert.equal((await lerResposta(segunda.id)).situacao, "tempo_esgotado");
     assert.equal((await lerResposta(terceira.id)).situacao, "em_andamento");
@@ -288,6 +293,7 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     assert.deepEqual(semCertificacao.corpo, {
         temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1), estado: "pendente" })),
         proximo_tema: 1, certificacao_concluida: false,
+        total_acertos: 0, percentual_acertos: 0, nota_final: 0, aprovado: false,
     });
     const quantidade = await banco.query(`SELECT count(*)::integer AS total FROM tbcertificacao c
         JOIN tbcandidato candidato ON candidato.id=c.idcandidato WHERE candidato.cpf='11144477735'`);
@@ -305,6 +311,10 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     assert.equal(concluida.corpo.certificacao_concluida, true);
     assert.equal(concluida.corpo.proximo_tema, null);
     assert.ok(concluida.corpo.temas.every(tema => tema.estado === "concluido"));
+    assert.equal(concluida.corpo.total_acertos, 12);
+    assert.equal(Number(concluida.corpo.percentual_acertos), 100);
+    assert.equal(Number(concluida.corpo.nota_final), 100);
+    assert.equal(concluida.corpo.aprovado, true);
 });
 
 
