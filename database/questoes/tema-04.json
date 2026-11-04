@@ -1,12 +1,15 @@
 {
   "tema": 4,
-  "fonte": "Fontes individuais em cada questão; mapeamento em docs/questoes/mapeamento-temas.md",
+  "fonte": "docs/questoes/questoes-pdf/Tema 4 - Papéis do Scrum.pdf",
   "questoes": [
     {
       "codigo": "tema-04-q01",
       "enunciado": "Quem é responsável por ordenar os itens do Product Backlog?",
       "justificativa": "Ordenar o Product Backlog é responsabilidade do PO.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem1-tema4-questoes.png",
+        "alt": "Equipe Scrum colaborando na definição e organização do plano de trabalho da Sprint."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -28,15 +31,16 @@
           "texto": "Os stakeholders, por votação.",
           "correta": false
         }
-      ],
-      "fonte": "docs/questoes/questoes-pdf/Tema 4 - Papéis do Scrum.pdf",
-      "questao_origem": "tema-04-q01"
+      ]
     },
     {
       "codigo": "tema-04-q02",
       "enunciado": "Qual afirmação descreve corretamente o Scrum Master?",
       "justificativa": "O SM não é gerente; serve ao time e responde pela eficácia do Scrum.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem2-tema4-questoes.png",
+        "alt": "Integrantes da equipe Scrum trabalhando juntos, compartilhando ideias e colaborando para alcançar os objetivos."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -58,15 +62,16 @@
           "texto": "É o desenvolvedor mais experiente do time.",
           "correta": false
         }
-      ],
-      "fonte": "docs/questoes/questoes-pdf/Tema 4 - Papéis do Scrum.pdf",
-      "questao_origem": "tema-04-q02"
+      ]
     },
     {
       "codigo": "tema-04-q03",
       "enunciado": "Quem cria o Sprint Backlog, ou seja, o plano de como entregar a Meta da Sprint?",
       "justificativa": "Os Developers criam e ajustam o Sprint Backlog.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem3-tema4-questoes.png",
+        "alt": "Product Owner organizando e priorizando os itens do backlog conforme seu valor e importância.."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -88,15 +93,16 @@
           "texto": "O gerente de projetos.",
           "correta": false
         }
-      ],
-      "fonte": "docs/questoes/questoes-pdf/Tema 4 - Papéis do Scrum.pdf",
-      "questao_origem": "tema-04-q03"
+      ]
     },
     {
       "codigo": "tema-04-q04",
       "enunciado": "Sobre o Scrum Team, é correto afirmar:",
       "justificativa": "O Scrum Team não tem sub-times nem comitês de PO.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem4-tema4-questoes.png",
+        "alt": "Equipe Scrum colaborando na definição e organização do plano de trabalho da Sprint."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -118,9 +124,7 @@
           "texto": "É multifuncional, autogerenciável e geralmente tem até 10 pessoas.",
           "correta": true
         }
-      ],
-      "fonte": "docs/questoes/questoes-pdf/Tema 4 - Papéis do Scrum.pdf",
-      "questao_origem": "tema-04-q04"
+      ]
     }
   ]
 }
