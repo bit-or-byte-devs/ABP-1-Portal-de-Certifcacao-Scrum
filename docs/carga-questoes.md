@@ -1,19 +1,39 @@
 # Carga de questões
 
-Os 12 JSONs preservam 48 questões dos PDFs originais. A carga aplica o [mapeamento curricular](questoes/mapeamento-temas.md): 41 questões originais importáveis e 15 novas questões autorais, totalizando 56 questões importáveis e 224 alternativas e 7 questões complementares sem equivalência no catálogo. Os campos de destino preservam os documentos e indicam o tema e código efetivamente usados no banco. São 12 questões com imagens e 44 sem imagens; a aplicação aceita ambas.
+Os 12 JSONs de `database/questoes` preservam 48 questões e 192 alternativas dos PDFs originais: exatamente quatro questões por tema. Não há questões extras nos temas 3, 4 ou 5; a distribuição atual é 4/4/4 em cada tema. Há imagens em 12 questões, todas nos temas 1, 2 e 3; a documentação das imagens também permanece disponível em `docs/questoes/questoes-imagens`, com os arquivos publicados em `imagens/questoes`. A aplicação aceita questões com imagem opcional.
+
+O banco recusa qualquer questão que não tenha exatamente 4 alternativas (A–D) e exatamente 1 correta. Os comandos `--migrar` aplicam a `003_carga_questoes.sql` e depois a `005_alternativas_questao.sql`, ambas repetíveis. Em banco novo, o `database/ddl/schema.sql` já incorpora as duas estruturas. Em volume Docker antigo, o schema não é executado novamente; execute uma vez:
+
+```powershell
+docker compose exec app npm run db:questoes -- --migrar
+```
 
 ## Execução
 
-Pela raiz, configure o PostgreSQL em backend/.env e execute:
+Pela raiz, configure o PostgreSQL e execute no PowerShell:
 
-```sh
+```powershell
 npm run setup
 npm run db:questoes -- --validar
 npm run db:questoes -- --migrar
 npm run db:questoes
 ```
 
-Em banco novo, execute primeiro database/ddl/schema.sql e database/dml/seed.sql. O schema já incorpora a migração 003. Em banco existente, aplique as migrações anteriores necessárias e a 003, sem recriar as tabelas. O comando --migrar aplica somente a 003, que é repetível. --validar lê os arquivos e não acessa o banco; informa a quantidade importável.
+Em banco existente, o volume não é recriado e, por isso, deve executar o comando de migração mostrado acima. O volume antigo precisa da 005 mesmo que a 003 já tenha sido aplicada. No Docker:
+
+```powershell
+docker compose up -d --build
+docker compose exec app npm run db:questoes -- --migrar
+docker compose exec app npm run db:questoes
+```
+
+Para validar os testes PostgreSQL reconstruindo a imagem que contém os arquivos de teste:
+
+```powershell
+docker compose up -d --build
+docker compose exec -e TEST_EXAME_POSTGRES=true app npm test
+docker compose exec app npm test
+```
 
 A carga é transacional, serializada e repetível. Os IDs reais dos temas são consultados pela ordem. O hash impede substituir conteúdo já importado: alterações exigem novo código de versão. --vincular-imagens permite apenas adicionar imagem ao mesmo conteúdo anteriormente sem imagem, preservando IDs e respostas. Não substitui imagens nem textos. Questões cadastradas manualmente sem código de origem exigem revisão antes da primeira carga.
 
@@ -33,6 +53,4 @@ As imagens documentais ficam em docs/questoes/questoes-imagens. As públicas fic
 
 ## Cobertura atual
 
-Todos os 12 temas têm pelo menos quatro questões importáveis. As 15 questões autorais foram incorporadas aos respectivos arquivos tema-XX.json. Consulte [a origem e a distribuição do complemento](questoes/complemento-curricular.md). O total de 56 inclui as questões extras dos temas 3, 4 e 5.
-
-A exigência de exatamente quatro questões por tema e imagem em todas ainda difere do catálogo atual: há questões extras e imagens opcionais. As imagens do PDF 4 permanecem documentais. A revisão pedagógica e a carga no ambiente de destino continuam necessárias.
+Todos os 12 temas têm exatamente quatro questões importáveis: 48 questões e 192 alternativas ao todo. Não há questões extras nos temas 3, 4 e 5. As imagens estão presentes nas quatro questões dos temas 1, 2 e 3; as questões dos temas 4–12 não possuem imagem. A revisão pedagógica e a carga no ambiente de destino continuam necessárias.

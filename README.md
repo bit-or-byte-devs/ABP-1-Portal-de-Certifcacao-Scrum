@@ -26,7 +26,7 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 | **1** | Alta (2) | **US11 - Organizar questões por tema:** Como responsável pelo sistema, quero que as questões sejam organizadas por tema para manter a base de questões estruturada conforme a certificação. | 1 | 2 | RF06 / RP06 | Em progresso |
 | **2** | Alta (3) | **US12 - Estruturar questão da certificação:** Como responsável pelo sistema, quero que cada questão possua os elementos obrigatórios para que possa ser utilizada na certificação. | 2 | 2 | RF08 | Concluída |
 | **3** | Alta (5) | **US13 - Sortear questão para o candidato:** Como candidato, quero receber uma questão sorteada aleatoriamente para cada tema para realizar a certificação conforme as regras da avaliação. | 2 | 2 | RF06 | Em progresso |
-| **4** | Alta (3) | **US14 - Armazenar alternativas e resposta correta:** Como responsável pelo sistema, quero armazenar alternativas e a resposta correta para cada questão. | 2 | 2 | RF08 / RP04 | Em progresso |
+| **4** | Alta (3) | **US14 - Armazenar alternativas e resposta correta:** Como responsável pelo sistema, quero armazenar alternativas e a resposta correta para cada questão. | 2 | 2 | RF08 / RP04 | Concluída |
 | **5** | Alta (3) | **US15 - Visualizar temas da certificação:** Como candidato, quero visualizar os temas da certificação para acompanhar quais ainda preciso responder. | 2 | 2 | RF05 / RF21 | Em progresso |
 | **6** | Alta (5) | **US16 - Iniciar questão de um tema:** Como candidato, quero iniciar a questão de um tema pendente para avançar na certificação. | 2 | 2 | RF05 | Concluída |
 | **7** | Alta (5) | **US17 - Responder questão da certificação:** Como candidato, quero selecionar e enviar uma alternativa para registrar minha resposta à questão. | 2 | 2 | RF08 | Concluída |
@@ -128,7 +128,8 @@ ABP-1-Portal-de-Certifcacao-Scrum/
 │   │   ├── 001_recuperacao_senha.sql
 │   │   ├── 002_progresso_estudos.sql
 │   │   ├── 003_carga_questoes.sql
-│   │   └── 004_conteudo_temas.sql
+│   │   ├── 004_conteudo_temas.sql
+│   │   ├── 005_alternativas_questao.sql
 │   └── diagrams/                   # Reservado para diagramas do banco
 │
 ├── imagens/                        # Logos do BorB, modelos conceitual e lógico, imagens das questões (temas 1 a 3)
