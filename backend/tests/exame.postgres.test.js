@@ -308,17 +308,34 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
 });
 
 
-test('Integracao da carga: migracao repetivel, imagens opcionais e respostas preservadas', opcoes, async () => {
+test('Integração das cargas: migrações repetíveis, temas estruturados e respostas preservadas', opcoes, async () => {
     const { carregar, importar } = require('../scripts/importar-questoes');
     const migracao = fs.readFileSync(path.join(__dirname, '../../database/migrations/003_carga_questoes.sql'), 'utf8');
     await banco.query(migracao);
     await banco.query(migracao);
+    const temas = require('../scripts/importar-temas');
+    const migracaoTemas = fs.readFileSync(path.join(__dirname, '../../database/migrations/004_conteudo_temas.sql'), 'utf8');
     await banco.query(fs.readFileSync(path.join(__dirname, '../../database/dml/seed.sql'), 'utf8'));
+    await banco.query("ALTER TABLE tbprogresso_estudo ADD COLUMN subtitulos integer[] NOT NULL DEFAULT '{}'");
+    const legado = await banco.query(`INSERT INTO tbcandidato (cpf,nome_completo,email,senha_hash)
+        VALUES ('39053344705','Legado','legado@example.test',$1) RETURNING id`, [senhaHash]);
+    const temaLegado = await banco.query('SELECT id FROM tbtema WHERE ordem=1');
+    await banco.query(`INSERT INTO tbprogresso_estudo (idcandidato,idtema,subtitulos)
+        VALUES ($1,$2,ARRAY[0,2])`, [legado.rows[0].id, temaLegado.rows[0].id]);
+    await banco.query(migracaoTemas);
+    await banco.query(migracaoTemas);
+    assert.deepEqual((await banco.query('SELECT secoes FROM tbprogresso_estudo WHERE idcandidato=$1',
+        [legado.rows[0].id])).rows[0].secoes, ['tema-01-s01', 'tema-01-s03']);
     const db = await banco.connect();
     try {
         assert.deepEqual(await importar(db, carregar()), { inseridas: 56, existentes: 0 });
         assert.deepEqual(await importar(db, carregar()), { inseridas: 0, existentes: 56 });
+        assert.deepEqual(await temas.importar(db, temas.carregar()),
+            { inseridos: 82, atualizados: 0, existentes: 0, removidos: 0 });
+        assert.deepEqual(await temas.importar(db, temas.carregar()),
+            { inseridos: 0, atualizados: 0, existentes: 82, removidos: 0 });
         assert.equal(Number((await db.query('SELECT count(*) FROM tbalternativa')).rows[0].count), 224);
+        assert.equal(Number((await db.query("SELECT count(*) FROM tbmaterial WHERE tipo='secao'")).rows[0].count), 70);
     } finally { db.release(); }
     const cookie = await criarCandidato();
     const questao = await iniciar(cookie, 4);
