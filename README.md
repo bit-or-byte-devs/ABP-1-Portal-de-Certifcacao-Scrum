@@ -19,7 +19,7 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 
 ---
 
-## 📋 Backlog do Produto - SPRINT 2
+## 📋 Backlog do Produto - SPRINT 2 .
 
 | Rank | Prioridade | User Story | Story Points | Sprint | Requisito Relacionado | Status |
 | --- | --- | --- | --- | --- | --- | --- |
