@@ -15,6 +15,14 @@
       // textContent apresenta o nome como texto, sem executar HTML.
       document.getElementById("boas-vindas").textContent = "Boas-vindas, " + usuario.nome + "!";
       document.querySelectorAll("[data-em-breve]").forEach(function (botao) { botao.disabled = false; });
+      try {
+        const progressoResposta = await fetch("/api/estudos", { cache: "no-store" });
+        if (progressoResposta.ok) {
+          const temas = await progressoResposta.json();
+          const concluidos = temas.filter(function (tema) { return tema.percentual === 100; }).length;
+          document.getElementById("temas-concluidos").textContent = concluidos + "/12";
+        }
+      } catch { /* Mantém o valor inicial se o progresso estiver indisponível. */ }
     } catch { mostrarErro(); }
   }
   document.querySelectorAll("[data-em-breve]").forEach(function (botao) {
