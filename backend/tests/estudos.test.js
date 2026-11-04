@@ -13,13 +13,25 @@ test('progresso por conta, sessão, material e validação dos exames', async t 
         if (sql.includes('WHERE cpf')) return { rows: [{ id: p[0] === '52998224725' ? 1 : 2, senha_hash: hash, versao_sessao: 0 }] };
         if (sql.includes('FROM tbcandidato WHERE id')) return { rows: [{ id: p[0], nome: 'Pessoa', versao_sessao: 0 }] };
         if (falhar) throw new Error('segredo do banco');
-        if (sql.includes('LEFT JOIN tbprogresso')) return { rows: [{ id: 50, ordem: 5, nome: 'Eventos', vistos: progresso.get(p[0]) || [] }] };
+        if (sql.includes('LEFT JOIN tbprogresso')) return { rows: [{ id: 50, ordem: 5, nome: 'Eventos',
+            descricao: 'Eventos do Scrum', vistos: progresso.get(p[0]) || [],
+            codigos: ['tema-05-s01', 'tema-05-s02', 'tema-05-s03'] }] };
+        if (sql.includes('COALESCE(array_agg(m.codigo_origem')) return { rows: [{ id: 50,
+            codigos: ['tema-05-s01', 'tema-05-s02', 'tema-05-s03'] }] };
         if (sql.includes('INSERT INTO tbprogresso')) {
-            assert.equal(p[1], 5);
+            assert.equal(p[1], 50);
             progresso.set(p[0], [...new Set([...(progresso.get(p[0]) || []), ...p[2]])]);
-            return { rows: [{ subtitulos: progresso.get(p[0]) }] };
+            return { rows: [{ secoes: progresso.get(p[0]) }] };
         }
-        if (sql.includes('FROM tbtema WHERE ordem')) return { rows: [{ id: 50, ordem: 5, nome: 'Eventos' }] };
+        if (sql.includes('FROM tbtema WHERE ordem')) return { rows: [{ id: 50, ordem: 5, nome: 'Eventos', descricao: 'Eventos do Scrum' }] };
+        if (sql.includes('codigo_origem AS codigo')) return { rows: [
+            { codigo: 'tema-05-introducao', titulo: 'Introdução', tipo: 'introducao', ordem: 0, nivel: null,
+                conteudo: [{ tipo: 'paragrafo', conteudo: 'Sprint e eventos.' }] },
+            { codigo: 'tema-05-s01', titulo: 'Sprint', tipo: 'secao', ordem: 1, nivel: 3,
+                conteudo: [{ tipo: 'paragrafo', conteudo: 'Conteúdo.' }] },
+            { codigo: 'tema-05-s02', titulo: 'Daily Scrum', tipo: 'secao', ordem: 2, nivel: 3, conteudo: [] },
+            { codigo: 'tema-05-s03', titulo: 'Review', tipo: 'secao', ordem: 3, nivel: 3, conteudo: [] },
+        ] };
         throw new Error('SQL inesperado');
     };
     const server = app.listen(0, '127.0.0.1');
@@ -31,12 +43,15 @@ test('progresso por conta, sessão, material e validação dos exames', async t 
     assert.equal((await pedir('/api/exames/5/iniciar', null, 'POST', {})).status, 401);
     async function login(cpf) { return (await pedir('/api/auth/login', null, 'POST', { cpf, senha: 'Senha123' })).headers.get('set-cookie').split(';')[0]; }
     const um = await login('52998224725'); const dois = await login('11144477735');
-    let r = await pedir('/api/estudos/5', um); assert.equal(r.status, 200); assert.match((await r.json()).conteudo, /Sprint/);
-    await pedir('/api/estudos/5/progresso', um, 'PUT', { vistos: [0, 1] });
-    await pedir('/api/estudos/5/progresso', um, 'PUT', { vistos: [1, 2] });
-    assert.deepEqual((await (await pedir('/api/estudos', um)).json())[0].vistos, [0, 1, 2]);
+    let r = await pedir('/api/estudos/5', um); assert.equal(r.status, 200);
+    const material = await r.json(); assert.equal(material.secoes[0].titulo, 'Sprint');
+    await pedir('/api/estudos/5/progresso', um, 'PUT', { vistos: ['tema-05-s01', 'tema-05-s02'] });
+    await pedir('/api/estudos/5/progresso', um, 'PUT', { vistos: ['tema-05-s02', 'tema-05-s03'] });
+    assert.deepEqual((await (await pedir('/api/estudos', um)).json())[0].vistos,
+        ['tema-05-s01', 'tema-05-s02', 'tema-05-s03']);
     assert.deepEqual((await (await pedir('/api/estudos', dois)).json())[0].vistos, []);
-    for (const vistos of [[-1], [9999], ['0'], null]) assert.equal((await pedir('/api/estudos/5/progresso', um, 'PUT', { vistos })).status, 400);
+    for (const vistos of [['tema-05-s99'], ['tema-04-s01'], [0], null])
+        assert.equal((await pedir('/api/estudos/5/progresso', um, 'PUT', { vistos })).status, 400);
     assert.equal((await pedir('/api/estudos/13', um)).status, 400);
     assert.equal((await pedir('/api/exames/13/iniciar', um, 'POST', {})).status, 400);
     assert.equal((await pedir('/api/exames/respostas/70', um, 'POST', { alternativa: '90' })).status, 400);
