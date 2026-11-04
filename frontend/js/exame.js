@@ -61,6 +61,7 @@
         linkContinuar.hidden = false;
         botaoInterromper.textContent = 'Encerrar sessão';
         botaoInterromper.hidden = false;
+        botaoInterromper.onclick = () => { location.href = 'menu.html'; };
         botaoConfirmar.disabled = true;
         alternativas.disabled = true;
     }
