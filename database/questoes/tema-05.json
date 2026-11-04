@@ -6,7 +6,10 @@
       "codigo": "tema-05-q01",
       "enunciado": "Qual é o timebox da Daily Scrum?",
       "justificativa": "A Daily Scrum tem 15 minutos.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem1-tema5-questoes.png",
+        "alt": "Equipe realizando uma reunião diária para alinhar atividades e acompanhar o progresso."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -34,7 +37,10 @@
       "codigo": "tema-05-q02",
       "enunciado": "Quem pode cancelar uma Sprint?",
       "justificativa": "Só o PO pode cancelar, se a Meta da Sprint ficar obsoleta.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem2-tema5-questoes.png",
+        "alt": "Equipe Scrum discutindo uma possível interrupção do ciclo de trabalho."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -62,7 +68,10 @@
       "codigo": "tema-05-q03",
       "enunciado": "Em qual evento o time inspeciona seu próprio processo de trabalho e planeja melhorias?",
       "justificativa": "A Retrospective trata do processo; a Review trata do produto.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem3-tema5-questoes.png",
+        "alt": "Time analisando seu processo de trabalho e identificando oportunidades de melhoria."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -90,7 +99,10 @@
       "codigo": "tema-05-q04",
       "enunciado": "Qual é a ordem correta dos eventos dentro de uma Sprint?",
       "justificativa": "Planning abre, Dailies acontecem durante, Review e Retrospective encerram.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem4-tema5-questoes.png",
+        "alt": "Representação visual do fluxo de atividades e eventos durante uma Sprint."
+      },
       "alternativas": [
         {
           "letra": "A",
