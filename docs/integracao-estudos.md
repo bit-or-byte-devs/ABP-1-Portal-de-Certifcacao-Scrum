@@ -4,15 +4,15 @@ As páginas de temas, estudos, exames e perfil exigem a sessão do login existen
 
 ## Banco existente
 
-Aplique `database/migrations/002_progresso_estudos.sql` e depois `database/dml/seed.sql` com psql no banco configurado. Não execute o schema inicial sobre um banco existente. Volumes Docker existentes não executam novamente os scripts de inicialização.
+Aplique as migrações até `database/migrations/004_conteudo_temas.sql`, execute `database/dml/seed.sql` e importe os temas. Não execute o schema inicial sobre um banco existente. Volumes Docker existentes não executam novamente os scripts de inicialização.
 
-Em banco novo, `schema.sql` e `seed.sql` já incluem progresso e cadastro dos materiais.
+Em banco novo, `schema.sql` e `seed.sql` criam a estrutura e o catálogo dos temas. A carga dos materiais é feita pelo importador descrito em `docs/carga-temas.md`.
 
 ## Material e progresso
 
-`GET /api/estudos` lista os temas do banco com progresso do candidato autenticado. `GET /api/estudos/:ordem` serve o conteúdo HTML versionado em `backend/src/services/conteudoTemas.js`. `tbmaterial` registra o endereço dessa API. O conteúdo não é HTML fornecido pelo usuário.
+`GET /api/estudos` lista os temas do banco com progresso do candidato autenticado. `GET /api/estudos/:ordem` monta o conteúdo estruturado cadastrado em `tbmaterial`. A fonte versionada são os 12 arquivos em `database/temas`.
 
-`PUT /api/estudos/:ordem/progresso` recebe `{ "vistos": [0, 1] }`. Os índices de subtítulos são validados e unidos ao progresso anterior no PostgreSQL. O progresso é por conta; dados antigos de localStorage não são importados, pois não identificam o candidato. O HTML fornecido pela feature é mantido no backend como fonte única.
+`PUT /api/estudos/:ordem/progresso` recebe códigos estáveis, por exemplo `{ "vistos": ["tema-01-s01"] }`. Os códigos são conferidos contra as seções importadas e unidos ao progresso anterior no PostgreSQL. A migração 004 converte os índices antigos para esses códigos.
 
 ## Exames
 
