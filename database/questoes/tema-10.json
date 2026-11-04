@@ -6,7 +6,7 @@
       "codigo": "tema-10-q01",
       "enunciado": "Segundo o Scrum Guide, quem é responsável por dimensionar (estimar) os itens do Product Backlog?",
       "justificativa": "As pessoas que farão o trabalho (Developers) são as responsáveis por estimá-lo.",
-      "imagem": null,
+      "imagem": "questoes-imagens/imagem1-tema10-questoes.jpg",
       "alternativas": [
         {
           "letra": "A",
@@ -36,7 +36,7 @@
       "codigo": "tema-10-q02",
       "enunciado": "Qual é o principal objetivo da técnica de Planning Poker?",
       "justificativa": "O Planning Poker utiliza o debate e estimativas relativas para criar um entendimento unificado e consenso sobre o esforço de um item.",
-      "imagem": null,
+      "imagem": "questoes-imagens/imagem2-tema10-questoes.jpg",
       "alternativas": [
         {
           "letra": "A",
@@ -66,7 +66,7 @@
       "codigo": "tema-10-q03",
       "enunciado": "Ao utilizar Story Points para estimar itens do Product Backlog, a equipe está medindo principalmente o quê?",
       "justificativa": "Story points são estimativas relativas (e não baseadas em tempo) que englobam volume de trabalho, risco, complexidade e incerteza.",
-      "imagem": null,
+      "imagem": "questoes-imagens/imagem3-tema10-questoes.jpg",
       "alternativas": [
         {
           "letra": "A",
@@ -96,7 +96,7 @@
       "codigo": "tema-10-q50",
       "enunciado": "Ao planejar uma Sprint, os Developers percebem que o trabalho selecionado excede sua capacidade. O que devem fazer?",
       "justificativa": "O planejamento considera capacidade, experiências anteriores e a Definition of Done; a seleção é discutida para sustentar um objetivo viável.",
-      "imagem": null,
+      "imagem": "questoes-imagens/imagem4-tema10-questoes.jpg",
       "alternativas": [
         {
           "letra": "A",
