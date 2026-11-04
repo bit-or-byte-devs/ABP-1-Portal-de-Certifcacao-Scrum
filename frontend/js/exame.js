@@ -58,7 +58,7 @@
         botaoConfirmar.hidden = true;
         linkContinuar.textContent = dados.proximo_tema === null ? 'Voltar à lista' : 'Próximo tema';
         linkContinuar.href = dados.proximo_tema === null ? 'exames.html' : `exame.html?tema=${dados.proximo_tema}`;
-        linkContinuar.hidden = Number(tema) === 12;
+        linkContinuar.hidden = false;
         botaoInterromper.textContent = 'Encerrar sessão';
         botaoInterromper.hidden = false;
         botaoConfirmar.disabled = true;
