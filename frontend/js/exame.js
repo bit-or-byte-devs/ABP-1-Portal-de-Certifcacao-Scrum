@@ -58,10 +58,9 @@
         botaoConfirmar.hidden = true;
         linkContinuar.textContent = 'Próximo tema';
         linkContinuar.href = dados.proximo_tema === null ? 'exames.html' : `exame.html?tema=${dados.proximo_tema}`;
-        linkContinuar.hidden = false;
+        linkContinuar.hidden = Number(tema) === 12;
         botaoInterromper.textContent = 'Encerrar sessão';
         botaoInterromper.hidden = false;
-        botaoInterromper.onclick = () => { location.href = 'menu.html'; };
         botaoConfirmar.disabled = true;
         alternativas.disabled = true;
     }
