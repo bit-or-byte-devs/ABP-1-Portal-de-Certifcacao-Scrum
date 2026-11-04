@@ -23,6 +23,8 @@ A tabela abaixo foi revisada pelos enunciados dos documentos. Para PDFs mistos, 
 | 12 – Antipadrões e Transformação Ágil | 1 | 5 – Eventos do Scrum |
 | 12 – Antipadrões e Transformação Ágil | 2–4 | Sem equivalência direta; removidas dos JSONs |
 
+A tabela registra a origem histórica das questões e não garante que todos esses PDFs ainda estejam nesta pasta. Quando o PDF original não está disponível, o campo `fonte` dos JSONs aponta para o PDF temático atual com o mesmo conteúdo; `questao_origem` preserva o código histórico da questão.
+
 Os PDFs atuais não oferecem uma seção dedicada a Kanban (tema 9 do banco) nem cobertura completa de Qualidade em Projetos Ágeis (tema 12). Não substituir esses temas por Scrum em Escala ou Transformação Ágil apenas para completar a numeração.
 
 Ao converter novos documentos, mantenha no JSON a origem em `fonte` e acrescente `questao_origem` em cada questão. O `codigo` identifica a questão no tema de destino: reserve novos números para não colidir com códigos existentes. Metadados de origem não alteram o hash do conteúdo já cadastrado.
@@ -31,4 +33,4 @@ Ao converter novos documentos, mantenha no JSON a origem em `fonte` e acrescente
 
 Cada arquivo tema-XX.json contém somente questões do tema indicado em database/dml/seed.sql. O campo codigo já corresponde ao cadastro efetivo, sem necessidade de destino. Cada questão mantém fonte e questao_origem para rastrear o documento original. As questões autorais foram incorporadas aos mesmos arquivos.
 
-A reorganização preserva os 56 códigos, conteúdos e hashes já importados; não exige alteração no banco nem nas respostas existentes. Os documentos PDF de origem permanecem como referência.
+A reorganização preserva os 56 códigos, conteúdos e hashes já importados; não exige alteração no banco nem nas respostas existentes. Os códigos históricos de origem permanecem registrados em `questao_origem`, mesmo quando o PDF original não está mais disponível.
