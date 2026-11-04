@@ -122,8 +122,12 @@ ABP-1-Portal-de-Certifcacao-Scrum/
 ├── database/                       # Banco de dados PostgreSQL
 │   ├── ddl/schema.sql              # Criação das tabelas
 │   ├── dml/seed.sql                # Carga inicial: os 12 temas de estudo
+│   ├── temas/                      # Conteúdo estruturado dos 12 temas
 │   ├── migrations/                 # Atualizações para bancos já existentes
-│   │   └── 001_recuperacao_senha.sql
+│   │   ├── 001_recuperacao_senha.sql
+│   │   ├── 002_progresso_estudos.sql
+│   │   ├── 003_carga_questoes.sql
+│   │   └── 004_conteudo_temas.sql
 │   └── diagrams/                   # Reservado para diagramas do banco
 │
 ├── imagens/                        # Logos do BorB, modelos conceitual e lógico, imagens das questões (temas 1 a 3)
@@ -243,3 +247,7 @@ Para imagens complementares como modelo conceitual, lógico, e Diagramas de Clas
 ## Carga de questões
 
 Consulte [as instruções de importação](docs/carga-questoes.md), [o mapeamento curricular](docs/questoes/mapeamento-temas.md) e [o relatório de integração](docs/relatorio-integracao-2026-11-02.md).
+
+## Carga dos temas
+
+Consulte [as instruções de importação dos conteúdos de estudo](docs/carga-temas.md). Os arquivos JSON em `database/temas` substituem o antigo conteúdo HTML centralizado no backend.
