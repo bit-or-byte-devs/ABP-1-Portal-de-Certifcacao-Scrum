@@ -6,6 +6,6 @@ As questões autorais usam códigos q50 em diante e estão nos respectivos arqui
 
 O catálogo passa a ter 56 questões importáveis e 224 alternativas, com pelo menos quatro questões por tema. Preservar as questões extras dos temas 3, 4 e 5 faz o total superar 48. São 12 questões com imagem e 44 sem imagem. As novas questões possuem quatro alternativas, uma correta e uma justificativa; são autorais e não transcrições dos PDFs.
 
-Referências conceituais: [Scrum Guide 2020, Ken Schwaber e Jeff Sutherland](https://scrumguides.org/scrum-guide.html), [Kanban Guide](https://kanbanguides.org/the-kanban-guide) e os conteúdos existentes em backend/src/services/conteudoTemas.js. A redação das questões é própria. As referências orientam conceitos; testes automatizados verificam estrutura e integração, não substituem o aceite pedagógico.
+Referências conceituais: [Scrum Guide 2020, Ken Schwaber e Jeff Sutherland](https://scrumguides.org/scrum-guide.html), [Kanban Guide](https://kanbanguides.org/the-kanban-guide) e os conteúdos de `database/temas`. A redação das questões é própria. As referências orientam conceitos; testes automatizados verificam estrutura e integração, não substituem o aceite pedagógico.
 
 Execute a migração 003 se necessária e a carga conforme docs/carga-questoes.md. A atualização dos arquivos não altera automaticamente o banco da aplicação.
