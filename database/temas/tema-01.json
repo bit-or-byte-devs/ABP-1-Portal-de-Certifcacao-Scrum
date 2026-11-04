@@ -1,0 +1,179 @@
+{
+  "versao_schema": 1,
+  "tema": 1,
+  "codigo": "tema-01",
+  "nome": "Fundamentos da Agilidade",
+  "descricao": "Crise do software, desenvolvimento tradicional e ágil e benefícios da agilidade.",
+  "fonte": "Conteúdo curricular do Portal BorB; referências individuais nos blocos de referência.",
+  "introducao": [
+    {
+      "tipo": "paragrafo",
+      "conteudo": "A agilidade ganhou espaço como resposta às dificuldades de planejar projetos de software como se fossem obras previsíveis. Em vez de esperar até o fim para entregar tudo, o time trabalha em ciclos curtos, recebe feedback e entrega partes funcionais do produto."
+    },
+    {
+      "tipo": "imagem",
+      "caminho": "/imagens/temas/tema-1-cascata-e-agil.jpg",
+      "texto_alternativo": "Comparação entre o desenvolvimento em cascata e o desenvolvimento ágil",
+      "legenda": "O modelo em cascata segue etapas sequenciais; a abordagem ágil trabalha em ciclos com entregas frequentes."
+    }
+  ],
+  "secoes": [
+    {
+      "codigo": "tema-01-s01",
+      "titulo": "O contexto e a crise do software",
+      "nivel": 3,
+      "ordem": 1,
+      "blocos": []
+    },
+    {
+      "codigo": "tema-01-s02",
+      "titulo": "Modelo tradicional de engenharia",
+      "nivel": 4,
+      "ordem": 2,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Entre as décadas de 1960 e 1980, o desenvolvimento tentou espelhar processos industriais e de engenharia civil. O modelo em cascata era linear: levantamento completo de requisitos, arquitetura, codificação, testes e implantação final. Cada etapa precisava ser concluída, aprovada e documentada antes da seguinte."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-01-s03",
+      "titulo": "A ilusão da previsibilidade",
+      "nivel": 4,
+      "ordem": 3,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O modelo partia da ideia de que todas as necessidades, problemas e tecnologias poderiam ser antecipados e congelados no início. Projetos de software, porém, não se comportam como construir uma ponte: requisitos e contexto mudam enquanto o produto é desenvolvido."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-01-s04",
+      "titulo": "A crise do software",
+      "nivel": 4,
+      "ordem": 4,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O termo ganhou repercussão na Conferência da OTAN de 1968 para descrever falhas sistêmicas da indústria de TI: atrasos de anos, orçamentos estourados, sistemas com bugs críticos e projetos cancelados antes do lançamento."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-01-s05",
+      "titulo": "Incerteza e mudança",
+      "nivel": 4,
+      "ordem": 5,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Mercado, economia, tecnologia e comportamento dos usuários mudam rapidamente. Em ciclos longos, o sistema podia ficar pronto conforme o plano antigo, mas obsoleto e distante da necessidade real do negócio."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-01-s06",
+      "titulo": "Desenvolvimento tradicional versus desenvolvimento ágil",
+      "nivel": 3,
+      "ordem": 6,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Tradicional:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " sequencial e inflexível; mudanças tardias geram custo e retrabalho. Prioriza aderência ao plano, contratos de escopo fechado e documentação prévia. O cliente participa principalmente no início e no aceite final."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Ágil:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " iterativo e incremental; o trabalho é dividido em ciclos curtos, com incrementos testados, integrados e funcionais. Prioriza adaptação, colaboração e entrega contínua de valor. O cliente participa regularmente para validar resultados e redirecionar os próximos passos."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "codigo": "tema-01-s07",
+      "titulo": "Benefícios da agilidade",
+      "nivel": 3,
+      "ordem": 7,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Mitigação precoce de riscos:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " testes e integrações frequentes revelam problemas antes que se acumulem."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Retorno sobre o investimento antecipado:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " funcionalidades úteis podem chegar aos usuários antes do encerramento do projeto."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Alinhamento com o usuário e menos desperdício:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " validações frequentes ajudam a construir o que o mercado realmente precisa."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Flexibilidade e competitividade:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " o time pode incorporar mudanças de tecnologia, legislação e estratégia com menos burocracia."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Sustentabilidade e engajamento:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " autonomia, transparência e colaboração favorecem motivação e reduzem o risco de burnout e rotatividade."
+              }
+            ]
+          ]
+        },
+        {
+          "tipo": "referencia",
+          "conteudo": "Fontes do material: relatório da Conferência da OTAN de 1968; artigo de Winston W. Royce (1970); Manifesto Ágil; Scrum Guide; Engenharia de Software Moderna."
+        }
+      ]
+    }
+  ]
+}

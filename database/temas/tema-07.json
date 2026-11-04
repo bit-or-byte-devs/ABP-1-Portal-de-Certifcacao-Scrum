@@ -1,0 +1,324 @@
+{
+  "versao_schema": 1,
+  "tema": 7,
+  "codigo": "tema-07",
+  "nome": "User Stories",
+  "descricao": "Estrutura de histórias de usuário e critérios de aceitação.",
+  "fonte": "Conteúdo curricular do Portal BorB; referências individuais nos blocos de referência.",
+  "introducao": [
+    {
+      "tipo": "paragrafo",
+      "conteudo": "User Story é uma forma breve de representar uma necessidade pela perspectiva de quem usa ou se beneficia do produto. Histórias ajudam a organizar o trabalho em incrementos funcionais que contribuem para o valor do produto. Não são um elemento obrigatório do Scrum: são uma técnica possível para escrever itens do Product Backlog."
+    },
+    {
+      "tipo": "imagem",
+      "caminho": "/imagens/temas/tema-7-anatomia-user-story.png",
+      "texto_alternativo": "Anatomia de uma história de usuário: perfil, capacidade e benefício",
+      "legenda": "Uma história explicita quem precisa de algo, o que deseja fazer e por que isso tem valor."
+    }
+  ],
+  "secoes": [
+    {
+      "codigo": "tema-07-s01",
+      "titulo": "Modelo “Como... Quero... Para...”",
+      "nivel": 3,
+      "ordem": 1,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Como [perfil]:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " quem tem a necessidade ou recebe o benefício?"
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Quero [capacidade]:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " o que essa pessoa precisa conseguir fazer?"
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Para [benefício]:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " que resultado ou valor espera alcançar?"
+              }
+            ]
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Esse formato, também chamado perfil–capacidade–benefício, deve ser pequeno o suficiente para servir de lembrete da conversa, não como especificação completa. Uma história útil permanece aberta à conversa, pode ser testada e expressa valor observável, em vez de apenas uma tarefa técnica."
+        },
+        {
+          "tipo": "imagem",
+          "caminho": "/imagens/temas/tema-7-exemplo-user-story.png",
+          "texto_alternativo": "Exemplo de história de usuário organizada por perfil, capacidade e benefício",
+          "legenda": "Exemplo de história de usuário para o portal."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Mesmo uma história clara precisa ser discutida. O time esclarece os dados necessários, regras de validação, estados de erro, limites de segurança e comportamento após o sucesso."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-07-s02",
+      "titulo": "Os três C: cartão, conversa e confirmação",
+      "nivel": 3,
+      "ordem": 2,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Cartão:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " registra uma descrição breve da necessidade e do valor esperado."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Conversa:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " reúne Product Owner, Developers e pessoas relevantes para descobrir detalhes, exemplos e alternativas."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Confirmação:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " define exemplos ou critérios observáveis que demonstram se a história foi implementada corretamente."
+              }
+            ]
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Essa leitura evita transformar a história em um contrato fechado. Os detalhes evoluem conforme a história se aproxima da implementação e o time aprende mais sobre o problema."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-07-s03",
+      "titulo": "Critérios de aceitação",
+      "nivel": 3,
+      "ordem": 3,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": [
+            {
+              "tipo": "texto",
+              "texto": "Critérios de aceitação estabelecem condições observáveis para aceitar uma história. Delimitam o comportamento esperado e ajudam produto, desenvolvimento e testes a compartilhar o mesmo entendimento. Uma forma comum de escrevê-los é "
+            },
+            {
+              "tipo": "destaque",
+              "texto": "Dado–Quando–Então"
+            },
+            {
+              "tipo": "texto",
+              "texto": "."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "codigo": "tema-07-s04",
+      "titulo": "História de cadastro — US-01",
+      "nivel": 4,
+      "ordem": 4,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Como pessoa interessada em estudar Scrum, quero criar uma conta com nome completo, CPF, e-mail e senha para obter credenciais de acesso ao portal. Os critérios de aceitação para esse cenário devem ser validados pelo time durante o refinamento e a implementação."
+        },
+        {
+          "tipo": "imagem",
+          "caminho": "/imagens/temas/tema-7-criterios-de-aceitacao.png",
+          "texto_alternativo": "Tabela de critérios de aceitação para o cadastro de candidato",
+          "legenda": "Exemplos de critérios observáveis para validar o fluxo de cadastro."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Atender aos critérios de aceitação não dispensa a Definition of Done. Uma história pode apresentar o comportamento correto e ainda não estar pronta se falhar nas medidas comuns de qualidade, segurança ou integração."
+        },
+        {
+          "tipo": "imagem",
+          "caminho": "/imagens/temas/tema-7-aceitacao-e-definition-of-done.png",
+          "texto_alternativo": "Comparação entre critérios de aceitação e Definition of Done",
+          "legenda": "Critérios de aceitação tratam de uma história; a DoD define a qualidade comum do Incremento."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-07-s05",
+      "titulo": "Como dividir histórias grandes",
+      "nivel": 3,
+      "ordem": 5,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Uma história deve ser pequena o suficiente para ser concluída dentro de uma iteração. Dividir consiste em criar histórias menores preservando valor mensurável em cada parte. Uma divisão vertical atravessa as camadas necessárias para entregar uma capacidade utilizável; dividir horizontalmente em “criar tela”, “criar API” e “criar tabela” gera componentes isolados sem valor observável para o candidato."
+        },
+        {
+          "tipo": "imagem",
+          "caminho": "/imagens/temas/tema-7-divisao-de-historias.png",
+          "texto_alternativo": "Divisão de uma história grande em resultados menores e úteis",
+          "legenda": "Divisões verticais preservam um resultado utilizável em cada etapa."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Técnicas úteis incluem dividir por etapas do fluxo (cadastrar-se, entrar, consultar material, responder questão, consultar resultado), cenários (começar pelo caminho de sucesso), regras de negócio, operações com valor próprio e variações de dados ou perfil."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-07-s06",
+      "titulo": "Verificação da qualidade: INVEST",
+      "nivel": 3,
+      "ordem": 6,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A heurística INVEST ajuda o time a avaliar histórias. É um conjunto de perguntas para orientar o refinamento, não uma certificação automática."
+        },
+        {
+          "tipo": "imagem",
+          "caminho": "/imagens/temas/tema-7-invest.png",
+          "texto_alternativo": "Perguntas para avaliar histórias de usuário com a heurística INVEST",
+          "legenda": "INVEST: independente, negociável, valiosa, estimável, pequena e testável."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-07-s07",
+      "titulo": "Exemplo completo para o portal",
+      "nivel": 4,
+      "ordem": 7,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Título:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " Criar conta de candidato."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "História:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " Como pessoa interessada em estudar Scrum, quero criar uma conta com meus dados para obter credenciais de acesso ao portal."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Valor:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " habilitar o primeiro acesso à plataforma."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Fora do escopo:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " autenticação, recuperação de senha e emissão de certificado."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Dependências:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " persistência de candidatos e disponibilização dos termos de uso."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Qualidade:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " atender à Definition of Done do produto."
+              }
+            ]
+          ]
+        },
+        {
+          "tipo": "referencia",
+          "conteudo": [
+            {
+              "tipo": "texto",
+              "texto": "Referências: "
+            },
+            {
+              "tipo": "link",
+              "texto": "Agile Alliance — User Stories",
+              "url": "https://agilealliance.org/glossary/user-stories/",
+              "nova_aba": true
+            },
+            {
+              "tipo": "texto",
+              "texto": " e "
+            },
+            {
+              "tipo": "link",
+              "texto": "The Scrum Guide",
+              "url": "https://scrumguides.org/scrum-guide.html",
+              "nova_aba": true
+            },
+            {
+              "tipo": "texto",
+              "texto": "."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "versao_schema": 1,
+  "tema": 4,
+  "codigo": "tema-04",
+  "nome": "Papéis do Scrum",
+  "descricao": "Responsabilidades do Product Owner, Scrum Master e Developers.",
+  "fonte": "Conteúdo curricular do Portal BorB; referências individuais nos blocos de referência.",
+  "introducao": [
+    {
+      "tipo": "paragrafo",
+      "conteudo": "O Scrum Team é a unidade fundamental do Scrum. É um time pequeno, autogerenciado e multidisciplinar, formado por Product Owner, Scrum Master e Developers. Não há hierarquia interna entre essas responsabilidades: todos compartilham a responsabilidade pelo Incremento e pela Sprint Goal."
+    },
+    {
+      "tipo": "imagem",
+      "caminho": "/imagens/temas/tema-4-scrum-team.jpg",
+      "texto_alternativo": "Product Owner, Scrum Master e Developers no Scrum Team",
+      "legenda": "As três responsabilidades que compõem o Scrum Team."
+    }
+  ],
+  "secoes": [
+    {
+      "codigo": "tema-04-s01",
+      "titulo": "Product Owner",
+      "nivel": 3,
+      "ordem": 1,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Responsável por maximizar o valor do produto. Cria e comunica a visão e o Product Goal, gere o Product Backlog e mantém seus itens claros, ordenados e alinhados às necessidades dos usuários e do negócio. Comunica-se com stakeholders para alinhar expectativas e decisões. Entre as habilidades úteis estão tomada de decisão, comunicação, conhecimento do domínio e priorização baseada em valor."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-04-s02",
+      "titulo": "Scrum Master",
+      "nivel": 3,
+      "ordem": 2,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Responsável por promover o entendimento e a aplicação correta do Scrum. Atua como facilitador, mentor e agente de mudança, apoiando o Product Owner e os Developers na colaboração e na melhoria de práticas. Ajuda a remover impedimentos e trabalha com a organização para eliminar barreiras à agilidade. Facilitação, coaching, liderança servidora e conhecimento do Scrum são habilidades importantes."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-04-s03",
+      "titulo": "Developers",
+      "nivel": 3,
+      "ordem": 3,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Responsáveis por criar um Incremento que atenda à Definition of Done. Planejam o trabalho da Sprint, participam do refinamento do backlog, cuidam da qualidade técnica e adaptam o plano conforme aprendem. Colaboração, engenharia de software, estimativa, planejamento e autogestão são competências úteis."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-04-s04",
+      "titulo": "Como as responsabilidades colaboram",
+      "nivel": 3,
+      "ordem": 4,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Product Owner e Developers:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " refinam o backlog, esclarecem critérios de aceitação e planejam a Sprint."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Scrum Master e Product Owner:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " melhoram a transparência do backlog, a comunicação com stakeholders e a priorização."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Scrum Master e Developers:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " colaboram na remoção de impedimentos, facilitação dos eventos e melhoria contínua."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Todo o Scrum Team:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " participa da Sprint Planning, Daily Scrum, Sprint Review e Sprint Retrospective conforme as responsabilidades de cada evento."
+              }
+            ]
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Uma pessoa que acumula outra responsabilidade pode participar da Daily Scrum como Developer quando contribui com itens do Sprint Backlog. O acúmulo exige tempo e atenção e pode ter custos para o trabalho."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-04-s05",
+      "titulo": "Resumo das responsabilidades",
+      "nivel": 3,
+      "ordem": 5,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Product Owner:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " maximizar o valor e gerir o Product Backlog — “O que é mais valioso fazer agora?”"
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Developers:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " criar o Incremento, planejar a Sprint e garantir qualidade — “Como transformar isso em algo pronto e utilizável?”"
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Scrum Master:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " estabelecer o Scrum e a eficácia do time — “Estamos usando bem o Scrum e melhorando a cada ciclo?”"
+              }
+            ]
+          ]
+        },
+        {
+          "tipo": "referencia",
+          "conteudo": [
+            {
+              "tipo": "texto",
+              "texto": "Referência: "
+            },
+            {
+              "tipo": "link",
+              "texto": "Scrum Guide",
+              "url": "https://scrumguides.org/scrum-guide.html",
+              "nova_aba": true
+            },
+            {
+              "tipo": "texto",
+              "texto": "."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

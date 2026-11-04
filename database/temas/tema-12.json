@@ -1,0 +1,184 @@
+{
+  "versao_schema": 1,
+  "tema": 12,
+  "codigo": "tema-12",
+  "nome": "Qualidade em Projetos Ágeis",
+  "descricao": "Definition of Done, testes automatizados, integração contínua, refatoração e dívida técnica.",
+  "fonte": "Conteúdo curricular do Portal BorB; referências individuais nos blocos de referência.",
+  "introducao": [
+    {
+      "tipo": "paragrafo",
+      "conteudo": "Na agilidade, qualidade não é uma fase isolada no fim do projeto: é uma prática contínua presente em todas as etapas. Em vez de apenas procurar bugs depois que o código está pronto, a equipe busca prevenir problemas e construir software confiável, limpo, testável e útil para o usuário."
+    },
+    {
+      "tipo": "imagem",
+      "caminho": "/imagens/temas/tema-12-qualidade-e-dod.jpg",
+      "texto_alternativo": "Qualidade e engenharia ágil: Definition of Done, testes, revisão, integração contínua e refatoração",
+      "legenda": "Qualidade contínua combina critérios de conclusão e práticas de engenharia."
+    }
+  ],
+  "secoes": [
+    {
+      "codigo": "tema-12-s01",
+      "titulo": "Definition of Done",
+      "nivel": 3,
+      "ordem": 1,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A Definition of Done (DoD) é um acordo explícito e compartilhado sobre o que significa um item estar realmente concluído. Definition of Ready (DoR) ajuda a indicar quando um item está pronto para começar; DoD define quando pode ser considerado pronto para entrega."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Critérios comuns incluem código revisado por outra pessoa, testes automatizados aprovados, integração ao repositório principal, documentação técnica atualizada e validação em ambiente de homologação. Se os critérios da DoD não foram atendidos, a funcionalidade não está pronta para ser entregue."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-12-s02",
+      "titulo": "Testes automatizados",
+      "nivel": 3,
+      "ordem": 2,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "São scripts que verificam partes do sistema automaticamente. Em ciclos curtos, repetir todos os testes manualmente após cada alteração é impraticável; automação ajuda a detectar regressões rapidamente."
+        },
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Testes unitários:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " verificam a menor parte isolada do código, como uma função ou método."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Testes de integração:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " verificam se módulos e componentes funcionam bem juntos."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Testes de aceitação ou sistema:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " validam se o comportamento atende às regras de negócio esperadas pelo usuário."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "codigo": "tema-12-s03",
+      "titulo": "Integração contínua",
+      "nivel": 3,
+      "ordem": 3,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Na Integração Contínua (CI), as pessoas integram código ao repositório compartilhado várias vezes ao dia ou pelo menos diariamente. Cada envio pode acionar processos automatizados que compilam o sistema e executam testes. Isso revela rapidamente se uma mudança quebrou algo e evita o “inferno da integração”, quando código desenvolvido isoladamente por muito tempo só é combinado no final."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-12-s04",
+      "titulo": "Refatoração",
+      "nivel": 3,
+      "ordem": 4,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Refatorar é reestruturar e limpar o código sem alterar o comportamento externo nem as funcionalidades oferecidas ao usuário. O objetivo é melhorar legibilidade, reduzir complexidade e duplicação e facilitar manutenção. É como organizar uma gaveta de ferramentas sem mudar para que cada ferramenta serve. Refatoração frequente ajuda o sistema a continuar flexível e saudável."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-12-s05",
+      "titulo": "Dívida técnica",
+      "nivel": 3,
+      "ordem": 5,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Dívida técnica é o custo implícito de escolher uma solução rápida ou de baixa qualidade em vez de uma solução mais limpa e sustentável. Um atalho pode ajudar a aproveitar uma oportunidade no curto prazo, mas, sem tempo para corrigir e refatorar, o código fica frágil e difícil de modificar. A equipe passa a gastar mais esforço mantendo problemas antigos e menos criando valor novo."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Em resumo:"
+            },
+            {
+              "tipo": "texto",
+              "texto": " critérios claros de pronto, testes, integração contínua e refatoração incorporam qualidade ao trabalho diário e ajudam a evitar o acúmulo de defeitos e dívida técnica."
+            }
+          ]
+        },
+        {
+          "tipo": "referencia",
+          "conteudo": [
+            {
+              "tipo": "texto",
+              "texto": "Fontes do material: "
+            },
+            {
+              "tipo": "link",
+              "texto": "Martin Fowler — Continuous Integration",
+              "url": "https://martinfowler.com/articles/continuousIntegration.html",
+              "nova_aba": true
+            },
+            {
+              "tipo": "texto",
+              "texto": ", "
+            },
+            {
+              "tipo": "link",
+              "texto": "Technical Debt",
+              "url": "https://martinfowler.com/bliki/TechnicalDebt.html",
+              "nova_aba": true
+            },
+            {
+              "tipo": "texto",
+              "texto": ", "
+            },
+            {
+              "tipo": "link",
+              "texto": "Refactoring Guru",
+              "url": "https://refactoring.guru/refactoring",
+              "nova_aba": true
+            },
+            {
+              "tipo": "texto",
+              "texto": " e "
+            },
+            {
+              "tipo": "link",
+              "texto": "Scrum Guide",
+              "url": "https://scrumguides.org/scrum-guide.html",
+              "nova_aba": true
+            },
+            {
+              "tipo": "texto",
+              "texto": "."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

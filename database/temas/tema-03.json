@@ -1,0 +1,212 @@
+{
+  "versao_schema": 1,
+  "tema": 3,
+  "codigo": "tema-03",
+  "nome": "Introdução ao Scrum",
+  "descricao": "Framework Scrum, empirismo, transparência, inspeção e adaptação.",
+  "fonte": "Conteúdo curricular do Portal BorB; referências individuais nos blocos de referência.",
+  "introducao": [
+    {
+      "tipo": "paragrafo",
+      "conteudo": "O Scrum é um framework leve que ajuda pessoas, times e organizações a gerar valor por meio de soluções adaptativas para problemas complexos. Define elementos essenciais e as regras entre eles, sem prescrever todas as técnicas de programação, teste ou design."
+    },
+    {
+      "tipo": "imagem",
+      "caminho": "/imagens/temas/tema-3-ciclo-scrum.jpg",
+      "texto_alternativo": "Ciclo Scrum: Product Backlog, Sprint, eventos, Incremento e feedback",
+      "legenda": "O ciclo Scrum conecta planejamento, execução, inspeção e adaptação."
+    }
+  ],
+  "secoes": [
+    {
+      "codigo": "tema-03-s01",
+      "titulo": "Como o Scrum funciona",
+      "nivel": 3,
+      "ordem": 1,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": true,
+          "itens": [
+            "O Product Owner organiza o trabalho necessário no Product Backlog.",
+            "O Scrum Team transforma parte desse trabalho em um Incremento de valor durante uma Sprint.",
+            "O time e as partes interessadas inspecionam resultados e fazem ajustes.",
+            "O ciclo se repete, usando o que foi aprendido para orientar o trabalho seguinte."
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Scrum é propositalmente incompleto: define somente as partes necessárias para aplicar sua teoria. As pessoas completam o restante com práticas adequadas ao contexto. Papéis, eventos, artefatos e regras essenciais são interligados; retirar partes fundamentais significa deixar de usar o Scrum em sua totalidade."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-03-s02",
+      "titulo": "Origem e evolução",
+      "nivel": 3,
+      "ordem": 2,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O nome vem do rugby, em que os jogadores se agrupam e avançam como uma unidade. Em 1986, Hirotaka Takeuchi e Ikujiro Nonaka usaram essa metáfora ao descrever equipes multidisciplinares que desenvolviam produtos juntas, em vez de passar o trabalho em etapas isoladas. Jeff Sutherland e Ken Schwaber aplicaram ideias semelhantes ao desenvolvimento de software e apresentaram o Scrum em 1995. Em 2010 publicaram a primeira versão do Scrum Guide; o guia foi atualizado ao longo dos anos, e a versão de 2020 é a referência usada neste material."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-03-s03",
+      "titulo": "Por que usar Scrum?",
+      "nivel": 3,
+      "ordem": 3,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Reduz riscos:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " ciclos de até um mês limitam o tempo investido antes de inspecionar o resultado."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Entrega valor mais cedo:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " o trabalho é ordenado para que funcionalidades importantes possam ser disponibilizadas antes."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Aumenta a transparência:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " progresso, trabalho pronto e problemas ficam visíveis."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Permite adaptação:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " eventos regulares oferecem momentos para incorporar mudanças."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Valoriza as pessoas:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " o time tem autonomia para decidir como fazer o trabalho."
+              }
+            ]
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Scrum não é uma fórmula mágica: não resolve sozinho falta de habilidade técnica, liderança autoritária ou metas impossíveis. Torna problemas visíveis para que possam ser tratados."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-03-s04",
+      "titulo": "Empirismo, pensamento Lean e os pilares",
+      "nivel": 3,
+      "ordem": 4,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O empirismo parte da experiência e do que é observado para produzir conhecimento e tomar decisões. O pensamento Lean procura reduzir desperdício e concentrar esforço no que gera valor. Na prática, o empirismo se apoia em três pilares:"
+        },
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Transparência:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " trabalho e processo visíveis para quem realiza e para quem recebe."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Inspeção:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " verificar regularmente artefatos e progresso para perceber desvios."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Adaptação:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " ajustar o plano ou o trabalho quando a inspeção revela diferenças importantes."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "codigo": "tema-03-s05",
+      "titulo": "Os cinco valores do Scrum",
+      "nivel": 3,
+      "ordem": 5,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Comprometimento, foco, abertura, respeito e coragem"
+            },
+            {
+              "tipo": "texto",
+              "texto": " criam um ambiente de confiança. O time se compromete com objetivos e apoio mútuo, mantém foco na Sprint, compartilha desafios com abertura, respeita as pessoas e tem coragem para fazer a coisa certa e enfrentar problemas difíceis."
+            }
+          ]
+        },
+        {
+          "tipo": "referencia",
+          "conteudo": [
+            {
+              "tipo": "texto",
+              "texto": "Referência: "
+            },
+            {
+              "tipo": "link",
+              "texto": "Scrum Guide 2020",
+              "url": "https://scrumguides.org/scrum-guide.html",
+              "nova_aba": true
+            },
+            {
+              "tipo": "texto",
+              "texto": "."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

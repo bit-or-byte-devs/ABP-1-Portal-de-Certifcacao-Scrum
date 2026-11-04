@@ -1,0 +1,329 @@
+{
+  "versao_schema": 1,
+  "tema": 5,
+  "codigo": "tema-05",
+  "nome": "Eventos do Scrum",
+  "descricao": "Sprint, Sprint Planning, Daily Scrum, Sprint Review e Sprint Retrospective.",
+  "fonte": "Conteúdo curricular do Portal BorB; referências individuais nos blocos de referência.",
+  "introducao": [
+    {
+      "tipo": "paragrafo",
+      "conteudo": [
+        {
+          "tipo": "destaque",
+          "texto": "Tempo estimado:"
+        },
+        {
+          "tipo": "texto",
+          "texto": " 10 a 15 minutos."
+        }
+      ]
+    },
+    {
+      "tipo": "paragrafo",
+      "conteudo": [
+        {
+          "tipo": "destaque",
+          "texto": "Objetivo:"
+        },
+        {
+          "tipo": "texto",
+          "texto": " entender a sequência dos eventos do Scrum, o propósito de cada um e como ajudam o time a inspecionar o trabalho e ajustar o caminho durante a Sprint."
+        }
+      ]
+    },
+    {
+      "tipo": "imagem",
+      "caminho": "/imagens/temas/tema-5-ciclo-da-sprint.jpg",
+      "texto_alternativo": "Ciclo da Sprint com Sprint Planning, Daily Scrum, Sprint Review e Sprint Retrospective",
+      "legenda": "O ciclo da Sprint e os eventos que apoiam o trabalho do Scrum Team."
+    }
+  ],
+  "secoes": [
+    {
+      "codigo": "tema-05-s01",
+      "titulo": "O que são os eventos do Scrum?",
+      "nivel": 3,
+      "ordem": 1,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Os eventos organizam momentos de trabalho em equipe. Eles ajudam a tornar o andamento do produto visível, verificar o que está acontecendo e adaptar o plano quando necessário. A Sprint é um evento de duração fixa, de um mês ou menos, que contém os demais. Quando uma Sprint termina, a próxima começa imediatamente."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A sequência geral é: Sprint Planning, trabalho da Sprint com Daily Scrums, Sprint Review e Sprint Retrospective. As Daily Scrums acontecem ao longo da Sprint; a Review e a Retrospective ocorrem perto do encerramento, nessa ordem."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-05-s02",
+      "titulo": "Sprint Planning — Planejamento da Sprint",
+      "nivel": 3,
+      "ordem": 2,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A Sprint Planning abre a Sprint. Nela, o Scrum Team conversa sobre o valor esperado, o trabalho que pode ser realizado e como começar. O planejamento responde a três perguntas:"
+        },
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Por que esta Sprint é valiosa?"
+              },
+              {
+                "tipo": "texto",
+                "texto": " A conversa ajuda a definir a Sprint Goal, ou Meta da Sprint."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "O que pode ser feito?"
+              },
+              {
+                "tipo": "texto",
+                "texto": " O time seleciona itens do Product Backlog que considera possível realizar."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Como o trabalho será feito?"
+              },
+              {
+                "tipo": "texto",
+                "texto": " Os Developers planejam como transformar os itens selecionados em um Incremento."
+              }
+            ]
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A Sprint Goal dá direção ao trabalho e comunica o resultado pretendido, mesmo que os detalhes do plano sejam ajustados. No Portal de Certificação, uma meta poderia ser permitir que o candidato crie uma conta e acesse o portal com CPF e senha. Para uma Sprint de um mês, a Planning tem duração máxima de oito horas; Sprints menores tendem a exigir menos tempo."
+        },
+        {
+          "tipo": "imagem",
+          "caminho": "/imagens/temas/tema-5-perguntas-do-planejamento.png",
+          "texto_alternativo": "As três perguntas da Sprint Planning: por quê, o quê e como",
+          "legenda": "As três perguntas que orientam o planejamento da Sprint."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-05-s03",
+      "titulo": "Daily Scrum",
+      "nivel": 3,
+      "ordem": 3,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Evento diário de até 15 minutos em que os Developers inspecionam o progresso em direção à Sprint Goal e adaptam o plano de trabalho, se necessário. O foco é o objetivo compartilhado: o time conversa sobre avanços, reorganização do trabalho e colaboração necessária."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Scrum Guide não exige uma lista fixa de perguntas. Os Developers escolhem a estrutura que funcione melhor, desde que a conversa ajude a acompanhar o progresso e gere um plano útil para o próximo período. Por exemplo, se a validação de CPF estiver levando mais tempo que o esperado, o plano pode ser ajustado para que outra pessoa ajude nessa parte."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A Daily Scrum não é uma apresentação de tarefas para um chefe nem uma prestação de contas individual. Seu propósito é ajudar os Developers a coordenar o trabalho e decidir os próximos passos."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-05-s04",
+      "titulo": "Sprint Review — Revisão da Sprint",
+      "nivel": 3,
+      "ordem": 4,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Perto do fim da Sprint, o Scrum Team e os principais stakeholders analisam o resultado do trabalho e conversam sobre os próximos passos do produto. A conversa pode considerar o que foi realizado, mudanças no contexto ou nas necessidades, aprendizados e oportunidades futuras."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A Review é uma sessão de trabalho colaborativa, não apenas uma apresentação de telas. O que o grupo aprende pode levar à adaptação dos próximos passos e do Product Backlog. No Portal, por exemplo, os stakeholders podem notar que o candidato precisa receber uma mensagem clara quando o CPF já está cadastrado."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A Sprint Review não serve para avaliar individualmente quem trabalhou mais ou menos. Para uma Sprint de um mês, dura no máximo quatro horas; em Sprints menores, costuma durar menos."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-05-s05",
+      "titulo": "Sprint Retrospective — Retrospectiva da Sprint",
+      "nivel": 3,
+      "ordem": 5,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Depois da Review, o Scrum Team reflete sobre como o trabalho aconteceu e planeja maneiras de melhorar a qualidade e a eficácia do time. Pode conversar sobre comunicação e colaboração, processos e ferramentas, qualidade, dificuldades e práticas que ajudaram ou atrapalharam."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A conversa deve resultar em melhorias úteis e possíveis de experimentar. Se algumas dúvidas sobre critérios das tarefas aparecem perto do fim, por exemplo, o time pode combinar de discutir os itens mais cedo no refinamento. A Retrospective não busca culpados: busca compreender o que aconteceu e decidir como trabalhar melhor. Para uma Sprint de um mês, dura no máximo três horas e conclui a Sprint."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-05-s06",
+      "titulo": "Limites de tempo e como os eventos se complementam",
+      "nivel": 3,
+      "ordem": 6,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            "Sprint Planning: até 8 horas.",
+            "Daily Scrum: até 15 minutos por dia.",
+            "Sprint Review: até 4 horas.",
+            "Sprint Retrospective: até 3 horas.",
+            "A Sprint tem duração fixa de até um mês. Em ciclos menores, os eventos costumam ser mais curtos."
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A Planning define objetivo, trabalho possível e como começar; a Daily inspeciona o progresso e adapta o plano; a Review inspeciona o produto e discute os próximos passos; a Retrospective melhora a forma de trabalhar. Juntos, os eventos formam um ciclo de planejamento, acompanhamento, avaliação e melhoria, mantendo a Sprint Goal como referência."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-05-s07",
+      "titulo": "Exemplo completo: uma Sprint do Portal",
+      "nivel": 4,
+      "ordem": 7,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": true,
+          "itens": [
+            "Na Planning, o time define a meta de permitir que o candidato crie uma conta e entre no portal, seleciona itens de cadastro e login e planeja o início do trabalho.",
+            "Nas Daily Scrums, os Developers verificam o progresso e adaptam o plano diante de descobertas ou dificuldades.",
+            "Na Review, o time demonstra o resultado e conversa com stakeholders sobre o que foi entregue e o que pode melhorar.",
+            "Na Retrospective, o Scrum Team escolhe uma melhoria para experimentar na Sprint seguinte."
+          ]
+        }
+      ]
+    },
+    {
+      "codigo": "tema-05-s08",
+      "titulo": "Confira seu entendimento",
+      "nivel": 4,
+      "ordem": 8,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": true,
+          "itens": [
+            [
+              {
+                "tipo": "texto",
+                "texto": "Qual evento inicia a Sprint? "
+              },
+              {
+                "tipo": "destaque",
+                "texto": "Sprint Planning."
+              }
+            ],
+            [
+              {
+                "tipo": "texto",
+                "texto": "Qual evento inspeciona diariamente o progresso rumo à Sprint Goal? "
+              },
+              {
+                "tipo": "destaque",
+                "texto": "Daily Scrum."
+              }
+            ],
+            [
+              {
+                "tipo": "texto",
+                "texto": "Em qual evento o time colabora com stakeholders para inspecionar resultados e próximos passos? "
+              },
+              {
+                "tipo": "destaque",
+                "texto": "Sprint Review."
+              }
+            ],
+            [
+              {
+                "tipo": "texto",
+                "texto": "Qual evento ajuda a planejar melhorias na forma de trabalhar? "
+              },
+              {
+                "tipo": "destaque",
+                "texto": "Sprint Retrospective."
+              }
+            ],
+            [
+              {
+                "tipo": "texto",
+                "texto": "A Daily é para provar ao Scrum Master que cada pessoa trabalhou? "
+              },
+              {
+                "tipo": "destaque",
+                "texto": "Não."
+              },
+              {
+                "tipo": "texto",
+                "texto": " Serve para inspecionar o progresso e adaptar o plano."
+              }
+            ],
+            [
+              {
+                "tipo": "texto",
+                "texto": "A Review deve ser apenas uma demonstração de telas? "
+              },
+              {
+                "tipo": "destaque",
+                "texto": "Não."
+              },
+              {
+                "tipo": "texto",
+                "texto": " É uma sessão colaborativa para inspecionar o produto e discutir o que fazer a seguir."
+              }
+            ]
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Resumo:"
+            },
+            {
+              "tipo": "texto",
+              "texto": " a Sprint contém os eventos; a Planning inicia o ciclo, a Daily acompanha o progresso, a Review inspeciona o resultado com stakeholders e a Retrospective planeja melhorias para o time."
+            }
+          ]
+        },
+        {
+          "tipo": "referencia",
+          "conteudo": [
+            {
+              "tipo": "texto",
+              "texto": "Referência: "
+            },
+            {
+              "tipo": "link",
+              "texto": "Guia do Scrum (Scrum Guides)",
+              "url": "https://scrumguides.org/scrum-guide.html",
+              "nova_aba": true
+            },
+            {
+              "tipo": "texto",
+              "texto": "."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
