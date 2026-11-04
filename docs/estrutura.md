@@ -7,6 +7,7 @@
 - `database/ddl`: instalação da estrutura em banco vazio.
 - `database/migrations`: alterações incrementais em bancos existentes; não renumerar migrações vindas de outras branches.
 - `database/dml`: cadastro inicial de temas.
+- `database/temas`: conteúdo estruturado e versionado dos 12 temas de estudo.
 - `database/questoes`: dados revisados para importação; contém gabaritos e não é publicado como pasta estática.
 - `docs/questoes/questoes-pdf`: documentos originais.
 - `docs/questoes/questoes-imagens`: referências documentais, não publicadas pelo servidor.
@@ -20,6 +21,9 @@ Não mova imagens existentes sem atualizar os caminhos nas páginas, no banco e 
 npm run setup
 npm start
 npm test
+npm run db:temas -- --validar
+npm run db:temas -- --migrar
+npm run db:temas
 npm run db:questoes -- --validar
 npm run db:questoes -- --migrar
 npm run db:questoes
