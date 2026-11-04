@@ -42,12 +42,19 @@ CREATE TABLE tbmaterial (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     idtema INTEGER NOT NULL REFERENCES tbtema(id),
     titulo VARCHAR(200) NOT NULL,
-    conteudo_ou_url TEXT NOT NULL,
+    conteudo_ou_url TEXT,
     tipo VARCHAR(30) NOT NULL,
     ordem INTEGER NOT NULL,
+    codigo_origem VARCHAR(100),
+    hash_origem VARCHAR(64),
+    nivel SMALLINT,
+    conteudo JSONB,
 
-    CONSTRAINT ck_material_ordem CHECK (ordem > 0)
+    CONSTRAINT ck_material_ordem CHECK (ordem >= 0),
+    CONSTRAINT ck_material_nivel CHECK (nivel IS NULL OR nivel IN (3, 4))
 );
+
+CREATE UNIQUE INDEX uq_material_codigo_origem ON tbmaterial(codigo_origem);
 
 -- Um material pode utilizar várias imagens.
 CREATE TABLE tbmaterial_por_imagem (
@@ -260,7 +267,7 @@ CREATE INDEX idx_resposta_alternativa ON tbresposta(idalternativa);
 CREATE TABLE IF NOT EXISTS tbprogresso_estudo (
  idcandidato INTEGER NOT NULL REFERENCES tbcandidato(id) ON DELETE CASCADE,
  idtema INTEGER NOT NULL REFERENCES tbtema(id) ON DELETE CASCADE,
- subtitulos INTEGER[] NOT NULL DEFAULT '{}',
+ secoes VARCHAR(100)[] NOT NULL DEFAULT '{}',
  atualizado_em TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
  PRIMARY KEY (idcandidato, idtema)
 );
