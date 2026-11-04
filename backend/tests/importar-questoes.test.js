@@ -4,11 +4,11 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const { carregar, importar } = require('../scripts/importar-questoes');
-test('Catálogo: 56 questões e gabaritos originais preservados', () => {
+test('Catálogo: 48 questões e gabaritos originais preservados', () => {
     const q = carregar();
-    assert.equal(q.length, 56);
-    assert.ok(Array.from({length:12}, (_,i) => q.filter(x => x.tema === i+1).length).every(total => total >= 4));
-    assert.equal(new Set(q.map(x => x.codigo)).size, 56);
+    assert.equal(q.length, 48);
+    assert.deepEqual(Array.from({length:12}, (_,i) => q.filter(x => x.tema === i+1).length), Array(12).fill(4));
+    assert.equal(new Set(q.map(x => x.codigo)).size, 48);
     assert.deepEqual([1,2,3,4].map(tema => q.filter(x => x.tema === tema && Number(x.codigo.slice(-2)) <= 4).map(x => x.alternativas.find(a => a.correta).letra).join('')), ['BCAD','CABD','BACD','CBAD']);
     assert.equal(q.filter(x => x.imagem !== null).length, 12);
     assert.ok(q.every(x => x.justificativa.length > 0));
@@ -42,12 +42,12 @@ test('carga usa IDs reais, não duplica e reverte uma falha integralmente', asyn
         x.imagem = null;
         return { ...x, hash: crypto.createHash('sha256').update(JSON.stringify(x)).digest('hex') };
     });
-    assert.deepEqual(await importar(db,q), { inseridas: 56, existentes: 0 });
-    assert.equal(alternativas,224);
-    assert.deepEqual(await importar(db,q), { inseridas: 0, existentes: 56 });
-    assert.equal(alternativas,224);
+    assert.deepEqual(await importar(db,q), { inseridas: 48, existentes: 0 });
+    assert.equal(alternativas,192);
+    assert.deepEqual(await importar(db,q), { inseridas: 0, existentes: 48 });
+    assert.equal(alternativas,192);
     await assert.rejects(importar(db,[{ ...q[0], codigo: 'nova', hash: 'nova' },{ ...q[1], hash: 'alterado' }]), /Conteúdo alterado/);
-    assert.equal(registros.size,56); assert.equal(alternativas,224);
+    assert.equal(registros.size,48); assert.equal(alternativas,192);
 });
 
 test('vinculação adiciona somente a imagem e rejeita substituição ou alteração de texto', async () => {
@@ -80,7 +80,7 @@ test('vinculação adiciona somente a imagem e rejeita substituição ou altera�
 
 test('mapeamento mantem o catalogo e reserva documentos complementares', () => {
     const q = carregar();
-    assert.deepEqual(Array.from({length:12}, (_,i) => q.filter(x => x.tema === i+1).length), [4,4,8,7,5,4,4,4,4,4,4,4]);
-    assert.match(q.find(x => x.codigo === 'tema-04-q05').enunciado, /Product Owner/);
+    assert.deepEqual(Array.from({length:12}, (_,i) => q.filter(x => x.tema === i+1).length), Array(12).fill(4));
+    assert.match(q.find(x => x.codigo === 'tema-03-q03').enunciado, /Product Owner/);
     assert.match(q.find(x => x.codigo === 'tema-10-q02').enunciado, /Planning Poker/);
 });
