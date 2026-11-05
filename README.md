@@ -129,7 +129,8 @@ ABP-1-Portal-de-Certifcacao-Scrum/
 │   │   ├── 002_progresso_estudos.sql
 │   │   ├── 003_carga_questoes.sql
 │   │   ├── 004_conteudo_temas.sql
-│   │   └── 005_alternativas_questao.sql
+│   │   ├── 005_alternativas_questao.sql
+│   │   └── 006_sinal_questao.sql
 │   └── diagrams/                   # Reservado para diagramas do banco
 │
 ├── imagens/                        # Logos do BorB, modelos conceitual e lógico, imagens das questões (temas 1 a 3)
