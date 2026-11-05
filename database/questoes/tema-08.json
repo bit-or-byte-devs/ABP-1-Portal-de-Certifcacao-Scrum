@@ -38,7 +38,7 @@
     {
       "codigo": "tema-08-q50",
       "enunciado": "Quem responde pela ordenação dos itens do Product Backlog?",
-      "justificativa": "Product Owner organizando as tarefas conforme suas prioridades.",
+      "justificativa": "O Product Owner é responsável pela gestão eficaz do Product Backlog, incluindo sua ordenação.",
       "imagem": {
         "caminho": "/imagens/questoes/imagem2-tema8-questoes.png",
         "alt": "Equipe realizando uma reunião diária para alinhar atividades e acompanhar o progresso."
