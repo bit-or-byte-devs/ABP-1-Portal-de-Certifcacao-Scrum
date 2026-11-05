@@ -82,8 +82,6 @@ router.post("/:ordem/iniciar", exigirJson, async (req, res) => {
         if (!tema.rows.length) { await db.query("ROLLBACK"); return res.status(404).json({ mensagem: "Tema não cadastrado." }); }
         await db.query(`INSERT INTO tbresposta (idcertificacao, idtema, idquestao)
             SELECT $1, q.idtema, q.id FROM tbquestao q WHERE q.idtema=$2
-            AND (SELECT count(*) FROM tbalternativa a WHERE a.idquestao=q.id)=4
-            AND EXISTS (SELECT 1 FROM tbalternativa a WHERE a.idquestao=q.id AND a.correta)
             ORDER BY random() LIMIT 1 ON CONFLICT (idcertificacao, idtema) DO NOTHING`, [id, tema.rows[0].id]);
         const { rows } = await db.query("SELECT id FROM tbresposta WHERE idcertificacao=$1 AND idtema=$2", [id, tema.rows[0].id]);
         if (!rows.length) { await db.query("ROLLBACK"); return res.status(404).json({ mensagem: "Ainda não há questões cadastradas para este tema." }); }

@@ -74,12 +74,33 @@ async function criarCandidato(cpf = "52998224725") {
 async function criarTema(ordem) {
     const tema = await banco.query("INSERT INTO tbtema (nome, descricao, ordem) VALUES ($1, 'Descrição', $2) RETURNING id", ["Tema " + ordem, ordem]);
     const imagem = await banco.query("INSERT INTO tbimagem (arquivo_ou_url, texto_alternativo) VALUES ('/imagens/teste.png', 'Imagem de teste') RETURNING id");
-    const questao = await banco.query(`INSERT INTO tbquestao (idtema, idimagem, enunciado, justificativa)
-        VALUES ($1, $2, 'Enunciado de teste', 'Justificativa de teste') RETURNING id`, [tema.rows[0].id, imagem.rows[0].id]);
-    const alternativas = await banco.query(`INSERT INTO tbalternativa (idquestao, letra, texto, correta)
-        SELECT $1, letra, 'Alternativa ' || letra, letra='A' FROM unnest(ARRAY['A','B','C','D']) letra
-        RETURNING id, letra, texto`, [questao.rows[0].id]);
+    const alternativas = await banco.query(`WITH q AS (
+            INSERT INTO tbquestao (idtema, idimagem, enunciado, justificativa)
+            VALUES ($1, $2, 'Enunciado de teste', 'Justificativa de teste') RETURNING id
+        ), inseridas AS (
+            INSERT INTO tbalternativa (idquestao, letra, texto, correta)
+            SELECT q.id, letra, 'Alternativa ' || letra, letra = 'A'
+            FROM q CROSS JOIN unnest(ARRAY['A','B','C','D']::text[]) AS letra
+            RETURNING id, letra, texto
+        )
+        SELECT id, letra, texto FROM inseridas`, [tema.rows[0].id, imagem.rows[0].id]);
     return alternativas.rows;
+}
+
+async function criarQuestaoValida(db, codigo, incluirAlternativas = true) {
+    let tema = await db.query('SELECT id FROM tbtema WHERE ordem=1');
+    if (tema.rowCount === 0) {
+        tema = await db.query("INSERT INTO tbtema (nome, descricao, ordem) VALUES ($1, $2, 1) RETURNING id",
+            ['Tema US14', 'Tema usado pelos testes da US14']);
+    }
+    const questao = await db.query(`INSERT INTO tbquestao (idtema, codigo_origem, enunciado, justificativa)
+        VALUES ($1, $2, $3, 'Justificativa') RETURNING id`, [tema.rows[0].id, codigo, codigo]);
+    if (incluirAlternativas) {
+        await db.query(`INSERT INTO tbalternativa (idquestao, letra, texto, correta)
+            SELECT $1, letra, 'Alternativa ' || letra, letra = 'A'
+            FROM unnest(ARRAY['A','B','C','D']::text[]) letra`, [questao.rows[0].id]);
+    }
+    return questao.rows[0].id;
 }
 
 async function iniciar(cookie, ordem = 1) {
@@ -313,6 +334,9 @@ test('Integração das cargas: migrações repetíveis, temas estruturados e res
     const migracao = fs.readFileSync(path.join(__dirname, '../../database/migrations/003_carga_questoes.sql'), 'utf8');
     await banco.query(migracao);
     await banco.query(migracao);
+    const migracaoAlternativas = fs.readFileSync(path.join(__dirname, '../../database/migrations/005_alternativas_questao.sql'), 'utf8');
+    await banco.query(migracaoAlternativas);
+    await banco.query(migracaoAlternativas);
     const temas = require('../scripts/importar-temas');
     const migracaoTemas = fs.readFileSync(path.join(__dirname, '../../database/migrations/004_conteudo_temas.sql'), 'utf8');
     await banco.query(fs.readFileSync(path.join(__dirname, '../../database/dml/seed.sql'), 'utf8'));
@@ -328,18 +352,18 @@ test('Integração das cargas: migrações repetíveis, temas estruturados e res
         [legado.rows[0].id])).rows[0].secoes, ['tema-01-s01', 'tema-01-s03']);
     const db = await banco.connect();
     try {
-        assert.deepEqual(await importar(db, carregar()), { inseridas: 56, existentes: 0 });
-        assert.deepEqual(await importar(db, carregar()), { inseridas: 0, existentes: 56 });
+        assert.deepEqual(await importar(db, carregar()), { inseridas: 48, existentes: 0 });
+        assert.deepEqual(await importar(db, carregar()), { inseridas: 0, existentes: 48 });
         assert.deepEqual(await temas.importar(db, temas.carregar()),
             { inseridos: 82, atualizados: 0, existentes: 0, removidos: 0 });
         assert.deepEqual(await temas.importar(db, temas.carregar()),
             { inseridos: 0, atualizados: 0, existentes: 82, removidos: 0 });
-        assert.equal(Number((await db.query('SELECT count(*) FROM tbalternativa')).rows[0].count), 224);
+        assert.equal(Number((await db.query('SELECT count(*) FROM tbalternativa')).rows[0].count), 192);
         assert.equal(Number((await db.query("SELECT count(*) FROM tbmaterial WHERE tipo='secao'")).rows[0].count), 70);
     } finally { db.release(); }
     const cookie = await criarCandidato();
     const questao = await iniciar(cookie, 4);
-    assert.equal(questao.imagem, null);
+    assert.match(questao.imagem, /^\/imagens\/questoes\//);
     assert.equal(questao.alternativas.length, 4);
     const consulta = await solicitar('/api/exames/respostas/' + questao.id, cookie);
     assert.equal(consulta.status, 200);
@@ -347,7 +371,7 @@ test('Integração das cargas: migrações repetíveis, temas estruturados e res
     assert.equal(resultado.status, 200);
     assert.equal(resultado.corpo.situacao, 'respondida');
     const cliente = await banco.connect();
-    try { assert.deepEqual(await importar(cliente, carregar()), { inseridas: 0, existentes: 56 }); }
+    try { assert.deepEqual(await importar(cliente, carregar()), { inseridas: 0, existentes: 48 }); }
     finally { cliente.release(); }
     assert.equal((await lerResposta(questao.id)).situacao, 'respondida');
     for (const ordem of [7,8,9,10,11,12]) {
@@ -360,4 +384,136 @@ test('Integração das cargas: migrações repetíveis, temas estruturados e res
     const arquivo = await fetch(base + comImagem.imagem);
     assert.equal(arquivo.status, 200);
     assert.match(arquivo.headers.get('content-type'), /^image\//);
+});
+
+test('005_alternativas_questao recusa base inconsistente', opcoes, async () => {
+    const migracao = fs.readFileSync(path.join(__dirname, '../../database/migrations/005_alternativas_questao.sql'), 'utf8');
+    // Simula uma base antiga, anterior à regra, que já tem uma questão inválida.
+    await banco.query('DROP TRIGGER tg_alternativas_questao ON tbalternativa');
+    await banco.query('DROP TRIGGER tg_questao_alternativas ON tbquestao');
+    const tema = await banco.query("INSERT INTO tbtema (nome, descricao, ordem) VALUES ('Tema inválido', 'Teste', 1) RETURNING id");
+    const questao = await banco.query(`INSERT INTO tbquestao (idtema, codigo_origem, enunciado, justificativa)
+        VALUES ($1, 'questao-invalida', 'Inválida', 'Inválida') RETURNING id`, [tema.rows[0].id]);
+    await banco.query(`INSERT INTO tbalternativa (idquestao, letra, texto, correta)
+        SELECT $1, letra, 'Alternativa ' || letra, false FROM unnest(ARRAY['A','B','C']::text[]) letra`, [questao.rows[0].id]);
+    await assert.rejects(banco.query(migracao), erro =>
+        /Questões sem exatamente 4 alternativas e 1 correta/.test(erro.message) &&
+        erro.message.includes(String(questao.rows[0].id)) && erro.message.includes('questao-invalida'));
+    // A migração recusada não recria os triggers; depois de limpar a base, ela passa.
+    await banco.query('DELETE FROM tbalternativa WHERE idquestao=$1', [questao.rows[0].id]);
+    await banco.query('DELETE FROM tbquestao WHERE id=$1', [questao.rows[0].id]);
+    await banco.query(migracao);
+    // Filtra pelo schema do teste: o schema principal do banco também tem esses triggers.
+    const triggers = await banco.query(`SELECT t.tgname FROM pg_trigger t JOIN pg_class c ON c.oid = t.tgrelid
+        WHERE c.relnamespace = current_schema()::regnamespace AND NOT t.tgisinternal
+        AND t.tgname IN ('tg_alternativas_questao', 'tg_questao_alternativas')`);
+    assert.deepEqual(triggers.rows.map(linha => linha.tgname).sort(),
+        ['tg_alternativas_questao', 'tg_questao_alternativas']);
+});
+
+
+test('Banco garante exatamente 4 alternativas e 1 correta por questão', opcoes, async () => {
+    async function criarQuestaoForaDaTransacao(codigo) {
+        const cliente = await banco.connect();
+        try {
+            await cliente.query('BEGIN');
+            const questao = await criarQuestaoValida(cliente, codigo);
+            await cliente.query('COMMIT');
+            return questao;
+        } catch (erro) {
+            await cliente.query('ROLLBACK').catch(() => {});
+            throw erro;
+        } finally { cliente.release(); }
+    }
+
+    async function rejeitarNoCommit(codigo, alteracao) {
+        const questao = await criarQuestaoForaDaTransacao(codigo);
+        const cliente = await banco.connect();
+        try {
+            await cliente.query('BEGIN');
+            await alteracao(cliente, questao);
+            await assert.rejects(cliente.query('COMMIT'), erro =>
+                erro.code === '23514' && erro.constraint === 'ck_questao_alternativas');
+            await cliente.query('ROLLBACK').catch(() => {});
+            const estado = await banco.query(`SELECT count(*)::integer AS total,
+                count(*) FILTER (WHERE correta)::integer AS corretas
+                FROM tbalternativa WHERE idquestao=$1`, [questao]);
+            assert.deepEqual(estado.rows[0], { total: 4, corretas: 1 });
+        } finally { cliente.release(); }
+    }
+
+    // Questões novas inválidas: nada pode ficar gravado depois do COMMIT recusado.
+    async function rejeitarQuestaoNova(codigo, letras, correta) {
+        const cliente = await banco.connect();
+        try {
+            await cliente.query('BEGIN');
+            const questao = await criarQuestaoValida(cliente, codigo, false);
+            if (letras.length) await cliente.query(`INSERT INTO tbalternativa (idquestao, letra, texto, correta)
+                SELECT $1, letra, 'Alternativa ' || letra, COALESCE(letra = $2, false) FROM unnest($3::text[]) letra`,
+                [questao, correta, letras]);
+            await assert.rejects(cliente.query('COMMIT'), erro =>
+                erro.code === '23514' && erro.constraint === 'ck_questao_alternativas');
+            const gravada = await banco.query('SELECT count(*)::integer AS total FROM tbquestao WHERE codigo_origem=$1', [codigo]);
+            assert.equal(gravada.rows[0].total, 0);
+        } finally { cliente.release(); }
+    }
+
+    await rejeitarQuestaoNova('questao-tres-alternativas', ['A', 'B', 'C'], 'A');
+    await rejeitarQuestaoNova('questao-quatro-sem-correta', ['A', 'B', 'C', 'D'], null);
+    await rejeitarQuestaoNova('questao-sem-alternativas', [], null);
+    await rejeitarNoCommit('questao-sem-correta', async (cliente, questao) => {
+        await cliente.query('UPDATE tbalternativa SET correta=false WHERE idquestao=$1', [questao]);
+    });
+    await rejeitarNoCommit('questao-delete-alternativa', async (cliente, questao) => {
+        await cliente.query("DELETE FROM tbalternativa WHERE idquestao=$1 AND letra='D'", [questao]);
+    });
+    await rejeitarNoCommit('questao-retira-correta', async (cliente, questao) => {
+        await cliente.query("UPDATE tbalternativa SET correta=false WHERE idquestao=$1 AND letra='A'", [questao]);
+    });
+
+    const origem = await criarQuestaoForaDaTransacao('questao-origem-movimento');
+    const destino = await criarQuestaoForaDaTransacao('questao-destino-movimento');
+    const clienteMovimento = await banco.connect();
+    try {
+        await clienteMovimento.query('BEGIN');
+        // O destino fica válido (perde a D e recebe a D da origem); só a origem fica com 3.
+        await clienteMovimento.query("DELETE FROM tbalternativa WHERE idquestao=$1 AND letra='D'", [destino]);
+        await clienteMovimento.query("UPDATE tbalternativa SET idquestao=$1 WHERE idquestao=$2 AND letra='D'", [destino, origem]);
+        await assert.rejects(clienteMovimento.query('COMMIT'), erro =>
+            erro.code === '23514' && erro.message.includes(`questão ${origem} `));
+        await clienteMovimento.query('ROLLBACK').catch(() => {});
+        for (const questao of [origem, destino]) {
+            const estado = await banco.query(`SELECT count(*)::integer AS total,
+                count(*) FILTER (WHERE correta)::integer AS corretas
+                FROM tbalternativa WHERE idquestao=$1`, [questao]);
+            assert.deepEqual(estado.rows[0], { total: 4, corretas: 1 });
+        }
+    } finally { clienteMovimento.release(); }
+
+    const questaoTroca = await criarQuestaoForaDaTransacao('questao-troca-gabarito');
+    const clienteTroca = await banco.connect();
+    try {
+        await clienteTroca.query('BEGIN');
+        await clienteTroca.query("UPDATE tbalternativa SET correta=false WHERE idquestao=$1 AND letra='A'", [questaoTroca]);
+        await clienteTroca.query("UPDATE tbalternativa SET correta=true WHERE idquestao=$1 AND letra='B'", [questaoTroca]);
+        await clienteTroca.query('COMMIT');
+        const corretas = await banco.query('SELECT letra FROM tbalternativa WHERE idquestao=$1 AND correta', [questaoTroca]);
+        assert.deepEqual(corretas.rows.map(linha => linha.letra), ['B']);
+    } catch (erro) {
+        await clienteTroca.query('ROLLBACK').catch(() => {});
+        throw erro;
+    } finally { clienteTroca.release(); }
+
+    const questaoOrdem = await criarQuestaoForaDaTransacao('questao-gabarito-ordem-invalida');
+    const clienteOrdem = await banco.connect();
+    try {
+        await clienteOrdem.query('BEGIN');
+        await assert.rejects(
+            clienteOrdem.query("UPDATE tbalternativa SET correta=true WHERE idquestao=$1 AND letra='B'", [questaoOrdem]),
+            erro => erro.code === '23505'
+        );
+        await clienteOrdem.query('ROLLBACK');
+        const estado = await banco.query(`SELECT letra FROM tbalternativa WHERE idquestao=$1 AND correta`, [questaoOrdem]);
+        assert.deepEqual(estado.rows.map(linha => linha.letra), ['A']);
+    } finally { clienteOrdem.release(); }
 });
