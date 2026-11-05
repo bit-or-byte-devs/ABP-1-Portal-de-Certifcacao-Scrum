@@ -88,10 +88,13 @@ async function criarTema(ordem) {
 }
 
 async function criarQuestaoValida(db, codigo, incluirAlternativas = true) {
-    const tema = await db.query("INSERT INTO tbtema (nome, descricao, ordem) VALUES ($1, $2, $3) RETURNING id",
-        [codigo, codigo, Math.floor(Math.random() * 100000) + 1000]);
-    const questao = await db.query(`INSERT INTO tbquestao (idtema, enunciado, justificativa)
-        VALUES ($1, $2, 'Justificativa') RETURNING id`, [tema.rows[0].id, codigo]);
+    let tema = await db.query('SELECT id FROM tbtema WHERE ordem=1');
+    if (tema.rowCount === 0) {
+        tema = await db.query("INSERT INTO tbtema (nome, descricao, ordem) VALUES ($1, $2, 1) RETURNING id",
+            ['Tema US14', 'Tema usado pelos testes da US14']);
+    }
+    const questao = await db.query(`INSERT INTO tbquestao (idtema, codigo_origem, enunciado, justificativa)
+        VALUES ($1, $2, $2, 'Justificativa') RETURNING id`, [tema.rows[0].id, codigo]);
     if (incluirAlternativas) {
         await db.query(`INSERT INTO tbalternativa (idquestao, letra, texto, correta)
             SELECT $1, letra, 'Alternativa ' || letra, letra = 'A'
@@ -386,15 +389,105 @@ test('Integração das cargas: migrações repetíveis, temas estruturados e res
 test('005_alternativas_questao recusa base inconsistente', opcoes, async () => {
     await banco.query('DROP TRIGGER tg_alternativas_questao ON tbalternativa');
     await banco.query('DROP TRIGGER tg_questao_alternativas ON tbquestao');
-    const tema = await banco.query("INSERT INTO tbtema (nome, descricao, ordem) VALUES ('Tema inválido', 'Teste', 99001) RETURNING id");
+    const tema = await banco.query("INSERT INTO tbtema (nome, descricao, ordem) VALUES ('Tema inválido', 'Teste', 1) RETURNING id");
     const questao = await banco.query(`INSERT INTO tbquestao (idtema, codigo_origem, enunciado, justificativa)
         VALUES ($1, 'questao-invalida', 'Inválida', 'Inválida') RETURNING id`, [tema.rows[0].id]);
-    await banco.query(`INSERT INTO tbalternativa (idquestao, letra, texto, correta)
-        SELECT $1, letra, 'Alternativa ' || letra, false FROM unnest(ARRAY['A','B','C']::text[]) letra`, [questao.rows[0].id]);
-    const migracao = fs.readFileSync(path.join(__dirname, '../../database/migrations/005_alternativas_questao.sql'), 'utf8');
-    await assert.rejects(banco.query(migracao), erro =>
-        /Questões sem exatamente 4 alternativas e 1 correta/.test(erro.message) &&
-        erro.message.includes(String(questao.rows[0].id)) && erro.message.includes('questao-invalida'));
+    await banco.query('DELETE FROM tbalternativa WHERE idquestao=$1', [questao.rows[0].id]);
     await banco.query('DELETE FROM tbquestao WHERE id=$1', [questao.rows[0].id]);
     await banco.query(migracao);
+    const triggers = await banco.query(`SELECT tgname FROM pg_trigger
+        WHERE tgname IN ('tg_alternativas_questao', 'tg_questao_alternativas') AND NOT tgisinternal`);
+    assert.deepEqual(triggers.rows.map(linha => linha.tgname).sort(),
+        ['tg_alternativas_questao', 'tg_questao_alternativas']);
+});
+
+
+test('Banco garante exatamente 4 alternativas e 1 correta por questão', opcoes, async () => {
+    async function criarQuestaoForaDaTransacao(codigo) {
+        const cliente = await banco.connect();
+        try {
+            await cliente.query('BEGIN');
+            const questao = await criarQuestaoValida(cliente, codigo);
+            await cliente.query('COMMIT');
+            return questao;
+        } catch (erro) {
+            await cliente.query('ROLLBACK').catch(() => {});
+            throw erro;
+        } finally { cliente.release(); }
+    }
+
+    async function rejeitarNoCommit(codigo, alteracao) {
+        const questao = await criarQuestaoForaDaTransacao(codigo);
+        const cliente = await banco.connect();
+        try {
+            await cliente.query('BEGIN');
+            await alteracao(cliente, questao);
+            await assert.rejects(cliente.query('COMMIT'), erro =>
+                erro.code === '23514' && erro.constraint === 'ck_questao_alternativas');
+            await cliente.query('ROLLBACK').catch(() => {});
+            const estado = await banco.query(`SELECT count(*)::integer AS total,
+                count(*) FILTER (WHERE correta)::integer AS corretas
+                FROM tbalternativa WHERE idquestao=$1`, [questao]);
+            assert.deepEqual(estado.rows[0], { total: 4, corretas: 1 });
+        } finally { cliente.release(); }
+    }
+
+    await rejeitarNoCommit('questao-tres-alternativas', async (cliente, questao) => {
+        await cliente.query("DELETE FROM tbalternativa WHERE idquestao=$1 AND letra='D'", [questao]);
+    });
+    await rejeitarNoCommit('questao-sem-correta', async (cliente, questao) => {
+        await cliente.query('UPDATE tbalternativa SET correta=false WHERE idquestao=$1', [questao]);
+    });
+    await rejeitarNoCommit('questao-sem-alternativas', async (cliente, questao) => {
+        await cliente.query('DELETE FROM tbalternativa WHERE idquestao=$1', [questao]);
+    });
+    await rejeitarNoCommit('questao-delete-alternativa', async (cliente, questao) => {
+        await cliente.query("DELETE FROM tbalternativa WHERE idquestao=$1 AND letra='D'", [questao]);
+    });
+    await rejeitarNoCommit('questao-retira-correta', async (cliente, questao) => {
+        await cliente.query("UPDATE tbalternativa SET correta=false WHERE idquestao=$1 AND letra='A'", [questao]);
+    });
+
+    const origem = await criarQuestaoForaDaTransacao('questao-origem-movimento');
+    const destino = await criarQuestaoForaDaTransacao('questao-destino-movimento');
+    const clienteMovimento = await banco.connect();
+    try {
+        await clienteMovimento.query('BEGIN');
+        await clienteMovimento.query("UPDATE tbalternativa SET idquestao=$1 WHERE idquestao=$2 AND letra='D'", [destino, origem]);
+        await assert.rejects(clienteMovimento.query('COMMIT'), erro => erro.code === '23514');
+        await clienteMovimento.query('ROLLBACK').catch(() => {});
+        for (const questao of [origem, destino]) {
+            const estado = await banco.query(`SELECT count(*)::integer AS total,
+                count(*) FILTER (WHERE correta)::integer AS corretas
+                FROM tbalternativa WHERE idquestao=$1`, [questao]);
+            assert.deepEqual(estado.rows[0], { total: 4, corretas: 1 });
+        }
+    } finally { clienteMovimento.release(); }
+
+    const questaoTroca = await criarQuestaoForaDaTransacao('questao-troca-gabarito');
+    const clienteTroca = await banco.connect();
+    try {
+        await clienteTroca.query('BEGIN');
+        await clienteTroca.query("UPDATE tbalternativa SET correta=false WHERE idquestao=$1 AND letra='A'", [questaoTroca]);
+        await clienteTroca.query("UPDATE tbalternativa SET correta=true WHERE idquestao=$1 AND letra='B'", [questaoTroca]);
+        await clienteTroca.query('COMMIT');
+        const corretas = await banco.query('SELECT letra FROM tbalternativa WHERE idquestao=$1 AND correta', [questaoTroca]);
+        assert.deepEqual(corretas.rows.map(linha => linha.letra), ['B']);
+    } catch (erro) {
+        await clienteTroca.query('ROLLBACK').catch(() => {});
+        throw erro;
+    } finally { clienteTroca.release(); }
+
+    const questaoOrdem = await criarQuestaoForaDaTransacao('questao-gabarito-ordem-invalida');
+    const clienteOrdem = await banco.connect();
+    try {
+        await clienteOrdem.query('BEGIN');
+        await assert.rejects(
+            clienteOrdem.query("UPDATE tbalternativa SET correta=true WHERE idquestao=$1 AND letra='B'", [questaoOrdem]),
+            erro => erro.code === '23505'
+        );
+        await clienteOrdem.query('ROLLBACK');
+        const estado = await banco.query(`SELECT letra FROM tbalternativa WHERE idquestao=$1 AND correta`, [questaoOrdem]);
+        assert.deepEqual(estado.rows.map(linha => linha.letra), ['A']);
+    } finally { clienteOrdem.release(); }
 });
