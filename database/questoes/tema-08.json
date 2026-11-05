@@ -6,7 +6,10 @@
       "codigo": "tema-08-q01",
       "enunciado": "O que acontece durante a atividade de Refinamento (Refinement) do Product Backlog?",
       "justificativa": "O refinamento é o ato contínuo de adicionar detalhes, estimativas e ordem aos itens do Product Backlog.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem1-tema8-questoes.png",
+        "alt": "Equipe analisando, discutindo e organizando itens do backlog."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -35,8 +38,11 @@
     {
       "codigo": "tema-08-q50",
       "enunciado": "Quem responde pela ordenação dos itens do Product Backlog?",
-      "justificativa": "O Product Owner é responsável pela gestão eficaz do Product Backlog, incluindo sua ordenação.",
-      "imagem": null,
+      "justificativa": "Product Owner organizando as tarefas conforme suas prioridades.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem2-tema8-questoes.png",
+        "alt": "Equipe realizando uma reunião diária para alinhar atividades e acompanhar o progresso."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -66,7 +72,10 @@
       "codigo": "tema-08-q51",
       "enunciado": "O que caracteriza o refinamento do Product Backlog?",
       "justificativa": "O refinamento aumenta a clareza dos itens e pode incluir divisão, descrição e estimativa; não é um evento formal prescrito.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem3-tema8-questoes.png",
+        "alt": "Equipe revisando requisitos, esclarecendo dúvidas e detalhando tarefas."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -96,7 +105,10 @@
       "codigo": "tema-08-q52",
       "enunciado": "Uma necessidade nova surge durante o desenvolvimento. Como tratar o Product Backlog?",
       "justificativa": "O Product Backlog evolui conforme o produto e seu contexto; novas informações orientam decisões de ordenação.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem4-tema8-questoes.png",
+        "alt": "Inclusão de uma nova demanda no Product Backlog."
+      },
       "alternativas": [
         {
           "letra": "A",
