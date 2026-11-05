@@ -1,4 +1,4 @@
-#SPRINT 1 
+#SPRINT 2
 
 # 🎯 BorB - Plataforma de Estudos Scrum
 
@@ -19,26 +19,27 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 
 ---
 
-## 📋 Backlog do Produto - SPRINT 1
+## 📋 Backlog do Produto - SPRINT 2 .
 
 | Rank | Prioridade | User Story | Story Points | Sprint | Requisito Relacionado | Status |
-| --- | --- | --- | --- | --- | --- | --- |
-| **1** | Alta (1) | **US03 - Acessar cadastro:** Como candidato, quero acessar a tela de cadastro para iniciar o registro. | 1 | 1 | RF03 | Concluído |
-| **2** | Alta (2) | **US01 - Visualizar informações:** Como candidato, quero ler as regras da certificação antes de iniciar. | 2 | 1 | RF01 | Concluído |
-| **3** | Alta (2) | **US05 - Ação pós-cadastro:** Como candidato, quero escolher entre ir ao menu ou iniciar a prova. | 2 | 1 | RF01 | Concluído |
-| **4** | Alta (2) | **US06 - Acessar Menu Principal:** Como candidato, quero navegar pelo menu após autenticado. | 2 | 1 | RF01 | Concluído |
-| **5** | Alta (2) | **US07 - Navegar entre áreas:** Como candidato, quero alternar entre as sessões do portal. | 2 | 1 | RF01 | Concluído |
-| **6** | Alta (2) | **US08 - Visualizar temas:** Como candidato, quero ver os 12 temas disponíveis para estudo. | 2 | 1 | RF08 | Concluído |
-| **7** | Alta (2) | **US10 - Navegar no conteúdo:** Como candidato, quero alternar entre os temas de estudo livremente. | 2 | 1 | RF08 | Concluído |
-| **8** | Alta (2) | **US41 - Pesquisar 12 temas** Como candidato, quero ter acesso aos conteúdos sobre os 12 temas. | 2 | 1 | RF05 | Concluído |
-| **9** | Alta (3) | **US02 - Realizar login:** Como candidato, quero autenticar com CPF e senha para acessar o portal. | 3 | 1 | RF04 | Concluído |
-| **10** | Alta (3) | **US09 - Acessar conteúdo de estudo:** Como candidato, quero ler o material didático de um tema. | 3 | 1 | RF08 | Concluído |
-| **11** | Alta (5) | **US04 - Cadastrar candidato:** Como candidato, quero registrar meus dados com validação de CPF único. | 5 | 1 | RF03 | Concluído |
-| **12** | Alta (8) | **US36 - Banco PostgreSQL:** Como equipe, queremos persistir os dados da aplicação no PostgreSQL. | 8 | 1 | RP02 | Concluído |
-| **13** | Alta (8) | **US37 - Arquitetura Web:** Como equipe, queremos conectar Front-End, Back-End e Banco de Dados. | 8 | 1 | RP01 / RP05 | Concluído |
-| **14** | Alta (8) | **US40 - Protótipo Figma:** Como equipe, queremos visualizar o design de todas as telas em um protótipo no Figma.| 8 | 1 | RF01 / RF07 | Concluído |
-| **15** | Alta (2) | **US41 - Pesquisa dos temas:** Como candidato, quero ter acesso a conteúdos pesquisados, confiáveis e organizados sobre os 12 temas previstos, para estudar os conceitos antes de realizar a avaliação.| 2 | 1 | RF08 | Concluído |
-| **16** | Alta (8) | **US42 - Recuperar senha:** Como candidato cadastrado que esqueceu sua senha, quero redefinir minha senha por meio do e-mail cadastrado para recuperar o acesso ao Portal de Certificação Scrum.| 8 | 1 | RF03 /  RF04 | Concluído |
+| :---: | :---: | :--- | :---: | :---: | :---: | :---: |
+| **1** | Alta (2) | **US11 - Organizar questões por tema:** Como responsável pelo sistema, quero que as questões sejam organizadas por tema para manter a base de questões estruturada conforme a certificação. | 1 | 2 | RF06 / RP06 | Em progresso |
+| **2** | Alta (3) | **US12 - Estruturar questão da certificação:** Como responsável pelo sistema, quero que cada questão possua os elementos obrigatórios para que possa ser utilizada na certificação. | 2 | 2 | RF08 | Concluída |
+| **3** | Alta (5) | **US13 - Sortear questão para o candidato:** Como candidato, quero receber uma questão sorteada aleatoriamente para cada tema para realizar a certificação conforme as regras da avaliação. | 2 | 2 | RF06 | Em progresso |
+| **4** | Alta (3) | **US14 - Armazenar alternativas e resposta correta:** Como responsável pelo sistema, quero armazenar alternativas e a resposta correta para cada questão. | 2 | 2 | RF08 / RP04 | Concluída |
+| **5** | Alta (3) | **US15 - Visualizar temas da certificação:** Como candidato, quero visualizar os temas da certificação para acompanhar quais ainda preciso responder. | 2 | 2 | RF05 / RF21 | Em progresso |
+| **6** | Alta (5) | **US16 - Iniciar questão de um tema:** Como candidato, quero iniciar a questão de um tema pendente para avançar na certificação. | 2 | 2 | RF05 | Concluída |
+| **7** | Alta (5) | **US17 - Responder questão da certificação:** Como candidato, quero selecionar e enviar uma alternativa para registrar minha resposta à questão. | 2 | 2 | RF08 | Concluída |
+| **8** | Alta (3) | **US18 - Visualizar correção da questão:** Como candidato, quero visualizar a resposta correta após responder uma questão para saber qual era a alternativa correta. | 2 | 2 | RF09 | Concluída |
+| **9** | Alta (3) | **US19 - Escolher continuidade da certificação:** Como candidato, quero decidir após cada questão se desejo continuar a certificação ou encerrar a sessão para poder realizá-la em momentos diferentes. | 3 | 2 | RF12 / RF13 | Em progresso |
+| **10** | Alta (5) | **US20 - Controlar tempo de resposta da questão:** Como candidato, quero visualizar o tempo restante para responder uma questão para saber quanto tempo tenho disponível. | 3 | 2 | RF10 | Concluída |
+| **11** | Alta (5) | **US21 - Encerrar questão por tempo esgotado:** Como candidato, quero ser informado quando o tempo da questão terminar para saber que aquela tentativa foi encerrada. | 5 | 2 | RF11 | Em progresso |
+| **12** | Alta (8) | **US22 - Tratar interrupção durante uma questão:** Como sistema, quero encerrar uma questão quando ocorrer uma interrupção durante sua resolução para garantir que cada tema tenha apenas uma tentativa. | 8 | 2 | RF14 / RF15 | Em progresso |
+| **13** | Alta (5) | **US23 - Retomar certificação interrompida:** Como candidato, quero retomar uma certificação interrompida para continuar respondendo aos temas ainda pendentes. | 8 | 2 | RF13 | Concluída |
+| **14** | Alta (3) | **US24 - Acompanhar progresso da certificação:** Como candidato, quero acompanhar meu progresso na certificação para saber quais temas já concluí e quais ainda preciso responder. | 8 | 2 | RF21 | Em progresso |
+| **15** | Alta (2) | **US25 - Registrar histórico das respostas:** Como candidato, quero que minhas respostas sejam registradas no histórico para manter um registro da certificação realizada. | 2 | 2 | RF20 | Em progresso |
+| **16** | Média (2) | **US43 - Reestruturar a tela de realização da questão:** Como candidato, quero uma tela de questão clara e organizada para analisar o enunciado e a imagem, selecionar uma alternativa e confirmar minha resposta. | 2 | 2 | RF08 / RNF01 | Concluída |
+| **17** | Baixa (1) | **US44 - Elaborar diagramas de Classes, Casos de Uso e Sequência:** Como integrante da equipe, quero documentar o Portal de Certificação com diagramas UML para facilitar a compreensão de seus atores, sua estrutura e seus fluxos. | 2 | 2 | RNF06 | Concluída |
 
 ---
 
@@ -59,6 +60,7 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 | Sprint | Período da Sprint | Documentação da Sprint | Vídeo do Incremento (YouTube) | Status |
 | --- | --- | --- | --- | --- |
 | 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1](https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I) | [Vídeo de Apresentação 1](https://youtu.be/FVt_IMNGXu8) | Concluído |
+| 🔖 **Sprint 2** | 23/10/2026 - 05/11/2026 | [Documentação Sprint 2](https://1drv.ms/w/c/e8fba6c9b965020d/IQAEdC8AzIp_QbojhheMglW7AZ6KTPoo0g9ohUsBH44cuIs) | [Vídeo de Apresentação 1]  | Em andamento |
 
 
 ## 💻 Tecnologias Utilizadas
@@ -121,8 +123,13 @@ ABP-1-Portal-de-Certifcacao-Scrum/
 ├── database/                       # Banco de dados PostgreSQL
 │   ├── ddl/schema.sql              # Criação das tabelas
 │   ├── dml/seed.sql                # Carga inicial: os 12 temas de estudo
+│   ├── temas/                      # Conteúdo estruturado dos 12 temas
 │   ├── migrations/                 # Atualizações para bancos já existentes
-│   │   └── 001_recuperacao_senha.sql
+│   │   ├── 001_recuperacao_senha.sql
+│   │   ├── 002_progresso_estudos.sql
+│   │   ├── 003_carga_questoes.sql
+│   │   ├── 004_conteudo_temas.sql
+│   │   └── 005_alternativas_questao.sql
 │   └── diagrams/                   # Reservado para diagramas do banco
 │
 ├── imagens/                        # Logos do BorB, modelos conceitual e lógico, imagens das questões (temas 1 a 3)
@@ -132,7 +139,7 @@ ABP-1-Portal-de-Certifcacao-Scrum/
 │   └── api/, installation/, requirements/   # Reservadas para as próximas sprints
 │
 ├── Dockerfile                      # Imagem da aplicação (Node.js 22)
-├── docker-compose.yml              # Orquestração: app + PostgreSQL, sem configuração manual
+├── docker-compose.yml              # Orquestração: PostgreSQL + preparação do banco + app
 ├── .dockerignore                   # Arquivos excluídos da imagem
 ├── .env.example                    # Modelo de variáveis de ambiente (execução fora do Docker)
 ├── package.json, package-lock.json # Metadados npm da raiz do repositório
@@ -143,7 +150,8 @@ ABP-1-Portal-de-Certifcacao-Scrum/
 
 * O **backend** serve a API em `/api/...` e entrega o **front-end** na mesma origem (`/pages/...`), por isso o navegador chama a API sem configuração extra.
 * O **banco** é criado pelos scripts de `database/ddl` e `database/dml`, que o Docker executa automaticamente na primeira subida.
-* O **Docker Compose** liga os dois serviços (`app` e `db`): basta executar
+* O serviço **preparar-banco** valida os conteúdos, aplica as migrações e importa temas e questões antes de iniciar a aplicação.
+* O **Docker Compose** coordena os três serviços (`db`, `preparar-banco` e `app`): basta executar
 docker compose up -d --build
 
 
@@ -170,7 +178,9 @@ cd ABP-1-Portal-de-Certifcacao-Scrum
 ```bash
 docker compose up -d --build
 ```
-Dois serviços sobem: `db` (PostgreSQL 16, com o schema e os temas carregados automaticamente na primeira execução) e `app` (API Node.js que também serve o front-end). A primeira execução baixa as imagens e pode levar alguns minutos.
+O serviço `db` inicia o PostgreSQL 16; em um volume novo, executa o schema e o seed. Depois, `preparar-banco` aplica as migrações e importa os materiais e questões dos JSONs. A `app` (API Node.js que também serve o front-end) inicia somente após o sucesso da preparação. É esperado que `preparar-banco` apareça como `Exited (0)`. A primeira execução baixa as imagens e pode levar alguns minutos.
+
+Para atualizar uma instalação em uso, pare a aplicação antes de preparar o banco. Consulte os [comandos de preparação, atualização e validação](docs/preparacao-banco.md).
 
 3. **Acessar a Aplicação:**
 Abra o navegador em `http://localhost:3000/pages/index.html`
@@ -178,22 +188,35 @@ Abra o navegador em `http://localhost:3000/pages/index.html`
 ### 🔧 Comandos úteis
 
 ```bash
+docker compose ps -a           # conferir os três serviços, incluindo a preparação encerrada
+docker compose logs preparar-banco # acompanhar migrações e importações
 docker compose logs -f app     # acompanhar o log (os códigos de recuperação de senha aparecem aqui)
 docker compose down            # parar os serviços (os dados do banco são mantidos)
-docker compose down -v         # parar e apagar o banco, para recomeçar do zero
+
 ```
 
 Observações:
+* O volume do banco é mantido entre execuções. Não o remova para repetir a carga.
+* Os JSONs atuais contêm 12 temas, 82 materiais e 48 questões, exatamente quatro por tema, com 192 alternativas. Consulte a [distribuição do catálogo](docs/questoes/mapeamento-temas.md) e as [pendências dos testes](docs/preparacao-banco.md).
 * A recuperação de senha roda em modo `console`: sem servidor SMTP, o código de verificação é impresso no log do serviço `app`.
 * Se a porta 3000 já estiver em uso, altere o mapeamento `ports` do serviço `app` no `docker-compose.yml` (por exemplo, `"3001:3000"`).
 * Os segredos do `docker-compose.yml` servem apenas para demonstração local. Para usar outros valores, defina `SESSION_SECRET` e `RECUPERACAO_SECRET` (32 caracteres ou mais) no ambiente.
 
 ---
 
-## 📂 Link para Pasta de Documentação
+## 📂 Link para Pasta de Documentação 
 
 Toda a documentação complementar, checklists, manuais e critérios de qualidade do projeto estão centralizados em nossa pasta oficial:
-👉 https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I
+👉 https://1drv.ms/w/c/e8fba6c9b965020d/IQAEdC8AzIp_QbojhheMglW7AZ6KTPoo0g9ohUsBH44cuIs
+
+Para acessar a pasta com a documentação das questões do exame:
+👉 https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/tree/develop/docs/questoes/questoes-pdf
+
+Para acessar o documento oficial dos 12 temas:
+👉 https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/blob/develop/docs/temasdeestudos.pdf
+
+Para imagens complementares como modelo conceitual, lógico, e Diagramas de Classe, Casos de Uso e Sequência, segue o link para a pasta do GitHub:
+👉 https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/tree/develop/docs-sprint-1
 
 ---
 
@@ -204,26 +227,36 @@ Toda a documentação complementar, checklists, manuais e critérios de qualidad
 |  | **Matheus Oliveira Dantas de Souza** | Product Owner | https://github.com/Matheus7souza | [LinkedIn](https://www.linkedin.com/in/matheus-dantas-souza) |
 |  | **Sarah Cristiny de Souza Mendes** | Scrum Master | https://github.com/sarahcris152 | [LinkedIn](https://www.linkedin.com/in/sarah-cristiny-de-souza-mendes-74aa881b7) |
 |  | **João Vitor Maximiano de Carvalho** | Desenvolvedor | https://github.com/JoaoCbca | [LinkedIn](https://www.linkedin.com/in/joão-vítor-maximiano-2b7356309) |
-|  | **Luiz Felipe Nogueira** | Desenvolvedor | https://github.com/luiz274 | [LinkedIn](https://www.linkedin.com/in/luiz-felipe-nogueira-bb2430270) |
+|  | **Luiz Felipe Nogueira** | Desenvolvedor | https://github.com/luiz274 | [LinkedIn](https://www.linkedin.com/in/luiz-felipe-nogueira-bb2430270) 
 |  | **Nikolas Gabriel Alves de Araujo** | Desenvolvedor | https://github.com/NikoRamid | [LinkedIn](https://www.google.com/search?q=https://linkedin.com) |
-|  | **Pedro Lucas Matias** | Desenvolvedor | [GitHub](https://github.com) | [LinkedIn](https://www.linkedin.com/in/pedrolmatias) |
-|  | **Ryan Cesar Candido Alves** | Desenvolvedor | https://github.com/ryancesar22 | [LinkedIn](https://www.linkedin.com/in/ryan-cesar-candido-alves-814887231) |
+|  | **Pedro Lucas Matias** | Desenvolvedor | https://github.com/Pedrojscx | [LinkedIn](https://www.linkedin.com/in/pedrolmatias) |
+| | **Ryan Cesar Candido Alves** | Desenvolvedor | https://github.com/ryancesar22 | [LinkedIn](https://www.linkedin.com/in/ryan-cesar-candido-alves-814887231) |
 |  | **Willian de Paula Barreto** | Desenvolvedor | https://github.com/will1907 | [LinkedIn](https://www.linkedin.com/in/willian-barreto-183aa2445) |
 
+---
 
-## 🔖 SPRINT 1 – Fundações, Infraestrutura e Base de Dados
-Período: 28/09/2026 a 22/10/2026
+## 🔖 SPRINT 2 – Desenvolvimento do Núcleo da Certificação e Área de Estudos
+**Período:** 23/10/2026 a 05/11/2026
 
-🏃 DoR da Sprint 1
-Protótipos das telas de Login, Cadastro, Menu Principal e Área de Estudos finalizados no Figma.
+### 🏃 DoR da Sprint 2 (Definition of Ready)
+- [x] Modelagem do banco de dados validada para suportar o armazenamento de questões, alternativas, imagens e histórico de respostas dos candidatos.
+- [x] Definição clara dos 12 temas da certificação (com base na listagem de conteúdos ágeis) e estruturação do banco de questões (4 questões por tema, contendo imagens e alternativas).
+- [x] Protótipos de alta fidelidade no Figma aprovados para as telas da Área de Estudos, Fluxo da Prova (com cronômetro e exibição de imagens) e Emissão de Certificado.
 
-Modelagem conceitual e lógica do banco de dados PostgreSQL aprovada pelo desenvolvedor responsável.
 
-Arquitetura em contêineres isolados (Front-End, Back-End e PostgreSQL) definida no docker-compose.yml.
+### 🏆 DoD da Sprint 2 (Definition of Done) – Checklist e Resultados por Entrega
 
-🏆 DoD da Sprint 1
-Scripts DDL/DML para criação e povoamento das tabelas de Usuários, Temas e Questões rodando perfeitamente no PostgreSQL via Docker.
+| Entrega / Funcionalidade | Critérios de Aceite (Checklist DoD) | Status | Resultados Esperados / Evidências |
+| :--- | :--- | :---: | :--- |
+| **1. Banco de Dados e Povoamento (PostgreSQL)** | - [x] Povoamento via scripts DML executado com sucesso no PostgreSQL.<br>- [x] Cadastro dos 12 temas da certificação.<br>- [x] Inserção de exatamente 4 questões por tema (total de 48 questões), todas vinculadas a imagens ilustrativas e 4 alternativas (sendo uma correta). | `Concluído` | • Banco PostgreSQL populado e estruturado.<br>• Integridade referencial validada para temas, questões, imagens e alternativas. |
+| **2. Núcleo de Back-end (Sorteio e Regras da Prova)** | - [x] Implementação de rotas/endpoints para o sorteio aleatório de uma questão por tema.<br>- [x] Regras de controle para tentativa única por tema e salvamento de histórico.<br>- [x] Gestão do cronômetro regressivo de 150 segundos no servidor e tratamento de encerramento por tempo esgotado ou interrupção. | `Concluído` | • API funcional integrando banco de dados e front-end.<br>• Fluxo de sorteio e validação de respostas operando sem falhas de manipulação no front-end. |
+| **3. Área de Estudos (Front-end)** | - [x] Interface desenvolvida em HTML, CSS e JavaScript puros conforme restrições de projeto.<br>- [x] Organização estruturada exatamente nos 12 temas da certificação.<br>- [x] Disponibilização de conteúdo didático, imagens e recursos de apoio à aprendizagem antes da prova. | `Concluído` | • Tela da Área de Estudos responsiva e integrada.<br>• Acesso fluido aos conteúdos teóricos correspondentes aos temas da avaliação. |
+| **4. Mecanismo da Prova e Fluxo de Interrupção** | - [x] Tela de exibição da questão contendo a imagem obrigatória e as quatro alternativas (A, B, C e D).<br>- [x] Cronômetro regressivo visível de 150 segundos funcionando em tempo real.<br>- [x] Feedback imediato informando a resposta correta após o envio.<br>- [x] Opções ativas para prosseguir para o próximo tema ou encerrar/interromper a sessão com segurança. | `Concluído` | • Prova interativa rodando integralmente no navegador.<br>• Encerramento automático de questões por tempo esgotado ou perda de conexão validado de acordo com as regras de negócio. |
 
-Telas estáticas e fluxo de navegação entre Login, Cadastro e Menu Principal funcionais em HTML/CSS/JS nativo.
+## Carga de questões
 
-Endpoints de autenticação (CPF e Senha) e cadastro integrados com o banco de dados.
+Consulte [as instruções de importação](docs/carga-questoes.md), [o mapeamento curricular](docs/questoes/mapeamento-temas.md) e [o relatório de integração](docs/relatorio-integracao-2026-11-02.md).
+
+## Carga dos temas
+
+Consulte [as instruções de importação dos conteúdos de estudo](docs/carga-temas.md). Os arquivos JSON em `database/temas` substituem o antigo conteúdo HTML centralizado no backend.
