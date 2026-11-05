@@ -10,7 +10,7 @@ test('Catálogo: 48 questões e gabaritos originais preservados', () => {
     assert.deepEqual(Array.from({length:12}, (_,i) => q.filter(x => x.tema === i+1).length), Array(12).fill(4));
     assert.equal(new Set(q.map(x => x.codigo)).size, 48);
     assert.deepEqual([1,2,3,4].map(tema => q.filter(x => x.tema === tema && Number(x.codigo.slice(-2)) <= 4).map(x => x.alternativas.find(a => a.correta).letra).join('')), ['BCAD','CABD','BACD','CBAD']);
-    assert.equal(q.filter(x => x.imagem !== null).length, 12);
+    assert.equal(q.filter(x => x.imagem !== null).length, 48);
     assert.ok(q.every(x => x.justificativa.length > 0));
 });
 test('validação rejeita gabarito inválido, códigos duplicados e imagem ausente', t => {
