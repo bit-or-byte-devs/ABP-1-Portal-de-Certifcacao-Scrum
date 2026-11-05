@@ -23,23 +23,22 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 
 | Rank | Prioridade | User Story | Story Points | Sprint | Requisito Relacionado | Status |
 | :---: | :---: | :--- | :---: | :---: | :---: | :---: |
-| **1** | Alta (2) | **US11 - Organizar questões por tema:** Como responsável pelo sistema, quero que as questões sejam organizadas por tema para manter a base de questões estruturada conforme a certificação. | 1 | 2 | RF06 / RP06 | Em progresso |
+| **1** | Alta (2) | **US11 - Organizar questões por tema:** Como responsável pelo sistema, quero que as questões sejam organizadas por tema para manter a base de questões estruturada conforme a certificação. | 1 | 2 | RF06 / RP06 | Concluída |
 | **2** | Alta (3) | **US12 - Estruturar questão da certificação:** Como responsável pelo sistema, quero que cada questão possua os elementos obrigatórios para que possa ser utilizada na certificação. | 2 | 2 | RF08 | Concluída |
-| **3** | Alta (5) | **US13 - Sortear questão para o candidato:** Como candidato, quero receber uma questão sorteada aleatoriamente para cada tema para realizar a certificação conforme as regras da avaliação. | 2 | 2 | RF06 | Em progresso |
+| **3** | Alta (5) | **US13 - Sortear questão para o candidato:** Como candidato, quero receber uma questão sorteada aleatoriamente para cada tema para realizar a certificação conforme as regras da avaliação. | 2 | 2 | RF06 | Concluída |
 | **4** | Alta (3) | **US14 - Armazenar alternativas e resposta correta:** Como responsável pelo sistema, quero armazenar alternativas e a resposta correta para cada questão. | 2 | 2 | RF08 / RP04 | Concluída |
-| **5** | Alta (3) | **US15 - Visualizar temas da certificação:** Como candidato, quero visualizar os temas da certificação para acompanhar quais ainda preciso responder. | 2 | 2 | RF05 / RF21 | Em progresso |
+| **5** | Alta (3) | **US15 - Visualizar temas da certificação:** Como candidato, quero visualizar os temas da certificação para acompanhar quais ainda preciso responder. | 2 | 2 | RF05 / RF21 | Concluída |
 | **6** | Alta (5) | **US16 - Iniciar questão de um tema:** Como candidato, quero iniciar a questão de um tema pendente para avançar na certificação. | 2 | 2 | RF05 | Concluída |
 | **7** | Alta (5) | **US17 - Responder questão da certificação:** Como candidato, quero selecionar e enviar uma alternativa para registrar minha resposta à questão. | 2 | 2 | RF08 | Concluída |
 | **8** | Alta (3) | **US18 - Visualizar correção da questão:** Como candidato, quero visualizar a resposta correta após responder uma questão para saber qual era a alternativa correta. | 2 | 2 | RF09 | Concluída |
-| **9** | Alta (3) | **US19 - Escolher continuidade da certificação:** Como candidato, quero decidir após cada questão se desejo continuar a certificação ou encerrar a sessão para poder realizá-la em momentos diferentes. | 3 | 2 | RF12 / RF13 | Em progresso |
+| **9** | Alta (3) | **US19 - Escolher continuidade da certificação:** Como candidato, quero decidir após cada questão se desejo continuar a certificação ou encerrar a sessão para poder realizá-la em momentos diferentes. | 3 | 2 | RF12 / RF13 | Concluída |
 | **10** | Alta (5) | **US20 - Controlar tempo de resposta da questão:** Como candidato, quero visualizar o tempo restante para responder uma questão para saber quanto tempo tenho disponível. | 3 | 2 | RF10 | Concluída |
-| **11** | Alta (5) | **US21 - Encerrar questão por tempo esgotado:** Como candidato, quero ser informado quando o tempo da questão terminar para saber que aquela tentativa foi encerrada. | 5 | 2 | RF11 | Em progresso |
-| **12** | Alta (8) | **US22 - Tratar interrupção durante uma questão:** Como sistema, quero encerrar uma questão quando ocorrer uma interrupção durante sua resolução para garantir que cada tema tenha apenas uma tentativa. | 8 | 2 | RF14 / RF15 | Em progresso |
+| **11** | Alta (5) | **US21 - Encerrar questão por tempo esgotado:** Como candidato, quero ser informado quando o tempo da questão terminar para saber que aquela tentativa foi encerrada. | 5 | 2 | RF11 | Concluída |
+| **12** | Alta (8) | **US22 - Tratar interrupção durante uma questão:** Como sistema, quero encerrar uma questão quando ocorrer uma interrupção durante sua resolução para garantir que cada tema tenha apenas uma tentativa. | 8 | 2 | RF14 / RF15 | Concluída |
 | **13** | Alta (5) | **US23 - Retomar certificação interrompida:** Como candidato, quero retomar uma certificação interrompida para continuar respondendo aos temas ainda pendentes. | 8 | 2 | RF13 | Concluída |
-| **14** | Alta (3) | **US24 - Acompanhar progresso da certificação:** Como candidato, quero acompanhar meu progresso na certificação para saber quais temas já concluí e quais ainda preciso responder. | 8 | 2 | RF21 | Em progresso |
-| **15** | Alta (2) | **US25 - Registrar histórico das respostas:** Como candidato, quero que minhas respostas sejam registradas no histórico para manter um registro da certificação realizada. | 2 | 2 | RF20 | Em progresso |
-| **16** | Média (2) | **US43 - Reestruturar a tela de realização da questão:** Como candidato, quero uma tela de questão clara e organizada para analisar o enunciado e a imagem, selecionar uma alternativa e confirmar minha resposta. | 2 | 2 | RF08 / RNF01 | Concluída |
-| **17** | Baixa (1) | **US44 - Elaborar diagramas de Classes, Casos de Uso e Sequência:** Como integrante da equipe, quero documentar o Portal de Certificação com diagramas UML para facilitar a compreensão de seus atores, sua estrutura e seus fluxos. | 2 | 2 | RNF06 | Concluída |
+| **14** | Média (2) | **US43 - Reestruturação da tela de realização da questão:** Como candidato, quero uma tela de questão clara e organizada, com enunciado,imagem seleção de alternativas e confirmar minha resposta. | 2 | 2 | RF08, RNF01 | Concluída |
+| **15** | Baixa (1) | **US44 - Elaborar diagramas de Classes, Casos de Uso e Sequência:** Como integrante da equipe, quero documentar o Portal de Certificação com diagramas UML para facilitar a compreensão de seus atores, sua estrutura e seus fluxos. | 2 | 2 | RNF06 | Concluída |
+| **16** | Alta (8) | **US45 - Produzir o vídeo da Sprint 2:** Como professor, quero assistir um vídeo que mostre todas as funcionalidades entregues da sprint 2 na plataforma. | 8 | 2 | RNF05 | Concluída |
 
 ---
 
@@ -60,7 +59,7 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 | Sprint | Período da Sprint | Documentação da Sprint | Vídeo do Incremento (YouTube) | Status |
 | --- | --- | --- | --- | --- |
 | 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1](https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I) | [Vídeo de Apresentação 1](https://youtu.be/FVt_IMNGXu8) | Concluído |
-| 🔖 **Sprint 2** | 23/10/2026 - 05/11/2026 | [Documentação Sprint 2](https://1drv.ms/w/c/e8fba6c9b965020d/IQAEdC8AzIp_QbojhheMglW7AZ6KTPoo0g9ohUsBH44cuIs) | [Vídeo de Apresentação 1]  | Em andamento |
+| 🔖 **Sprint 2** | 23/10/2026 - 05/11/2026 | [Documentação Sprint 2](https://1drv.ms/w/c/e8fba6c9b965020d/IQAEdC8AzIp_QbojhheMglW7AZ6KTPoo0g9ohUsBH44cuIs) | [Vídeo de Apresentação 2](https://youtu.be/K_Tbho3OMi8?is=4hczwcMjw8u2Ketj) | Concluído |
 
 
 ## 💻 Tecnologias Utilizadas
@@ -239,19 +238,17 @@ Para imagens complementares como modelo conceitual, lógico, e Diagramas de Clas
 **Período:** 23/10/2026 a 05/11/2026
 
 ### 🏃 DoR da Sprint 2 (Definition of Ready)
-- [x] Modelagem do banco de dados validada para suportar o armazenamento de questões, alternativas, imagens e histórico de respostas dos candidatos.
-- [x] Definição clara dos 12 temas da certificação (com base na listagem de conteúdos ágeis) e estruturação do banco de questões (4 questões por tema, contendo imagens e alternativas).
-- [x] Protótipos de alta fidelidade no Figma aprovados para as telas da Área de Estudos, Fluxo da Prova (com cronômetro e exibição de imagens) e Emissão de Certificado.
+- [x] **Modelagem de Dados Aprovada:** Modelagem do banco de dados validada (PostgreSQL) para suportar os 12 temas, 48 questões (4 por tema), alternativas, imagens ilustrativas, tentativas únicas por tema e histórico de interrupções.
+- [x] **Carga e Conteúdo Homologados:** Definição final dos 12 temas da certificação e estruturação dos arquivos JSON/scripts de migração contendo o conteúdo didático e as questões com imagens.
+- [x] **Protótipos de Alta Fidelidade (Figma):** Telas aprovadas pela equipe para a Área de Estudos, Fluxo da Prova (com cronômetro, enunciado, imagem e alternativas conforme a US43) e fluxo de interrupção/retomada.
+- [x] **Especificação de Regras de Negócio:** Critérios de aceite detalhados para o sorteio randômico de questões (US13), controle do cronômetro regressivo (US20), encerramento por tempo esgotado (US21) e tratamento de interrupções de sessão (US22/US23).
 
+### 🏆 DoD da Sprint 2 (Definition of Done)
+- [x] **Banco de Dados e Povoamento:** Schema DDL e seeds DML executados via Docker Compose, com carga íntegra dos 12 temas e das 48 questões (4 por tema) e migrações (`001` a `005`) testadas e integradas.
+- [x] **Núcleo de Back-end (Motor do Simulado & Regras):** Endpoints implementados em Node.js para sorteio aleatório (US13), tentativa única (US16, US19), controle de cronômetro, tempo esgotado (US21) e tratamento/retomada de interrupções (US22, US23).
+- [x] **Área de Estudos & Interface (Front-end):** Telas desenvolvidas em HTML5, CSS3 e JavaScript puro, estruturadas nos 12 temas (US11, US15) e com reestruturação da tela de prova (US43) para enunciado, imagens e alternativas.
+- [x] **Feedback, Diagramas UML e Entrega:** Exibição da resposta correta após submissão (US18), diagramas UML de Classes, Casos de Uso e Sequência documentados (US44), e vídeo de apresentação da Sprint 2 publicado no YouTube (US45).
 
-### 🏆 DoD da Sprint 2 (Definition of Done) – Checklist e Resultados por Entrega
-
-| Entrega / Funcionalidade | Critérios de Aceite (Checklist DoD) | Status | Resultados Esperados / Evidências |
-| :--- | :--- | :---: | :--- |
-| **1. Banco de Dados e Povoamento (PostgreSQL)** | - [x] Povoamento via scripts DML executado com sucesso no PostgreSQL.<br>- [x] Cadastro dos 12 temas da certificação.<br>- [x] Inserção de exatamente 4 questões por tema (total de 48 questões), todas vinculadas a imagens ilustrativas e 4 alternativas (sendo uma correta). | `Concluído` | • Banco PostgreSQL populado e estruturado.<br>• Integridade referencial validada para temas, questões, imagens e alternativas. |
-| **2. Núcleo de Back-end (Sorteio e Regras da Prova)** | - [x] Implementação de rotas/endpoints para o sorteio aleatório de uma questão por tema.<br>- [x] Regras de controle para tentativa única por tema e salvamento de histórico.<br>- [x] Gestão do cronômetro regressivo de 150 segundos no servidor e tratamento de encerramento por tempo esgotado ou interrupção. | `Concluído` | • API funcional integrando banco de dados e front-end.<br>• Fluxo de sorteio e validação de respostas operando sem falhas de manipulação no front-end. |
-| **3. Área de Estudos (Front-end)** | - [x] Interface desenvolvida em HTML, CSS e JavaScript puros conforme restrições de projeto.<br>- [x] Organização estruturada exatamente nos 12 temas da certificação.<br>- [x] Disponibilização de conteúdo didático, imagens e recursos de apoio à aprendizagem antes da prova. | `Concluído` | • Tela da Área de Estudos responsiva e integrada.<br>• Acesso fluido aos conteúdos teóricos correspondentes aos temas da avaliação. |
-| **4. Mecanismo da Prova e Fluxo de Interrupção** | - [x] Tela de exibição da questão contendo a imagem obrigatória e as quatro alternativas (A, B, C e D).<br>- [x] Cronômetro regressivo visível de 150 segundos funcionando em tempo real.<br>- [x] Feedback imediato informando a resposta correta após o envio.<br>- [x] Opções ativas para prosseguir para o próximo tema ou encerrar/interromper a sessão com segurança. | `Concluído` | • Prova interativa rodando integralmente no navegador.<br>• Encerramento automático de questões por tempo esgotado ou perda de conexão validado de acordo com as regras de negócio. |
 
 ## Carga de questões
 
