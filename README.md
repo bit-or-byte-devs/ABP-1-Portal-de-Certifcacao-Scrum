@@ -138,7 +138,7 @@ ABP-1-Portal-de-Certifcacao-Scrum/
 │   └── api/, installation/, requirements/   # Reservadas para as próximas sprints
 │
 ├── Dockerfile                      # Imagem da aplicação (Node.js 22)
-├── docker-compose.yml              # Orquestração: app + PostgreSQL, sem configuração manual
+├── docker-compose.yml              # Orquestração: PostgreSQL + preparação do banco + app
 ├── .dockerignore                   # Arquivos excluídos da imagem
 ├── .env.example                    # Modelo de variáveis de ambiente (execução fora do Docker)
 ├── package.json, package-lock.json # Metadados npm da raiz do repositório
@@ -149,7 +149,8 @@ ABP-1-Portal-de-Certifcacao-Scrum/
 
 * O **backend** serve a API em `/api/...` e entrega o **front-end** na mesma origem (`/pages/...`), por isso o navegador chama a API sem configuração extra.
 * O **banco** é criado pelos scripts de `database/ddl` e `database/dml`, que o Docker executa automaticamente na primeira subida.
-* O **Docker Compose** liga os dois serviços (`app` e `db`): basta executar
+* O serviço **preparar-banco** valida os conteúdos, aplica as migrações e importa temas e questões antes de iniciar a aplicação.
+* O **Docker Compose** coordena os três serviços (`db`, `preparar-banco` e `app`): basta executar
 docker compose up -d --build
 
 
@@ -176,7 +177,9 @@ cd ABP-1-Portal-de-Certifcacao-Scrum
 ```bash
 docker compose up -d --build
 ```
-Dois serviços sobem: `db` (PostgreSQL 16, com o schema e os temas carregados automaticamente na primeira execução) e `app` (API Node.js que também serve o front-end). A primeira execução baixa as imagens e pode levar alguns minutos.
+O serviço `db` inicia o PostgreSQL 16; em um volume novo, executa o schema e o seed. Depois, `preparar-banco` aplica as migrações e importa os materiais e questões dos JSONs. A `app` (API Node.js que também serve o front-end) inicia somente após o sucesso da preparação. É esperado que `preparar-banco` apareça como `Exited (0)`. A primeira execução baixa as imagens e pode levar alguns minutos.
+
+Para atualizar uma instalação em uso, pare a aplicação antes de preparar o banco. Consulte os [comandos de preparação, atualização e validação](docs/preparacao-banco.md).
 
 3. **Acessar a Aplicação:**
 Abra o navegador em `http://localhost:3000/pages/index.html`
@@ -184,12 +187,16 @@ Abra o navegador em `http://localhost:3000/pages/index.html`
 ### 🔧 Comandos úteis
 
 ```bash
+docker compose ps -a           # conferir os três serviços, incluindo a preparação encerrada
+docker compose logs preparar-banco # acompanhar migrações e importações
 docker compose logs -f app     # acompanhar o log (os códigos de recuperação de senha aparecem aqui)
 docker compose down            # parar os serviços (os dados do banco são mantidos)
-docker compose down -v         # parar e apagar o banco, para recomeçar do zero
+
 ```
 
 Observações:
+* O volume do banco é mantido entre execuções. Não o remova para repetir a carga.
+* Os JSONs atuais contêm 12 temas, 82 materiais e 48 questões, exatamente quatro por tema, com 192 alternativas. Consulte a [distribuição do catálogo](docs/questoes/mapeamento-temas.md) e as [pendências dos testes](docs/preparacao-banco.md).
 * A recuperação de senha roda em modo `console`: sem servidor SMTP, o código de verificação é impresso no log do serviço `app`.
 * Se a porta 3000 já estiver em uso, altere o mapeamento `ports` do serviço `app` no `docker-compose.yml` (por exemplo, `"3001:3000"`).
 * Os segredos do `docker-compose.yml` servem apenas para demonstração local. Para usar outros valores, defina `SESSION_SECRET` e `RECUPERACAO_SECRET` (32 caracteres ou mais) no ambiente.

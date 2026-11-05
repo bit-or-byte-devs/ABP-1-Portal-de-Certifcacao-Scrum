@@ -1,6 +1,8 @@
 # Relatório do projeto — 02/11/2026
 
-> Estado atual após o complemento: 56 questões importáveis, com pelo menos quatro em cada um dos 12 temas. As 48 questões dos PDFs foram preservadas (41 importáveis e sete complementares) e receberam 15 novas questões autorais. Os números do diagnóstico inicial abaixo são históricos.
+> **Catálogo atual conferido nos JSONs:** 48 questões importáveis, exatamente quatro por tema, com 192 alternativas. São 33 questões provenientes de documentos e 15 autorais, já incluídas no total de 48. Consulte o [mapeamento atual](questoes/mapeamento-temas.md).
+
+> **Registro histórico:** as seções abaixo preservam os diagnósticos, contagens e resultados de testes registrados na integração anterior. As referências a 41 ou 56 questões e aos testes daquela integração não descrevem o catálogo atual nem constituem uma validação desta revisão.
 
 ## Comparação das branches
 
@@ -52,10 +54,10 @@ Prioridades: completar e revisar pedagogicamente o catálogo; validar as imagens
 
 O merge é local. A publicação da develop no remoto não foi realizada.
 
-## Atualização — complemento dos temas atuais
+## Atualização histórica — complemento curricular
 
-Após o diagnóstico acima, foram adicionadas 15 questões autorais, sem remover as existentes. O catálogo atual tem 56 questões importáveis, 224 alternativas e sete questões documentais complementares. Distribuição por tema: 4, 4, 8, 7, 5, 4, 4, 4, 4, 4, 4, 4. Kanban e Qualidade agora têm quatro questões cada. Todos os temas atingem o mínimo de quatro; a ausência de questões deixa de ser um impedimento após carregar o catálogo atualizado no banco.
+O registro posterior ao diagnóstico acima descrevia a adição de 15 questões autorais, sem remover as existentes, e um catálogo de 56 questões importáveis, 224 alternativas e sete questões documentais complementares. Distribuição por tema: 4, 4, 8, 7, 5, 4, 4, 4, 4, 4, 4, 4. Kanban e Qualidade agora têm quatro questões cada. Todos os temas atingem o mínimo de quatro; a ausência de questões deixa de ser um impedimento após carregar o catálogo atualizado no banco.
 
 Os números e pendências das seções anteriores registram o diagnóstico inicial. As novas questões não vieram dos PDFs: origem, referências e critérios estão em [complemento curricular](questoes/complemento-curricular.md). A exigência de imagens em todas as questões e o aceite pedagógico continuam pendentes. A população do banco da aplicação não é alterada pela edição dos arquivos.
 
-Validação do complemento: 28 testes aprovados, zero falhas e zero ignorados, incluindo PostgreSQL isolado, carga de 56 questões/224 alternativas e início/envio de respostas nos temas 7–12. O validador confirmou 56 questões sem modificar o banco da aplicação.
+Validação registrada à época do complemento: 28 testes aprovados, zero falhas e zero ignorados, incluindo PostgreSQL isolado, carga de 56 questões/224 alternativas e início/envio de respostas nos temas 7–12. Esse resultado histórico não foi reproduzido nesta revisão. A validação da preparação automática e as pendências atuais estão em [preparação do banco](preparacao-banco.md).

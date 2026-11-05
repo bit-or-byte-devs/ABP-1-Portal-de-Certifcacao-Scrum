@@ -110,7 +110,7 @@ body {
 /* Grid de Cards da Página Inicial */
 .cards-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 35px;
 }
 
@@ -357,6 +357,19 @@ body {
 .green-text {
     color: var(--green-accent);
 }
+
+@media (max-width: 900px) {
+    .cards-wrapper {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .cards-wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 /* Estados do exame ficam visíveis também nos cards recolhidos. */
 .pagina-exames .theme-card .btn-iniciar {
