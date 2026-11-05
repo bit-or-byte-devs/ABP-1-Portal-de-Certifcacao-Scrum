@@ -9,6 +9,7 @@ const migracoes = [
     '002_progresso_estudos.sql',
     '003_carga_questoes.sql',
     '004_conteudo_temas.sql',
+    '005_alternativas_questao.sql',
 ];
 const tabelasBase = [
     'tbcandidato', 'tbtema', 'tbimagem', 'tbmaterial',
