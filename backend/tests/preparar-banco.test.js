@@ -66,10 +66,12 @@ test('falha nos temas impede a importação das questões', async t => {
         return { rows: [] };
     });
     await assert.rejects(preparar(pool, opcoes), /importação dos temas: falha nos temas/);
-    assert.equal(chamadas.some(sql => sql.includes('FROM tbquestao')), false);
+    // A 005 também consulta tbquestao; o que não pode ter ocorrido é a importação das questões.
+    assert.equal(chamadas.some(sql => sql.includes('SELECT hash_origem FROM tbquestao')), false);
     assert.equal(chamadas.some(sql => sql.includes('INSERT INTO tbquestao')), false);
     assert.match(chamadas[1], /versao_sessao/);
     assert.match(chamadas[2], /subtitulos INTEGER/);
     assert.match(chamadas[3], /ALTER TABLE tbquestao/);
     assert.match(chamadas[4], /ADD COLUMN IF NOT EXISTS conteudo JSONB/);
+    assert.match(chamadas[5], /tg_alternativas_questao/);
 });
