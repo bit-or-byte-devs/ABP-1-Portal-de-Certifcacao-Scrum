@@ -1,0 +1,116 @@
+{
+  "versao_schema": 1,
+  "tema": 9,
+  "codigo": "tema-09",
+  "nome": "Kanban",
+  "descricao": "Fluxo contínuo, quadro Kanban, limites de trabalho em progresso e gargalos.",
+  "fonte": "Conteúdo curricular do Portal BorB; referências individuais nos blocos de referência.",
+  "introducao": [
+    {
+      "tipo": "imagem",
+      "caminho": "/imagens/temas/tema-9-quadro-kanban.jpg",
+      "texto_alternativo": "Quadro Kanban dividido em A Fazer, Em Andamento, Concluído e Aprovado",
+      "legenda": "Um quadro torna visível o estado dos itens e ajuda a equipe a acompanhar o fluxo."
+    }
+  ],
+  "secoes": [
+    {
+      "codigo": "tema-09-s01",
+      "titulo": "Kanban: fluxo contínuo e eficiência",
+      "nivel": 3,
+      "ordem": 1,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Enquanto o Scrum organiza o trabalho em ciclos (Sprints), o Kanban ajuda a visualizar e gerenciar o fluxo de ponta a ponta. Originado na indústria automobilística, associado ao Sistema Toyota de Produção, usa a visualização do trabalho para identificar gargalos, reduzir desperdícios e entregar valor de forma sustentável."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-09-s02",
+      "titulo": "Visualização do fluxo de trabalho",
+      "nivel": 3,
+      "ordem": 2,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": [
+            {
+              "tipo": "texto",
+              "texto": "Um quadro físico ou digital usa colunas que representam as etapas de cada tarefa. Um exemplo é "
+            },
+            {
+              "tipo": "destaque",
+              "texto": "A Fazer"
+            },
+            {
+              "tipo": "texto",
+              "texto": ", "
+            },
+            {
+              "tipo": "destaque",
+              "texto": "Em Andamento"
+            },
+            {
+              "tipo": "texto",
+              "texto": ", "
+            },
+            {
+              "tipo": "destaque",
+              "texto": "Concluído"
+            },
+            {
+              "tipo": "texto",
+              "texto": " e, opcionalmente, "
+            },
+            {
+              "tipo": "destaque",
+              "texto": "Aprovado"
+            },
+            {
+              "tipo": "texto",
+              "texto": ". Cartões representam as demandas e avançam conforme o trabalho progride; assim todos conseguem ver onde cada item está."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "codigo": "tema-09-s03",
+      "titulo": "Limite de WIP",
+      "nivel": 3,
+      "ordem": 3,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "WIP (Work in Progress) é o trabalho em andamento. Limitar a quantidade de itens simultâneos evita sobrecarga e multitarefa. A equipe procura terminar o que já começou antes de puxar novos itens, respeitando sua capacidade."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-09-s04",
+      "titulo": "Gargalos e melhoria contínua",
+      "nivel": 3,
+      "ordem": 4,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Quando o trabalho se acumula em uma coluna, há um gargalo. A equipe identifica o ponto de espera e atua para destravá-lo antes de iniciar mais tarefas. A melhoria contínua (Kaizen) usa ajustes incrementais e métricas como Cycle Time para melhorar o fluxo."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Em resumo:"
+            },
+            {
+              "tipo": "texto",
+              "texto": " Kanban visualiza o fluxo em colunas e cartões, limita o WIP e ajuda a equipe a detectar gargalos. As tarefas avançam continuamente conforme a capacidade, sem depender de ciclos fixos."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

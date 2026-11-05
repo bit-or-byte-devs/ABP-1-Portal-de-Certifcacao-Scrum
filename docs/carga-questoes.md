@@ -1,0 +1,58 @@
+# Carga de questões
+
+Os 12 JSONs atuais contêm 48 questões importáveis, quatro por tema, com 192 alternativas. Todas as 48 questões têm imagem. O importador aceita o campo `destino` para mapear uma questão para outro tema/código ou ignorá-la quando esse campo é `null`.
+
+O [mapeamento curricular](questoes/mapeamento-temas.md) apresenta a distribuição atual: 33 questões provenientes de documentos e 15 questões autorais, descritas no [complemento curricular](questoes/complemento-curricular.md). Juntas, elas formam as 48 questões; o complemento já está incluído nesse total.
+
+## Regra das alternativas
+
+O banco recusa qualquer questão que não tenha exatamente 4 alternativas (A a D) e exatamente 1 correta. A verificação é feita no fim da transação, por isso a questão e as quatro alternativas precisam ser gravadas na mesma transação, como o importador já faz. A regra vem da migração `005_alternativas_questao.sql`, que também se recusa a rodar se encontrar no banco alguma questão fora dessa regra, listando quais são. Para trocar o gabarito de uma questão, desmarque a alternativa correta antiga antes de marcar a nova.
+
+## Preparação completa
+
+Consulte o [fluxo de preparação do banco](preparacao-banco.md). Pela raiz, configure o PostgreSQL em `backend/.env` e execute:
+
+```sh
+npm run setup
+npm run db:preparar -- --validar
+npm run db:preparar
+```
+
+Em banco vazio fora do Docker, execute antes `database/ddl/schema.sql`, que já incorpora as estruturas das migrações 003 e 005. O comando completo aplica as migrações 001 a 005, importa os temas e depois as questões.
+
+## Importação individual
+
+```sh
+npm run db:questoes -- --validar
+npm run db:questoes -- --migrar
+npm run db:questoes
+```
+
+O comando `--migrar` aplica a migração 003 e depois a 005, ambas repetíveis. Em banco existente, aplique também as migrações anteriores necessárias. Para essa importação individual, os temas precisam estar cadastrados, pelo seed ou pelo importador dos temas. `--validar` lê os arquivos e não acessa o banco.
+
+A carga é transacional, serializada e repetível. Os IDs reais dos temas são consultados pela ordem. O hash impede substituir conteúdo já importado: alterações exigem novo código de versão. `--vincular-imagens` permite apenas adicionar imagem ao mesmo conteúdo anteriormente sem imagem, preservando IDs e respostas. Não substitui imagens nem textos. Questões cadastradas manualmente sem código de origem exigem revisão antes da primeira carga.
+
+Se uma instalação já importou os JSONs 7–12 com outra numeração, revise esses registros e as respostas associadas antes de executar esta versão. A carga não reclassifica registros existentes; colisões de código com conteúdo diferente causam rollback. Não apague respostas para corrigir o catálogo.
+
+## Docker
+
+```powershell
+docker compose up -d --build
+docker compose logs preparar-banco
+```
+
+O Docker inclui os JSONs e as imagens. O serviço `preparar-banco` executa as migrações e as cargas antes da aplicação, inclusive em volumes antigos, que não reexecutam o schema; por isso um volume criado antes da US14 recebe a 005 na próxima subida. Não remova volumes para recarregar questões; siga o [procedimento para instalações existentes](preparacao-banco.md).
+
+As imagens documentais ficam em `docs/questoes/questoes-imagens`. As públicas ficam em `imagens/questoes`; os caminhos antigos de `imagens/` também foram preservados para bancos existentes. A API usa `LEFT JOIN` e a tela omite a imagem quando nula. Créditos não informados permanecem nulos. Algumas ilustrações dão pistas da resposta e precisam de revisão pedagógica.
+
+## Cobertura e testes
+
+O total de referência para a carga é 48 questões e 192 alternativas, com quatro questões em cada um dos 12 temas, todas com imagem. A revisão pedagógica e a carga no ambiente de destino continuam necessárias.
+
+Para rodar os testes, inclusive os que usam PostgreSQL real, reconstrua a imagem (os testes entram nela no build):
+
+```powershell
+docker compose up -d --build
+docker compose exec -e TEST_EXAME_POSTGRES=true app npm test
+docker compose exec app npm test
+```

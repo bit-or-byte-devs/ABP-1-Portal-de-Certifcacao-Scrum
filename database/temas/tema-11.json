@@ -1,0 +1,129 @@
+{
+  "versao_schema": 1,
+  "tema": 11,
+  "codigo": "tema-11",
+  "nome": "Métricas Ágeis",
+  "descricao": "Velocity, Burndown, Burnup, Lead Time e Cycle Time.",
+  "fonte": "Conteúdo curricular do Portal BorB; referências individuais nos blocos de referência.",
+  "introducao": [
+    {
+      "tipo": "paragrafo",
+      "conteudo": "Métricas ágeis ajudam o time a entender valor entregue, previsibilidade e eficiência do fluxo. Não devem ser usadas para punir nem para microgerenciar a produtividade individual. Funcionam como um painel de bordo: tornam o andamento visível e ajudam a corrigir a rota."
+    },
+    {
+      "tipo": "imagem",
+      "caminho": "/imagens/temas/tema-11-metricas-ageis.jpg",
+      "texto_alternativo": "Comparação de Velocity, Burndown, Burnup, Cycle Time e Lead Time",
+      "legenda": "Métricas diferentes respondem a perguntas diferentes sobre trabalho e fluxo."
+    }
+  ],
+  "secoes": [
+    {
+      "codigo": "tema-11-s01",
+      "titulo": "Velocity",
+      "nivel": 3,
+      "ordem": 1,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Mede a quantidade de Story Points de itens que a equipe concluiu integralmente em uma Sprint. Se itens concluídos valem 3, 5 e 5 pontos, a Velocity é 13. O histórico, como a média das últimas Sprints, ajuda a prever capacidade e planejar entregas."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Velocity não serve para comparar equipes, pois as escalas são próprias de cada time, nem deve virar meta de pressão para produzir mais a qualquer custo."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-11-s02",
+      "titulo": "Burndown Chart",
+      "nivel": 3,
+      "ordem": 2,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Mostra o trabalho restante ao longo do tempo. O eixo vertical representa o trabalho restante (horas, tarefas ou pontos) e o horizontal representa os dias. A linha ideal desce até zero; a linha real mostra o progresso observado. Se a linha real fica muito acima da ideal, o time pode investigar riscos e ajustar o plano."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-11-s03",
+      "titulo": "Burnup Chart",
+      "nivel": 3,
+      "ordem": 3,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Mostra o trabalho concluído e também a evolução do escopo total. Uma linha representa o trabalho acumulado entregue; outra representa o escopo. Se a linha do escopo subir, novos requisitos foram adicionados, tornando visível o efeito das mudanças nas previsões."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-11-s04",
+      "titulo": "Lead Time e Cycle Time",
+      "nivel": 3,
+      "ordem": 4,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Lead Time:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " tempo total desde o pedido do cliente ou negócio até a entrega em produção. Inclui o tempo em que o item ficou aguardando na fila e representa a espera percebida pelo cliente."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Cycle Time:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " tempo desde que a equipe começa efetivamente a trabalhar no item até sua conclusão. Ajuda a observar a eficiência interna do processo."
+              }
+            ]
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Lead Time começa quando a demanda é solicitada; o Cycle Time começa quando o trabalho é iniciado. Por isso, Lead Time é sempre maior ou igual ao Cycle Time."
+        },
+        {
+          "tipo": "referencia",
+          "conteudo": [
+            {
+              "tipo": "texto",
+              "texto": "Fontes do material: "
+            },
+            {
+              "tipo": "link",
+              "texto": "Scrum.org — Evidence-Based Management",
+              "url": "https://www.scrum.org/resources/evidence-based-management",
+              "nova_aba": true
+            },
+            {
+              "tipo": "texto",
+              "texto": ", "
+            },
+            {
+              "tipo": "link",
+              "texto": "Atlassian — Agile Metrics",
+              "url": "https://www.atlassian.com/agile/project-management/metrics",
+              "nova_aba": true
+            },
+            {
+              "tipo": "texto",
+              "texto": " e Kanban University."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

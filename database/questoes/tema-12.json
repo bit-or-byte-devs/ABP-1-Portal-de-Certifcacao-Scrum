@@ -1,0 +1,138 @@
+{
+  "tema": 12,
+  "fonte": "Fontes individuais em cada questão; mapeamento em docs/questoes/mapeamento-temas.md",
+  "questoes": [
+    {
+      "codigo": "tema-12-q50",
+      "enunciado": "Um item foi implementado, mas ainda não atende à Definition of Done. Como deve ser tratado?",
+      "justificativa": "A Definition of Done estabelece o estado de qualidade necessário para um Incremento; implementação isolada não basta.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem1-tema12-questoes.png",
+        "alt": "Painel ilustrativo com verificações automatizadas de qualidade e testes."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Como Incremento pronto, desde que o prazo esteja próximo.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Como trabalho que ainda não faz parte de um Incremento concluído.",
+          "correta": true
+        },
+        {
+          "letra": "C",
+          "texto": "Como item automaticamente aprovado na Sprint Review.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Como concluído se apenas o autor concordar.",
+          "correta": false
+        }
+      ],
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-12-q50"
+    },
+    {
+      "codigo": "tema-12-q51",
+      "enunciado": "Qual é uma contribuição dos testes automatizados para a qualidade?",
+      "justificativa": "Os testes oferecem feedback repetível sobre comportamentos cobertos, mas sua cobertura e seus casos são limitados.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem2-tema12-questoes.png",
+        "alt": "Ilustração abstrata de componentes de software conectados em forma de cubo."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Garantir ausência de qualquer defeito.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Eliminar a necessidade de revisar requisitos.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Substituir toda avaliação humana.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Detectar regressões em comportamentos verificados quando o código muda.",
+          "correta": true
+        }
+      ],
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-12-q51"
+    },
+    {
+      "codigo": "tema-12-q52",
+      "enunciado": "Qual prática caracteriza a integração contínua?",
+      "justificativa": "Integrações frequentes com verificações permitem perceber incompatibilidades e falhas mais cedo.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem3-tema12-questoes.png",
+        "alt": "Ciclo de integração contínua com desenvolvimento, verificações e validação."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Integrar alterações frequentemente e executar verificações automatizadas.",
+          "correta": true
+        },
+        {
+          "letra": "B",
+          "texto": "Integrar tudo somente no último dia do projeto.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Evitar testes para acelerar a integração.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Manter cada alteração permanentemente isolada.",
+          "correta": false
+        }
+      ],
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-12-q52"
+    },
+    {
+      "codigo": "tema-12-q53",
+      "enunciado": "O que significa refatorar código?",
+      "justificativa": "A refatoração reorganiza o código sem mudar seu comportamento esperado, apoiando compreensão e manutenção.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem4-tema12-questoes.png",
+        "alt": "Comparação ilustrativa entre código desorganizado e código refatorado."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Adicionar funcionalidades obrigatoriamente.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "Apagar os testes existentes.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Melhorar sua estrutura interna preservando o comportamento observável.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "Adiar qualquer manutenção até o fim do projeto.",
+          "correta": false
+        }
+      ],
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-12-q53"
+    }
+  ]
+}

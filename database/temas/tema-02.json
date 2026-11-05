@@ -1,0 +1,139 @@
+{
+  "versao_schema": 1,
+  "tema": 2,
+  "codigo": "tema-02",
+  "nome": "Manifesto Ágil",
+  "descricao": "Os quatro valores e os doze princípios do Manifesto Ágil.",
+  "fonte": "Conteúdo curricular do Portal BorB; referências individuais nos blocos de referência.",
+  "introducao": [
+    {
+      "tipo": "paragrafo",
+      "conteudo": "O Manifesto para o Desenvolvimento Ágil de Software foi criado em 2001, em Snowbird, Utah, por 17 profissionais que buscavam alternativas a processos pesados, burocráticos e muito dependentes de planos rígidos. O grupo reuniu práticas que já funcionavam em equipes e destacou colaboração, flexibilidade e entrega rápida de valor."
+    },
+    {
+      "tipo": "imagem",
+      "caminho": "/imagens/temas/tema-2-valores-manifesto.jpg",
+      "texto_alternativo": "Os quatro valores do Manifesto Ágil",
+      "legenda": "Os quatro valores do Manifesto Ágil."
+    },
+    {
+      "tipo": "paragrafo",
+      "conteudo": "A frase que resume sua intenção é: “Estamos descobrindo maneiras melhores de desenvolver software, fazendo-o nós mesmos e ajudando outros a fazerem o mesmo”. O Manifesto não rejeita os itens à direita; valoriza mais os itens à esquerda."
+    }
+  ],
+  "secoes": [
+    {
+      "codigo": "tema-02-s01",
+      "titulo": "Os quatro valores",
+      "nivel": 3,
+      "ordem": 1,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": true,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Indivíduos e interações mais que processos e ferramentas:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " ferramentas e processos ajudam, mas a comunicação e a colaboração entre as pessoas são essenciais."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Software em funcionamento mais que documentação abrangente:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " documentação tem valor, mas o produto funcional valida o negócio e gera valor ao cliente."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Colaboração com o cliente mais que negociação de contratos:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " cliente e equipe trabalham em parceria para ajustar rotas e prioridades."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Responder a mudanças mais que seguir um plano:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " um plano é útil, mas deve ser adaptado quando o mercado e a realidade mudam."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "codigo": "tema-02-s02",
+      "titulo": "Os doze princípios",
+      "nivel": 3,
+      "ordem": 2,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": true,
+          "itens": [
+            "Satisfazer o cliente por meio da entrega contínua e antecipada de software com valor.",
+            "Aceitar mudanças de requisitos, mesmo tarde no desenvolvimento, para gerar vantagem ao cliente.",
+            "Entregar software funcionando com frequência, preferindo ciclos curtos.",
+            "Manter pessoas de negócios e desenvolvedores trabalhando juntos diariamente.",
+            "Construir projetos ao redor de pessoas motivadas, dando ambiente, suporte e confiança.",
+            "Preferir a conversa direta como forma eficiente de transmitir informações à equipe.",
+            "Usar software funcionando como medida primária de progresso.",
+            "Promover um ritmo sustentável que patrocinadores, desenvolvedores e usuários consigam manter.",
+            "Manter atenção contínua à excelência técnica e ao bom design para aumentar a agilidade.",
+            "Valorizar a simplicidade: maximizar o trabalho que não precisa ser feito.",
+            "Permitir que equipes auto-organizáveis criem as melhores arquiteturas, requisitos e designs.",
+            "Refletir regularmente sobre como se tornar mais eficaz e ajustar o comportamento."
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Na prática, ciclos curtos e feedback permitem adaptar o produto; conversa frequente evita mal-entendidos; excelência técnica reduz dívida; e retrospectivas apoiam a melhoria contínua."
+        },
+        {
+          "tipo": "referencia",
+          "conteudo": [
+            {
+              "tipo": "texto",
+              "texto": "Fontes do material: "
+            },
+            {
+              "tipo": "link",
+              "texto": "Manifesto Ágil",
+              "url": "https://agilemanifesto.org/iso/ptbr/manifesto.html",
+              "nova_aba": true
+            },
+            {
+              "tipo": "texto",
+              "texto": " e seus "
+            },
+            {
+              "tipo": "link",
+              "texto": "doze princípios",
+              "url": "https://agilemanifesto.org/iso/ptbr/principles.html",
+              "nova_aba": true
+            },
+            {
+              "tipo": "texto",
+              "texto": "."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -42,12 +42,19 @@ CREATE TABLE tbmaterial (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     idtema INTEGER NOT NULL REFERENCES tbtema(id),
     titulo VARCHAR(200) NOT NULL,
-    conteudo_ou_url TEXT NOT NULL,
+    conteudo_ou_url TEXT,
     tipo VARCHAR(30) NOT NULL,
     ordem INTEGER NOT NULL,
+    codigo_origem VARCHAR(100),
+    hash_origem VARCHAR(64),
+    nivel SMALLINT,
+    conteudo JSONB,
 
-    CONSTRAINT ck_material_ordem CHECK (ordem > 0)
+    CONSTRAINT ck_material_ordem CHECK (ordem >= 0),
+    CONSTRAINT ck_material_nivel CHECK (nivel IS NULL OR nivel IN (3, 4))
 );
+
+CREATE UNIQUE INDEX uq_material_codigo_origem ON tbmaterial(codigo_origem);
 
 -- Um material pode utilizar várias imagens.
 CREATE TABLE tbmaterial_por_imagem (
@@ -61,13 +68,17 @@ CREATE TABLE tbmaterial_por_imagem (
 CREATE TABLE tbquestao (
     id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     idtema INTEGER NOT NULL REFERENCES tbtema(id),
-    idimagem INTEGER NOT NULL REFERENCES tbimagem(id),
+    idimagem INTEGER REFERENCES tbimagem(id),
+    codigo_origem VARCHAR(100),
+    hash_origem VARCHAR(64),
     enunciado TEXT NOT NULL,
     justificativa TEXT NOT NULL,
 
     -- Necessária para a referência composta de tbresposta.
     CONSTRAINT uq_questao_tema UNIQUE (id, idtema)
 );
+
+CREATE UNIQUE INDEX uq_questao_codigo_origem ON tbquestao(codigo_origem);
 
 -- 6. Alternativas
 CREATE TABLE tbalternativa (
@@ -92,6 +103,61 @@ CREATE TABLE tbalternativa (
 CREATE UNIQUE INDEX uq_alternativa_correta
     ON tbalternativa (idquestao)
     WHERE correta = TRUE;
+
+-- 6.1 Validação das alternativas da questão
+-- Verificada no COMMIT, permitindo inserir a questão e depois as 4 alternativas.
+CREATE OR REPLACE FUNCTION fn_validar_alternativas_questao() RETURNS trigger
+LANGUAGE plpgsql AS $$
+DECLARE
+    questoes INTEGER[];
+    questao INTEGER;
+    total INTEGER;
+    corretas INTEGER;
+BEGIN
+    IF TG_TABLE_NAME = 'tbquestao' THEN
+        questoes := ARRAY[NEW.id];
+    ELSIF TG_OP = 'INSERT' THEN
+        questoes := ARRAY[NEW.idquestao];
+    ELSIF TG_OP = 'DELETE' OR OLD.idquestao = NEW.idquestao THEN
+        questoes := ARRAY[OLD.idquestao];
+    ELSE
+        -- Alternativa movida de questão: valida a de origem e a de destino.
+        questoes := ARRAY[OLD.idquestao, NEW.idquestao];
+    END IF;
+
+    FOREACH questao IN ARRAY questoes LOOP
+        -- Trava a questão para que transações concorrentes não passem juntas.
+        PERFORM 1 FROM tbquestao WHERE id = questao FOR UPDATE;
+        -- Questão apagada na mesma transação: nada a validar.
+        CONTINUE WHEN NOT FOUND;
+
+        SELECT count(*), count(*) FILTER (WHERE correta)
+        INTO total, corretas
+        FROM tbalternativa
+        WHERE idquestao = questao;
+
+        IF total <> 4 OR corretas <> 1 THEN
+            RAISE EXCEPTION 'A questão % deve ter exatamente 4 alternativas e 1 correta (tem % e %).',
+                questao, total, corretas
+                USING ERRCODE = '23514', CONSTRAINT = 'ck_questao_alternativas';
+        END IF;
+    END LOOP;
+
+    RETURN NULL;
+END $$;
+
+DROP TRIGGER IF EXISTS tg_alternativas_questao ON tbalternativa;
+CREATE CONSTRAINT TRIGGER tg_alternativas_questao
+    AFTER INSERT OR DELETE OR UPDATE OF idquestao, correta ON tbalternativa
+    DEFERRABLE INITIALLY DEFERRED
+    FOR EACH ROW EXECUTE FUNCTION fn_validar_alternativas_questao();
+
+-- Impede questão sem nenhuma alternativa.
+DROP TRIGGER IF EXISTS tg_questao_alternativas ON tbquestao;
+CREATE CONSTRAINT TRIGGER tg_questao_alternativas
+    AFTER INSERT ON tbquestao
+    DEFERRABLE INITIALLY DEFERRED
+    FOR EACH ROW EXECUTE FUNCTION fn_validar_alternativas_questao();
 
 -- 7. Certificação do candidato
 -- Neste MVP, cada candidato possui uma certificação.
@@ -252,5 +318,13 @@ CREATE INDEX idx_questao_tema ON tbquestao(idtema);
 CREATE INDEX idx_questao_imagem ON tbquestao(idimagem);
 CREATE INDEX idx_resposta_questao ON tbresposta(idquestao);
 CREATE INDEX idx_resposta_alternativa ON tbresposta(idalternativa);
+
+CREATE TABLE IF NOT EXISTS tbprogresso_estudo (
+ idcandidato INTEGER NOT NULL REFERENCES tbcandidato(id) ON DELETE CASCADE,
+ idtema INTEGER NOT NULL REFERENCES tbtema(id) ON DELETE CASCADE,
+ secoes VARCHAR(100)[] NOT NULL DEFAULT '{}',
+ atualizado_em TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ PRIMARY KEY (idcandidato, idtema)
+);
 
 COMMIT;

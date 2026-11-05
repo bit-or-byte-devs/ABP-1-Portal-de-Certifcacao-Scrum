@@ -1,4 +1,4 @@
-# Sobe o Portal de Certificação (app + PostgreSQL) sem nenhuma configuração manual:
+# Sobe o Portal de Certificação (PostgreSQL + preparação + app):
 #   docker compose up -d --build
 # Depois acesse http://localhost:3000/pages/index.html
 #
@@ -19,17 +19,34 @@ services:
       - ./database/ddl/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
       - ./database/dml/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U portal -d portal_certificacao"]
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U portal -d portal_certificacao"]
       interval: 5s
       timeout: 3s
       retries: 20
     restart: unless-stopped
+
+  # Usa a mesma receita de imagem da aplicação e encerra após preparar o banco.
+  preparar-banco:
+    build: .
+    command: ["npm", "run", "db:preparar"]
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: portal_certificacao
+      DB_USER: portal
+      DB_PASSWORD: portal_dev_123
+    restart: "no"
 
   app:
     build: .
     depends_on:
       db:
         condition: service_healthy
+      preparar-banco:
+        condition: service_completed_successfully
     environment:
       NODE_ENV: development
       PORT: "3000"

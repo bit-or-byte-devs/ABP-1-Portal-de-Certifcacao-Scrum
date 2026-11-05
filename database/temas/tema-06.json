@@ -1,0 +1,177 @@
+{
+  "versao_schema": 1,
+  "tema": 6,
+  "codigo": "tema-06",
+  "nome": "Artefatos do Scrum",
+  "descricao": "Product Backlog, Sprint Backlog, Incremento e seus compromissos.",
+  "fonte": "Conteúdo curricular do Portal BorB; referências individuais nos blocos de referência.",
+  "introducao": [
+    {
+      "tipo": "paragrafo",
+      "conteudo": "Os artefatos do Scrum representam trabalho ou valor e maximizam a transparência das informações essenciais. Cada artefato tem um compromisso correspondente, que fornece foco e uma referência para medir o progresso. As associações não representam uma sequência de etapas."
+    },
+    {
+      "tipo": "imagem",
+      "caminho": "/imagens/temas/tema-6-artefatos-e-compromissos.png",
+      "texto_alternativo": "Product Backlog e Product Goal, Sprint Backlog e Sprint Goal, Incremento e Definition of Done",
+      "legenda": "Os três artefatos do Scrum e seus compromissos."
+    },
+    {
+      "tipo": "paragrafo",
+      "conteudo": "Os compromissos não são promessas de concluir uma quantidade fixa de tarefas. Eles orientam decisões, aumentam a transparência e apoiam a inspeção e a adaptação."
+    }
+  ],
+  "secoes": [
+    {
+      "codigo": "tema-06-s01",
+      "titulo": "Product Backlog e Product Goal",
+      "nivel": 3,
+      "ordem": 1,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Product Backlog é uma lista ordenada e emergente do que é necessário para melhorar o produto e a fonte única de trabalho do Scrum Team. Ele muda conforme o produto, o mercado e o entendimento das pessoas evoluem."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Product Goal descreve um estado futuro do produto e funciona como objetivo de longo prazo do Scrum Team. O time deve cumprir ou abandonar um Product Goal antes de assumir outro. O Product Owner responde por maximizar o valor do produto e gerir o backlog de forma eficaz: comunicar o Product Goal, criar e ordenar itens e manter o backlog transparente e compreendido."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-06-s02",
+      "titulo": "Sprint Backlog e Sprint Goal",
+      "nivel": 3,
+      "ordem": 2,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Sprint Backlog contém a Sprint Goal, os itens do Product Backlog selecionados para a Sprint e um plano acionável para criar o Incremento. Os Developers o criam e atualizam durante a Sprint conforme o aprendizado aumenta."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A Sprint Goal é o objetivo único da Sprint. Ela cria coerência e foco, mas permite flexibilidade sobre o trabalho exato necessário. Se o trabalho se revelar diferente do esperado, os Developers colaboram com o Product Owner para negociar o escopo sem comprometer a meta."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-06-s03",
+      "titulo": "Exemplo para o portal",
+      "nivel": 4,
+      "ordem": 3,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Sprint Goal:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " permitir que uma pessoa crie credenciais válidas e acesse o portal."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Itens selecionados:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " cadastro de candidato e autenticação por CPF e senha."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Plano inicial:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " validar dados, persistir o cadastro, proteger a senha, autenticar, tratar erros e testar o fluxo integrado."
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "codigo": "tema-06-s04",
+      "titulo": "Incremento e Definition of Done",
+      "nivel": 3,
+      "ordem": 4,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Um Incremento é um passo concreto em direção ao Product Goal. Deve somar-se aos incrementos anteriores, ser verificado e permanecer utilizável. Pode haver vários incrementos em uma Sprint, e valor pode ser liberado antes da Sprint Review."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A Definition of Done (DoD) descreve formalmente o estado do Incremento quando as medidas de qualidade exigidas para o produto são atendidas. Trabalho que não satisfaz a DoD não faz parte do Incremento e retorna ao Product Backlog."
+        },
+        {
+          "tipo": "imagem",
+          "caminho": "/imagens/temas/tema-6-relacao-artefatos.png",
+          "texto_alternativo": "Critérios e dimensões de qualidade usados para verificar o trabalho",
+          "legenda": "Exemplos de critérios usados para tornar a qualidade verificável."
+        },
+        {
+          "tipo": "imagem",
+          "caminho": "/imagens/temas/tema-6-criterios-de-qualidade.png",
+          "texto_alternativo": "Critérios de qualidade e verificação de um Incremento",
+          "legenda": "Uma definição de qualidade ajuda o time a verificar se o Incremento está pronto."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-06-s05",
+      "titulo": "Como os três pares trabalham juntos",
+      "nivel": 3,
+      "ordem": 5,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Product Goal indica a direção estratégica. Em cada Sprint, a Sprint Goal define um resultado intermediário coerente. O Incremento oferece evidência concreta do progresso, desde que satisfaça a DoD. A inspeção do que foi concluído alimenta novas decisões sobre o Product Backlog."
+        },
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            "O compromisso do Sprint Backlog é a Sprint Goal, não a conclusão rígida de todos os itens inicialmente selecionados.",
+            "A Sprint Review inspeciona resultados e pode adaptar o Product Backlog; não é uma barreira obrigatória para liberar valor.",
+            "Critérios de aceitação verificam um item específico. A DoD define a qualidade comum exigida para qualquer Incremento.",
+            "Todos os Scrum Teams que trabalham no mesmo produto precisam respeitar a mesma DoD."
+          ]
+        },
+        {
+          "tipo": "imagem",
+          "caminho": "/imagens/temas/tema-6-inspecao-dos-artefatos.png",
+          "texto_alternativo": "Tabela que relaciona cada artefato ao seu compromisso e à pergunta de inspeção",
+          "legenda": "Os compromissos ajudam a inspecionar o estado de cada artefato."
+        },
+        {
+          "tipo": "referencia",
+          "conteudo": [
+            {
+              "tipo": "texto",
+              "texto": "Referência: Schwaber e Sutherland, "
+            },
+            {
+              "tipo": "link",
+              "texto": "The Scrum Guide (2020)",
+              "url": "https://scrumguides.org/scrum-guide.html",
+              "nova_aba": true
+            },
+            {
+              "tipo": "texto",
+              "texto": "."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

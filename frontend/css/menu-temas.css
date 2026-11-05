@@ -110,7 +110,7 @@ body {
 /* Grid de Cards da Página Inicial */
 .cards-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 35px;
 }
 
@@ -268,7 +268,6 @@ body {
     font-size: 12px;
     color: var(--text-muted);
     display: none; /* Recolhidos ficam ocultos */
-    gap: 4px;
 }
 
 .btn-iniciar {
@@ -311,10 +310,21 @@ body {
 }
 
 .theme-card.active .theme-desc {
-    max-height: 100px;
+    max-height: 2000px;
     margin-top: 15px;
     border-top: 1px solid rgba(255, 255, 255, 0.04);
     padding-top: 15px;
+}
+
+.theme-desc h4 {
+    color: var(--text-white);
+    font-size: 14px;
+    margin-top: 14px;
+    margin-bottom: 6px;
+}
+
+.theme-desc p + p {
+    margin-top: 8px;
 }
 
 /* Rodapé */
@@ -346,4 +356,34 @@ body {
 
 .green-text {
     color: var(--green-accent);
+}
+
+@media (max-width: 900px) {
+    .cards-wrapper {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .cards-wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Estados do exame ficam visíveis também nos cards recolhidos. */
+.pagina-exames .theme-card .btn-iniciar {
+    display: inline-flex;
+}
+
+.pagina-exames .btn-iniciar:disabled {
+    cursor: default;
+    border-color: rgba(255, 255, 255, 0.12);
+    color: var(--text-muted);
+}
+
+#btn-continuar-certificacao {
+    background-color: var(--green-accent);
+    color: var(--inner-box);
+    font-weight: 700;
 }

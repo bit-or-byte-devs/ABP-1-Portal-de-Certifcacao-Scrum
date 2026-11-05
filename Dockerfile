@@ -13,6 +13,7 @@ RUN npm ci --omit=dev
 COPY backend ./
 COPY frontend /app/frontend
 COPY imagens /app/imagens
+COPY database /app/database
 
 USER node
 EXPOSE 3000

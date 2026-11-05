@@ -1,0 +1,156 @@
+{
+  "versao_schema": 1,
+  "tema": 8,
+  "codigo": "tema-08",
+  "nome": "Gestão do Product Backlog",
+  "descricao": "Priorização, refinamento, organização e evolução do backlog.",
+  "fonte": "Conteúdo curricular do Portal BorB; referências individuais nos blocos de referência.",
+  "introducao": [
+    {
+      "tipo": "imagem",
+      "caminho": "/imagens/temas/tema-8-priorizacao-backlog.jpg",
+      "texto_alternativo": "Product Backlog ordenado por prioridade: login e cadastro, listagem de cursos e pagamento por Pix",
+      "legenda": "Exemplo visual de organização de itens do Product Backlog por prioridade."
+    }
+  ],
+  "secoes": [
+    {
+      "codigo": "tema-08-s01",
+      "titulo": "O que é o Product Backlog?",
+      "nivel": 3,
+      "ordem": 1,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Imagine que você está construindo uma casa e tem uma lista grande de desejos: piscina, paredes, azulejos e telhado. Tentar fazer tudo ao mesmo tempo não funciona. No desenvolvimento de software, o Product Backlog é essa lista viva e organizada de tudo que pode ser necessário para construir ou melhorar o produto."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No Scrum, é a fonte única de requisitos para qualquer mudança no produto. Nunca está completo: evolui conforme o produto e o ambiente em que é usado mudam."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-08-s02",
+      "titulo": "Responsabilidade do Product Owner",
+      "nivel": 3,
+      "ordem": 2,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Product Owner responde pela gestão do Product Backlog. Cabe a ele manter a lista visível, transparente e clara para todos e ordenar os itens para maximizar o valor para o negócio e os usuários."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-08-s03",
+      "titulo": "Colaboração do time",
+      "nivel": 3,
+      "ordem": 3,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Product Owner organiza a ordem e o valor dos itens. O restante do time colabora estimando o esforço — por exemplo, usando Story Points — e refinando detalhes técnicos. A colaboração ajuda a criar entendimento compartilhado sobre o trabalho."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-08-s04",
+      "titulo": "Refinamento contínuo",
+      "nivel": 3,
+      "ordem": 4,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Backlog Refinement é a atividade contínua de detalhar, estimar e reavaliar itens para que histórias de usuário estejam compreendidas e preparadas para entrar em Sprints futuras. Épicos e funcionalidades podem ser detalhados em histórias menores com critérios claros."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-08-s05",
+      "titulo": "Ordenação e priorização",
+      "nivel": 3,
+      "ordem": 5,
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Os itens mais valiosos para o negócio e para os usuários ficam no topo. A ordem também considera dependências e o que é necessário para entregar valor com segurança."
+        }
+      ]
+    },
+    {
+      "codigo": "tema-08-s06",
+      "titulo": "Exemplo do portal",
+      "nivel": 4,
+      "ordem": 6,
+      "blocos": [
+        {
+          "tipo": "lista",
+          "ordenada": false,
+          "itens": [
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Alta prioridade:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " tela de login e cadastro, base essencial para o funcionamento do portal."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Prioridade seguinte:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " listagem de cursos, que entrega valor após o acesso."
+              }
+            ],
+            [
+              {
+                "tipo": "destaque",
+                "texto": "Futuro:"
+              },
+              {
+                "tipo": "texto",
+                "texto": " sistema de pagamento por Pix, que depende da base estar pronta."
+              }
+            ]
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Em outro exemplo do documento, login seguro e busca rápida aparecem no topo por serem importantes para a experiência inicial. A ordem deve ser revista conforme o valor, as dependências e o contexto do produto evoluem."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Em resumo:"
+            },
+            {
+              "tipo": "texto",
+              "texto": " o Product Backlog é dinâmico e priorizado; o Product Owner mantém sua transparência e ordenação, e o time colabora no refinamento, nas estimativas e nos detalhes técnicos."
+            }
+          ]
+        },
+        {
+          "tipo": "referencia",
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Fontes consultadas no material:"
+            },
+            {
+              "tipo": "texto",
+              "texto": " Guia de Product Backlog (Scrum.com.br); Product Backlog no Scrum (Escritório de Projetos); boas práticas de backlog (Scrum Alliance)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

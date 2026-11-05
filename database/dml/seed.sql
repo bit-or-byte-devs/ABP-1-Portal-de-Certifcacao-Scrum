@@ -63,5 +63,4 @@ VALUES
     12
 )
 ON CONFLICT (ordem) DO NOTHING;
-
 COMMIT;

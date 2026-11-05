@@ -1,0 +1,138 @@
+{
+  "tema": 11,
+  "fonte": "Fontes individuais em cada questão; mapeamento em docs/questoes/mapeamento-temas.md",
+  "questoes": [
+    {
+      "codigo": "tema-11-q01",
+      "enunciado": "O que um gráfico de Burndown (Burndown Chart) da Sprint ilustra?",
+      "justificativa": "O Burndown mostra uma tendência visual de quanto trabalho falta ser feito conforme os dias da Sprint passam.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem1-tema11-questoes.png",
+        "alt": "Equipe analisando um gráfico de progresso durante uma reunião."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "A quantidade exata de trabalho concluído a cada dia.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "O número de defeitos e bugs encontrados durante a Sprint.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "O trabalho restante estimado ao longo do tempo até o final da Sprint.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "A velocidade média do time nas últimas três Sprints.",
+          "correta": false
+        }
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 11 - Métricas Ágeis.pdf",
+      "questao_origem": "tema-09-q02"
+    },
+    {
+      "codigo": "tema-11-q02",
+      "enunciado": "O que representa a \"Velocidade\" (Velocity) de um Scrum Team?",
+      "justificativa": "A Velocidade é uma métrica histórica usada para ajudar a equipe a prever quanto trabalho consegue realizar em Sprints futuras.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem2-tema11-questoes.png",
+        "alt": "Equipe acompanhando seus resultados e desempenho entre ciclos de trabalho."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "A rapidez com que o Scrum Master consegue remover impedimentos organizacionais.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "O número de horas trabalhadas por dia pelos Developers da equipe.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "A quantidade de trabalho (frequentemente em Story Points) concluída pelo time em Sprints anteriores.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "O tempo total necessário para entregar o projeto completo ao mercado.",
+          "correta": false
+        }
+      ],
+      "fonte": "docs/questoes/questoes-pdf/Tema 11 - Métricas Ágeis.pdf",
+      "questao_origem": "tema-09-q04"
+    },
+    {
+      "codigo": "tema-11-q50",
+      "enunciado": "O que um gráfico Burndown permite acompanhar?",
+      "justificativa": "O Burndown apresenta trabalho restante e sua evolução; ele apoia acompanhamento, mas não garante o resultado futuro.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem3-tema11-questoes.png",
+        "alt": "Monitoramento visual das atividades e do avanço ao longo dos dias."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "O salário dos integrantes ao longo do projeto.",
+          "correta": false
+        },
+        {
+          "letra": "B",
+          "texto": "A quantidade de reuniões por semana.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "A evolução do trabalho restante ao longo do tempo.",
+          "correta": true
+        },
+        {
+          "letra": "D",
+          "texto": "Uma garantia de que o prazo será cumprido.",
+          "correta": false
+        }
+      ],
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-11-q50"
+    },
+    {
+      "codigo": "tema-11-q51",
+      "enunciado": "Um time concluiu 12 itens em uma semana. Qual métrica representa essa contagem por período?",
+      "justificativa": "A vazão conta itens concluídos por unidade de tempo, enquanto tempo de ciclo e idade medem intervalos.",
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem4-tema11-questoes.png",
+        "alt": "Equipe apresentando a quantidade de tarefas finalizadas em determinado intervalo."
+      },
+      "alternativas": [
+        {
+          "letra": "A",
+          "texto": "Vazão (Throughput).",
+          "correta": true
+        },
+        {
+          "letra": "B",
+          "texto": "Idade de um item aberto.",
+          "correta": false
+        },
+        {
+          "letra": "C",
+          "texto": "Limite de WIP.",
+          "correta": false
+        },
+        {
+          "letra": "D",
+          "texto": "Tempo de ciclo de um único item.",
+          "correta": false
+        }
+      ],
+      "fonte": "Questões autorais de complemento curricular; referências e revisão em docs/questoes/complemento-curricular.md",
+      "questao_origem": "tema-11-q51"
+    }
+  ]
+}

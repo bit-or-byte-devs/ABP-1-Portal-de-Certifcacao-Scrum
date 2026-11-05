@@ -1,0 +1,48 @@
+/* Tokens compartilhados das páginas logadas (identidade "Metodologias Scrum").
+   Breakpoints de referência (desktop-first, max-width): 740px e 480px. */
+:root {
+    /* Fundo e superfícies escuras */
+    --bg-blue: #3d519b;
+    --bg-gradiente: linear-gradient(135deg, #4358a9 0%, #314282 100%);
+    --card-bg: #111726;
+    --inner-box: #0b0f19;
+    --btn-escuro: #1f2937;
+    --btn-escuro-hover: #374151;
+
+    /* Texto sobre fundo escuro */
+    --text-white: #ffffff;
+    --text-muted: #8c95a5;
+    --green-accent: #00ff66;
+
+    /* Superfícies claras (cartões de conteúdo e questão) */
+    --menta: #d8f2e6;
+    --menta-alternativa: #cfd8d3;
+    --menta-hover: #c4d0cb;
+    --menta-marcada: #b5c7bd;
+    --placeholder: #d1d1d1;
+
+    /* Texto e bordas sobre fundo claro */
+    --texto-escuro: #111111;
+    --texto-escuro-suave: #333333;
+    --borda-escura: #555555;
+
+    /* Estados */
+    --erro-escuro: #b91c1c;
+    --sucesso-escuro: #15803d;
+    --alerta: #d62828;
+
+    /* Tipografia */
+    --fonte-texto: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --fs-xs: 0.75rem;
+    --fs-sm: 0.875rem;
+    --fs-md: 1rem;
+    --fs-lg: 1.25rem;
+    --fs-xl: 1.5rem;
+    --fs-2xl: 2.125rem;
+
+    /* Forma e profundidade */
+    --raio-card: 22px;
+    --raio-pill: 20px;
+    --sombra-card: 0 10px 30px rgba(0, 0, 0, 0.25);
+    --sombra-leve: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
