@@ -6,7 +6,10 @@
       "codigo": "tema-07-q01",
       "enunciado": "Qual é o formato padrão mais utilizado para descrever uma História de Usuário (User Story)?",
       "justificativa": "O formato \"Como um... eu quero... para que...\" coloca o foco no valor gerado para o usuário final.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem1-tema7-questoes.png",
+        "alt": "História de usuário apresentada no formato usuário, ação e benefício."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -36,7 +39,10 @@
       "codigo": "tema-07-q02",
       "enunciado": "O que são os Critérios de Aceite (Acceptance Criteria) de uma História de Usuário?",
       "justificativa": "Critérios de aceite garantem que a equipe saiba exatamente quais condições devem ser atendidas para a história ser aceita.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem2-tema7-questoes.png",
+        "alt": "Equipe analisando critérios de aceite em uma lista de verificação."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -66,7 +72,10 @@
       "codigo": "tema-07-q03",
       "enunciado": "Em uma História de Usuário muito grande (também conhecida como Épico), qual é a melhor prática no Scrum?",
       "justificativa": "Épicos são grandes demais para uma Sprint e devem ser divididos (quebrados) em itens menores durante o refinamento.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem3-tema7-questoes.png",
+        "alt": "Quadro ágil com um épico e histórias menores em diferentes etapas."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -96,7 +105,10 @@
       "codigo": "tema-07-q50",
       "enunciado": "Qual critério de aceitação torna uma história sobre recuperação de senha verificável?",
       "justificativa": "Uma condição observável permite verificar o resultado esperado; adjetivos subjetivos não definem um teste de aceitação.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem4-tema7-questoes.png",
+        "alt": "Tela ilustrativa com requisitos de segurança para validação de senha."
+      },
       "alternativas": [
         {
           "letra": "A",

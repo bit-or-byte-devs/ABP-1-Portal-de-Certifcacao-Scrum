@@ -6,7 +6,10 @@
       "codigo": "tema-09-q50",
       "enunciado": "Qual é a finalidade de visualizar o fluxo em um quadro Kanban?",
       "justificativa": "Visualizar o fluxo ajuda a entender onde os itens estão; o quadro não elimina obstáculos por si só.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem1-tema9-questoes.png",
+        "alt": "Quadro demonstrando as etapas e o andamento das atividades."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -36,7 +39,10 @@
       "codigo": "tema-09-q51",
       "enunciado": "Uma etapa atingiu seu limite de trabalho em progresso. Qual ação é mais coerente?",
       "justificativa": "Controlar o trabalho em progresso favorece um sistema puxado e incentiva terminar atividades antes de começar novas.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem2-tema9-questoes.png",
+        "alt": "Equipe identificando o limite de tarefas em andamento."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -66,7 +72,10 @@
       "codigo": "tema-09-q52",
       "enunciado": "Vários itens se acumulam continuamente antes de uma etapa. O que isso sugere?",
       "justificativa": "O acúmulo persistente pode indicar uma restrição de fluxo; é necessário observar capacidade e bloqueios para decidir melhorias.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem3-tema9-questoes.png",
+        "alt": "Excesso de tarefas."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -96,7 +105,10 @@
       "codigo": "tema-09-q53",
       "enunciado": "Para que servem políticas explícitas em um fluxo Kanban?",
       "justificativa": "Políticas explícitas estabelecem um entendimento comum sobre o fluxo e apoiam decisões consistentes.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem4-tema9-questoes.png",
+        "alt": "Regras e critérios visuais que orientam a execução das atividades."
+      },
       "alternativas": [
         {
           "letra": "A",

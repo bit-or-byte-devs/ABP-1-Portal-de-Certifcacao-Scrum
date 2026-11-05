@@ -1,36 +1,39 @@
-# Correspondência dos PDFs com o catálogo do banco
+# Organização e origem das questões
 
-O catálogo de referência é `database/dml/seed.sql`. O número no nome de um PDF identifica o documento de origem; não determina automaticamente `tbtema.ordem`. Os IDs existentes e as questões dos temas 1–4 permanecem intactos.
+O catálogo de temas é definido em `database/dml/seed.sql`. As questões disponíveis para importação estão em `database/questoes/tema-01.json` a `tema-12.json`.
 
-A tabela abaixo foi revisada pelos enunciados dos documentos. Para PDFs mistos, cada questão deve receber o tema indicado antes de gerar novos JSONs. Os JSONs estão organizados pelo tema de destino; questões sem equivalência foram removidas do catálogo JSON.
+O catálogo atual contém **48 questões, exatamente quatro por tema, e 192 alternativas**. Cada questão possui quatro alternativas e uma resposta correta.
 
-| PDF de origem | Questões | Tema de destino no banco |
-|---|---|---|
-| 1 – Fundamentos da Agilidade | 1–4 | 1 – Fundamentos da Agilidade |
-| 2 – Manifesto Ágil | 1–4 | 2 – Manifesto Ágil |
-| 3 – Introdução ao Scrum | 1–4 | 3 – Introdução ao Scrum |
-| 4 – Papéis do Scrum | 1–4 | 4 – Papéis do Scrum |
-| 5 – Eventos do Scrum | 1–4 | 5 – Eventos do Scrum |
-| 6 – Artefatos do Scrum | 1–4 | 6 – Artefatos do Scrum |
-| 7 – Responsabilidades no Scrum | 1, 3, 4 | 4 – Papéis do Scrum |
-| 7 – Responsabilidades no Scrum | 2 | 10 – Planejamento Ágil (responsabilidade pela estimativa) |
-| 8 – Pilares e Valores do Scrum | 1–4 | 3 – Introdução ao Scrum |
-| 9 – Estimativas e Métricas Ágeis | 1, 3 | 10 – Planejamento Ágil |
-| 9 – Estimativas e Métricas Ágeis | 2, 4 | 11 – Métricas Ágeis |
-| 10 – Histórias de Usuário e Refinamento | 1, 2, 4 | 7 – User Stories |
-| 10 – Histórias de Usuário e Refinamento | 3 | 8 – Gestão do Product Backlog |
-| 11 – Scrum em Escala | 1–4 | Fora do catálogo atual; removidas dos JSONs |
-| 12 – Antipadrões e Transformação Ágil | 1 | 5 – Eventos do Scrum |
-| 12 – Antipadrões e Transformação Ágil | 2–4 | Sem equivalência direta; removidas dos JSONs |
+## Distribuição atual
 
-A tabela registra a origem histórica das questões e não garante que todos esses PDFs ainda estejam nesta pasta. Quando o PDF original não está disponível, o campo `fonte` dos JSONs aponta para o PDF temático atual com o mesmo conteúdo; `questao_origem` preserva o código histórico da questão.
+| Tema | Arquivo | Questões de documentos | Questões autorais | Total |
+| --- | --- | ---: | ---: | ---: |
+| 1 — Fundamentos da Agilidade | `tema-01.json` | 4 | 0 | 4 |
+| 2 — Manifesto Ágil | `tema-02.json` | 4 | 0 | 4 |
+| 3 — Introdução ao Scrum | `tema-03.json` | 4 | 0 | 4 |
+| 4 — Papéis do Scrum | `tema-04.json` | 4 | 0 | 4 |
+| 5 — Eventos do Scrum | `tema-05.json` | 4 | 0 | 4 |
+| 6 — Artefatos do Scrum | `tema-06.json` | 4 | 0 | 4 |
+| 7 — User Stories | `tema-07.json` | 3 | 1 | 4 |
+| 8 — Gestão do Product Backlog | `tema-08.json` | 1 | 3 | 4 |
+| 9 — Kanban | `tema-09.json` | 0 | 4 | 4 |
+| 10 — Planejamento Ágil | `tema-10.json` | 3 | 1 | 4 |
+| 11 — Métricas Ágeis | `tema-11.json` | 2 | 2 | 4 |
+| 12 — Qualidade em Projetos Ágeis | `tema-12.json` | 0 | 4 | 4 |
+| **Total** | | **33** | **15** | **48** |
 
-Os PDFs atuais não oferecem uma seção dedicada a Kanban (tema 9 do banco) nem cobertura completa de Qualidade em Projetos Ágeis (tema 12). Não substituir esses temas por Scrum em Escala ou Transformação Ágil apenas para completar a numeração.
+As 15 questões autorais estão descritas em [complemento curricular](complemento-curricular.md). O catálogo tem 12 questões com imagem e 36 sem imagem.
 
-Ao converter novos documentos, mantenha no JSON a origem em `fonte` e acrescente `questao_origem` em cada questão. O `codigo` identifica a questão no tema de destino: reserve novos números para não colidir com códigos existentes. Metadados de origem não alteram o hash do conteúdo já cadastrado.
+## Identificação e rastreabilidade
 
-## Organização atual da carga
+Cada JSON contém somente as questões do tema indicado no campo `tema`, correspondente a `tbtema.ordem`. Nos arquivos atuais, `codigo` identifica diretamente a questão no tema de destino, sem redirecionamento por `destino`.
 
-Cada arquivo tema-XX.json contém somente questões do tema indicado em database/dml/seed.sql. O campo codigo já corresponde ao cadastro efetivo, sem necessidade de destino. Cada questão mantém fonte e questao_origem para rastrear o documento original. As questões autorais foram incorporadas aos mesmos arquivos.
+Os campos `fonte` e `questao_origem` preservam a rastreabilidade. O número histórico da questão de origem pode diferir do tema atual. Por exemplo, em User Stories, `tema-07-q01` registra `tema-10-q01` como origem. O campo `fonte` informa o documento temático atual ou a referência às questões autorais.
 
-A reorganização preserva os 56 códigos, conteúdos e hashes já importados; não exige alteração no banco nem nas respostas existentes. Os códigos históricos de origem permanecem registrados em `questao_origem`, mesmo quando o PDF original não está mais disponível.
+Os IDs do banco são consultados pelos importadores e não devem ser presumidos a partir dos números dos arquivos. Questões já importadas são reconhecidas por `codigo_origem` e `hash_origem`. Para modificar conteúdo de uma questão já cadastrada, respeite o versionamento descrito nas [instruções de carga](../carga-questoes.md).
+
+## Registros anteriores
+
+O [relatório de integração de 02/11/2026](../relatorio-integracao-2026-11-02.md) mantém os registros históricos de outra distribuição do catálogo. Esses registros não definem a quantidade da carga atual.
+
+Alguns testes ainda esperam a distribuição anterior, com questões extras nos temas 3, 4 e 5. A documentação atual considera quatro questões por tema; os ajustes desses testes permanecem pendentes.

@@ -6,7 +6,10 @@
       "codigo": "tema-12-q50",
       "enunciado": "Um item foi implementado, mas ainda não atende à Definition of Done. Como deve ser tratado?",
       "justificativa": "A Definition of Done estabelece o estado de qualidade necessário para um Incremento; implementação isolada não basta.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem1-tema12-questoes.png",
+        "alt": "Painel ilustrativo com verificações automatizadas de qualidade e testes."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -36,7 +39,10 @@
       "codigo": "tema-12-q51",
       "enunciado": "Qual é uma contribuição dos testes automatizados para a qualidade?",
       "justificativa": "Os testes oferecem feedback repetível sobre comportamentos cobertos, mas sua cobertura e seus casos são limitados.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem2-tema12-questoes.png",
+        "alt": "Ilustração abstrata de componentes de software conectados em forma de cubo."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -66,7 +72,10 @@
       "codigo": "tema-12-q52",
       "enunciado": "Qual prática caracteriza a integração contínua?",
       "justificativa": "Integrações frequentes com verificações permitem perceber incompatibilidades e falhas mais cedo.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem3-tema12-questoes.png",
+        "alt": "Ciclo de integração contínua com desenvolvimento, verificações e validação."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -96,7 +105,10 @@
       "codigo": "tema-12-q53",
       "enunciado": "O que significa refatorar código?",
       "justificativa": "A refatoração reorganiza o código sem mudar seu comportamento esperado, apoiando compreensão e manutenção.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem4-tema12-questoes.png",
+        "alt": "Comparação ilustrativa entre código desorganizado e código refatorado."
+      },
       "alternativas": [
         {
           "letra": "A",
