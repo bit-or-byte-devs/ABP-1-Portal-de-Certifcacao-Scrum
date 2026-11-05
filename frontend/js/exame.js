@@ -9,8 +9,15 @@
     const botaoInterromper = document.getElementById('btn-interromper');
     let encerrada = false;
     let tempoEsgotado = false;
+    let semConexao = false;
+    let reconciliando = false;
     let consultaAgendada;
+    let sinalAgendado;
+    let reconciliacaoAgendada;
     const json = body => ({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    // Só falha de rede de verdade conta como perda de conexão; respostas HTTP (503 inclusive) não.
+    const ehFalhaDeRede = erro => erro instanceof TypeError || erro?.name === 'TimeoutError' || erro?.name === 'AbortError';
+    const MENSAGEM_SEM_CONEXAO = 'Sem conexão. Ao reconectar, esta questão será encerrada como interrompida e contará como incorreta.';
 
     function montarAlternativa(alternativa, marcada) {
         const label = document.createElement('label');
@@ -28,7 +35,10 @@
 
     function mostrarResultado(dados) {
         encerrada = true;
+        semConexao = false;
         clearTimeout(consultaAgendada);
+        clearTimeout(sinalAgendado);
+        clearTimeout(reconciliacaoAgendada);
         cronometro.parar();
         feedback.classList.remove('feedback--sucesso', 'feedback--erro');
         feedback.classList.add(dados.acertou ? 'feedback--sucesso' : 'feedback--erro');
@@ -84,6 +94,83 @@
         });
 
         secaoQuestao.hidden = false;
+        const rotaResposta = `/api/exames/respostas/${questao.id}`;
+
+        function travarQuestao() {
+            alternativas.disabled = true;
+            botaoConfirmar.disabled = true;
+        }
+
+        // Ao voltar (conexão, histórico), a tentativa anterior nunca é retomada:
+        // se o servidor ainda a tem aberta, a página pede o encerramento antes de mostrar qualquer coisa.
+        async function reconciliarInterrupcao() {
+            if (encerrada || reconciliando) return;
+            reconciliando = true;
+            clearTimeout(reconciliacaoAgendada);
+            try {
+                let estado = await portal.pedir(rotaResposta, { signal: AbortSignal.timeout(10000) });
+                if (estado.situacao === 'em_andamento') {
+                    estado = await portal.pedir(`${rotaResposta}/interromper`, { ...json({}), signal: AbortSignal.timeout(10000) });
+                }
+                if (!encerrada) mostrarResultado(estado);
+            } catch {
+                // Sem confirmação do servidor a questão continua travada; tenta de novo.
+                if (!encerrada) reconciliacaoAgendada = setTimeout(reconciliarInterrupcao, 3000);
+            } finally { reconciliando = false; }
+        }
+
+        // A interface não promete avisar o servidor offline: trava e reconcilia ao voltar.
+        function perderConexao() {
+            if (encerrada || semConexao) return;
+            semConexao = true;
+            clearTimeout(sinalAgendado);
+            clearTimeout(consultaAgendada);
+            cronometro.parar();
+            travarQuestao();
+            feedback.classList.remove('feedback--sucesso');
+            feedback.classList.add('feedback--erro');
+            feedback.textContent = MENSAGEM_SEM_CONEXAO;
+            // Também tenta periodicamente: a primeira requisição que funcionar encerra a questão.
+            reconciliacaoAgendada = setTimeout(reconciliarInterrupcao, 3000);
+        }
+
+        // Sinal periódico: o intervalo vem do servidor, que interrompe a questão sem sinal.
+        function agendarSinal(segundos) {
+            clearTimeout(sinalAgendado);
+            sinalAgendado = setTimeout(enviarSinal, segundos * 1000);
+        }
+
+        async function enviarSinal() {
+            if (encerrada || semConexao) return;
+            try {
+                const sinal = await portal.pedir(`${rotaResposta}/sinal`, { ...json({}), signal: AbortSignal.timeout(10000) });
+                if (encerrada || semConexao) return;
+                agendarSinal(sinal.intervalo_sinal_segundos);
+            } catch (erro) {
+                if (encerrada || semConexao) return;
+                if (erro.status === 409 && erro.resposta?.alternativa_correta) {
+                    mostrarResultado(erro.resposta);
+                    portal.avisar(erro.message);
+                } else if (ehFalhaDeRede(erro)) perderConexao();
+                else agendarSinal(questao.intervalo_sinal_segundos);
+            }
+        }
+
+        window.addEventListener('offline', perderConexao);
+        window.addEventListener('online', () => { if (semConexao) reconciliarInterrupcao(); });
+        // Saída da página: aviso sem garantia de entrega; o limite sem sinal no servidor cobre a falta dele.
+        window.addEventListener('pagehide', () => {
+            if (!encerrada) navigator.sendBeacon(`${rotaResposta}/interromper`, new Blob(['{}'], { type: 'application/json' }));
+        });
+        // Voltar pelo histórico (página restaurada do cache): nada fica clicável antes de reconciliar.
+        window.addEventListener('pageshow', evento => {
+            if (!evento.persisted || encerrada) return;
+            clearTimeout(sinalAgendado);
+            clearTimeout(consultaAgendada);
+            cronometro.parar();
+            travarQuestao();
+            reconciliarInterrupcao();
+        });
 
         async function confirmarEncerramento(tentativa = 0) {
             if (encerrada) return;
@@ -93,6 +180,7 @@
                 if (estado.situacao !== 'em_andamento') { mostrarResultado(estado); return; }
             } catch (erro) {
                 if (encerrada) return;
+                if (ehFalhaDeRede(erro)) { perderConexao(); return; }
             }
             if (tentativa < 3) {
                 consultaAgendada = setTimeout(() => confirmarEncerramento(tentativa + 1), 2000);
@@ -102,24 +190,34 @@
         }
 
         if (questao.situacao !== 'em_andamento') mostrarResultado(questao);
-        else cronometro.iniciar(questao.segundos_restantes, () => {
-            tempoEsgotado = true;
-            consultaAgendada = setTimeout(() => confirmarEncerramento(), 3000);
-        });
+        else {
+            cronometro.iniciar(questao.segundos_restantes, () => {
+                tempoEsgotado = true;
+                if (!semConexao) consultaAgendada = setTimeout(() => confirmarEncerramento(), 3000);
+            });
+            agendarSinal(questao.intervalo_sinal_segundos);
+            if (!navigator.onLine) perderConexao();
+        }
 
         form.addEventListener('submit', async evento => {
             evento.preventDefault();
-            if (encerrada || tempoEsgotado || botaoConfirmar.disabled) return;
+            if (encerrada || tempoEsgotado || semConexao || botaoConfirmar.disabled) return;
             botaoConfirmar.disabled = true;
             try {
                 const idAlternativa = Number(new FormData(form).get('alternativa'));
-                mostrarResultado(await portal.pedir(`/api/exames/respostas/${questao.id}`, json({ alternativa: idAlternativa })));
+                const resultado = await portal.pedir(rotaResposta, { ...json({ alternativa: idAlternativa }), signal: AbortSignal.timeout(10000) });
+                if (!encerrada) mostrarResultado(resultado);
             } catch (erro) {
+                if (encerrada) return;
                 if (erro.status === 409 && erro.resposta?.situacao !== 'em_andamento' && erro.resposta?.alternativa_correta) {
                     mostrarResultado(erro.resposta);
+                    portal.avisar(erro.message);
+                } else if (ehFalhaDeRede(erro)) {
+                    // A resposta pode ter chegado antes da queda; a reconciliação mostra o que o servidor gravou.
+                    perderConexao();
                 } else {
                     portal.avisar(erro.message);
-                    if (!encerrada && !tempoEsgotado) botaoConfirmar.disabled = false;
+                    if (!tempoEsgotado && !semConexao) botaoConfirmar.disabled = false;
                 }
             }
         });
