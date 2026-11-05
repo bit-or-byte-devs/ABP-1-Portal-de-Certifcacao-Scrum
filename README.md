@@ -237,31 +237,18 @@ Para imagens complementares como modelo conceitual, lógico, e Diagramas de Clas
 ## 🔖 SPRINT 2 – Desenvolvimento do Núcleo da Certificação e Área de Estudos
 **Período:** 23/10/2026 a 05/11/2026
 
-🏃 DoR da Sprint 2 (Definition of Ready) 
+### 🏃 DoR da Sprint 2 (Definition of Ready)
+- [x] **Modelagem de Dados Aprovada:** Modelagem do banco de dados validada (PostgreSQL) para suportar os 12 temas, 48 questões (4 por tema), alternativas, imagens ilustrativas, tentativas únicas por tema e histórico de interrupções.
+- [x] **Carga e Conteúdo Homologados:** Definição final dos 12 temas da certificação e estruturação dos arquivos JSON/scripts de migração contendo o conteúdo didático e as questões com imagens.
+- [x] **Protótipos de Alta Fidelidade (Figma):** Telas aprovadas pela equipe para a Área de Estudos, Fluxo da Prova (com cronômetro, enunciado, imagem e alternativas conforme a US43) e fluxo de interrupção/retomada.
+- [x] **Especificação de Regras de Negócio:** Critérios de aceite detalhados para o sorteio randômico de questões (US13), controle do cronômetro regressivo (US20), encerramento por tempo esgotado (US21) e tratamento de interrupções de sessão (US22/US23).
 
- * [x] Modelagem de Dados Aprovada: Modelagem do banco de dados validada (PostgreSQL) para suportar os 12 temas, 48 questões (4 por tema), alternativas, imagens ilustrativas, tentativas únicas por tema e histórico de interrupções.
- * [x] Carga e Conteúdo Homologados: Definição final dos 12 temas da certificação e estruturação dos arquivos JSON/scripts de migração contendo o conteúdo didático e as questões com imagens.
- * [x] Protótipos de Alta Fidelidade (Figma): Telas aprovadas pela equipe para a Área de Estudos, Fluxo da Prova (com cronômetro, enunciado, imagem e alternativas conforme a US43) e fluxo de interrupção/retomada.
- * [x] Especificação de Regras de Negócio: Critérios de aceite detalhados para o sorteio randômico de questões (US13), controle do cronômetro regressivo (US20), encerramento por tempo esgotado (US21) e tratamento de interrupções de sessão (US22/US23).
+### 🏆 DoD da Sprint 2 (Definition of Done)
+- [x] **Banco de Dados e Povoamento:** Schema DDL e seeds DML executados via Docker Compose, com carga íntegra dos 12 temas e das 48 questões (4 por tema) e migrações (`001` a `005`) testadas e integradas.
+- [x] **Núcleo de Back-end (Motor do Simulado & Regras):** Endpoints implementados em Node.js para sorteio aleatório (US13), tentativa única (US16, US19), controle de cronômetro, tempo esgotado (US21) e tratamento/retomada de interrupções (US22, US23).
+- [x] **Área de Estudos & Interface (Front-end):** Telas desenvolvidas em HTML5, CSS3 e JavaScript puro, estruturadas nos 12 temas (US11, US15) e com reestruturação da tela de prova (US43) para enunciado, imagens e alternativas.
+- [x] **Feedback, Diagramas UML e Entrega:** Exibição da resposta correta após submissão (US18), diagramas UML de Classes, Casos de Uso e Sequência documentados (US44), e vídeo de apresentação da Sprint 2 publicado no YouTube (US45).
 
-
-🏆 DoD da Sprint 2 (Definition of Done) 
-
-| Entrega / Funcionalidade | Critérios de Aceite (Checklist DoD) | Status | Evidências / Validações Técnicas |
-|---|---|---|---|
-| 1. Banco de Dados e Povoamento | - [x] Schema DDL e seeds DML executados via Docker Compose.
-- [x] Carga íntegra dos 12 temas e das 48 questões (4 por tema) com suas respectivas alternativas e imagens.
-- [x] Migrações (001 a 005) testadas e integradas ao serviço preparar-banco. | Concluído | • Banco estruturado e populado sem erros de integridade referencial. |
-| 2. Núcleo de Back-end (Motor do Simulado & Regras) | - [x] Endpoints implementados em Node.js para sorteio aleatório de questões por tema (US13).
-- [x] Regras de tentativa única e controle de sessão por candidato validadas (US16, US19).
-- [x] Gestão de tempo de resposta, encerramento por tempo esgotado (US21) e tratamento/retomada de interrupções (US22, US23). | Concluído | • API robusta testada para o fluxo completo do simulado e tratamento de falhas de conexão/saída. |
-| 3. Área de Estudos & Interface (Front-end) | - [x] Telas desenvolvidas em HTML5, CSS3 e JavaScript puro sem frameworks.
-- [x] Organização estruturada em 12 temas de estudo (US11, US15).
-- [x] Reestruturação da tela de prova (US43) garantindo clareza do enunciado, exibição de imagens e seleção de alternativas. | Concluído | • Front-end responsivo integrado nativamente ao back-end na mesma origem. |
-| 4. Feedback, Diagramas UML e Entrega | - [x] Exibição da resposta correta após a submissão (US18).
-- [x] Elaboração dos diagramas UML de Classes, Casos de Uso e Sequência (US44) documentados no repositório.
-- [x] Gravação e publicação do Vídeo de Apresentação da Sprint 2 no YouTube (US45). | Concluído | • Documentação técnica atualizada.
-• Vídeo de entrega validado pelos orientadores. |
 
 ## Carga de questões
 
