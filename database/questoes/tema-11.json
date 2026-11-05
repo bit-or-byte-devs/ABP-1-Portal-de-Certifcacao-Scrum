@@ -6,7 +6,10 @@
       "codigo": "tema-11-q01",
       "enunciado": "O que um gráfico de Burndown (Burndown Chart) da Sprint ilustra?",
       "justificativa": "O Burndown mostra uma tendência visual de quanto trabalho falta ser feito conforme os dias da Sprint passam.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem1-tema11-questoes.png",
+        "alt": "Equipe analisando um gráfico de progresso durante uma reunião."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -36,7 +39,10 @@
       "codigo": "tema-11-q02",
       "enunciado": "O que representa a \"Velocidade\" (Velocity) de um Scrum Team?",
       "justificativa": "A Velocidade é uma métrica histórica usada para ajudar a equipe a prever quanto trabalho consegue realizar em Sprints futuras.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem2-tema11-questoes.png",
+        "alt": "Equipe acompanhando seus resultados e desempenho entre ciclos de trabalho."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -66,7 +72,10 @@
       "codigo": "tema-11-q50",
       "enunciado": "O que um gráfico Burndown permite acompanhar?",
       "justificativa": "O Burndown apresenta trabalho restante e sua evolução; ele apoia acompanhamento, mas não garante o resultado futuro.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem3-tema11-questoes.png",
+        "alt": "Monitoramento visual das atividades e do avanço ao longo dos dias."
+      },
       "alternativas": [
         {
           "letra": "A",
@@ -96,7 +105,10 @@
       "codigo": "tema-11-q51",
       "enunciado": "Um time concluiu 12 itens em uma semana. Qual métrica representa essa contagem por período?",
       "justificativa": "A vazão conta itens concluídos por unidade de tempo, enquanto tempo de ciclo e idade medem intervalos.",
-      "imagem": null,
+      "imagem": {
+        "caminho": "/imagens/questoes/imagem4-tema11-questoes.png",
+        "alt": "Equipe apresentando a quantidade de tarefas finalizadas em determinado intervalo."
+      },
       "alternativas": [
         {
           "letra": "A",

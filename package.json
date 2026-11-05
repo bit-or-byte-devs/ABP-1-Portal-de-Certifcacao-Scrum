@@ -5,6 +5,7 @@
     "setup": "npm --prefix backend ci",
     "start": "npm --prefix backend start",
     "test": "npm --prefix backend test",
+    "db:preparar": "npm --prefix backend run db:preparar --",
     "db:questoes": "npm --prefix backend run db:questoes --",
     "db:temas": "npm --prefix backend run db:temas --"
   }
