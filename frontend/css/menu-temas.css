@@ -304,6 +304,31 @@ body {
     border-color: rgba(255, 255, 255, 0.12);
 }
 
+.theme-card--launching {
+    animation: theme-launch 360ms ease-out;
+}
+
+.theme-main-row--animating {
+    animation: theme-row-toggle 360ms ease-out;
+}
+
+@keyframes theme-row-toggle {
+    0% { transform: translateY(0); }
+    45% { transform: translateY(-3px); filter: brightness(1.25); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes theme-launch {
+    0% { transform: scale(1); border-color: rgba(0, 255, 102, 0.2); }
+    45% { transform: scale(1.015); border-color: var(--green-accent); }
+    100% { transform: scale(1); border-color: rgba(255, 255, 255, 0.12); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .theme-card--launching { animation-duration: 1ms; }
+    .theme-main-row--animating { animation-duration: 1ms; }
+}
+
 .theme-card.active .progress-badge,
 .theme-card.active .btn-iniciar {
     display: inline-flex;
