@@ -56,7 +56,7 @@
         });
         feedback.textContent = `${resultado} Alternativa correta: ${correta.letra}. ${correta.texto}. ${dados.justificativa || ''}`;
         botaoConfirmar.hidden = true;
-        linkContinuar.textContent = 'Próximo tema';
+        linkContinuar.textContent = dados.proximo_tema === null ? 'Voltar à lista' : 'Próximo tema';
         linkContinuar.href = dados.proximo_tema === null ? 'exames.html' : `exame.html?tema=${dados.proximo_tema}`;
         linkContinuar.hidden = Number(tema) === 12;
         botaoInterromper.textContent = 'Encerrar sessão';

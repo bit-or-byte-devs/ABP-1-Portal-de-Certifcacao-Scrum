@@ -42,6 +42,8 @@ router.get("/progresso", async (req, res) => {
         const certificacao = await db.query("SELECT id FROM tbcertificacao WHERE idcandidato=$1 FOR UPDATE", [req.candidato.id]);
         const idcertificacao = certificacao.rows[0]?.id ?? null;
         if (idcertificacao !== null) await atualizarQuestoesVencidas(db, idcertificacao);
+        const resultadoCertificacao = idcertificacao === null ? null : await db.query(`SELECT total_acertos, percentual_acertos, nota_final
+            FROM tbcertificacao WHERE id=$1`, [idcertificacao]);
         const { rows: temas } = await db.query(`SELECT t.ordem, t.nome,
             CASE WHEN r.id IS NULL THEN 'pendente'
                 WHEN r.situacao='em_andamento' THEN 'em_andamento'
@@ -56,9 +58,18 @@ router.get("/progresso", async (req, res) => {
                 proximoTema = await buscarProximoTemaPendente(db, idcertificacao, proximoTema);
             }
         }
+        const certificacaoConcluida = temas.length === 12 && temas.every(tema => tema.estado === 'concluido');
+        const totalAcertos = Number(resultadoCertificacao?.rows[0]?.total_acertos ?? 0);
+        const percentualAcertos = Number(resultadoCertificacao?.rows[0]?.percentual_acertos ?? 0);
+        const notaFinal = Number(resultadoCertificacao?.rows[0]?.nota_final ?? 0);
+        const aprovado = percentualAcertos >= 65;
         await db.query("COMMIT");
         res.json({ temas, proximo_tema: proximoTema,
-            certificacao_concluida: temas.length === 12 && temas.every(tema => tema.estado === 'concluido') });
+            certificacao_concluida: certificacaoConcluida,
+            total_acertos: totalAcertos,
+            percentual_acertos: percentualAcertos,
+            nota_final: notaFinal,
+            aprovado });
     } catch { if (db) await db.query("ROLLBACK").catch(() => {}); res.status(503).json({ mensagem: "Não foi possível consultar o progresso da certificação." }); }
     finally { db?.release(); }
 });
