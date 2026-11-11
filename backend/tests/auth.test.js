@@ -99,9 +99,20 @@ test("login, sessão, proteção e saída sem modificar o banco", async (t) => {
     assert.equal(resposta.status, 500);
     assert.doesNotMatch(await resposta.text(), /Banco indisponível|senha_hash/);
     falharBanco = false;
-    resposta = await pedir("/api/auth/logout", { method: "POST", headers: { Cookie: cookie, "Content-Type": "application/json" }, body: "{}" });
+    // O logout tenta interromper a questão aberta numa transação; aqui essa etapa falha
+    // e o logout precisa concluir mesmo assim, sem tocar no banco real.
+    const connectOriginal = pool.connect;
+    const erroOriginal = console.error;
+    const errosRegistrados = [];
+    pool.connect = async () => { throw new Error("Banco indisponível"); };
+    console.error = (...args) => errosRegistrados.push(args);
+    try {
+        resposta = await pedir("/api/auth/logout", { method: "POST", headers: { Cookie: cookie, "Content-Type": "application/json" }, body: "{}" });
+    } finally { pool.connect = connectOriginal; console.error = erroOriginal; }
     assert.equal(resposta.status, 200);
     assert.match(resposta.headers.get("set-cookie"), /Expires=Thu, 01 Jan 1970/);
+    assert.equal(errosRegistrados.length, 1);
+    assert.match(String(errosRegistrados[0][0]), /interromper a questão no logout/);
     assert.equal((await pedir("/api/auth/usuario", { headers: { Cookie: cookie } })).status, 401);
     assert.equal((await pedir("/pages/menu.html", { headers: { Cookie: cookie } })).status, 302);
     resposta = await entrar("52998224725", "Senha123");

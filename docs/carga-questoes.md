@@ -18,7 +18,7 @@ npm run db:preparar -- --validar
 npm run db:preparar
 ```
 
-Em banco vazio fora do Docker, execute antes `database/ddl/schema.sql`, que já incorpora as estruturas das migrações 003 e 005. O comando completo aplica as migrações 001 a 005, importa os temas e depois as questões.
+Em banco vazio fora do Docker, execute antes `database/ddl/schema.sql`, que já incorpora as estruturas das migrações 003, 005 e 006. O comando completo aplica as migrações 001 a 006, importa os temas e depois as questões.
 
 ## Importação individual
 
@@ -28,7 +28,7 @@ npm run db:questoes -- --migrar
 npm run db:questoes
 ```
 
-O comando `--migrar` aplica a migração 003 e depois a 005, ambas repetíveis. Em banco existente, aplique também as migrações anteriores necessárias. Para essa importação individual, os temas precisam estar cadastrados, pelo seed ou pelo importador dos temas. `--validar` lê os arquivos e não acessa o banco.
+O comando `--migrar` aplica as migrações 003, 005 e 006, nessa ordem, todas repetíveis. Em banco existente, aplique também as migrações anteriores necessárias. Para essa importação individual, os temas precisam estar cadastrados, pelo seed ou pelo importador dos temas. `--validar` lê os arquivos e não acessa o banco.
 
 A carga é transacional, serializada e repetível. Os IDs reais dos temas são consultados pela ordem. O hash impede substituir conteúdo já importado: alterações exigem novo código de versão. `--vincular-imagens` permite apenas adicionar imagem ao mesmo conteúdo anteriormente sem imagem, preservando IDs e respostas. Não substitui imagens nem textos. Questões cadastradas manualmente sem código de origem exigem revisão antes da primeira carga.
 

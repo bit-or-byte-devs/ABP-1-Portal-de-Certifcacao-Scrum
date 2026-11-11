@@ -10,6 +10,7 @@ const migracoes = [
     '003_carga_questoes.sql',
     '004_conteudo_temas.sql',
     '005_alternativas_questao.sql',
+    '006_sinal_questao.sql',
 ];
 const tabelasBase = [
     'tbcandidato', 'tbtema', 'tbimagem', 'tbmaterial',
