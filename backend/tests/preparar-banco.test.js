@@ -74,4 +74,5 @@ test('falha nos temas impede a importação das questões', async t => {
     assert.match(chamadas[3], /ALTER TABLE tbquestao/);
     assert.match(chamadas[4], /ADD COLUMN IF NOT EXISTS conteudo JSONB/);
     assert.match(chamadas[5], /tg_alternativas_questao/);
+    assert.match(chamadas[6], /data_hora_ultimo_sinal/);
 });

@@ -203,6 +203,9 @@ CREATE TABLE tbresposta (
         DEFAULT CURRENT_TIMESTAMP,
     data_hora_resposta TIMESTAMPTZ,
     data_hora_encerramento TIMESTAMPTZ,
+    -- Último sinal da página aberta; sem sinal além do limite, a questão é interrompida.
+    data_hora_ultimo_sinal TIMESTAMPTZ NOT NULL
+        DEFAULT CURRENT_TIMESTAMP,
 
     situacao VARCHAR(20) NOT NULL DEFAULT 'em_andamento',
     acertou BOOLEAN,
@@ -266,7 +269,10 @@ CREATE TABLE tbresposta (
             AND
             (data_hora_encerramento IS NULL
              OR data_hora_encerramento >= data_hora_exibicao)
-        )
+        ),
+
+    CONSTRAINT ck_resposta_ultimo_sinal
+        CHECK (data_hora_ultimo_sinal >= data_hora_exibicao)
 );
 
 -- 9. Certificados

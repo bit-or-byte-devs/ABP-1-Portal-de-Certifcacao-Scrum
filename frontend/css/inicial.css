@@ -69,6 +69,21 @@ main { max-width: 1120px; margin: 0 auto; padding: 28px 50px 64px; }
 .learning > h2 br { display: none; }
 .learning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
 .objectives, .learning-description { padding: 30px; border: 1px solid var(--border); border-radius: 22px; background: var(--card); box-shadow: 0 10px 30px rgba(0,0,0,.15); }
+.hero-side, .learning-grid > .objectives, .learning-grid > .learning-description {
+  position: relative;
+  transition: transform .75s cubic-bezier(.34,1.56,.64,1), box-shadow .75s ease;
+}
+.hero-side:hover, .hero-side:focus-within,
+.learning-grid > .objectives:hover, .learning-grid > .objectives:focus-within,
+.learning-grid > .learning-description:hover, .learning-grid > .learning-description:focus-within {
+  z-index: 1;
+  transform: scale(1.035);
+}
+.hero-side:hover, .hero-side:focus-within,
+.learning-grid > .objectives:hover, .learning-grid > .objectives:focus-within,
+.learning-grid > .learning-description:hover, .learning-grid > .learning-description:focus-within {
+  box-shadow: 0 16px 38px rgba(0,0,0,.32);
+}
 .learning-grid h3 { margin: 0 0 20px; font-size: 20px; }
 .learning-grid p { margin: 0 0 20px; font-size: 15px; color: var(--muted); }
 .learning-grid strong { color: #fff; }
@@ -102,4 +117,12 @@ footer a:hover { color: var(--green); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .button { transition: none; }
+  .hero-side, .learning-grid > .objectives, .learning-grid > .learning-description {
+    transition: none;
+  }
+  .hero-side:hover, .hero-side:focus-within,
+  .learning-grid > .objectives:hover, .learning-grid > .objectives:focus-within,
+  .learning-grid > .learning-description:hover, .learning-grid > .learning-description:focus-within {
+    transform: none;
+  }
 }

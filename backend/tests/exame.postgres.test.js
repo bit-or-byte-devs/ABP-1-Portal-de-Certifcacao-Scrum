@@ -113,6 +113,39 @@ async function recuarExibicao(id, segundos) {
     await banco.query("UPDATE tbresposta SET data_hora_exibicao=clock_timestamp() - $2 * INTERVAL '1 second' WHERE id=$1", [id, segundos]);
 }
 
+// O último sinal não pode ficar antes da exibição (ck_resposta_ultimo_sinal): recue a exibição antes.
+async function recuarSinal(id, segundos) {
+    await banco.query("UPDATE tbresposta SET data_hora_ultimo_sinal=clock_timestamp() - $2 * INTERVAL '1 second' WHERE id=$1", [id, segundos]);
+}
+
+async function encerramentoAposSinal(id) {
+    const { rows } = await banco.query(`SELECT data_hora_encerramento = data_hora_ultimo_sinal + INTERVAL '15 seconds' AS correto
+        FROM tbresposta WHERE id=$1`, [id]);
+    return rows[0].correto;
+}
+
+async function varrer() {
+    const { encerrarQuestoesVencidas } = require("../src/services/encerramentoQuestao");
+    const { recalcularCertificacao } = require("../src/services/certificacao");
+    const db = await banco.connect();
+    try {
+        await db.query("BEGIN");
+        const certificacoes = await encerrarQuestoesVencidas(db);
+        for (const idcertificacao of certificacoes) await recalcularCertificacao(db, idcertificacao);
+        await db.query("COMMIT");
+        return certificacoes;
+    } catch (erro) { await db.query("ROLLBACK"); throw erro; }
+    finally { db.release(); }
+}
+
+function assertInterrompida(resposta) {
+    assert.equal(resposta.situacao, "interrompida");
+    assert.equal(resposta.acertou, false);
+    assert.equal(resposta.idalternativa, null);
+    assert.equal(resposta.data_hora_resposta, null);
+    assert.ok(resposta.data_hora_encerramento);
+}
+
 async function lerResposta(id) {
     return (await banco.query("SELECT * FROM tbresposta WHERE id=$1", [id])).rows[0];
 }
@@ -289,10 +322,15 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     const terceira = await iniciar(cookie, 3);
     const progresso = await solicitar("/api/exames/progresso", cookie);
     assert.equal(progresso.status, 200);
+    assert.equal(progresso.corpo.total_acertos, 1);
+    assert.equal(Number(progresso.corpo.percentual_acertos), 8.33);
+    assert.equal(Number(progresso.corpo.nota_final), 8.33);
+    assert.equal(progresso.corpo.aprovado, false);
     assert.deepEqual(progresso.corpo, {
         temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1),
             estado: indice < 2 ? "concluido" : indice === 2 ? "em_andamento" : "pendente" })),
         proximo_tema: 4, certificacao_concluida: false,
+        total_acertos: 1, percentual_acertos: 8.33, nota_final: 8.33, aprovado: false,
     });
     assert.equal((await lerResposta(segunda.id)).situacao, "tempo_esgotado");
     assert.equal((await lerResposta(terceira.id)).situacao, "em_andamento");
@@ -309,6 +347,7 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     assert.deepEqual(semCertificacao.corpo, {
         temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1), estado: "pendente" })),
         proximo_tema: 1, certificacao_concluida: false,
+        total_acertos: 0, percentual_acertos: 0, nota_final: 0, aprovado: false,
     });
     const quantidade = await banco.query(`SELECT count(*)::integer AS total FROM tbcertificacao c
         JOIN tbcandidato candidato ON candidato.id=c.idcandidato WHERE candidato.cpf='11144477735'`);
@@ -326,6 +365,10 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     assert.equal(concluida.corpo.certificacao_concluida, true);
     assert.equal(concluida.corpo.proximo_tema, null);
     assert.ok(concluida.corpo.temas.every(tema => tema.estado === "concluido"));
+    assert.equal(concluida.corpo.total_acertos, 12);
+    assert.equal(Number(concluida.corpo.percentual_acertos), 100);
+    assert.equal(Number(concluida.corpo.nota_final), 100);
+    assert.equal(concluida.corpo.aprovado, true);
 });
 
 
@@ -337,6 +380,16 @@ test('Integração das cargas: migrações repetíveis, temas estruturados e res
     const migracaoAlternativas = fs.readFileSync(path.join(__dirname, '../../database/migrations/005_alternativas_questao.sql'), 'utf8');
     await banco.query(migracaoAlternativas);
     await banco.query(migracaoAlternativas);
+    const migracaoSinal = fs.readFileSync(path.join(__dirname, '../../database/migrations/006_sinal_questao.sql'), 'utf8');
+    await banco.query(migracaoSinal);
+    await banco.query(migracaoSinal);
+    const coluna = await banco.query(`SELECT is_nullable, column_default FROM information_schema.columns
+        WHERE table_schema=current_schema() AND table_name='tbresposta' AND column_name='data_hora_ultimo_sinal'`);
+    assert.equal(coluna.rows[0].is_nullable, 'NO');
+    assert.match(coluna.rows[0].column_default, /CURRENT_TIMESTAMP/i);
+    const restricao = await banco.query(`SELECT count(*)::integer AS total FROM pg_constraint
+        WHERE conname='ck_resposta_ultimo_sinal' AND connamespace=current_schema()::regnamespace`);
+    assert.equal(restricao.rows[0].total, 1);
     const temas = require('../scripts/importar-temas');
     const migracaoTemas = fs.readFileSync(path.join(__dirname, '../../database/migrations/004_conteudo_temas.sql'), 'utf8');
     await banco.query(fs.readFileSync(path.join(__dirname, '../../database/dml/seed.sql'), 'utf8'));
@@ -384,6 +437,184 @@ test('Integração das cargas: migrações repetíveis, temas estruturados e res
     const arquivo = await fetch(base + comImagem.imagem);
     assert.equal(arquivo.status, 200);
     assert.match(arquivo.headers.get('content-type'), /^image\//);
+});
+
+test("Sinal: renova a questão e devolve tempo restante e intervalo do servidor", opcoes, async () => {
+    await criarTema(1);
+    const cookie = await criarCandidato();
+    const questao = await iniciar(cookie);
+    assert.equal(questao.intervalo_sinal_segundos, 5);
+    await recuarExibicao(questao.id, 20);
+    await recuarSinal(questao.id, 10);
+    // Consultar não renova o sinal.
+    const antes = (await lerResposta(questao.id)).data_hora_ultimo_sinal;
+    const consulta = await solicitar(`/api/exames/respostas/${questao.id}`, cookie);
+    assert.equal(consulta.corpo.intervalo_sinal_segundos, 5);
+    assert.deepEqual((await lerResposta(questao.id)).data_hora_ultimo_sinal, antes);
+    const sinal = await solicitar(`/api/exames/respostas/${questao.id}/sinal`, cookie, {});
+    assert.equal(sinal.status, 200);
+    assert.deepEqual(Object.keys(sinal.corpo).sort(), ["intervalo_sinal_segundos", "segundos_restantes", "situacao"]);
+    assert.equal(sinal.corpo.situacao, "em_andamento");
+    assert.equal(sinal.corpo.intervalo_sinal_segundos, 5);
+    assert.ok(sinal.corpo.segundos_restantes > 129 && sinal.corpo.segundos_restantes <= 130);
+    const renovada = await banco.query(`SELECT clock_timestamp() - data_hora_ultimo_sinal < INTERVAL '2 seconds' AS recente
+        FROM tbresposta WHERE id=$1`, [questao.id]);
+    assert.equal(renovada.rows[0].recente, true);
+    assert.equal((await lerResposta(questao.id)).situacao, "em_andamento");
+    // Renovado, o mesmo atraso que interromperia a questão já não interrompe.
+    assert.equal((await solicitar(`/api/exames/respostas/${questao.id}`, cookie)).corpo.situacao, "em_andamento");
+});
+
+test("Sem sinal há mais de 15 s: interrompida pela varredura, progresso, consulta e resposta", opcoes, async () => {
+    for (let ordem = 1; ordem <= 5; ordem++) await criarTema(ordem);
+    const cookie = await criarCandidato();
+    async function abandonar(ordem, segundosSemSinal = 16) {
+        const questao = await iniciar(cookie, ordem);
+        await recuarExibicao(questao.id, 30);
+        await recuarSinal(questao.id, segundosSemSinal);
+        return questao;
+    }
+
+    const varredura = await abandonar(1);
+    assert.equal((await varrer()).length, 1);
+    assertInterrompida(await lerResposta(varredura.id));
+    assert.equal(await encerramentoAposSinal(varredura.id), true);
+
+    const progresso = await abandonar(2);
+    const estado = await solicitar("/api/exames/progresso", cookie);
+    assert.equal(estado.corpo.temas[1].estado, "concluido");
+    assertInterrompida(await lerResposta(progresso.id));
+    assert.equal(await encerramentoAposSinal(progresso.id), true);
+
+    const consulta = await abandonar(3);
+    const consultada = await solicitar(`/api/exames/respostas/${consulta.id}`, cookie);
+    assert.equal(consultada.status, 200);
+    assert.equal(consultada.corpo.situacao, "interrompida");
+    assert.deepEqual(consultada.corpo.alternativa_correta, consulta.alternativas[0]);
+    assert.equal(await encerramentoAposSinal(consulta.id), true);
+
+    const resposta = await abandonar(4);
+    const recusada = await solicitar(`/api/exames/respostas/${resposta.id}`, cookie, { alternativa: resposta.alternativas[0].id });
+    assert.equal(recusada.status, 409);
+    assert.equal(recusada.corpo.situacao, "interrompida");
+    assert.equal(recusada.corpo.mensagem, "Questão encerrada por interrupção.");
+    assert.deepEqual(recusada.corpo.alternativa_correta, resposta.alternativas[0]);
+    assertInterrompida(await lerResposta(resposta.id));
+    assert.equal(await encerramentoAposSinal(resposta.id), true);
+
+    // Dentro do limite a resposta ainda é aceita.
+    const noLimite = await abandonar(5, 14);
+    const aceita = await solicitar(`/api/exames/respostas/${noLimite.id}`, cookie, { alternativa: noLimite.alternativas[0].id });
+    assert.equal(aceita.status, 200);
+    assert.equal(aceita.corpo.situacao, "respondida");
+
+    const certificacao = (await banco.query("SELECT * FROM tbcertificacao")).rows[0];
+    assert.equal(certificacao.total_acertos, 1);
+    assert.equal((await banco.query("SELECT count(*)::integer AS total FROM tbresposta WHERE situacao='interrompida'")).rows[0].total, 4);
+});
+
+test("Prazo e abandono: o que vence primeiro define a causa do encerramento", opcoes, async () => {
+    for (let ordem = 1; ordem <= 2; ordem++) await criarTema(ordem);
+    const cookie = await criarCandidato();
+    // Sinal recente e prazo de 150 s vencido: tempo esgotado no horário final.
+    const vencida = await iniciar(cookie, 1);
+    await recuarExibicao(vencida.id, 153);
+    await recuarSinal(vencida.id, 5);
+    assert.equal((await solicitar(`/api/exames/respostas/${vencida.id}`, cookie)).corpo.situacao, "tempo_esgotado");
+    const horario = await banco.query(`SELECT data_hora_encerramento = data_hora_exibicao + INTERVAL '150 seconds' AS correto
+        FROM tbresposta WHERE id=$1`, [vencida.id]);
+    assert.equal(horario.rows[0].correto, true);
+    // Abandono antes do prazo, mesmo com o prazo já vencido: interrompida no instante do abandono.
+    const abandonada = await iniciar(cookie, 2);
+    await recuarExibicao(abandonada.id, 160);
+    await recuarSinal(abandonada.id, 140);
+    assert.equal((await solicitar(`/api/exames/respostas/${abandonada.id}`, cookie)).corpo.situacao, "interrompida");
+    assertInterrompida(await lerResposta(abandonada.id));
+    assert.equal(await encerramentoAposSinal(abandonada.id), true);
+});
+
+test("Interromper: encerra a questão aberta, é idempotente e bloqueia sinal e resposta", opcoes, async () => {
+    await criarTema(1);
+    const cookie = await criarCandidato();
+    const questao = await iniciar(cookie);
+    const interrompida = await solicitar(`/api/exames/respostas/${questao.id}/interromper`, cookie, {});
+    assert.equal(interrompida.status, 200);
+    assert.equal(interrompida.corpo.situacao, "interrompida");
+    assert.deepEqual(interrompida.corpo.alternativa_correta, questao.alternativas[0]);
+    const gravada = await lerResposta(questao.id);
+    assertInterrompida(gravada);
+    const repetida = await solicitar(`/api/exames/respostas/${questao.id}/interromper`, cookie, {});
+    assert.equal(repetida.status, 200);
+    assert.equal(repetida.corpo.situacao, "interrompida");
+    assert.deepEqual(await lerResposta(questao.id), gravada);
+    const sinal = await solicitar(`/api/exames/respostas/${questao.id}/sinal`, cookie, {});
+    assert.equal(sinal.status, 409);
+    assert.equal(sinal.corpo.situacao, "interrompida");
+    assert.equal(sinal.corpo.mensagem, "Questão encerrada por interrupção.");
+    assert.deepEqual(sinal.corpo.alternativa_correta, questao.alternativas[0]);
+    const resposta = await solicitar(`/api/exames/respostas/${questao.id}`, cookie, { alternativa: questao.alternativas[0].id });
+    assert.equal(resposta.status, 409);
+    assert.equal(resposta.corpo.mensagem, "Questão encerrada por interrupção.");
+    // Nova tentativa do mesmo tema devolve a mesma questão encerrada.
+    const reaberta = await iniciar(cookie);
+    assert.equal(reaberta.id, questao.id);
+    assert.equal(reaberta.situacao, "interrompida");
+    assert.deepEqual(await lerResposta(questao.id), gravada);
+    assert.equal((await banco.query("SELECT count(*)::integer AS total FROM tbresposta")).rows[0].total, 1);
+});
+
+test("Iniciar: tema novo interrompe a aberta, tema encerrado não, reabrir encerra a própria", opcoes, async () => {
+    for (let ordem = 1; ordem <= 4; ordem++) await criarTema(ordem);
+    const cookie = await criarCandidato();
+    const respondida = await iniciar(cookie, 1);
+    assert.equal((await solicitar(`/api/exames/respostas/${respondida.id}`, cookie, { alternativa: respondida.alternativas[0].id })).status, 200);
+    const aberta = await iniciar(cookie, 2);
+    // Abrir tema já encerrado mostra o resultado e não interrompe a questão aberta.
+    const consultada = await iniciar(cookie, 1);
+    assert.equal(consultada.situacao, "respondida");
+    assert.equal((await lerResposta(aberta.id)).situacao, "em_andamento");
+    // Reabrir o tema aberto encerra a própria questão, sem sortear outra.
+    const reaberta = await iniciar(cookie, 2);
+    assert.equal(reaberta.id, aberta.id);
+    assert.equal(reaberta.situacao, "interrompida");
+    assertInterrompida(await lerResposta(aberta.id));
+    // Iniciar outro tema válido interrompe a questão aberta.
+    const terceira = await iniciar(cookie, 3);
+    const quarta = await iniciar(cookie, 4);
+    assert.equal(quarta.situacao, "em_andamento");
+    assertInterrompida(await lerResposta(terceira.id));
+    assert.equal((await banco.query("SELECT count(*)::integer AS total FROM tbresposta")).rows[0].total, 4);
+});
+
+test("Logout com questão aberta: interrompida", opcoes, async () => {
+    for (let ordem = 1; ordem <= 2; ordem++) await criarTema(ordem);
+    const cookie = await criarCandidato();
+    const outroCookie = await criarCandidato("11144477735");
+    const questao = await iniciar(cookie);
+    const deOutro = await iniciar(outroCookie);
+    const saida = await solicitar("/api/auth/logout", cookie, {});
+    assert.equal(saida.status, 200);
+    assertInterrompida(await lerResposta(questao.id));
+    const certificacao = (await banco.query("SELECT c.* FROM tbcertificacao c JOIN tbresposta r ON r.idcertificacao=c.id WHERE r.id=$1", [questao.id])).rows[0];
+    assert.equal(certificacao.total_acertos, 0);
+    assert.equal(certificacao.status, "em_andamento");
+    // A sessão encerrada não renova nem responde; a questão de outro candidato não é tocada.
+    assert.equal((await solicitar(`/api/exames/respostas/${questao.id}/sinal`, cookie, {})).status, 401);
+    assert.equal((await lerResposta(deOutro.id)).situacao, "em_andamento");
+});
+
+test("Dono da resposta: sinal e interromper de outro candidato devolvem 404", opcoes, async () => {
+    await criarTema(1);
+    const cookie = await criarCandidato();
+    const outroCookie = await criarCandidato("11144477735");
+    const questao = await iniciar(cookie);
+    const antes = await lerResposta(questao.id);
+    for (const acao of ["sinal", "interromper"]) {
+        const resposta = await solicitar(`/api/exames/respostas/${questao.id}/${acao}`, outroCookie, {});
+        assert.equal(resposta.status, 404);
+        assert.deepEqual(resposta.corpo, { mensagem: "Resposta não encontrada." });
+    }
+    assert.deepEqual(await lerResposta(questao.id), antes);
 });
 
 test('005_alternativas_questao recusa base inconsistente', opcoes, async () => {
