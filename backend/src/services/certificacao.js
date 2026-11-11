@@ -1,8 +1,10 @@
 const PERCENTUAL_MINIMO_CERTIFICADO = 65;
 
 async function recalcularCertificacao(db, idcertificacao) {
-    await db.query(`UPDATE tbcertificacao SET total_acertos=s.acertos,
-        percentual_acertos=round(s.acertos * 100.0 / 12, 2), nota_final=round(s.acertos * 100.0 / 12, 2),
+    await db.query(`UPDATE tbcertificacao SET
+        total_acertos=CASE WHEN s.respondidas=12 THEN s.acertos ELSE NULL END,
+        percentual_acertos=CASE WHEN s.respondidas=12 THEN round(s.acertos * 100.0 / 12, 2) ELSE NULL END,
+        nota_final=CASE WHEN s.respondidas=12 THEN round(s.acertos * 100.0 / 12, 2) ELSE NULL END,
         status=CASE WHEN s.respondidas=12 THEN 'concluida' ELSE 'em_andamento' END,
         data_conclusao=CASE WHEN s.respondidas=12 THEN COALESCE(data_conclusao, CURRENT_TIMESTAMP) ELSE NULL END
         FROM (SELECT count(*) FILTER (WHERE acertou)::integer AS acertos,

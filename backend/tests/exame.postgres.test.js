@@ -271,8 +271,9 @@ test("Interrupção: reiniciar encerra pendências e preserva o tempo esgotado",
     assert.deepEqual(vencida.alternativa_correta, terceira.alternativas[0]);
     assert.equal((await iniciar(cookie)).id, primeira.id);
     const certificacao = (await banco.query("SELECT * FROM tbcertificacao")).rows[0];
-    assert.equal(certificacao.total_acertos, 0);
-    assert.equal(Number(certificacao.percentual_acertos), 0);
+    assert.equal(certificacao.total_acertos, null);
+    assert.equal(certificacao.nota_final, null);
+    assert.equal(certificacao.percentual_acertos, null);
     assert.equal(certificacao.status, "em_andamento");
     assert.equal((await banco.query("SELECT count(*)::integer AS total FROM tbresposta")).rows[0].total, 3);
 });
@@ -341,6 +342,13 @@ test("Resultado final: aplica o mínimo de 65% e não permite alterar respostas"
                 alternativa: alternativa.id,
             });
             assert.equal(resposta.status, 200);
+            if (ordem === 11) {
+                const parcial = (await banco.query(`SELECT total_acertos, nota_final, percentual_acertos, status
+                    FROM tbcertificacao WHERE idcandidato=(SELECT id FROM tbcandidato WHERE cpf=$1)`, [cpf])).rows[0];
+                assert.deepEqual(parcial, {
+                    total_acertos: null, nota_final: null, percentual_acertos: null, status: "em_andamento",
+                });
+            }
             if (ordem === 1) primeiraResposta = { id: questao.id, alternativa: questao.alternativas[1] };
         }
 
@@ -360,11 +368,13 @@ test("Resultado final: aplica o mínimo de 65% e não permite alterar respostas"
         });
         assert.equal(alteracao.status, 409);
         assert.equal(alteracao.corpo.situacao, "respondida");
-        const resultadoPersistido = (await banco.query(`SELECT c.total_acertos, c.nota_final
+        const resultadoPersistido = (await banco.query(`SELECT c.total_acertos, c.nota_final, c.percentual_acertos, c.status
             FROM tbcertificacao c JOIN tbcandidato candidato ON candidato.id=c.idcandidato
             WHERE candidato.cpf=$1`, [cpf])).rows[0];
         assert.equal(resultadoPersistido.total_acertos, correctas);
         assert.equal(Number(resultadoPersistido.nota_final), Number((correctas * 100 / 12).toFixed(2)));
+        assert.equal(Number(resultadoPersistido.percentual_acertos), Number((correctas * 100 / 12).toFixed(2)));
+        assert.equal(resultadoPersistido.status, "concluida");
     }
 
     await concluir(8, "52998224725");
