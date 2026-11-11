@@ -18,6 +18,8 @@ Em banco novo, `schema.sql` e `seed.sql` criam a estrutura e o catálogo dos tem
 
 `POST /api/exames/:ordem/iniciar` inicia ou retoma uma questão do tema, mantendo uma certificação por candidato e uma resposta por tema, conforme o schema existente. `POST /api/exames/respostas/:id` recebe `{ "alternativa": 123 }`, confere propriedade e alternativa, grava a resposta e calcula o resultado no servidor. Respostas concluídas não podem ser substituídas. A certificação é concluída após os 12 temas. O resultado parcial usa o total de 12 questões como denominador.
 
+`GET /api/exames/progresso` retorna `resultado_final` somente após a conclusão dos 12 temas, com nota, percentual de acertos, quantidade de respostas corretas, percentual mínimo para aprovação (65%) e condição de aptidão para o certificado. A página de certificados exibe esses dados em modo somente leitura; a emissão do documento não faz parte deste fluxo.
+
 Cadastre questões reais em `tbquestao`, imagens em `tbimagem` e quatro alternativas A–D em `tbalternativa`, com uma correta. O seed atual não contém questões: nesse caso a tela informa a indisponibilidade, sem apresentar uma prova fictícia. A emissão de certificado continua fora deste fluxo; não é emitido documento apenas por concluir a leitura.
 
 ## Verificação

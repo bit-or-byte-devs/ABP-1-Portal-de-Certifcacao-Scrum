@@ -5,7 +5,9 @@ const {
     DURACAO_QUESTAO_SEGUNDOS, TOLERANCIA_REDE_SEGUNDOS,
     encerrarQuestoesVencidasDaCertificacao, interromperQuestoesEmAndamento,
 } = require("../services/encerramentoQuestao");
-const { recalcularCertificacao, buscarProximoTemaPendente } = require("../services/certificacao");
+const {
+    PERCENTUAL_MINIMO_CERTIFICADO, recalcularCertificacao, buscarProximoTemaPendente,
+} = require("../services/certificacao");
 const router = express.Router();
 
 async function atualizarQuestoesVencidas(db, idcertificacao) {
@@ -56,9 +58,24 @@ router.get("/progresso", async (req, res) => {
                 proximoTema = await buscarProximoTemaPendente(db, idcertificacao, proximoTema);
             }
         }
+        const certificacaoConcluida = temas.length === 12 && temas.every(tema => tema.estado === 'concluido');
+        let resultadoFinal = null;
+        if (certificacaoConcluida) {
+            const resultado = await db.query(`SELECT total_acertos, nota_final, percentual_acertos
+                FROM tbcertificacao WHERE id=$1`, [idcertificacao]);
+            const { total_acertos, nota_final, percentual_acertos } = resultado.rows[0];
+            const percentual = Number(percentual_acertos);
+            resultadoFinal = {
+                total_acertos: Number(total_acertos),
+                nota_final: Number(nota_final),
+                percentual_acertos: percentual,
+                percentual_minimo_certificado: PERCENTUAL_MINIMO_CERTIFICADO,
+                apto_certificado: percentual >= PERCENTUAL_MINIMO_CERTIFICADO,
+            };
+        }
         await db.query("COMMIT");
         res.json({ temas, proximo_tema: proximoTema,
-            certificacao_concluida: temas.length === 12 && temas.every(tema => tema.estado === 'concluido') });
+            certificacao_concluida: certificacaoConcluida, resultado_final: resultadoFinal });
     } catch { if (db) await db.query("ROLLBACK").catch(() => {}); res.status(503).json({ mensagem: "Não foi possível consultar o progresso da certificação." }); }
     finally { db?.release(); }
 });

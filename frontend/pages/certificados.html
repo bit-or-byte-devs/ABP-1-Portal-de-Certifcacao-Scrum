@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,11 +28,30 @@
             <h1 class="page-title">Certificados</h1>
         </div>
 
-        <section class="card" aria-labelledby="validacao-titulo">
-            <h2 id="validacao-titulo">Validação de certificado</h2>
+        <section class="card resultado-certificacao" aria-labelledby="resultado-titulo">
+            <h2 id="resultado-titulo">Resultado da certificação</h2>
             <div class="card-body-content">
-                <p>Em breve, você poderá validar aqui o certificado adquirido ao concluir o curso.</p>
-                <p>A validação de certificados ainda não está disponível.</p>
+                <p id="mensagem-resultado" role="status" aria-live="polite">Carregando resultado...</p>
+                <div id="resultado-final" hidden>
+                    <h3>Resultado final</h3>
+                    <dl class="resultado-certificacao__metricas">
+                        <div>
+                            <dt>Nota obtida</dt>
+                            <dd id="nota-final"></dd>
+                        </div>
+                        <div>
+                            <dt>Percentual de acertos</dt>
+                            <dd id="percentual-acertos"></dd>
+                        </div>
+                        <div>
+                            <dt>Respostas corretas</dt>
+                            <dd id="total-acertos"></dd>
+                        </div>
+                    </dl>
+                    <h3>Condição para emissão do certificado</h3>
+                    <p id="condicao-certificado"></p>
+                </div>
+                <p id="link-exames" hidden><a class="btn-nav" href="exames.html">Continuar certificação</a></p>
             </div>
         </section>
     </main>
@@ -49,6 +68,7 @@
     </footer>
 
     <script src="../js/logout.js"></script>
-<script src="../js/sessao-estudos.js"></script>
+    <script src="../js/sessao-estudos.js"></script>
+    <script src="../js/certificados.js"></script>
 </body>
 </html>

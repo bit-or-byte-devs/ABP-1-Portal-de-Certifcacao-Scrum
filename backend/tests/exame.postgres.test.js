@@ -292,7 +292,7 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     assert.deepEqual(progresso.corpo, {
         temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1),
             estado: indice < 2 ? "concluido" : indice === 2 ? "em_andamento" : "pendente" })),
-        proximo_tema: 4, certificacao_concluida: false,
+        proximo_tema: 4, certificacao_concluida: false, resultado_final: null,
     });
     assert.equal((await lerResposta(segunda.id)).situacao, "tempo_esgotado");
     assert.equal((await lerResposta(terceira.id)).situacao, "em_andamento");
@@ -308,7 +308,7 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     assert.equal(semCertificacao.status, 200);
     assert.deepEqual(semCertificacao.corpo, {
         temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1), estado: "pendente" })),
-        proximo_tema: 1, certificacao_concluida: false,
+        proximo_tema: 1, certificacao_concluida: false, resultado_final: null,
     });
     const quantidade = await banco.query(`SELECT count(*)::integer AS total FROM tbcertificacao c
         JOIN tbcandidato candidato ON candidato.id=c.idcandidato WHERE candidato.cpf='11144477735'`);
@@ -326,6 +326,49 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     assert.equal(concluida.corpo.certificacao_concluida, true);
     assert.equal(concluida.corpo.proximo_tema, null);
     assert.ok(concluida.corpo.temas.every(tema => tema.estado === "concluido"));
+});
+
+test("Resultado final: aplica o mínimo de 65% e não permite alterar respostas", opcoes, async () => {
+    for (let ordem = 1; ordem <= 12; ordem++) await criarTema(ordem);
+
+    async function concluir(correctas, cpf) {
+        const cookie = await criarCandidato(cpf);
+        let primeiraResposta;
+        for (let ordem = 1; ordem <= 12; ordem++) {
+            const questao = await iniciar(cookie, ordem);
+            const alternativa = questao.alternativas[ordem <= correctas ? 0 : 1];
+            const resposta = await solicitar(`/api/exames/respostas/${questao.id}`, cookie, {
+                alternativa: alternativa.id,
+            });
+            assert.equal(resposta.status, 200);
+            if (ordem === 1) primeiraResposta = { id: questao.id, alternativa: questao.alternativas[1] };
+        }
+
+        const progresso = await solicitar("/api/exames/progresso", cookie);
+        assert.equal(progresso.status, 200);
+        assert.equal(progresso.corpo.certificacao_concluida, true);
+        assert.deepEqual(progresso.corpo.resultado_final, {
+            total_acertos: correctas,
+            nota_final: Number((correctas * 100 / 12).toFixed(2)),
+            percentual_acertos: Number((correctas * 100 / 12).toFixed(2)),
+            percentual_minimo_certificado: 65,
+            apto_certificado: correctas * 100 / 12 >= 65,
+        });
+
+        const alteracao = await solicitar(`/api/exames/respostas/${primeiraResposta.id}`, cookie, {
+            alternativa: primeiraResposta.alternativa.id,
+        });
+        assert.equal(alteracao.status, 409);
+        assert.equal(alteracao.corpo.situacao, "respondida");
+        const resultadoPersistido = (await banco.query(`SELECT c.total_acertos, c.nota_final
+            FROM tbcertificacao c JOIN tbcandidato candidato ON candidato.id=c.idcandidato
+            WHERE candidato.cpf=$1`, [cpf])).rows[0];
+        assert.equal(resultadoPersistido.total_acertos, correctas);
+        assert.equal(Number(resultadoPersistido.nota_final), Number((correctas * 100 / 12).toFixed(2)));
+    }
+
+    await concluir(8, "52998224725");
+    await concluir(7, "11144477735");
 });
 
 

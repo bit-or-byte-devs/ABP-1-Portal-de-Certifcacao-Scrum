@@ -28,9 +28,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         });
         mensagem.textContent = progresso.certificacao_concluida ? 'Certificação concluída.' : '';
-        botaoContinuar.hidden = progresso.certificacao_concluida || progresso.proximo_tema === null;
+        botaoContinuar.textContent = progresso.certificacao_concluida
+            ? 'Ver resultado final' : 'Continuar certificação';
+        botaoContinuar.hidden = !progresso.certificacao_concluida && progresso.proximo_tema === null;
         botaoContinuar.disabled = botaoContinuar.hidden;
-        botaoContinuar.addEventListener('click', () => abrirTema(progresso.proximo_tema));
+        botaoContinuar.addEventListener('click', () => {
+            if (progresso.certificacao_concluida) location.href = 'certificados.html';
+            else abrirTema(progresso.proximo_tema);
+        });
     } catch (erro) {
         portal.avisar(erro.message);
         mensagem.textContent = '';

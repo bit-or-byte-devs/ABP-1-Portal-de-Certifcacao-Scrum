@@ -387,3 +387,39 @@ body {
     color: var(--inner-box);
     font-weight: 700;
 }
+
+.resultado-certificacao h3 {
+    margin: 20px 0 12px;
+}
+
+.resultado-certificacao__metricas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+    gap: 12px;
+}
+
+.resultado-certificacao__metricas > div {
+    padding: 16px;
+    background-color: var(--inner-box);
+    border-radius: 12px;
+}
+
+.resultado-certificacao__metricas dt {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.resultado-certificacao__metricas dd {
+    margin-top: 6px;
+    color: var(--green-accent);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.resultado-certificacao [hidden] {
+    display: none;
+}
+
+#link-exames {
+    margin-top: 20px;
+}

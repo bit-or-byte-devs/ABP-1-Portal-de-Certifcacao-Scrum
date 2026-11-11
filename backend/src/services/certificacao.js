@@ -1,3 +1,5 @@
+const PERCENTUAL_MINIMO_CERTIFICADO = 65;
+
 async function recalcularCertificacao(db, idcertificacao) {
     await db.query(`UPDATE tbcertificacao SET total_acertos=s.acertos,
         percentual_acertos=round(s.acertos * 100.0 / 12, 2), nota_final=round(s.acertos * 100.0 / 12, 2),
@@ -16,4 +18,4 @@ async function buscarProximoTemaPendente(db, idcertificacao, ordemAtual) {
     return rows[0]?.ordem ?? null;
 }
 
-module.exports = { recalcularCertificacao, buscarProximoTemaPendente };
+module.exports = { PERCENTUAL_MINIMO_CERTIFICADO, recalcularCertificacao, buscarProximoTemaPendente };

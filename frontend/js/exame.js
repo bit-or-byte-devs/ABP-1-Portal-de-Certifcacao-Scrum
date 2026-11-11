@@ -56,9 +56,12 @@
         });
         feedback.textContent = `${resultado} Alternativa correta: ${correta.letra}. ${correta.texto}. ${dados.justificativa || ''}`;
         botaoConfirmar.hidden = true;
-        linkContinuar.textContent = 'Próximo tema';
-        linkContinuar.href = dados.proximo_tema === null ? 'exames.html' : `exame.html?tema=${dados.proximo_tema}`;
-        linkContinuar.hidden = Number(tema) === 12;
+        const certificacaoConcluida = Number(tema) === 12 && dados.proximo_tema === null;
+        linkContinuar.textContent = certificacaoConcluida
+            ? 'Ver resultado final' : 'Próximo tema';
+        linkContinuar.href = certificacaoConcluida
+            ? 'certificados.html' : `exame.html?tema=${dados.proximo_tema}`;
+        linkContinuar.hidden = !certificacaoConcluida;
         botaoInterromper.textContent = 'Encerrar sessão';
         botaoInterromper.hidden = false;
         botaoConfirmar.disabled = true;
