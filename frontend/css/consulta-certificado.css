@@ -1,0 +1,257 @@
+.pagina-consulta-certificado .main-container {
+    max-width: 860px;
+    padding: 24px 24px 48px;
+}
+
+.pagina-consulta-certificado .top-header-row {
+    width: min(100%, 720px);
+    margin: 20px auto 18px;
+    gap: 16px;
+}
+
+.pagina-consulta-certificado .page-title {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.pagina-consulta-certificado .consulta-card {
+    width: min(100%, 720px);
+    margin: 0 auto;
+    padding: 26px 28px 28px;
+    border: 1px solid rgba(0, 255, 102, 0.473);
+    border-radius: 12px;
+    background: rgba(11, 18, 30, 0.9);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.pagina-consulta-certificado .consulta-card h2 {
+    margin: 0 0 20px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.pagina-consulta-certificado .consulta-label {
+    display: block;
+    margin: 20px 0 12px;
+    color: var(--text-white);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.pagina-consulta-certificado .consulta-input {
+    width: 100%;
+    height: 46px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    background: rgba(15, 22, 35, 0.9);
+    color: var(--text-white);
+    font-size: 15px;
+    outline: none;
+}
+
+.pagina-consulta-certificado .consulta-input:focus {
+    border-color: rgba(0, 255, 102, 0.35);
+    box-shadow: 0 0 0 2px rgba(0, 255, 102, 0.08);
+}
+
+.pagina-consulta-certificado .consulta-button {
+    display: block;
+    margin: 20px auto 0;
+    min-width: 170px;
+    min-height: 44px;
+    padding: 10px 28px;
+    border: none;
+    border-radius: 18px;
+    background: #00ff66;
+    color: #0b0f19;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.pagina-consulta-certificado .consulta-button:hover {
+    background: #66ffa3;
+}
+
+.pagina-consulta-certificado .consulta-mensagem {
+    min-height: 22px;
+    margin-top: 12px;
+    color: #ff8a8a;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.pagina-consulta-certificado .resultado-certificado {
+    margin-top: 24px;
+}
+
+.pagina-consulta-certificado .resultado-status {
+    margin: 0 0 16px;
+    color: var(--text-white);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.pagina-consulta-certificado .resultado-status span {
+    color: #a6f4d1;
+}
+
+.pagina-consulta-certificado .certificado-documento {
+    position: relative;
+    overflow: hidden;
+    min-height: 470px;
+    padding: 52px 38px 28px;
+    border: 3px solid #123b6d;
+    border-radius: 4px 4px 0 0;
+    background: #f7f8f9;
+    box-shadow: inset 0 0 0 3px rgba(19, 58, 107, 0.15);
+}
+
+.pagina-consulta-certificado .certificado-documento::before,
+.pagina-consulta-certificado .certificado-documento::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.pagina-consulta-certificado .certificado-documento::before {
+    background: linear-gradient(135deg, transparent 0 48%, rgba(20, 66, 110, 0.18) 48% 51%, transparent 51% 100%);
+    opacity: 0.8;
+}
+
+.pagina-consulta-certificado .certificado-documento::after {
+    background: linear-gradient(135deg, rgba(233, 203, 84, 0.8) 0%, rgba(233, 203, 84, 0.8) 17%, transparent 17%, transparent 100%);
+    clip-path: polygon(0 0, 42% 0, 100% 100%, 0 100%);
+    opacity: 0.85;
+}
+
+.pagina-consulta-certificado .certificado-canto {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(18, 59, 109, 0.98) 0%, rgba(18, 59, 109, 0.98) 70%, transparent 70%);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    opacity: 0.8;
+}
+
+.pagina-consulta-certificado .certificado-titulo {
+    position: relative;
+    z-index: 1;
+    margin: 18px 0 18px;
+    color: #0d2448;
+    text-align: center;
+    font-size: clamp(28px, 3vw, 48px);
+    letter-spacing: 0.04em;
+    font-weight: 800;
+}
+
+.pagina-consulta-certificado .certificado-subtitulo {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 18px;
+    color: #0d2448;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.pagina-consulta-certificado .certificado-nome {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 26px;
+    color: #0d2448;
+    text-align: center;
+    font-size: clamp(26px, 2.5vw, 38px);
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+}
+
+.pagina-consulta-certificado .certificado-texto {
+    position: relative;
+    z-index: 1;
+    max-width: 610px;
+    margin: 0 auto 42px;
+    color: #1d2c46;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.7;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.pagina-consulta-certificado .certificado-assinatura {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 28px;
+    color: #0d2448;
+}
+
+.pagina-consulta-certificado .linha-assinatura {
+    width: 200px;
+    height: 2px;
+    background: rgba(13, 36, 72, 0.7);
+    margin-bottom: 10px;
+}
+
+.pagina-consulta-certificado .assinatura-nome {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.pagina-consulta-certificado .assinatura-cargo {
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.85;
+}
+
+.pagina-consulta-certificado .certificado-botao {
+    display: block;
+    margin: 18px auto 0;
+    min-width: 140px;
+    min-height: 38px;
+    padding: 9px 18px;
+    border: none;
+    border-radius: 18px;
+    background: rgba(17, 23, 38, 0.8);
+    color: var(--text-white);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+    .pagina-consulta-certificado .main-container {
+        padding: 16px 16px 32px;
+    }
+
+    .pagina-consulta-certificado .top-header-row {
+        margin: 14px auto 18px;
+    }
+
+    .pagina-consulta-certificado .page-title {
+        font-size: 28px;
+    }
+
+    .pagina-consulta-certificado .consulta-card {
+        padding: 20px 18px 22px;
+    }
+
+    .pagina-consulta-certificado .footer-bar {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 18px 16px;
+    }
+}

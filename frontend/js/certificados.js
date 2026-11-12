@@ -7,8 +7,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     const nomeCandidato = document.getElementById('nome-candidato');
     const progressoCertificacao = document.getElementById('progresso-certificacao');
     const statusCertificacao = document.getElementById('status-certificacao');
+    const btnConsultarCodigo = document.getElementById('btn-consultar-codigo');
+    const certificadoEmitido = document.getElementById('certificado-emitido');
+
+    btnConsultarCodigo?.addEventListener('click', () => {
+        window.location.href = 'consultar-certificado.html';
+    });
 
     resultadoFinal.hidden = false;
+    certificadoEmitido.hidden = true;
     linkExames.hidden = true;
     detalhesResultado.hidden = true;
     autenticidadeResultado.hidden = true;
@@ -67,6 +74,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         autenticidadeResultado.hidden = false;
         mensagem.textContent = 'Certificação concluída. Suas respostas e seu resultado são somente para consulta.';
         linkExames.hidden = true;
+
+        if (resultado.apto_certificado) {
+            const nomeEmitido = document.getElementById('certificado-nome');
+            if (nomeEmitido) nomeEmitido.textContent = usuario.nome.trim();
+            certificadoEmitido.hidden = false;
+            resultadoFinal.hidden = false;
+        }
     };
 
     const carregarDados = async () => {

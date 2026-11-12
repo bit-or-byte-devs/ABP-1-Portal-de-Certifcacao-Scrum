@@ -159,6 +159,152 @@
     text-decoration: none;
 }
 
+.pagina-certificados .certificado-emitido {
+    margin-top: 26px;
+}
+
+.pagina-certificados .resultado-status {
+    margin: 0 0 16px;
+    color: var(--text-white);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.pagina-certificados .resultado-status span {
+    color: #a6f4d1;
+}
+
+.pagina-certificados .certificado-documento {
+    position: relative;
+    overflow: hidden;
+    min-height: 470px;
+    padding: 52px 38px 28px;
+    border: 3px solid #123b6d;
+    border-radius: 4px 4px 0 0;
+    background: #f7f8f9;
+    box-shadow: inset 0 0 0 3px rgba(19, 58, 107, 0.15);
+}
+
+.pagina-certificados .certificado-documento::before,
+.pagina-certificados .certificado-documento::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.pagina-certificados .certificado-documento::before {
+    background: linear-gradient(135deg, transparent 0 48%, rgba(20, 66, 110, 0.18) 48% 51%, transparent 51% 100%);
+    opacity: 0.8;
+}
+
+.pagina-certificados .certificado-documento::after {
+    background: linear-gradient(135deg, rgba(233, 203, 84, 0.8) 0%, rgba(233, 203, 84, 0.8) 17%, transparent 17%, transparent 100%);
+    clip-path: polygon(0 0, 42% 0, 100% 100%, 0 100%);
+    opacity: 0.85;
+}
+
+.pagina-certificados .certificado-canto {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(18, 59, 109, 0.98) 0%, rgba(18, 59, 109, 0.98) 70%, transparent 70%);
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    opacity: 0.8;
+}
+
+.pagina-certificados .certificado-titulo {
+    position: relative;
+    z-index: 1;
+    margin: 18px 0 18px;
+    color: #0d2448;
+    text-align: center;
+    font-size: clamp(28px, 3vw, 48px);
+    letter-spacing: 0.04em;
+    font-weight: 800;
+}
+
+.pagina-certificados .certificado-subtitulo {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 18px;
+    color: #0d2448;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.pagina-certificados .certificado-nome {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 26px;
+    color: #0d2448;
+    text-align: center;
+    font-size: clamp(26px, 2.5vw, 38px);
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+}
+
+.pagina-certificados .certificado-texto {
+    position: relative;
+    z-index: 1;
+    max-width: 610px;
+    margin: 0 auto 42px;
+    color: #1d2c46;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.7;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.pagina-certificados .certificado-assinatura {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 28px;
+    color: #0d2448;
+}
+
+.pagina-certificados .linha-assinatura {
+    width: 200px;
+    height: 2px;
+    background: rgba(13, 36, 72, 0.7);
+    margin-bottom: 10px;
+}
+
+.pagina-certificados .assinatura-nome {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.pagina-certificados .assinatura-cargo {
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0.85;
+}
+
+.pagina-certificados .certificado-botao {
+    display: block;
+    margin: 18px auto 0;
+    min-width: 140px;
+    min-height: 38px;
+    padding: 9px 18px;
+    border: none;
+    border-radius: 18px;
+    background: rgba(17, 23, 38, 0.8);
+    color: var(--text-white);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
 @media (max-width: 600px) {
     .pagina-certificados .top-nav {
         width: calc(100% - 32px);
