@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const { VALIDADE_MINUTOS } = require("./codigoRecuperacao");
 let transporte;
 function configuracao() {
     const modoConsole = process.env.RECUPERACAO_MODO === "console";
@@ -17,7 +18,7 @@ function configuracao() {
 async function enviarCodigo(email, codigo, solicitacaoId) {
     const opcoes = configuracao();
     if (opcoes.modoConsole) {
-        console.log("[RECUPERAÇÃO LOCAL] Solicitação: %s | Código: %s | Validade: 10 minutos", solicitacaoId, codigo);
+        console.log("[RECUPERAÇÃO LOCAL] Solicitação: %s | Código: %s | Validade: %d minutos", solicitacaoId, codigo, VALIDADE_MINUTOS);
         return;
     }
     if (!transporte) {
@@ -33,7 +34,7 @@ async function enviarCodigo(email, codigo, solicitacaoId) {
         from: process.env.SMTP_FROM, to: email,
         subject: "Código de recuperação — Portal de Certificação Scrum",
         text: "Seu código de recuperação é: " + codigo +
-            "\nEle é válido por 10 minutos e pode ser usado apenas uma vez." +
+            "\nEle é válido por " + VALIDADE_MINUTOS + " minutos e pode ser usado apenas uma vez." +
             "\nSe você não solicitou a recuperação, ignore este e-mail.",
     });
     if (!resultado.accepted || resultado.accepted.length === 0 || resultado.rejected?.length) {

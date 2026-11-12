@@ -1,53 +1,56 @@
 const crypto = require("crypto");
 const model = require("../models/recuperacaoModel");
 const emailService = require("../services/emailRecuperacao");
-const { obterSegredo, gerarCodigo, solicitacoesLivres } = require("../services/codigoRecuperacao");
+const { VALIDADE_MINUTOS, obterSegredo, gerarCodigo, solicitacoesLivres } = require("../services/codigoRecuperacao");
 const MENSAGEM = "Se houver uma conta com esse e-mail, enviaremos um código de recuperação.";
 function falhar(res) {
     return res.status(503).json({ mensagem: "Não foi possível concluir a recuperação. Tente novamente mais tarde." });
 }
+// Mesmo critério do cadastro: e-mail aparado e minúsculo.
+function lerEmail(valor) {
+    const email = typeof valor === "string" ? valor.trim().toLowerCase() : "";
+    return email.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? email : "";
+}
+// Não aguarda o transporte: a resposta não pode depender de a conta existir nem do envio.
+function enviarEmSegundoPlano(email, codigo, solicitacaoId) {
+    emailService.enviarCodigo(email, codigo, solicitacaoId)
+        .then(() => model.concluirEnvio(solicitacaoId, true))
+        .catch(() => {
+            // Sem código, e-mail ou detalhes do transporte no log.
+            console.error("Falha no envio do código de recuperação de senha.");
+            return model.concluirEnvio(solicitacaoId, false);
+        })
+        .catch(() => console.error("Falha ao registrar o resultado do envio de recuperação de senha."));
+}
 async function solicitarCodigo(req, res) {
-    const dados = req.body || {};
-    const cpf = typeof dados.cpf === "string" ? dados.cpf.replace(/\D/g, "") : "";
-    const email = typeof dados.email === "string" ? dados.email.trim().toLowerCase() : "";
-    if (!/^\d{11}$/.test(cpf) || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        return res.status(400).json({ mensagem: "Informe CPF e e-mail válidos." });
-    }
-    const solicitacaoId = crypto.randomUUID();
+    const email = lerEmail((req.body || {}).email);
+    if (!email) return res.status(400).json({ mensagem: "Informe um e-mail válido." });
     try {
         obterSegredo();
         emailService.configuracao();
         const liberarSolicitacoes = solicitacoesLivres();
         if (!liberarSolicitacoes && (!await model.reservarLimite("envio-ip", req.ip, 10, 600) ||
-            !await model.reservarLimite("conta-minuto", cpf, 1, 60) ||
-            !await model.reservarLimite("conta-hora", cpf, 5, 3600))) {
+            !await model.reservarLimite("email-minuto", email, 1, 60) ||
+            !await model.reservarLimite("email-hora", email, 5, 3600))) {
             res.set("Retry-After", "60");
             return res.status(429).json({ mensagem: "Limite de solicitações atingido. Aguarde antes de tentar novamente.", aguardarSegundos: 60 });
         }
+        const solicitacaoId = crypto.randomUUID();
         const codigo = gerarCodigo();
-        const candidato = await model.criarSolicitacao(cpf, email, solicitacaoId, codigo);
-        if (candidato) {
-            try {
-                await emailService.enviarCodigo(candidato.email, codigo, solicitacaoId);
-                await model.concluirEnvio(solicitacaoId, true);
-            } catch {
-                await model.concluirEnvio(solicitacaoId, false);
-                console.error("Falha no envio de recuperação de senha.");
-                return falhar(res);
-            }
-        }
-        // Retorna um ID aleatório também para dados que não correspondem a uma conta.
-        return res.status(202).json({ mensagem: MENSAGEM, solicitacaoId, aguardarSegundos: liberarSolicitacoes ? 0 : 60 });
+        const candidato = await model.criarSolicitacao(email, solicitacaoId, codigo);
+        if (candidato) enviarEmSegundoPlano(candidato.email, codigo, solicitacaoId);
+        // Mesmo status e mesmo corpo para conta existente, inexistente ou falha de envio.
+        return res.status(202).json({ mensagem: MENSAGEM, expiraEmMinutos: VALIDADE_MINUTOS, aguardarSegundos: liberarSolicitacoes ? 0 : 60 });
     } catch {
         console.error("Falha ao processar solicitação de recuperação.");
         return falhar(res);
     }
 }
 async function redefinirSenha(req, res) {
-    const { solicitacaoId, codigo, senha, confirmarSenha } = req.body || {};
-    if (typeof solicitacaoId !== "string" || !/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(solicitacaoId) ||
-        typeof codigo !== "string" || !/^\d{6}$/.test(codigo)) {
-        return res.status(400).json({ mensagem: "Informe um código de seis dígitos e solicite a recuperação nesta página." });
+    const { email: emailInformado, codigo, senha, confirmarSenha } = req.body || {};
+    const email = lerEmail(emailInformado);
+    if (!email || typeof codigo !== "string" || !/^\d{6}$/.test(codigo)) {
+        return res.status(400).json({ mensagem: "Informe o e-mail e o código de seis dígitos recebido." });
     }
     if (typeof senha !== "string" || senha.length < 8 || senha.length > 1024 || !/[A-Za-z]/.test(senha) || !/\d/.test(senha)) {
         return res.status(400).json({ mensagem: "A senha deve ter de 8 a 1024 caracteres, incluindo letras e números." });
@@ -57,7 +60,7 @@ async function redefinirSenha(req, res) {
         if (!await model.reservarLimite("validacao-ip", req.ip, 30, 600)) {
             return res.status(429).json({ mensagem: "Muitas tentativas. Aguarde alguns minutos antes de tentar novamente." });
         }
-        const resultado = await model.redefinirSenha(solicitacaoId, codigo, senha);
+        const resultado = await model.redefinirSenha(email, codigo, senha);
         const erros = {
             invalido: "Código inválido ou já utilizado. Confira os dados ou solicite outro código.",
             expirado: "Código expirado. Solicite outro código.",
