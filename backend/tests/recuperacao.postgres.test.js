@@ -41,6 +41,26 @@ test("recuperação com PostgreSQL isolado, concorrência e sessões", {
     const sql = fs.readFileSync(path.join(__dirname, "../../database/migrations/001_recuperacao_senha.sql"), "utf8");
     await banco.query(sql);
     await banco.query(sql); // A migração pode ser aplicada novamente sem apagar dados.
+    // A 008 recusa e-mails repetidos sem alterar nada; resolvidos, normaliza e cria o índice único.
+    const emailUnico = fs.readFileSync(path.join(__dirname, "../../database/migrations/008_email_unico.sql"), "utf8");
+    await banco.query(
+        `INSERT INTO tbcandidato (cpf, nome_completo, email, senha_hash) VALUES
+         ('39053344705', 'Duplicado Um', 'Dup@Example.test', 'x'), ('12345678909', 'Duplicado Dois', ' dup@example.test ', 'x')`
+    );
+    const conexaoMigracao = await banco.connect();
+    try {
+        await assert.rejects(conexaoMigracao.query(emailUnico), /1 e-mail\(s\) repetido\(s\) em 2 conta\(s\); nenhum dado foi alterado/);
+        await conexaoMigracao.query("ROLLBACK");
+    } finally { conexaoMigracao.release(); }
+    assert.deepEqual((await banco.query("SELECT email FROM tbcandidato ORDER BY cpf DESC")).rows.map(r => r.email),
+        ["Dup@Example.test", " dup@example.test "]);
+    assert.equal((await banco.query("SELECT to_regclass('uq_candidato_email') AS indice")).rows[0].indice, null);
+    await banco.query("UPDATE tbcandidato SET email = ' Outro@Example.TEST ' WHERE cpf = '12345678909'");
+    await banco.query(emailUnico);
+    await banco.query(emailUnico); // Também pode ser aplicada novamente.
+    assert.deepEqual((await banco.query("SELECT email FROM tbcandidato ORDER BY cpf DESC")).rows.map(r => r.email),
+        ["dup@example.test", "outro@example.test"]);
+    await banco.query("DELETE FROM tbcandidato");
     const caminhoDb = require.resolve("../src/config/db");
     require.cache[caminhoDb] = { id: caminhoDb, filename: caminhoDb, loaded: true, exports: banco };
     const { gerarHash, verificarSenha } = require("../src/services/senha");
@@ -54,7 +74,7 @@ test("recuperação com PostgreSQL isolado, concorrência e sessões", {
     const candidatoId = inserido.rows[0].id;
     await banco.query(
         "INSERT INTO tbcandidato (cpf, nome_completo, email, senha_hash) VALUES ($1, $2, $3, $4)",
-        ["11144477735", "Outra Pessoa", "maria@example.test", hashOriginal]
+        ["11144477735", "Outra Pessoa", "outra@example.test", hashOriginal]
     );
     const emails = [];
     let falharEmail = false;
@@ -175,14 +195,38 @@ test("recuperação com PostgreSQL isolado, concorrência e sessões", {
         assert.equal(emails.length, 1);
         assert.equal((await trocar(ausente.corpo.solicitacaoId, "123456")).status, 400);
     });
-    await t.test("e-mail repetido identifica a conta pelo CPF e exige correspondência", async () => {
+    await t.test("e-mail repetido é recusado pelo banco, sem diferenciar maiúsculas", async () => {
+        await assert.rejects(banco.query(
+            "INSERT INTO tbcandidato (cpf, nome_completo, email, senha_hash) VALUES ($1, $2, $3, $4)",
+            ["39053344705", "Maria Copia", "MARIA@Example.TEST", hashOriginal]
+        ), erro => erro.code === "23505" && erro.constraint === "uq_candidato_email");
+    });
+    await t.test("cadastro normaliza o e-mail e recusa repetido, inclusive simultâneo", async () => {
+        async function cadastrar(cpf, email) {
+            return post("/api/candidatos", { nome: "Teste Cadastro", cpf, email, senha: "Senha123", aceiteTermos: true });
+        }
+        const cpfsCriados = ["39053344705", "12345678909", "98765432100"];
+        try {
+            const repetido = await cadastrar("39053344705", "  MARIA@example.TEST ");
+            assert.equal(repetido.status, 409);
+            assert.deepEqual(repetido.corpo, { mensagem: "Este e-mail já possui cadastro.", campo: "email" });
+            const novo = await cadastrar("39053344705", "  Nova@Example.TEST ");
+            assert.equal(novo.status, 201);
+            assert.equal((await banco.query("SELECT email FROM tbcandidato WHERE cpf = $1", ["39053344705"])).rows[0].email, "nova@example.test");
+            const cpfRepetido = await cadastrar("52998224725", "inedito@example.test");
+            assert.equal(cpfRepetido.status, 409);
+            assert.deepEqual(cpfRepetido.corpo, { mensagem: "Este CPF já possui cadastro.", campo: "cpf" });
+            const simultaneos = await Promise.all([cadastrar("12345678909", "par@example.test"), cadastrar("98765432100", "PAR@Example.test")]);
+            assert.deepEqual(simultaneos.map(r => r.status).sort(), [201, 409]);
+            assert.deepEqual(simultaneos.find(r => r.status === 409).corpo, { mensagem: "Este e-mail já possui cadastro.", campo: "email" });
+            assert.equal((await banco.query("SELECT count(*)::int AS total FROM tbcandidato WHERE lower(email) = 'par@example.test'")).rows[0].total, 1);
+            // A recusa do e-mail não altera a conta existente.
+            assert.equal((await lerConta()).senha_hash, hashOriginal);
+        } finally { await banco.query("DELETE FROM tbcandidato WHERE cpf = ANY($1)", [cpfsCriados]); }
+    });
+    await t.test("CPF e e-mail de contas diferentes não geram pedido", async () => {
         await preparar();
-        const pedido = await solicitar("11144477735", "maria@example.test");
-        assert.equal(pedido.status, 202);
-        const conta = (await banco.query("SELECT candidato_id FROM tbrecuperacao_senha WHERE solicitacao_id = $1", [pedido.corpo.solicitacaoId])).rows[0];
-        assert.notEqual(conta.candidato_id, candidatoId);
-        await preparar();
-        const errado = await solicitar("52998224725", "outro@example.test");
+        const errado = await solicitar("52998224725", "outra@example.test");
         assert.equal(errado.status, 202);
         assert.equal(emails.length, 0);
         assert.equal((await banco.query("SELECT * FROM tbrecuperacao_senha")).rowCount, 0);
