@@ -78,8 +78,11 @@ test("recuperação com PostgreSQL isolado, concorrência e sessões", {
     );
     const emails = [];
     let falharEmail = false;
+    let atrasoEmail = 0;
+    // Transporte de teste: guarda o código, pode demorar ou falhar. Nunca envia e-mail real.
     emailService.enviarCodigo = async (email, codigo, id) => {
-        if (falharEmail) throw new Error("SMTP de teste indisponível");
+        if (atrasoEmail) await new Promise(resolve => setTimeout(resolve, atrasoEmail));
+        if (falharEmail) { emails.push({ email, codigo, id, falhou: true }); throw new Error("SMTP de teste indisponível"); }
         emails.push({ email, codigo, id });
     };
     const app = require("../src/app");
@@ -92,17 +95,39 @@ test("recuperação com PostgreSQL isolado, concorrência e sessões", {
         });
         return { status: resposta.status, corpo: await resposta.json(), resposta };
     }
-    async function solicitar(cpf = "52998224725", email = "maria@example.test") {
-        return post("/api/auth/recuperacao/solicitar", { cpf, email });
+    async function solicitar(email = "maria@example.test") {
+        return post("/api/auth/recuperacao/solicitar", { email });
     }
-    async function trocar(id, codigo, senha = "Nova12345") {
-        return post("/api/auth/recuperacao/redefinir", { solicitacaoId: id, codigo, senha, confirmarSenha: senha });
+    async function verificar(codigo, email = "maria@example.test") {
+        return post("/api/auth/recuperacao/verificar", { email, codigo });
+    }
+    async function trocar(codigo, senha = "Nova12345", email = "maria@example.test") {
+        return post("/api/auth/recuperacao/redefinir", { email, codigo, senha, confirmarSenha: senha });
+    }
+    // O envio roda em segundo plano: espera o pedido sair de "enviando" antes de usar o código.
+    async function aguardar(condicao, descricao) {
+        for (let i = 0; i < 150; i++) {
+            if (await condicao()) return;
+            await new Promise(resolve => setTimeout(resolve, 20));
+        }
+        assert.fail("Tempo esgotado aguardando: " + descricao);
+    }
+    async function aguardarEnvio() {
+        await aguardar(async () => (await banco.query(
+            "SELECT count(*)::int AS pendentes FROM tbrecuperacao_senha WHERE NOT enviada AND NOT invalidada"
+        )).rows[0].pendentes === 0, "conclusão do envio");
+    }
+    async function solicitarEnviado(email) {
+        const pedido = await solicitar(email);
+        assert.equal(pedido.status, 202);
+        await aguardarEnvio();
+        return pedido;
     }
     async function preparar() {
         process.env.RECUPERACAO_SOLICITACOES_LIVRES = "false";
         await banco.query("TRUNCATE tbrecuperacao_senha, tblimite_recuperacao");
         await banco.query("UPDATE tbcandidato SET senha_hash = $2, versao_sessao = 0 WHERE id = $1", [candidatoId, hashOriginal]);
-        emails.length = 0; falharEmail = false;
+        emails.length = 0; falharEmail = false; atrasoEmail = 0;
     }
     async function liberarReenvio() {
         await banco.query("UPDATE tblimite_recuperacao SET reinicia_em = clock_timestamp() - INTERVAL '1 second'");
@@ -110,6 +135,14 @@ test("recuperação com PostgreSQL isolado, concorrência e sessões", {
     async function lerConta() {
         return (await banco.query("SELECT senha_hash, versao_sessao FROM tbcandidato WHERE id = $1", [candidatoId])).rows[0];
     }
+    async function lerPedido() {
+        return (await banco.query("SELECT * FROM tbrecuperacao_senha")).rows[0];
+    }
+    function codigoErrado(codigo) { return codigo === "000000" ? "111111" : "000000"; }
+    const MENSAGEM_PUBLICA = "Se houver uma conta com esse e-mail, enviaremos um código de recuperação.";
+    const INVALIDO = { mensagem: "Código inválido ou já utilizado. Confira os dados ou solicite outro código." };
+    const EXPIRADO = { mensagem: "Código expirado. Solicite outro código." };
+    const TENTATIVAS = { mensagem: "Limite de cinco tentativas atingido. Solicite outro código." };
     await t.test("zeros à esquerda e HMAC vinculado ao pedido", async () => {
         const original = crypto.randomInt;
         try { crypto.randomInt = () => 7; assert.equal(codigoService.gerarCodigo(), "000007"); }
@@ -120,80 +153,161 @@ test("recuperação com PostgreSQL isolado, concorrência e sessões", {
         assert.equal(codigoService.conferirCodigo(candidatoId + 1, id, "000007", hmac), false);
         assert.equal(codigoService.conferirCodigo(candidatoId, crypto.randomUUID(), "000007", hmac), false);
     });
-    await t.test("recuperação correta, uso único, senha antiga e sessões invalidadas", async () => {
+    await t.test("fluxo completo: solicitar, verificar, redefinir, uso único, login e sessões derrubadas", async () => {
         await preparar();
         const login = await post("/api/auth/login", { cpf: "52998224725", senha: "Antiga123" });
         const cookie = login.resposta.headers.get("set-cookie").split(";")[0];
         const outroLogin = await post("/api/auth/login", { cpf: "52998224725", senha: "Antiga123" });
         const outroCookie = outroLogin.resposta.headers.get("set-cookie").split(";")[0];
-        const pedido = await solicitar();
-        assert.equal(pedido.status, 202);
-        assert.deepEqual(Object.keys(pedido.corpo).sort(), ["aguardarSegundos", "mensagem", "solicitacaoId"]);
-        const row = (await banco.query("SELECT * FROM tbrecuperacao_senha")).rows[0];
+        // Só o e-mail, normalizado como no cadastro (espaços e maiúsculas).
+        const pedido = await solicitarEnviado("  MARIA@Example.TEST ");
+        assert.deepEqual(pedido.corpo, { mensagem: MENSAGEM_PUBLICA, expiraEmMinutos: 10, aguardarSegundos: 60 });
+        assert.equal(pedido.resposta.headers.get("cache-control"), "no-store");
+        assert.equal(emails.length, 1); assert.equal(emails[0].email, "maria@example.test");
+        const row = await lerPedido();
         assert.equal(row.codigo_hmac.length, 64);
         assert.notEqual(row.codigo_hmac, emails[0].codigo);
         assert.equal(row.candidato_id, candidatoId);
         const ttl = row.expira_em.getTime() - Date.now();
         assert.ok(ttl > 590000 && ttl <= 600000);
-        assert.equal((await trocar(pedido.corpo.solicitacaoId, emails[0].codigo)).status, 200);
-        assert.equal((await trocar(pedido.corpo.solicitacaoId, emails[0].codigo)).status, 400);
+        // Verificar confere sem consumir e sem gastar tentativa.
+        const verificado = await verificar(emails[0].codigo, " Maria@Example.test");
+        assert.equal(verificado.status, 200);
+        assert.deepEqual(verificado.corpo, { mensagem: "Código confirmado. Defina a nova senha." });
+        assert.equal((await verificar(emails[0].codigo)).status, 200);
+        assert.equal((await lerPedido()).tentativas, 0);
+        assert.equal((await lerPedido()).consumida_em, null);
+        assert.equal((await lerConta()).senha_hash, hashOriginal);
+        // Redefinir confere de novo e consome na mesma operação.
+        assert.equal((await trocar(emails[0].codigo)).status, 200);
+        // Código já utilizado: mesma resposta nas duas rotas.
+        assert.deepEqual((await verificar(emails[0].codigo)).corpo, INVALIDO);
+        const reuso = await trocar(emails[0].codigo, "Outra12345");
+        assert.equal(reuso.status, 400); assert.deepEqual(reuso.corpo, INVALIDO);
         const conta = await lerConta();
         assert.equal(conta.versao_sessao, 1);
         assert.equal(await verificarSenha("Nova12345", conta.senha_hash), true);
         assert.equal(await verificarSenha("Antiga123", conta.senha_hash), false);
+        // Sessões abertas antes da troca deixam de valer.
         assert.equal((await fetch(base + "/api/auth/usuario", { headers: { Cookie: cookie } })).status, 401);
         assert.equal((await fetch(base + "/pages/menu.html", { redirect: "manual", headers: { Cookie: outroCookie } })).status, 302);
         assert.equal((await post("/api/auth/login", { cpf: "52998224725", senha: "Antiga123" })).status, 401);
         assert.equal((await post("/api/auth/login", { cpf: "52998224725", senha: "Nova12345" })).status, 200);
     });
-    await t.test("cinco erros bloqueiam inclusive o código correto", async () => {
-        await preparar(); const pedido = await solicitar();
-        const errado = emails[0].codigo === "000000" ? "111111" : "000000";
-        for (let i = 0; i < 5; i++) assert.equal((await trocar(pedido.corpo.solicitacaoId, errado)).status, 400);
-        const bloqueado = await trocar(pedido.corpo.solicitacaoId, emails[0].codigo);
-        assert.match(bloqueado.corpo.mensagem, /cinco tentativas/);
-        assert.equal((await banco.query("SELECT tentativas FROM tbrecuperacao_senha")).rows[0].tentativas, 5);
+    await t.test("202 idêntico para conta existente, inexistente e falha de envio", async () => {
+        await preparar();
+        const existente = await solicitarEnviado();
+        const inexistente = await solicitar("ausente@example.test");
+        assert.equal(inexistente.status, 202);
+        assert.deepEqual(inexistente.corpo, existente.corpo);
+        assert.equal(emails.length, 1);
+        // Falha no transporte: mesma resposta, pedido invalidado e log sem código nem e-mail.
+        await liberarReenvio(); falharEmail = true;
+        const erros = []; const erroOriginal = console.error;
+        console.error = (...args) => erros.push(args.join(" "));
+        let falha;
+        try {
+            falha = await solicitar();
+            await aguardarEnvio();
+        } finally { console.error = erroOriginal; }
+        assert.equal(falha.status, 202);
+        assert.deepEqual(falha.corpo, existente.corpo);
+        const row = await lerPedido();
+        assert.equal(row.enviada, false); assert.equal(row.invalidada, true);
+        assert.deepEqual(erros, ["Falha no envio do código de recuperação de senha."]);
+        const codigoNaoEnviado = emails.at(-1).codigo;
+        assert.ok(emails.at(-1).falhou);
+        assert.doesNotMatch(erros.join(" "), new RegExp(codigoNaoEnviado + "|@"));
+        // O código de um envio que falhou não vale em nenhuma das rotas.
+        assert.deepEqual((await verificar(codigoNaoEnviado)).corpo, INVALIDO);
+        assert.deepEqual((await trocar(codigoNaoEnviado)).corpo, INVALIDO);
         assert.equal((await lerConta()).senha_hash, hashOriginal);
     });
-    await t.test("código expirado não muda senha", async () => {
-        await preparar(); const pedido = await solicitar();
+    await t.test("resposta não aguarda o transporte e o código só vale depois do envio", async () => {
+        await preparar(); atrasoEmail = 400;
+        const inicio = Date.now();
+        const pedido = await solicitar();
+        assert.equal(pedido.status, 202);
+        assert.ok(Date.now() - inicio < atrasoEmail, "a resposta não pode esperar o envio");
+        assert.equal((await lerPedido()).enviada, false);
+        await aguardarEnvio();
+        assert.equal((await lerPedido()).enviada, true);
+        assert.equal((await verificar(emails[0].codigo)).status, 200);
+    });
+    await t.test("solicitação só por e-mail: CPF é ignorado e não escolhe a conta", async () => {
+        await preparar();
+        // CPF de uma conta com e-mail de outra: vale só o e-mail.
+        const pedido = await post("/api/auth/recuperacao/solicitar", { cpf: "52998224725", email: "outra@example.test" });
+        assert.equal(pedido.status, 202);
+        await aguardarEnvio();
+        assert.deepEqual(emails.map(e => e.email), ["outra@example.test"]);
+        assert.notEqual((await lerPedido()).candidato_id, candidatoId);
+        // Sem e-mail não há pedido.
+        assert.equal((await post("/api/auth/recuperacao/solicitar", { cpf: "52998224725" })).status, 400);
+        assert.equal((await banco.query("SELECT * FROM tbrecuperacao_senha")).rowCount, 1);
+        // O código da outra conta não serve para a Maria.
+        assert.deepEqual((await verificar(emails[0].codigo)).corpo, INVALIDO);
+    });
+    await t.test("contador compartilhado: erros no /verificar somados aos do /redefinir bloqueiam no 5º", async () => {
+        await preparar(); await solicitarEnviado();
+        const certo = emails[0].codigo;
+        const errado = codigoErrado(certo);
+        assert.deepEqual((await verificar(errado)).corpo, INVALIDO);
+        assert.deepEqual((await verificar(errado)).corpo, INVALIDO);
+        assert.deepEqual((await trocar(errado)).corpo, INVALIDO);
+        assert.deepEqual((await trocar(errado)).corpo, INVALIDO);
+        assert.equal((await lerPedido()).tentativas, 4);
+        const quinto = await verificar(errado);
+        assert.equal(quinto.status, 400); assert.deepEqual(quinto.corpo, TENTATIVAS);
+        assert.equal((await lerPedido()).tentativas, 5);
+        // Bloqueado inclusive para o código correto, nas duas rotas.
+        assert.deepEqual((await verificar(certo)).corpo, TENTATIVAS);
+        assert.deepEqual((await trocar(certo)).corpo, TENTATIVAS);
+        assert.equal((await lerPedido()).tentativas, 5);
+        assert.equal((await lerConta()).senha_hash, hashOriginal);
+        // No sentido inverso o 5º erro também bloqueia: não há contador por rota.
+        await liberarReenvio(); emails.length = 0; await solicitarEnviado();
+        for (let i = 0; i < 4; i++) await trocar(codigoErrado(emails[0].codigo));
+        assert.deepEqual((await verificar(codigoErrado(emails[0].codigo))).corpo, TENTATIVAS);
+        assert.deepEqual((await trocar(emails[0].codigo)).corpo, TENTATIVAS);
+    });
+    await t.test("código inválido e expirado têm a mesma resposta nas duas rotas", async () => {
+        await preparar(); await solicitarEnviado();
+        const errado = codigoErrado(emails[0].codigo);
+        const verificarErrado = await verificar(errado);
+        const trocarErrado = await trocar(errado);
+        assert.equal(verificarErrado.status, 400); assert.deepEqual(verificarErrado.corpo, INVALIDO);
+        assert.equal(trocarErrado.status, 400); assert.deepEqual(trocarErrado.corpo, INVALIDO);
+        // Conta inexistente responde como código inválido.
+        assert.deepEqual((await verificar(emails[0].codigo, "ausente@example.test")).corpo, INVALIDO);
+        assert.deepEqual((await trocar(emails[0].codigo, "Nova12345", "ausente@example.test")).corpo, INVALIDO);
         await banco.query("UPDATE tbrecuperacao_senha SET expira_em = clock_timestamp() - INTERVAL '1 second'");
-        const resposta = await trocar(pedido.corpo.solicitacaoId, emails[0].codigo);
-        assert.match(resposta.corpo.mensagem, /expirado/);
+        const tentativasAntes = (await lerPedido()).tentativas;
+        const verificarExpirado = await verificar(emails[0].codigo);
+        const trocarExpirado = await trocar(emails[0].codigo);
+        assert.equal(verificarExpirado.status, 400); assert.deepEqual(verificarExpirado.corpo, EXPIRADO);
+        assert.equal(trocarExpirado.status, 400); assert.deepEqual(trocarExpirado.corpo, EXPIRADO);
+        assert.equal((await lerPedido()).tentativas, tentativasAntes);
         assert.equal((await lerConta()).senha_hash, hashOriginal);
     });
     await t.test("reenvio respeita um minuto e invalida o pedido anterior", async () => {
-        await preparar(); const primeiro = await solicitar(); const codigoAnterior = emails[0].codigo;
-        assert.equal((await solicitar()).status, 429);
-        await liberarReenvio(); const segundo = await solicitar();
-        assert.equal(segundo.status, 202);
-        assert.equal((await trocar(primeiro.corpo.solicitacaoId, codigoAnterior)).status, 400);
-        assert.equal((await trocar(segundo.corpo.solicitacaoId, emails[1].codigo)).status, 200);
+        await preparar(); await solicitarEnviado(); const codigoAnterior = emails[0].codigo;
+        const repetido = await solicitar("MARIA@example.test");
+        assert.equal(repetido.status, 429);
+        assert.equal(repetido.resposta.headers.get("retry-after"), "60");
+        await liberarReenvio(); await solicitarEnviado();
+        assert.equal(emails.length, 2);
+        if (codigoAnterior !== emails[1].codigo) assert.deepEqual((await verificar(codigoAnterior)).corpo, INVALIDO);
+        assert.equal((await trocar(emails[1].codigo)).status, 200);
     });
     await t.test("requisições simultâneas consomem o código somente uma vez", async () => {
-        await preparar(); const pedido = await solicitar();
+        await preparar(); await solicitarEnviado();
         const respostas = await Promise.all([
-            trocar(pedido.corpo.solicitacaoId, emails[0].codigo, "Primeira123"),
-            trocar(pedido.corpo.solicitacaoId, emails[0].codigo, "Segunda123"),
+            trocar(emails[0].codigo, "Primeira123"),
+            trocar(emails[0].codigo, "Segunda123"),
         ]);
         assert.deepEqual(respostas.map(r => r.status).sort(), [200, 400]);
         assert.equal((await lerConta()).versao_sessao, 1);
-    });
-    await t.test("falha SMTP invalida código e não confirma envio", async () => {
-        await preparar(); falharEmail = true;
-        const pedido = await solicitar(); assert.equal(pedido.status, 503);
-        const row = (await banco.query("SELECT enviada, invalidada FROM tbrecuperacao_senha")).rows[0];
-        assert.equal(row.enviada, false); assert.equal(row.invalidada, true);
-        assert.equal((await lerConta()).senha_hash, hashOriginal);
-        assert.doesNotMatch(JSON.stringify(pedido.corpo), /SMTP de teste|senha_hash|codigo_hmac/);
-    });
-    await t.test("conta ausente e CPF incompatível têm a mesma resposta pública", async () => {
-        await preparar(); const existente = await solicitar();
-        const ausente = await solicitar("12345678901", "ausente@example.test");
-        assert.equal(ausente.status, 202);
-        assert.equal(ausente.corpo.mensagem, existente.corpo.mensagem);
-        assert.equal(emails.length, 1);
-        assert.equal((await trocar(ausente.corpo.solicitacaoId, "123456")).status, 400);
     });
     await t.test("e-mail repetido é recusado pelo banco, sem diferenciar maiúsculas", async () => {
         await assert.rejects(banco.query(
@@ -202,6 +316,7 @@ test("recuperação com PostgreSQL isolado, concorrência e sessões", {
         ), erro => erro.code === "23505" && erro.constraint === "uq_candidato_email");
     });
     await t.test("cadastro normaliza o e-mail e recusa repetido, inclusive simultâneo", async () => {
+        await preparar(); // Não depende da senha deixada pelo teste anterior.
         async function cadastrar(cpf, email) {
             return post("/api/candidatos", { nome: "Teste Cadastro", cpf, email, senha: "Senha123", aceiteTermos: true });
         }
@@ -224,29 +339,34 @@ test("recuperação com PostgreSQL isolado, concorrência e sessões", {
             assert.equal((await lerConta()).senha_hash, hashOriginal);
         } finally { await banco.query("DELETE FROM tbcandidato WHERE cpf = ANY($1)", [cpfsCriados]); }
     });
-    await t.test("CPF e e-mail de contas diferentes não geram pedido", async () => {
-        await preparar();
-        const errado = await solicitar("52998224725", "outra@example.test");
-        assert.equal(errado.status, 202);
-        assert.equal(emails.length, 0);
-        assert.equal((await banco.query("SELECT * FROM tbrecuperacao_senha")).rowCount, 0);
-    });
-    await t.test("limites atômicos por conta e IP", async () => {
+    await t.test("limites atômicos por e-mail e IP", async () => {
         await preparar();
         const model = require("../src/models/recuperacaoModel");
         const simultaneos = await Promise.all([
-            model.reservarLimite("conta-minuto", "teste", 1, 60),
-            model.reservarLimite("conta-minuto", "teste", 1, 60),
+            model.reservarLimite("email-minuto", "teste@example.test", 1, 60),
+            model.reservarLimite("email-minuto", "teste@example.test", 1, 60),
         ]);
         assert.deepEqual(simultaneos.sort(), [false, true]);
-        for (let i = 0; i < 10; i++) assert.equal((await solicitar(String(i).padStart(11, "0"))).status, 202);
-        assert.equal((await solicitar("99999999999")).status, 429);
+        // 10 solicitações por IP a cada 10 minutos, com e-mails diferentes.
+        for (let i = 0; i < 10; i++) assert.equal((await solicitar(`ausente${i}@example.test`)).status, 202);
+        assert.equal((await solicitar("ausente10@example.test")).status, 429);
+        // 5 por hora para o mesmo e-mail, mesmo liberando o limite de 1 por minuto.
         await preparar();
         for (let i = 0; i < 5; i++) {
             assert.equal((await solicitar()).status, 202);
-            await banco.query("UPDATE tblimite_recuperacao SET reinicia_em = clock_timestamp() - INTERVAL '1 second' WHERE chave = $1", [codigoService.protegerLimite("conta-minuto", "52998224725")]);
+            await banco.query("UPDATE tblimite_recuperacao SET reinicia_em = clock_timestamp() - INTERVAL '1 second' WHERE chave = $1",
+                [codigoService.protegerLimite("email-minuto", "maria@example.test")]);
         }
-        assert.equal((await solicitar()).status, 429);
+        assert.equal((await solicitar(" Maria@Example.TEST ")).status, 429);
+        await aguardarEnvio();
+        // Limite por IP das validações é um só para /verificar e /redefinir (30 a cada 10 minutos).
+        await preparar();
+        for (let i = 0; i < 15; i++) {
+            assert.equal((await verificar("123456", "ausente@example.test")).status, 400);
+            assert.equal((await trocar("123456", "Nova12345", "ausente@example.test")).status, 400);
+        }
+        assert.equal((await verificar("123456", "ausente@example.test")).status, 429);
+        assert.equal((await trocar("123456", "Nova12345", "ausente@example.test")).status, 429);
     });
     await t.test("liberação local permite solicitar repetidamente sem espera", async () => {
         await preparar();
@@ -257,18 +377,22 @@ test("recuperação com PostgreSQL isolado, concorrência e sessões", {
                 assert.equal(pedido.status, 202);
                 assert.equal(pedido.corpo.aguardarSegundos, 0);
             }
-            assert.equal(emails.length, 12);
+            await aguardar(async () => emails.length === 12, "12 envios");
             assert.equal((await banco.query("SELECT * FROM tblimite_recuperacao")).rowCount, 0);
         } finally { process.env.RECUPERACAO_SOLICITACOES_LIVRES = "false"; }
     });
     await t.test("erro ao consumir código faz rollback também da nova senha", async () => {
-        await preparar(); const pedido = await solicitar();
+        await preparar(); await solicitarEnviado();
         await banco.query("ALTER TABLE tbrecuperacao_senha ADD CONSTRAINT teste_impedir_consumo CHECK (consumida_em IS NULL)");
+        const erroOriginal = console.error; console.error = () => {};
         try {
-            assert.equal((await trocar(pedido.corpo.solicitacaoId, emails[0].codigo)).status, 503);
+            assert.equal((await trocar(emails[0].codigo)).status, 503);
             assert.equal((await lerConta()).senha_hash, hashOriginal);
             assert.equal((await lerConta()).versao_sessao, 0);
-        } finally { await banco.query("ALTER TABLE tbrecuperacao_senha DROP CONSTRAINT teste_impedir_consumo"); }
-        assert.equal((await trocar(pedido.corpo.solicitacaoId, emails[0].codigo)).status, 200);
+        } finally {
+            console.error = erroOriginal;
+            await banco.query("ALTER TABLE tbrecuperacao_senha DROP CONSTRAINT teste_impedir_consumo");
+        }
+        assert.equal((await trocar(emails[0].codigo)).status, 200);
     });
 });
