@@ -1,0 +1,175 @@
+.pagina-certificados .top-nav {
+    width: calc(100% - 96px);
+    max-width: 1120px;
+    margin: 16px auto;
+    padding: 10px 24px;
+}
+
+.pagina-certificados .main-container {
+    max-width: 860px;
+    padding: 24px 24px 48px;
+}
+
+.pagina-certificados .top-header-row {
+    width: min(100%, 720px);
+    margin: 20px auto 18px;
+    gap: 16px;
+}
+
+.pagina-certificados .page-title {
+    font-size: 36px;
+}
+
+.pagina-certificados .nav-buttons a {
+    color: var(--text-white);
+    text-decoration: none;
+}
+
+.pagina-certificados .resultado-certificacao.card {
+    display: block;
+    width: min(100%, 720px);
+    min-height: 0;
+    margin: 0 auto;
+    padding: 26px 28px 28px;
+    border: 1px solid rgba(0, 255, 102, 0.2);
+    border-radius: 12px;
+}
+
+.pagina-certificados .resultado-certificacao > h2 {
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    font-size: 18px;
+}
+
+.pagina-certificados .card-body-content {
+    padding-top: 16px;
+}
+
+.pagina-certificados #mensagem-resultado {
+    margin-bottom: 20px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.pagina-certificados .resultado-certificacao h3 {
+    margin: 20px 0 12px;
+    font-size: 15px;
+}
+
+.pagina-certificados .resultado-certificacao__metricas {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+}
+
+.pagina-certificados .resultado-certificacao__metricas > div {
+    padding: 0;
+    background: transparent;
+}
+
+.pagina-certificados .resultado-certificacao__metricas dt {
+    margin-bottom: 7px;
+    color: var(--text-white);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.pagina-certificados .resultado-certificacao__metricas dd {
+    margin: 0;
+    padding: 11px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    background: var(--inner-box);
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.pagina-certificados #status-certificacao {
+    color: var(--green-accent);
+}
+
+.pagina-certificados #status-certificacao[data-apto="false"] {
+    color: #ff8a8a;
+}
+
+.pagina-certificados .resultado-certificacao__detalhes dd {
+    display: grid;
+    gap: 5px;
+    line-height: 1.45;
+}
+
+.pagina-certificados .resultado-certificacao__detalhes p {
+    margin: 0;
+    color: var(--text-muted);
+}
+
+.pagina-certificados .resultado-certificacao__detalhes strong {
+    color: var(--text-white);
+    font-weight: 600;
+}
+
+.pagina-certificados .resultado-certificacao__autenticidade > div {
+    display: grid;
+    gap: 5px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    background: var(--inner-box);
+}
+
+.pagina-certificados .resultado-certificacao__autenticidade p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.pagina-certificados .resultado-certificacao__autenticidade strong {
+    color: var(--text-white);
+    font-weight: 600;
+}
+
+.pagina-certificados #link-exames a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .pagina-certificados .top-nav {
+        width: calc(100% - 32px);
+        margin: 16px auto;
+        padding: 12px 14px;
+        border-radius: 18px;
+    }
+
+    .pagina-certificados .main-container {
+        padding: 16px 16px 32px;
+    }
+
+    .pagina-certificados .top-header-row {
+        margin: 14px auto 18px;
+        gap: 12px;
+    }
+
+    .pagina-certificados .page-title {
+        font-size: 28px;
+    }
+
+    .pagina-certificados .resultado-certificacao.card {
+        padding: 20px 18px 22px;
+    }
+
+    .pagina-certificados .footer-bar {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 18px 16px;
+    }
+
+    .pagina-certificados .footer-left,
+    .pagina-certificados .footer-right {
+        flex-wrap: wrap;
+        gap: 10px 16px;
+    }
+}

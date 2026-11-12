@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BorB - Certificados</title>
     <link rel="stylesheet" href="../css/menu-temas.css">
+    <link rel="stylesheet" href="../css/certificados.css">
 </head>
-<body>
+<body class="pagina-certificados">
 
     <header class="top-nav">
         <div class="logo-area">
@@ -25,31 +26,45 @@
     <main class="main-container">
         <div class="top-header-row">
             <a href="menu.html" class="btn-voltar">&larr; Voltar</a>
-            <h1 class="page-title">Certificados</h1>
+            <h1 class="page-title">Certificação</h1>
         </div>
 
         <section class="card resultado-certificacao" aria-labelledby="resultado-titulo">
-            <h2 id="resultado-titulo">Resultado da certificação</h2>
+            <h2 id="resultado-titulo">Validação do certificado</h2>
             <div class="card-body-content">
                 <p id="mensagem-resultado" role="status" aria-live="polite">Carregando resultado...</p>
                 <div id="resultado-final" hidden>
-                    <h3>Resultado final</h3>
                     <dl class="resultado-certificacao__metricas">
                         <div>
-                            <dt>Nota obtida</dt>
-                            <dd id="nota-final"></dd>
+                            <dt>Nome do usuário</dt>
+                            <dd id="nome-candidato"></dd>
                         </div>
                         <div>
-                            <dt>Percentual de acertos</dt>
-                            <dd id="percentual-acertos"></dd>
+                            <dt>Progresso da certificação</dt>
+                            <dd id="progresso-certificacao"></dd>
                         </div>
                         <div>
-                            <dt>Respostas corretas</dt>
-                            <dd id="total-acertos"></dd>
+                            <dt>Status da certificação</dt>
+                            <dd id="status-certificacao"></dd>
+                        </div>
+                        <div class="resultado-certificacao__detalhes">
+                            <dt>Detalhes do resultado</dt>
+                            <dd>
+                                <p><strong>Nota final:</strong> <span id="nota-final"></span></p>
+                                <p><strong>Percentual de acertos:</strong> <span id="percentual-acertos"></span></p>
+                                <p><strong>Respostas corretas:</strong> <span id="total-acertos"></span></p>
+                            </dd>
                         </div>
                     </dl>
-                    <h3>Condição para emissão do certificado</h3>
-                    <p id="condicao-certificado"></p>
+                    <section class="resultado-certificacao__autenticidade" aria-labelledby="autenticidade-titulo">
+                        <h3 id="autenticidade-titulo">Detalhes da autenticidade</h3>
+                        <div>
+                            <p><strong>Código de verificação:</strong> <span>Não disponível: certificado ainda não emitido</span></p>
+                            <p><strong>Status do registro:</strong> <span id="status-registro"></span></p>
+                            <p><strong>Sistema responsável:</strong> <span>BorB - Portal de Certificação Scrum</span></p>
+                            <p><strong>Data da consulta:</strong> <span id="data-validacao"></span></p>
+                        </div>
+                    </section>
                 </div>
                 <p id="link-exames" hidden><a class="btn-nav" href="exames.html">Continuar certificação</a></p>
             </div>

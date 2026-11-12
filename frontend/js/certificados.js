@@ -13,11 +13,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
+        const usuario = await portal.pedir('/api/auth/usuario');
+        if (typeof usuario.nome !== 'string' || !usuario.nome.trim()) {
+            throw new Error('Não foi possível confirmar o nome do usuário.');
+        }
+
         const resultado = progresso.resultado_final;
         const valores = [
             resultado.nota_final,
             resultado.percentual_acertos,
-            resultado.percentual_minimo_certificado,
         ].map(Number);
         const totalAcertos = Number(resultado.total_acertos);
         if (!valores.every(Number.isFinite) || !Number.isInteger(totalAcertos)
@@ -30,14 +34,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             maximumFractionDigits: 2,
         }).format(valor);
         const formatarPercentual = valor => `${formatarNumero(valor)}%`;
+        document.getElementById('nome-candidato').textContent = usuario.nome.trim();
         document.getElementById('nota-final').textContent = `${formatarNumero(valores[0])} / 100`;
         document.getElementById('percentual-acertos').textContent = formatarPercentual(valores[1]);
         document.getElementById('total-acertos').textContent = `${totalAcertos} de 12`;
+        document.getElementById('progresso-certificacao').textContent = '12 de 12 temas concluídos';
+        const statusCertificacao = document.getElementById('status-certificacao');
+        statusCertificacao.dataset.apto = String(resultado.apto_certificado);
+        statusCertificacao.textContent = resultado.apto_certificado
+            ? 'Apto à emissão do certificado' : 'Não apto à emissão do certificado';
 
-        const condicao = document.getElementById('condicao-certificado');
-        condicao.textContent = resultado.apto_certificado
-            ? `Você atingiu o mínimo de ${formatarPercentual(valores[2])} e está apto à emissão do certificado.`
-            : `Você não atingiu o mínimo de ${formatarPercentual(valores[2])} necessário para a emissão do certificado.`;
+        document.getElementById('status-registro').textContent = 'Resultado final associado à conta autenticada';
+        document.getElementById('data-validacao').textContent = new Intl.DateTimeFormat('pt-BR', {
+            dateStyle: 'short', timeStyle: 'short',
+        }).format(new Date());
         mensagem.textContent = 'Certificação concluída. Suas respostas e seu resultado são somente para consulta.';
         resultadoFinal.hidden = false;
     } catch (erro) {
