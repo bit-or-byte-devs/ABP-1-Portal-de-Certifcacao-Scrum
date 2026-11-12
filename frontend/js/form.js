@@ -4,6 +4,9 @@
   "use strict";
 
   const CHAVE_CPF = "borb:cpfCadastrado";
+  // Gravada pela recuperação de senha (recuperar-senha.js); só um aviso, sem dados pessoais.
+  const CHAVE_SENHA_REDEFINIDA = "borb:senhaRedefinida";
+  const MSG_SENHA_REDEFINIDA = "Senha redefinida com sucesso. Entre com sua nova senha.";
   const PAGINA_MENU = "menu.html";
   const DURACAO_SUCESSO = 3000;
 
@@ -129,6 +132,18 @@
     } catch (e) {
       return null;
     }
+  }
+
+  // Exibe uma única vez: a chave é apagada assim que lida.
+  function avisarSenhaRedefinida(form) {
+    let redefinida = null;
+    try {
+      redefinida = sessionStorage.getItem(CHAVE_SENHA_REDEFINIDA);
+      sessionStorage.removeItem(CHAVE_SENHA_REDEFINIDA);
+    } catch (e) {
+      return;
+    }
+    if (redefinida === "1") mostrarAviso(form, MSG_SENHA_REDEFINIDA, "sucesso");
   }
 
   function preencherCpf(form) {
@@ -268,6 +283,7 @@
 
     configurarOlhos(form);
     if (form.hasAttribute("data-preencher-cpf")) preencherCpf(form);
+    if (form.hasAttribute("data-aviso-senha-redefinida")) avisarSenhaRedefinida(form);
     form.addEventListener("submit", enviar);
   }
 
