@@ -16,6 +16,8 @@ CREATE TABLE tbcandidato (
     CONSTRAINT ck_candidato_cpf
         CHECK (cpf ~ '^[0-9]{11}$')
 );
+-- E-mail único sem diferenciar maiúsculas de minúsculas (migração 008).
+CREATE UNIQUE INDEX uq_candidato_email ON tbcandidato (lower(email));
 
 -- 2. Temas da certificação
 CREATE TABLE tbtema (
