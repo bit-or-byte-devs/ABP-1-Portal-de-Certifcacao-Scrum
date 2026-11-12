@@ -74,10 +74,10 @@ async function cadastrar(req, res) {
     // O model converte a violação de unicidade (23505) nestes erros,
     // inclusive quando dois cadastros simultâneos chegam ao banco.
     if (erroCadastro instanceof candidatoModel.CpfJaCadastradoError) {
-      return res.status(409).json({ mensagem: MSG_CPF_DUPLICADO });
+      return res.status(409).json({ mensagem: MSG_CPF_DUPLICADO, campo: "cpf" });
     }
     if (erroCadastro instanceof candidatoModel.EmailJaCadastradoError) {
-      return res.status(409).json({ mensagem: MSG_EMAIL_DUPLICADO });
+      return res.status(409).json({ mensagem: MSG_EMAIL_DUPLICADO, campo: "email" });
     }
 
     // Só o código vai para o log
