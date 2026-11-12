@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         statusCertificacao.textContent = resultado.apto_certificado
             ? 'Apto à emissão do certificado' : 'Não apto à emissão do certificado';
 
-        document.getElementById('status-registro').textContent = 'Resultado final associado à conta autenticada';
+        document.getElementById('status-documento').textContent = 'Certificado ainda não emitido';
         document.getElementById('data-validacao').textContent = new Intl.DateTimeFormat('pt-BR', {
             dateStyle: 'short', timeStyle: 'short',
         }).format(new Date());
