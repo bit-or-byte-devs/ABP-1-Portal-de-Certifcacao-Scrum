@@ -59,26 +59,39 @@ async function concluirEnvio(solicitacaoId, enviada) {
         [solicitacaoId, enviada]
     );
 }
+// Conferência única para /verificar e /redefinir: as duas rotas somam erros no mesmo
+// campo tentativas do pedido, então não existe contador separado.
+async function conferirPedido(cliente, email, codigo) {
+    // Sempre trava candidato primeiro, como no reenvio, para evitar deadlocks.
+    const conta = await cliente.query("SELECT id FROM tbcandidato WHERE lower(email) = $1 FOR UPDATE", [email]);
+    if (!conta.rows[0]) return { resultado: "invalido" };
+    const candidatoId = conta.rows[0].id;
+    // Só o pedido atual do candidato vale; um novo pedido substitui o anterior.
+    const consulta = await cliente.query(
+        `SELECT *, expira_em <= clock_timestamp() AS expirado
+         FROM tbrecuperacao_senha WHERE candidato_id = $1 FOR UPDATE`,
+        [candidatoId]
+    );
+    const pedido = consulta.rows[0];
+    if (!pedido || !pedido.enviada || pedido.invalidada || pedido.consumida_em) return { resultado: "invalido" };
+    if (pedido.tentativas >= 5) return { resultado: "tentativas" };
+    if (pedido.expirado) return { resultado: "expirado" };
+    if (!conferirCodigo(candidatoId, pedido.solicitacao_id, codigo, pedido.codigo_hmac)) {
+        // O erro é gravado no COMMIT da transação, mesmo sem trocar a senha.
+        await cliente.query("UPDATE tbrecuperacao_senha SET tentativas = tentativas + 1 WHERE candidato_id = $1", [candidatoId]);
+        return { resultado: pedido.tentativas + 1 >= 5 ? "tentativas" : "invalido" };
+    }
+    return { resultado: "valido", candidatoId };
+}
+// Confere sem consumir: o código continua valendo para o /redefinir.
+async function verificarCodigo(email, codigo) {
+    return transacao(async cliente => (await conferirPedido(cliente, email, codigo)).resultado);
+}
 async function redefinirSenha(email, codigo, senha) {
     return transacao(async cliente => {
-        // Sempre trava candidato primeiro, como no reenvio, para evitar deadlocks.
-        const conta = await cliente.query("SELECT id FROM tbcandidato WHERE lower(email) = $1 FOR UPDATE", [email]);
-        if (!conta.rows[0]) return "invalido";
-        const candidatoId = conta.rows[0].id;
-        // Só o pedido atual do candidato vale; um novo pedido substitui o anterior.
-        const resultado = await cliente.query(
-            `SELECT *, expira_em <= clock_timestamp() AS expirado
-             FROM tbrecuperacao_senha WHERE candidato_id = $1 FOR UPDATE`,
-            [candidatoId]
-        );
-        const pedido = resultado.rows[0];
-        if (!pedido || !pedido.enviada || pedido.invalidada || pedido.consumida_em) return "invalido";
-        if (pedido.tentativas >= 5) return "tentativas";
-        if (pedido.expirado) return "expirado";
-        if (!conferirCodigo(candidatoId, pedido.solicitacao_id, codigo, pedido.codigo_hmac)) {
-            await cliente.query("UPDATE tbrecuperacao_senha SET tentativas = tentativas + 1 WHERE candidato_id = $1", [candidatoId]);
-            return pedido.tentativas + 1 >= 5 ? "tentativas" : "invalido";
-        }
+        // Confere de novo e consome na mesma operação; a verificação anterior não basta.
+        const { resultado, candidatoId } = await conferirPedido(cliente, email, codigo);
+        if (resultado !== "valido") return resultado;
         const senhaHash = await gerarHash(senha);
         // Senha, versão das sessões e consumo do código fazem parte do mesmo COMMIT.
         await cliente.query(
@@ -89,4 +102,4 @@ async function redefinirSenha(email, codigo, senha) {
         return "sucesso";
     });
 }
-module.exports = { reservarLimite, criarSolicitacao, concluirEnvio, redefinirSenha };
+module.exports = { reservarLimite, criarSolicitacao, concluirEnvio, verificarCodigo, redefinirSenha };

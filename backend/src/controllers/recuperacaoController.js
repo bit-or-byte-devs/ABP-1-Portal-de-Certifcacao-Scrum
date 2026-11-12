@@ -46,31 +46,56 @@ async function solicitarCodigo(req, res) {
         return falhar(res);
     }
 }
-async function redefinirSenha(req, res) {
-    const { email: emailInformado, codigo, senha, confirmarSenha } = req.body || {};
-    const email = lerEmail(emailInformado);
-    if (!email || typeof codigo !== "string" || !/^\d{6}$/.test(codigo)) {
-        return res.status(400).json({ mensagem: "Informe o e-mail e o código de seis dígitos recebido." });
+// Mesmas respostas no /verificar e no /redefinir para código inválido, expirado ou já utilizado.
+const ERROS_CODIGO = {
+    invalido: "Código inválido ou já utilizado. Confira os dados ou solicite outro código.",
+    expirado: "Código expirado. Solicite outro código.",
+    tentativas: "Limite de cinco tentativas atingido. Solicite outro código.",
+};
+function lerEmailECodigo(corpo) {
+    const email = lerEmail(corpo.email);
+    const codigo = typeof corpo.codigo === "string" && /^\d{6}$/.test(corpo.codigo) ? corpo.codigo : "";
+    return email && codigo ? { email, codigo } : null;
+}
+function recusarEmailECodigo(res) {
+    return res.status(400).json({ mensagem: "Informe o e-mail e o código de seis dígitos recebido." });
+}
+// Limite por IP das validações, o mesmo nas duas rotas.
+async function reservarValidacao(req, res) {
+    if (await model.reservarLimite("validacao-ip", req.ip, 30, 600)) return true;
+    res.status(429).json({ mensagem: "Muitas tentativas. Aguarde alguns minutos antes de tentar novamente." });
+    return false;
+}
+async function verificarCodigo(req, res) {
+    const dados = lerEmailECodigo(req.body || {});
+    if (!dados) return recusarEmailECodigo(res);
+    try {
+        if (!await reservarValidacao(req, res)) return;
+        const resultado = await model.verificarCodigo(dados.email, dados.codigo);
+        if (resultado !== "valido") return res.status(400).json({ mensagem: ERROS_CODIGO[resultado] });
+        return res.json({ mensagem: "Código confirmado. Defina a nova senha." });
+    } catch {
+        console.error("Falha ao verificar código de recuperação.");
+        return falhar(res);
     }
+}
+async function redefinirSenha(req, res) {
+    const corpo = req.body || {};
+    const dados = lerEmailECodigo(corpo);
+    if (!dados) return recusarEmailECodigo(res);
+    const { senha, confirmarSenha } = corpo;
     if (typeof senha !== "string" || senha.length < 8 || senha.length > 1024 || !/[A-Za-z]/.test(senha) || !/\d/.test(senha)) {
         return res.status(400).json({ mensagem: "A senha deve ter de 8 a 1024 caracteres, incluindo letras e números." });
     }
     if (senha !== confirmarSenha) return res.status(400).json({ mensagem: "As senhas não coincidem." });
     try {
-        if (!await model.reservarLimite("validacao-ip", req.ip, 30, 600)) {
-            return res.status(429).json({ mensagem: "Muitas tentativas. Aguarde alguns minutos antes de tentar novamente." });
-        }
-        const resultado = await model.redefinirSenha(email, codigo, senha);
-        const erros = {
-            invalido: "Código inválido ou já utilizado. Confira os dados ou solicite outro código.",
-            expirado: "Código expirado. Solicite outro código.",
-            tentativas: "Limite de cinco tentativas atingido. Solicite outro código.",
-        };
-        if (resultado !== "sucesso") return res.status(400).json({ mensagem: erros[resultado] });
+        if (!await reservarValidacao(req, res)) return;
+        const resultado = await model.redefinirSenha(dados.email, dados.codigo, senha);
+        if (resultado !== "sucesso") return res.status(400).json({ mensagem: ERROS_CODIGO[resultado] });
         return res.json({ mensagem: "Senha alterada com sucesso. Entre novamente com sua nova senha." });
     } catch {
         console.error("Falha ao redefinir senha.");
         return falhar(res);
     }
 }
-module.exports = { solicitarCodigo, redefinirSenha };
+module.exports = { solicitarCodigo, verificarCodigo, redefinirSenha };
