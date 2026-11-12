@@ -415,10 +415,12 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     assert.equal(concluida.corpo.certificacao_concluida, true);
     assert.equal(concluida.corpo.proximo_tema, null);
     assert.ok(concluida.corpo.temas.every(tema => tema.estado === "concluido"));
-    assert.equal(concluida.corpo.total_acertos, 12);
-    assert.equal(Number(concluida.corpo.percentual_acertos), 100);
-    assert.equal(Number(concluida.corpo.nota_final), 100);
-    assert.equal(concluida.corpo.aprovado, true);
+    // Concluir todos os temas não significa acertar: só a primeira foi respondida corretamente.
+    assert.equal(concluida.corpo.total_acertos, 1);
+    assert.equal(Number(concluida.corpo.percentual_acertos), 8.33);
+    assert.equal(Number(concluida.corpo.nota_final), 8.33);
+    assert.equal(concluida.corpo.aprovado, false);
+    assert.equal((await banco.query("SELECT count(*)::integer AS total FROM tbcertificado")).rows[0].total, 0);
 });
 
 
