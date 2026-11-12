@@ -80,6 +80,13 @@
     white-space: nowrap;
 }
 
+.questao__data {
+    margin: -12px 0 20px;
+    color: var(--texto-escuro-suave);
+    font-size: var(--fs-sm);
+    font-weight: 700;
+}
+
 .questao__corpo {
     display: grid;
     grid-template-columns: 1fr 1fr;
