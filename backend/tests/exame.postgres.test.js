@@ -209,6 +209,29 @@ test("Gabarito: oculto em andamento e disponível após o encerramento", opcoes,
     assert.deepEqual(repetida.corpo.alternativa_correta, alternativas[0]);
 });
 
+test("Revisão: lista resposta concluída e recupera resultado e horário", opcoes, async () => {
+    const alternativas = await criarTema(1);
+    await criarTema(2);
+    const cookie = await criarCandidato();
+    const questao = await iniciar(cookie);
+    const envio = await solicitar(`/api/exames/respostas/${questao.id}`, cookie, { alternativa: alternativas[0].id });
+    assert.equal(envio.status, 200);
+
+    const progresso = await solicitar("/api/exames/progresso", cookie);
+    assert.equal(progresso.status, 200);
+    const tema = progresso.corpo.temas.find(item => item.ordem === 1);
+    assert.equal(tema.estado, "concluido");
+    assert.equal(Number(tema.id_resposta), questao.id);
+
+    const revisao = await solicitar(`/api/exames/respostas/${tema.id_resposta}`, cookie);
+    assert.equal(revisao.status, 200);
+    assert.equal(revisao.corpo.situacao, "respondida");
+    assert.equal(revisao.corpo.acertou, true);
+    assert.equal(revisao.corpo.idalternativa, alternativas[0].id);
+    assert.deepEqual(revisao.corpo.alternativa_correta, alternativas[0]);
+    assert.ok(revisao.corpo.data_hora);
+});
+
 test("Varredura: respeita tolerância, horário final e conclusão da 12ª questão", opcoes, async () => {
     for (let ordem = 1; ordem <= 12; ordem++) await criarTema(ordem);
     const cookie = await criarCandidato();
