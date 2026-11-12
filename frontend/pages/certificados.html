@@ -32,22 +32,25 @@
         <section class="card resultado-certificacao" aria-labelledby="resultado-titulo">
             <h2 id="resultado-titulo">Validação do certificado</h2>
             <div class="card-body-content">
-                <p id="mensagem-resultado" role="status" aria-live="polite">Carregando resultado...</p>
-                <div id="resultado-final" hidden>
+                <p id="mensagem-resultado" role="status" aria-live="polite"></p>
+                <div id="resultado-final">
                     <dl class="resultado-certificacao__metricas">
                         <div>
                             <dt>Nome do usuário</dt>
-                            <dd id="nome-candidato"></dd>
+                            <dd id="nome-candidato">Carregando...</dd>
                         </div>
                         <div>
                             <dt>Progresso da certificação</dt>
-                            <dd id="progresso-certificacao"></dd>
+                            <dd id="progresso-certificacao">Carregando...</dd>
                         </div>
                         <div>
                             <dt>Status da certificação</dt>
-                            <dd id="status-certificacao"></dd>
+                            <dd id="status-certificacao" data-apto="false">Carregando...</dd>
                         </div>
-                        <div class="resultado-certificacao__detalhes">
+                        <div>
+                            <button type="button" class="button" id="btn-consultar-codigo">Consultar por código de verificação</button>
+                        </div>
+                        <div class="resultado-certificacao__detalhes" id="detalhes-resultado" hidden>
                             <dt>Detalhes do resultado</dt>
                             <dd>
                                 <p><strong>Nota final:</strong> <span id="nota-final"></span></p>
@@ -56,7 +59,7 @@
                             </dd>
                         </div>
                     </dl>
-                    <section class="resultado-certificacao__autenticidade" aria-labelledby="autenticidade-titulo">
+                    <section class="resultado-certificacao__autenticidade" id="autenticidade-resultado" aria-labelledby="autenticidade-titulo" hidden>
                         <h3 id="autenticidade-titulo">Detalhes da autenticidade</h3>
                         <div>
                             <p><strong>Código de verificação:</strong> <span>Não disponível: certificado ainda não emitido</span></p>

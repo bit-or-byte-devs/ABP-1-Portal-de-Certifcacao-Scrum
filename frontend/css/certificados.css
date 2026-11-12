@@ -92,6 +92,29 @@
     color: #ff8a8a;
 }
 
+.pagina-certificados #btn-consultar-codigo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    margin-top: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    background: #00ff66cb;
+    color: #0b0f19;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0;
+    cursor: pointer;
+    box-shadow: none;
+    transition: background 0.2s ease;
+}
+
+.pagina-certificados #btn-consultar-codigo:hover {
+    background: #66ffa3;
+}
+
 .pagina-certificados .resultado-certificacao__detalhes dd {
     display: grid;
     gap: 5px;
