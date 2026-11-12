@@ -4,8 +4,10 @@ const pool = require("../config/db");
 const VIOLACAO_UNIQUE = "23505";
 
 class CpfJaCadastradoError extends Error {}
+class EmailJaCadastradoError extends Error {}
 
-// A garantia de CPF único é a constraint UNIQUE de tbcandidato.cpf.
+// A garantia de CPF e e-mail únicos é do banco: UNIQUE de tbcandidato.cpf
+// e índice único uq_candidato_email em lower(email).
 // Não fazemos SELECT antes do INSERT: dois cadastros simultâneos
 // passariam pelo SELECT e o banco é quem decide no fim.
 async function criar({ cpf, nome, email, senhaHash }) {
@@ -22,6 +24,9 @@ async function criar({ cpf, nome, email, senhaHash }) {
         if (erro.code === VIOLACAO_UNIQUE && erro.constraint === "tbcandidato_cpf_key") {
             throw new CpfJaCadastradoError("CPF já cadastrado.");
         }
+        if (erro.code === VIOLACAO_UNIQUE && erro.constraint === "uq_candidato_email") {
+            throw new EmailJaCadastradoError("E-mail já cadastrado.");
+        }
         throw erro;
     }
 }
@@ -35,4 +40,4 @@ async function buscarPorId(id) {
     const resultado = await pool.query("SELECT id, nome_completo AS nome, versao_sessao FROM tbcandidato WHERE id = $1", [id]);
     return resultado.rows[0];
 }
-module.exports = { criar, CpfJaCadastradoError, buscarPorCpf, buscarPorId };
+module.exports = { criar, CpfJaCadastradoError, EmailJaCadastradoError, buscarPorCpf, buscarPorId };

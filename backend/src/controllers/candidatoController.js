@@ -6,9 +6,15 @@ const candidatoModel = require("../models/candidatoModel");
 const { gerarHash } = require("../services/senha");
 
 const MSG_CPF_DUPLICADO = "Este CPF já possui cadastro.";
+const MSG_EMAIL_DUPLICADO = "Este e-mail já possui cadastro.";
 
 function somenteDigitos(valor) {
   return String(valor || "").replace(/\D/g, "");
+}
+
+// E-mail é único sem diferenciar maiúsculas: grava sempre aparado e minúsculo.
+function normalizarEmail(valor) {
+  return String(valor || "").trim().toLowerCase();
 }
 
 // Confere os dois dígitos verificadores (mesma regra do form.js)
@@ -24,7 +30,7 @@ function cpfValido(cpf) {
 
 function validar(dados) {
   const nome = String(dados.nome || "").trim();
-  const email = String(dados.email || "").trim();
+  const email = normalizarEmail(dados.email);
   const senha = typeof dados.senha === "string" ? dados.senha : "";
 
   if (!nome || nome.length > 150) return "Informe o nome completo.";
@@ -49,7 +55,7 @@ async function cadastrar(req, res) {
     const candidato = await candidatoModel.criar({
       cpf: somenteDigitos(dados.cpf),
       nome: String(dados.nome).trim(),
-      email: String(dados.email).trim(),
+      email: normalizarEmail(dados.email),
       senhaHash: await gerarHash(dados.senha),
     });
 
@@ -65,9 +71,13 @@ async function cadastrar(req, res) {
 
     return res.status(201).json({ mensagem: "Cadastro realizado com sucesso." });
   } catch (erroCadastro) {
-    // O model converte a violação do UNIQUE de CPF (23505) neste erro
+    // O model converte a violação de unicidade (23505) nestes erros,
+    // inclusive quando dois cadastros simultâneos chegam ao banco.
     if (erroCadastro instanceof candidatoModel.CpfJaCadastradoError) {
       return res.status(409).json({ mensagem: MSG_CPF_DUPLICADO });
+    }
+    if (erroCadastro instanceof candidatoModel.EmailJaCadastradoError) {
+      return res.status(409).json({ mensagem: MSG_EMAIL_DUPLICADO });
     }
 
     // Só o código vai para o log
