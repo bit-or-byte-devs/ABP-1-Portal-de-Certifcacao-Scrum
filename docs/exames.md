@@ -1,26 +1,31 @@
-# Exames: guia de estudo
+# Exames: progresso e homologação
 
 ## Preparar e executar
 
-Configure e inicie o projeto conforme [docs/cadastro.md](./cadastro.md). Abra
+Configure e inicie o projeto conforme [cadastro.md](./cadastro.md). Abra
 http://localhost:3000/pages/exames.html pelo servidor (ou use a porta
-configurada no `.env`). Também é possível chegar à página pelo botão “Iniciar
-exame” do modal de cadastro.
+configurada no `.env`). A página exige uma sessão autenticada.
 
-## O que faz cada parte
+## Comportamento do progresso
 
-- `frontend/pages/exames.html`: apresenta o cabeçalho com os botões Perfil e
-  Log Out, o link “Voltar” para `menu.html` e uma lista de 12 temas. Cada cartão
-  mostra o título, uma breve descrição, o progresso inicial de 0% e um botão
-  “Iniciar exame”.
-- `frontend/css/menu-temas.css`: fornece os estilos compartilhados da página
-  de exames e da página de temas.
-- `frontend/js/menu-temas.js`: permite expandir ou recolher os cartões como um
-  acordeão; ao abrir um cartão, fecha os outros. Clicar em “Iniciar exame”
-  mostra um alerta com o nome do exame.
-- `frontend/js/logout.js`: envia `POST /api/auth/logout`. Quando o servidor
-  confirma a saída, redireciona para `login.html`; se houver falha, mostra um
-  alerta e reabilita o botão.
+- `frontend/js/exames.js` consulta `GET /api/exames/progresso` e mostra os
+  temas como pendentes, em andamento ou concluídos. O indicador de 100% quer
+  dizer que a questão daquele tema foi encerrada; não representa a nota.
+- `frontend/js/exame.js` envia a resposta escolhida ao servidor. A seleção só
+  fica persistida quando é confirmada; uma opção apenas marcada e não enviada
+  não é recuperada após sair ou atualizar a página.
+- O servidor grava o resultado por candidato e tema. Questões respondidas,
+  expiradas ou interrompidas não são substituídas por uma nova questão ao
+  retornar. Uma questão aberta que é abandonada encerra como interrompida e
+  conta como incorreta; retornar mostra esse resultado, não retoma o cronômetro.
+- O logout encerra a questão aberta antes de invalidar a sessão. Se o aviso de
+  saída da página não chegar ao servidor, a ausência de sinais periódicos
+  também encerra a questão. Consulte [homologacao-us22.md](./homologacao-us22.md)
+  para os cenários detalhados de interrupção.
+- As rotas exigem sessão e associam progresso e respostas ao candidato
+  autenticado. Uma tentativa de consultar ou alterar uma resposta de outro
+  candidato deve retornar `404`; sem sessão, as rotas protegidas retornam
+  `401`.
 
 ## Temas apresentados
 
@@ -37,22 +42,26 @@ exame” do modal de cadastro.
 11. Métricas Ágeis
 12. Qualidade em Projetos Ágeis
 
-## Limites atuais da página
+## Homologar o critério
 
-- Os cartões mostram 0% como valor fixo; a página não salva nem atualiza o
-  progresso.
-- “Iniciar exame” apenas exibe uma mensagem de alerta com o título do cartão.
-  Não inicia uma prova, carrega questões ou registra resultados.
-- Perfil aparece como botão, mas não possui ação implementada nesta página.
+Use duas contas de teste e questões carregadas. Para cada retorno, confirme o
+estado pela tela e por `GET /api/exames/progresso`:
 
-## Como verificar
+1. **Resposta:** responda uma questão, atualize a página ou entre novamente.
+  A questão deve continuar concluída, com o mesmo resultado e sem duplicar a
+  resposta.
+2. **Expiração:** deixe o tempo acabar e retorne. A questão deve continuar
+  concluída como incorreta e não aceitar nova resposta.
+3. **Interrupção:** abandone uma questão aberta ou use logout. Ao retornar, ela
+  deve aparecer concluída como interrompida; o próximo tema pendente deve
+  continuar disponível.
+4. **Sessão encerrada:** depois do logout, a sessão antiga deve receber `401`.
+  Após novo login, o progresso persistido do candidato deve continuar visível.
+5. **Isolamento:** com a segunda conta, consulte seu próprio progresso e tente
+  acessar uma resposta da primeira conta. A segunda conta não deve ver nem
+  alterar a resposta, e o estado da primeira conta deve permanecer intacto.
 
-1. Abra `/pages/exames.html` pelo servidor e confirme que os 12 cartões e os
-   progressos iniciais aparecem.
-2. Clique em um cartão fora do botão “Iniciar exame”: ele deve expandir ou
-   recolher, e abrir outro cartão deve fechar o anterior.
-3. Clique em “Iniciar exame” e confirme que o alerta apresenta o nome do tema,
-   sem iniciar uma prova.
-4. Use “Voltar” e confirme que a navegação abre `/pages/menu.html`.
-5. Clique em Log Out e confirme o redirecionamento para o login quando o
-   servidor confirmar a saída.
+Os testes de integração PostgreSQL ficam em
+`backend/tests/exame.postgres.test.js`. Execute `npm test` na pasta `backend`
+para os testes gerais. A suíte PostgreSQL exige `TEST_EXAME_POSTGRES=true` e as
+variáveis de conexão do banco configuradas no ambiente.
