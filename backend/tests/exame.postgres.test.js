@@ -270,6 +270,10 @@ test("Dono da resposta: GET de outro candidato devolve 404", opcoes, async () =>
     const resposta = await solicitar(`/api/exames/respostas/${questao.id}`, outroCookie);
     assert.equal(resposta.status, 404);
     assert.deepEqual(resposta.corpo, { mensagem: "Resposta não encontrada." });
+    const tentativaDeResposta = await solicitar(`/api/exames/respostas/${questao.id}`, outroCookie,
+        { alternativa: questao.alternativas[0].id });
+    assert.equal(tentativaDeResposta.status, 404);
+    assert.deepEqual(tentativaDeResposta.corpo, { mensagem: "Resposta não encontrada." });
     assert.equal((await lerResposta(questao.id)).situacao, "em_andamento");
 });
 
@@ -600,6 +604,22 @@ test("Logout com questão aberta: interrompida", opcoes, async () => {
     assert.equal(certificacao.status, "em_andamento");
     // A sessão encerrada não renova nem responde; a questão de outro candidato não é tocada.
     assert.equal((await solicitar(`/api/exames/respostas/${questao.id}/sinal`, cookie, {})).status, 401);
+    assert.equal((await solicitar("/api/exames/progresso", cookie)).status, 401);
+    assert.equal((await lerResposta(deOutro.id)).situacao, "em_andamento");
+
+    const novoLogin = await solicitar("/api/auth/login", null, { cpf: "52998224725", senha: "Exame12345" });
+    assert.equal(novoLogin.status, 200);
+    const novoCookie = novoLogin.cabecalhos.get("set-cookie").split(";")[0];
+    const progresso = await solicitar("/api/exames/progresso", novoCookie);
+    assert.equal(progresso.status, 200);
+    assert.equal(progresso.corpo.temas[0].estado, "concluido");
+    assert.equal(progresso.corpo.temas[1].estado, "pendente");
+    assert.equal(progresso.corpo.proximo_tema, 2);
+    const retorno = await iniciar(novoCookie);
+    assert.equal(retorno.id, questao.id);
+    assert.equal(retorno.situacao, "interrompida");
+    assertInterrompida(await lerResposta(questao.id));
+    assert.equal((await banco.query("SELECT count(*)::integer AS total FROM tbresposta WHERE idcertificacao=$1", [certificacao.id])).rows[0].total, 1);
     assert.equal((await lerResposta(deOutro.id)).situacao, "em_andamento");
 });
 
