@@ -40,7 +40,7 @@ Os comandos individuais `db:temas` e `db:questoes` continuam disponíveis.
 
 ## Volumes existentes e atualizações
 
-O volume `pgdata` é preservado. As migrações são executadas na ordem 001, 002, 003, 004, 005 e 006; a 002 cria a tabela de progresso necessária à 004, a 005 recusa a execução se encontrar questão sem exatamente 4 alternativas e 1 correta, e a 006 cria em `tbresposta` a coluna `data_hora_ultimo_sinal`, que registra o último sinal da página aberta para o servidor encerrar como interrompida a questão abandonada (US22). Não reaplique o schema sobre um banco existente.
+O volume `pgdata` é preservado. As migrações são executadas na ordem 001 a 007; a 002 cria a tabela de progresso necessária à 004, a 005 recusa a execução se encontrar questão sem exatamente 4 alternativas e 1 correta, a 006 registra o último sinal da página aberta para o servidor encerrar como interrompida uma questão abandonada (US22), e a 007 impede alterar questões e alternativas já usadas em tentativas. Para corrigir uma questão histórica, cadastre uma nova versão em vez de modificar a anterior. Não reaplique o schema sobre um banco existente.
 
 Para atualizar uma instalação já em uso, pare a aplicação antes da preparação:
 

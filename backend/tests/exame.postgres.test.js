@@ -34,6 +34,7 @@ before(async () => {
     process.env.PGOPTIONS = "-c search_path=" + schema;
     banco = require("../src/config/db");
     await banco.query(fs.readFileSync(path.join(__dirname, "../../database/ddl/schema.sql"), "utf8"));
+    await banco.query(fs.readFileSync(path.join(__dirname, "../../database/migrations/007_versionamento_questoes.sql"), "utf8"));
     senhaHash = await require("../src/services/senha").gerarHash("Exame12345");
     servidor = require("../src/app").listen(0, "127.0.0.1");
     await new Promise(resolve => servidor.once("listening", resolve));
@@ -207,6 +208,48 @@ test("Gabarito: oculto em andamento e disponível após o encerramento", opcoes,
     assert.equal(repetida.status, 409);
     assert.equal(repetida.corpo.situacao, "respondida");
     assert.deepEqual(repetida.corpo.alternativa_correta, alternativas[0]);
+});
+
+test("Histórico: preserva o gabarito da versão usada após manutenção do catálogo", opcoes, async () => {
+    await criarTema(1);
+    const cookie = await criarCandidato();
+    const tentativa = await iniciar(cookie);
+    const corretaOriginal = tentativa.alternativas.find(alternativa => alternativa.letra === "A");
+    const incorretaOriginal = tentativa.alternativas.find(alternativa => alternativa.letra === "B");
+    const enviada = await solicitar(`/api/exames/respostas/${tentativa.id}`, cookie,
+        { alternativa: incorretaOriginal.id });
+    assert.equal(enviada.status, 200);
+    assert.equal(enviada.corpo.acertou, false);
+
+    await assert.rejects(
+        banco.query("UPDATE tbalternativa SET correta=false WHERE idquestao=$1 AND letra='A'", [tentativa.questao]),
+        erro => erro.code === "55000",
+    );
+    await assert.rejects(
+        banco.query("UPDATE tbquestao SET justificativa='Justificativa atualizada' WHERE id=$1", [tentativa.questao]),
+        erro => erro.code === "55000",
+    );
+
+    const cliente = await banco.connect();
+    let novaVersao;
+    try {
+        await cliente.query("BEGIN");
+        novaVersao = await criarQuestaoValida(cliente, "tema-01-q01-v2");
+        await cliente.query("UPDATE tbalternativa SET correta=false WHERE idquestao=$1 AND correta", [novaVersao]);
+        await cliente.query("UPDATE tbalternativa SET correta=true WHERE idquestao=$1 AND letra='B'", [novaVersao]);
+        await cliente.query("COMMIT");
+    } catch (erro) {
+        await cliente.query("ROLLBACK").catch(() => {});
+        throw erro;
+    } finally { cliente.release(); }
+
+    const novoGabarito = await banco.query("SELECT letra FROM tbalternativa WHERE idquestao=$1 AND correta", [novaVersao]);
+    assert.deepEqual(novoGabarito.rows.map(linha => linha.letra), ["B"]);
+    const historico = await solicitar(`/api/exames/respostas/${tentativa.id}`, cookie);
+    assert.equal(historico.status, 200);
+    assert.deepEqual(historico.corpo.alternativa_correta, corretaOriginal);
+    assert.equal(historico.corpo.idalternativa, incorretaOriginal.id);
+    assert.equal(historico.corpo.acertou, false);
 });
 
 test("Varredura: respeita tolerância, horário final e conclusão da 12ª questão", opcoes, async () => {
