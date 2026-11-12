@@ -1,10 +1,14 @@
 (async () => {
-    const tema = new URLSearchParams(location.search).get('tema') || '1';
+    const parametros = new URLSearchParams(location.search);
+    const tema = parametros.get('tema') || '1';
+    const idResposta = parametros.get('resposta');
+    const modoRevisao = idResposta !== null;
     const secaoQuestao = document.getElementById('questao');
     const form = document.getElementById('form-questao');
     const alternativas = document.getElementById('alternativas');
     const botaoConfirmar = document.getElementById('btn-confirmar');
     const feedback = document.getElementById('feedback');
+    const dataTentativa = document.getElementById('data-tentativa');
     const linkContinuar = document.getElementById('link-continuar');
     const botaoInterromper = document.getElementById('btn-interromper');
     let encerrada = false;
@@ -42,6 +46,12 @@
         cronometro.parar();
         feedback.classList.remove('feedback--sucesso', 'feedback--erro');
         feedback.classList.add(dados.acertou ? 'feedback--sucesso' : 'feedback--erro');
+        if (modoRevisao && dados.data_hora) {
+            dataTentativa.textContent = `Tentativa em ${new Intl.DateTimeFormat('pt-BR', {
+                dateStyle: 'short', timeStyle: 'short',
+            }).format(new Date(dados.data_hora))}`;
+            dataTentativa.hidden = false;
+        }
         const resultado = dados.situacao === 'tempo_esgotado'
             ? 'O tempo acabou. A questão conta como incorreta.'
             : dados.situacao === 'interrompida'
@@ -66,19 +76,31 @@
         });
         feedback.textContent = `${resultado} Alternativa correta: ${correta.letra}. ${correta.texto}. ${dados.justificativa || ''}`;
         botaoConfirmar.hidden = true;
-        linkContinuar.textContent = dados.proximo_tema === null ? 'Voltar à lista' : 'Próximo tema';
-        linkContinuar.href = dados.proximo_tema === null ? 'exames.html' : `exame.html?tema=${dados.proximo_tema}`;
-        linkContinuar.hidden = Number(tema) === 12;
-        botaoInterromper.textContent = 'Encerrar sessão';
-        botaoInterromper.hidden = false;
+        if (modoRevisao) {
+            linkContinuar.textContent = 'Voltar aos exames';
+            linkContinuar.href = 'exames.html';
+            linkContinuar.hidden = false;
+            botaoInterromper.hidden = true;
+        } else {
+            linkContinuar.textContent = dados.proximo_tema === null ? 'Voltar à lista' : 'Próximo tema';
+            linkContinuar.href = dados.proximo_tema === null ? 'exames.html' : `exame.html?tema=${dados.proximo_tema}`;
+            linkContinuar.hidden = Number(tema) === 12;
+            botaoInterromper.textContent = 'Encerrar sessão';
+            botaoInterromper.hidden = false;
+        }
         botaoConfirmar.disabled = true;
         alternativas.disabled = true;
     }
 
     try {
-        // Uma única chamada por carregamento: repetir iniciar interromperia a própria questão.
-        const questao = await portal.pedir(`/api/exames/${encodeURIComponent(tema)}/iniciar`, json({}));
-        document.getElementById('exame-titulo').textContent = `Exame: ${questao.nome}`;
+        const questao = modoRevisao
+            ? await portal.pedir(`/api/exames/respostas/${encodeURIComponent(idResposta)}`)
+            : await portal.pedir(`/api/exames/${encodeURIComponent(tema)}/iniciar`, json({}));
+        if (modoRevisao && questao.situacao === 'em_andamento') {
+            throw new Error('Esta tentativa ainda está em andamento e não pode ser revisada.');
+        }
+        document.getElementById('exame-titulo').textContent = `${modoRevisao ? 'Revisão' : 'Exame'}: ${questao.nome}`;
+        if (modoRevisao) document.querySelector('.cronometro').hidden = true;
         document.getElementById('questao-titulo').textContent = questao.enunciado;
 
         const imagem = document.getElementById('questao-imagem');
