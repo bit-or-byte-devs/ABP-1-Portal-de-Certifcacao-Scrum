@@ -365,10 +365,11 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     assert.equal(concluida.corpo.certificacao_concluida, true);
     assert.equal(concluida.corpo.proximo_tema, null);
     assert.ok(concluida.corpo.temas.every(tema => tema.estado === "concluido"));
-    assert.equal(concluida.corpo.total_acertos, 12);
-    assert.equal(Number(concluida.corpo.percentual_acertos), 100);
-    assert.equal(Number(concluida.corpo.nota_final), 100);
-    assert.equal(concluida.corpo.aprovado, true);
+    // Apenas o primeiro tema foi respondido corretamente; os demais encerraram sem acerto.
+    assert.equal(concluida.corpo.total_acertos, 1);
+    assert.equal(Number(concluida.corpo.percentual_acertos), 8.33);
+    assert.equal(Number(concluida.corpo.nota_final), 8.33);
+    assert.equal(concluida.corpo.aprovado, false);
 });
 
 
@@ -747,4 +748,43 @@ test('Banco garante exatamente 4 alternativas e 1 correta por questão', opcoes,
         const estado = await banco.query(`SELECT letra FROM tbalternativa WHERE idquestao=$1 AND correta`, [questaoOrdem]);
         assert.deepEqual(estado.rows.map(linha => linha.letra), ['A']);
     } finally { clienteOrdem.release(); }
+});
+
+test("US24: progresso persiste após novo login e outro candidato não altera respostas", opcoes, async () => {
+    for (let ordem = 1; ordem <= 12; ordem++) await criarTema(ordem);
+    const cookie = await criarCandidato();
+    const outroCookie = await criarCandidato("11144477735");
+    const certa = await iniciar(cookie, 1);
+    await solicitar(`/api/exames/respostas/${certa.id}`, cookie, { alternativa: certa.alternativas[0].id });
+    const errada = await iniciar(cookie, 2);
+    await solicitar(`/api/exames/respostas/${errada.id}`, cookie, { alternativa: errada.alternativas[1].id });
+    const expirada = await iniciar(cookie, 3);
+    await recuarExibicao(expirada.id, 153);
+    await solicitar("/api/exames/progresso", cookie);
+    const interrompida = await iniciar(cookie, 4);
+    await solicitar(`/api/exames/respostas/${interrompida.id}/interromper`, cookie, {});
+    const aberta = await iniciar(cookie, 5);
+    const antes = await lerResposta(certa.id);
+    const invasao = await solicitar(`/api/exames/respostas/${certa.id}`, outroCookie, { alternativa: certa.alternativas[1].id });
+    assert.equal(invasao.status, 404);
+    assert.deepEqual(await lerResposta(certa.id), antes);
+    assert.equal((await solicitar("/api/auth/logout", cookie, {})).status, 200);
+    assert.equal((await solicitar("/api/exames/progresso", cookie)).status, 401);
+    const login = await solicitar("/api/auth/login", null, { cpf: "52998224725", senha: "Exame12345" });
+    assert.equal(login.status, 200);
+    const novoCookie = login.cabecalhos.get("set-cookie").split(";")[0];
+    const retorno = await solicitar("/api/exames/progresso", novoCookie);
+    assert.equal(retorno.status, 200);
+    assert.deepEqual(retorno.corpo.temas.map(t => t.estado),
+        Array.from({ length: 12 }, (_, i) => i < 5 ? "concluido" : "pendente"));
+    assert.equal(retorno.corpo.total_acertos, 1);
+    assert.equal(retorno.corpo.proximo_tema, 6);
+    assert.equal((await lerResposta(certa.id)).acertou, true);
+    assert.equal((await lerResposta(errada.id)).acertou, false);
+    assert.equal((await lerResposta(expirada.id)).situacao, "tempo_esgotado");
+    assertInterrompida(await lerResposta(interrompida.id));
+    assertInterrompida(await lerResposta(aberta.id));
+    const outro = await solicitar("/api/exames/progresso", outroCookie);
+    assert.ok(outro.corpo.temas.every(t => t.estado === "pendente"));
+    assert.equal(outro.corpo.total_acertos, 0);
 });
