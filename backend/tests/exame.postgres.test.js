@@ -197,6 +197,7 @@ test("Gabarito: oculto em andamento e disponível após o encerramento", opcoes,
     assert.equal(encerrada.status, 200);
     assert.equal(encerrada.corpo.situacao, "tempo_esgotado");
     assert.deepEqual(encerrada.corpo.alternativa_correta, questao.alternativas[0]);
+    assert.ok(encerrada.corpo.data_hora);
     assert.equal(encerrada.corpo.justificativa, "Justificativa de teste");
     assert.equal(encerrada.corpo.proximo_tema, 1); // Retorna à menor ordem pendente.
     assert.deepEqual((await iniciar(cookie, 2)).alternativa_correta, questao.alternativas[0]);
@@ -375,6 +376,7 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     assert.equal(progresso.corpo.aprovado, false);
     assert.deepEqual(progresso.corpo, {
         temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1),
+            id_resposta: [primeira.id, segunda.id, terceira.id][indice] ?? null,
             estado: indice < 2 ? "concluido" : indice === 2 ? "em_andamento" : "pendente" })),
         proximo_tema: 4, certificacao_concluida: false,
         total_acertos: 1, percentual_acertos: 8.33, nota_final: 8.33, aprovado: false,
@@ -392,7 +394,8 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     const semCertificacao = await solicitar("/api/exames/progresso", outroCookie);
     assert.equal(semCertificacao.status, 200);
     assert.deepEqual(semCertificacao.corpo, {
-        temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1), estado: "pendente" })),
+        temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1),
+            id_resposta: null, estado: "pendente" })),
         proximo_tema: 1, certificacao_concluida: false,
         total_acertos: 0, percentual_acertos: 0, nota_final: 0, aprovado: false,
     });

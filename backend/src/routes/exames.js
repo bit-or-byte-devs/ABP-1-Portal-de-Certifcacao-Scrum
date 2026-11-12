@@ -29,7 +29,8 @@ const MENSAGENS_ENCERRADA = {
 
 async function buscarEstadoResposta(db, id) {
     const { rows } = await db.query(`SELECT r.id, r.situacao, r.acertou, r.idalternativa,
-        r.idcertificacao, t.ordem, t.nome, q.id AS questao, q.enunciado,
+        r.idcertificacao, COALESCE(r.data_hora_resposta, r.data_hora_encerramento,
+            r.data_hora_exibicao) AS data_hora, t.ordem, t.nome, q.id AS questao, q.enunciado,
         CASE WHEN r.situacao <> 'em_andamento' THEN q.justificativa END AS justificativa,
         i.arquivo_ou_url AS imagem, i.texto_alternativo AS imagem_alt,
         GREATEST(0, EXTRACT(EPOCH FROM (r.data_hora_exibicao
@@ -59,7 +60,7 @@ router.get("/progresso", async (req, res) => {
         if (idcertificacao !== null) await reconciliar(db, idcertificacao);
         const resultadoCertificacao = idcertificacao === null ? null : await db.query(`SELECT total_acertos, percentual_acertos, nota_final
             FROM tbcertificacao WHERE id=$1`, [idcertificacao]);
-        const { rows: temas } = await db.query(`SELECT t.ordem, t.nome,
+        const { rows: temas } = await db.query(`SELECT t.ordem, t.nome, r.id AS id_resposta,
             CASE WHEN r.id IS NULL THEN 'pendente'
                 WHEN r.situacao='em_andamento' THEN 'em_andamento'
                 ELSE 'concluido' END AS estado

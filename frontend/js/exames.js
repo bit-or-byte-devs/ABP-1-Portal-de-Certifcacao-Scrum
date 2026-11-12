@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const cards = document.querySelectorAll('.theme-card');
     const botaoContinuar = document.getElementById('btn-continuar-certificacao');
     const mensagem = document.getElementById('mensagem-certificacao');
-    const rotulos = { pendente: 'Iniciar exame', em_andamento: 'Em andamento', concluido: 'Concluído' };
+    const rotulos = { pendente: 'Iniciar exame', em_andamento: 'Em andamento' };
 
     let temaEmAndamento;
 
@@ -17,14 +17,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         cards.forEach(card => {
             const tema = progresso.temas.find(tema => tema.ordem === Number(card.dataset.id));
             const botao = card.querySelector('.btn-iniciar');
-            botao.disabled = !tema || tema.estado === 'concluido';
+            const concluido = tema?.estado === 'concluido';
+            botao.disabled = !tema || (concluido && !tema.id_resposta);
             card.querySelector('.progress-badge .green-text').textContent = tema?.estado === 'concluido' ? '100%' : '0%';
             if (!tema) return;
             card.querySelector('h3').textContent = `${tema.ordem}. ${tema.nome}`;
-            botao.textContent = rotulos[tema.estado];
+            botao.textContent = concluido ? 'Revisar' : rotulos[tema.estado];
             botao.addEventListener('click', evento => {
                 evento.stopPropagation();
-                if (!botao.disabled) abrirTema(tema.ordem);
+                if (botao.disabled) return;
+                if (concluido) location.href = `exame.html?resposta=${encodeURIComponent(tema.id_resposta)}`;
+                else abrirTema(tema.ordem);
             });
         });
         if (progresso.certificacao_concluida) {
