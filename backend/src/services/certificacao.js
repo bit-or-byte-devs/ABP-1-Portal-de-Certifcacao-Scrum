@@ -1,11 +1,22 @@
+const { randomBytes } = require("node:crypto");
+
 async function recalcularCertificacao(db, idcertificacao) {
-    await db.query(`UPDATE tbcertificacao SET total_acertos=s.acertos,
+    await db.query(`WITH atualizada AS (UPDATE tbcertificacao SET total_acertos=s.acertos,
         percentual_acertos=round(s.acertos * 100.0 / 12, 2), nota_final=round(s.acertos * 100.0 / 12, 2),
         status=CASE WHEN s.respondidas=12 THEN 'concluida' ELSE 'em_andamento' END,
         data_conclusao=CASE WHEN s.respondidas=12 THEN COALESCE(data_conclusao, CURRENT_TIMESTAMP) ELSE NULL END
         FROM (SELECT count(*) FILTER (WHERE acertou)::integer AS acertos,
             count(*) FILTER (WHERE situacao <> 'em_andamento') AS respondidas
-            FROM tbresposta WHERE idcertificacao=$1) s WHERE id=$1`, [idcertificacao]);
+            FROM tbresposta WHERE idcertificacao=$1) s WHERE id=$1
+        RETURNING id, idcandidato, status, nota_final, percentual_acertos
+    )
+    INSERT INTO tbcertificado (idcertificacao, codigo_validacao, nome_completo_emitido,
+        cpf_emitido, email_emitido, nota_final_emitida, percentual_acertos_emitido)
+    SELECT c.id, $2, candidato.nome_completo, candidato.cpf, candidato.email,
+        c.nota_final, c.percentual_acertos
+    FROM atualizada c JOIN tbcandidato candidato ON candidato.id=c.idcandidato
+    WHERE c.status='concluida' AND c.percentual_acertos >= 65
+    ON CONFLICT (idcertificacao) DO NOTHING`, [idcertificacao, randomBytes(32).toString("hex")]);
 }
 
 async function buscarProximoTemaPendente(db, idcertificacao, ordemAtual) {

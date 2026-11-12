@@ -811,3 +811,47 @@ test('Banco garante exatamente 4 alternativas e 1 correta por questão', opcoes,
         assert.deepEqual(estado.rows.map(linha => linha.letra), ['A']);
     } finally { clienteOrdem.release(); }
 });
+
+
+test("Certificado: emite apenas ao concluir aprovado e preserva os dados da emissão", opcoes, async () => {
+    for (let ordem = 1; ordem <= 12; ordem++) await criarTema(ordem);
+    const cookie = await criarCandidato();
+    for (let ordem = 1; ordem <= 11; ordem++) {
+        const questao = await iniciar(cookie, ordem);
+        const letra = ordem <= 8 ? "A" : "B";
+        const resposta = await solicitar(`/api/exames/respostas/${questao.id}`, cookie,
+            { alternativa: questao.alternativas.find(a => a.letra === letra).id });
+        assert.equal(resposta.status, 200);
+    }
+    assert.equal((await banco.query("SELECT * FROM tbcertificado")).rowCount, 0);
+    const ultima = await iniciar(cookie, 12);
+    assert.equal((await solicitar(`/api/exames/respostas/${ultima.id}`, cookie,
+        { alternativa: ultima.alternativas.find(a => a.letra === "B").id })).status, 200);
+    const emitidos = await banco.query("SELECT * FROM tbcertificado");
+    assert.equal(emitidos.rowCount, 1);
+    const certificado = emitidos.rows[0];
+    assert.equal(certificado.nome_completo_emitido, "Candidato de teste");
+    assert.equal(certificado.cpf_emitido, "52998224725");
+    assert.equal(certificado.email_emitido, "exame@example.test");
+    assert.equal(Number(certificado.nota_final_emitida), 66.67);
+    assert.equal(Number(certificado.percentual_acertos_emitido), 66.67);
+    assert.match(certificado.codigo_validacao, /^[a-f0-9]{64}$/);
+    assert.ok(certificado.data_hora_emissao);
+    await banco.query("UPDATE tbcandidato SET nome_completo='Nome atualizado', email='novo@example.test'");
+    const { recalcularCertificacao } = require("../src/services/certificacao");
+    await recalcularCertificacao(banco, certificado.idcertificacao);
+    assert.deepEqual((await banco.query("SELECT * FROM tbcertificado")).rows, [certificado]);
+});
+
+test("Certificado: não emite para certificação concluída com sete acertos", opcoes, async () => {
+    for (let ordem = 1; ordem <= 12; ordem++) await criarTema(ordem);
+    const cookie = await criarCandidato();
+    for (let ordem = 1; ordem <= 12; ordem++) {
+        const questao = await iniciar(cookie, ordem);
+        const letra = ordem <= 7 ? "A" : "B";
+        assert.equal((await solicitar(`/api/exames/respostas/${questao.id}`, cookie,
+            { alternativa: questao.alternativas.find(a => a.letra === letra).id })).status, 200);
+    }
+    assert.equal((await banco.query("SELECT status FROM tbcertificacao")).rows[0].status, "concluida");
+    assert.equal((await banco.query("SELECT * FROM tbcertificado")).rowCount, 0);
+});
