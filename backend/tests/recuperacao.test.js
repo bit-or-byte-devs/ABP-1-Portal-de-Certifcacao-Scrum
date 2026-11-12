@@ -41,7 +41,7 @@ test("HMAC e SMTP sem enviar e-mail real", async (t) => {
     await assert.rejects(email.enviarCodigo("teste@example.test", "000007", id));
     Object.assign(process.env, {
         SMTP_HOST: "smtp.example.test", SMTP_PORT: "587", SMTP_SECURE: "false",
-        SMTP_USER: "teste", SMTP_PASSWORD: "teste", SMTP_FROM: "Portal <portal@example.test>",
+        SMTP_USER: "teste", SMTP_PASS: "teste", SMTP_FROM: "Portal <portal@example.test>",
     });
     let falhar = false;
     let rejeitar = false;

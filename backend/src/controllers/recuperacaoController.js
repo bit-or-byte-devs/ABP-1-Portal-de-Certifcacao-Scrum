@@ -15,9 +15,9 @@ function lerEmail(valor) {
 function enviarEmSegundoPlano(email, codigo, solicitacaoId) {
     emailService.enviarCodigo(email, codigo, solicitacaoId)
         .then(() => model.concluirEnvio(solicitacaoId, true))
-        .catch(() => {
-            // Sem código, e-mail ou detalhes do transporte no log.
-            console.error("Falha no envio do código de recuperação de senha.");
+        .catch(erro => {
+            // Só o código do erro (EAUTH, CONFIG_RECUPERACAO...): sem código, e-mail ou detalhes do transporte.
+            console.error("Falha no envio do código de recuperação de senha (código " + emailService.codigoErro(erro) + ").");
             return model.concluirEnvio(solicitacaoId, false);
         })
         .catch(() => console.error("Falha ao registrar o resultado do envio de recuperação de senha."));
@@ -26,8 +26,8 @@ async function solicitarCodigo(req, res) {
     const email = lerEmail((req.body || {}).email);
     if (!email) return res.status(400).json({ mensagem: "Informe um e-mail válido." });
     try {
+        // Sem configuração de envio válida, a resposta continua 202 genérica e a falha vai para o log.
         obterSegredo();
-        emailService.configuracao();
         const liberarSolicitacoes = solicitacoesLivres();
         if (!liberarSolicitacoes && (!await model.reservarLimite("envio-ip", req.ip, 10, 600) ||
             !await model.reservarLimite("email-minuto", email, 1, 60) ||

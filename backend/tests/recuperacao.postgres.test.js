@@ -214,7 +214,8 @@ test("recuperação com PostgreSQL isolado, concorrência e sessões", {
         assert.deepEqual(falha.corpo, existente.corpo);
         const row = await lerPedido();
         assert.equal(row.enviada, false); assert.equal(row.invalidada, true);
-        assert.deepEqual(erros, ["Falha no envio do código de recuperação de senha."]);
+        // Só o código do erro; o transporte de teste lança um Error sem code.
+        assert.deepEqual(erros, ["Falha no envio do código de recuperação de senha (código DESCONHECIDO)."]);
         const codigoNaoEnviado = emails.at(-1).codigo;
         assert.ok(emails.at(-1).falhou);
         assert.doesNotMatch(erros.join(" "), new RegExp(codigoNaoEnviado + "|@"));

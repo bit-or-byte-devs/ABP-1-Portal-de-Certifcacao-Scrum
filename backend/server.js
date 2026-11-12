@@ -6,6 +6,7 @@ const app = require("./src/app");
 const pool = require("./src/config/db");
 const { reconciliarQuestoesAbertas } = require("./src/services/encerramentoQuestao");
 const { recalcularCertificacao } = require("./src/services/certificacao");
+const { prepararEnvio } = require("./src/services/emailRecuperacao");
 let varreduraEmAndamento = false;
 
 async function varrerQuestoesVencidas() {
@@ -35,4 +36,6 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}/pages/index.html`);
+    // Confere o envio de e-mail uma vez; uma falha só gera aviso, sem derrubar o portal.
+    prepararEnvio();
 });
