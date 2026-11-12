@@ -11,7 +11,7 @@ docker compose up -d --build
 A ordem configurada é:
 
 1. `db`: inicializa o PostgreSQL e, somente em um volume novo, executa `schema.sql` e `seed.sql`.
-2. `preparar-banco`: aguarda o banco ficar saudável, valida os JSONs e imagens, confere as tabelas base, aplica as migrações 001 a 006 e importa temas e questões.
+2. `preparar-banco`: aguarda o banco ficar saudável, valida os JSONs e imagens, confere as tabelas base, aplica as migrações 001 a 007 e importa temas e questões.
 3. `app`: inicia após a preparação encerrar com código zero.
 
 O serviço de preparação usa o mesmo Dockerfile da aplicação e não publica portas. É esperado que apareça como `Exited (0)` após o sucesso; não é um servidor permanente. O healthcheck do banco usa TCP para não considerar pronto o servidor temporário usado durante a inicialização dos SQLs.
@@ -40,7 +40,7 @@ Os comandos individuais `db:temas` e `db:questoes` continuam disponíveis.
 
 ## Volumes existentes e atualizações
 
-O volume `pgdata` é preservado. As migrações são executadas na ordem 001, 002, 003, 004, 005 e 006; a 002 cria a tabela de progresso necessária à 004, a 005 recusa a execução se encontrar questão sem exatamente 4 alternativas e 1 correta, e a 006 cria em `tbresposta` a coluna `data_hora_ultimo_sinal`, que registra o último sinal da página aberta para o servidor encerrar como interrompida a questão abandonada (US22). Não reaplique o schema sobre um banco existente.
+O volume `pgdata` é preservado. As migrações são executadas na ordem 001, 002, 003, 004, 005, 006 e 007; a 002 cria a tabela de progresso necessária à 004, a 005 recusa a execução se encontrar questão sem exatamente 4 alternativas e 1 correta, e a 006 cria em `tbresposta` a coluna `data_hora_ultimo_sinal`, que registra o último sinal da página aberta para o servidor encerrar como interrompida a questão abandonada (US22). A 007 protege questões e alternativas com tentativas e preserva os vínculos históricos. Consulte [a manutenção do catálogo](us25-manutencao-catalogo.md). Não reaplique o schema sobre um banco existente.
 
 Para atualizar uma instalação já em uso, pare a aplicação antes da preparação:
 

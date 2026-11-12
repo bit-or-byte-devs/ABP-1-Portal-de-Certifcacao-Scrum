@@ -788,3 +788,165 @@ test("US24: progresso persiste após novo login e outro candidato não altera re
     assert.ok(outro.corpo.temas.every(t => t.estado === "pendente"));
     assert.equal(outro.corpo.total_acertos, 0);
 });
+
+async function historicoUS25() {
+    const { rows } = await banco.query(`SELECT jsonb_build_object(
+        'candidatos', (SELECT jsonb_agg(to_jsonb(c) ORDER BY id) FROM tbcandidato c),
+        'certificacoes', (SELECT jsonb_agg(to_jsonb(c) ORDER BY id) FROM tbcertificacao c),
+        'respostas', (SELECT jsonb_agg(to_jsonb(r) ORDER BY id) FROM tbresposta r),
+        'questoes', (SELECT jsonb_agg(to_jsonb(q) ORDER BY id) FROM tbquestao q),
+        'alternativas', (SELECT jsonb_agg(to_jsonb(a) ORDER BY id) FROM tbalternativa a)
+    ) AS historico`);
+    return rows[0].historico;
+}
+
+test("US25: versões históricas resistem a SQL direto desde a tentativa aberta", opcoes, async () => {
+    await criarTema(1);
+    const cookie = await criarCandidato();
+    const questao = await iniciar(cookie);
+    const antes = await historicoUS25();
+    const operacoes = [
+        ["UPDATE tbquestao SET enunciado='Alterado' WHERE id=$1", [questao.questao]],
+        ["UPDATE tbquestao SET justificativa='Alterada' WHERE id=$1", [questao.questao]],
+        ["UPDATE tbquestao SET codigo_origem='substituido' WHERE id=$1", [questao.questao]],
+        ["DELETE FROM tbquestao WHERE id=$1", [questao.questao]],
+        ["UPDATE tbalternativa SET correta=false WHERE id=$1", [questao.alternativas[0].id]],
+        ["UPDATE tbalternativa SET texto='Alterado' WHERE id=$1", [questao.alternativas[1].id]],
+        ["DELETE FROM tbalternativa WHERE id=$1", [questao.alternativas[1].id]],
+        ["INSERT INTO tbalternativa (idquestao,letra,texto) VALUES ($1,'A','Nova')", [questao.questao]],
+        ["UPDATE tbresposta SET idcertificacao=idcertificacao+1 WHERE id=$1", [questao.id]],
+    ];
+    for (const [sql, parametros] of operacoes) {
+        await assert.rejects(banco.query(sql, parametros), erro =>
+            erro.code === "23514" && /historica|historico/.test(erro.constraint));
+    }
+    assert.deepEqual(await historicoUS25(), antes);
+    const resultado = await solicitar(`/api/exames/respostas/${questao.id}`, cookie,
+        { alternativa: questao.alternativas[0].id });
+    assert.equal(resultado.status, 200);
+    assert.deepEqual(resultado.corpo.alternativa_correta, questao.alternativas[0]);
+});
+
+test("US25: nova versão com outro gabarito preserva consulta e registros antigos", opcoes, async () => {
+    const { carregar, importar } = require("../scripts/importar-questoes");
+    const { preparar } = require("../scripts/preparar-banco");
+    await preparar(banco, { log() {} });
+    const cookie = await criarCandidato();
+    const tentativa = await iniciar(cookie);
+    assert.equal((await solicitar(`/api/exames/respostas/${tentativa.id}`, cookie,
+        { alternativa: tentativa.alternativas[0].id })).status, 200);
+    const antes = await historicoUS25();
+    const consultaAntes = await solicitar(`/api/exames/respostas/${tentativa.id}`, cookie);
+    const codigo = (await banco.query("SELECT codigo_origem FROM tbquestao WHERE id=$1", [tentativa.questao])).rows[0].codigo_origem;
+    const original = carregar().find(q => q.codigo === codigo);
+    const { hash, ...conteudo } = original;
+    const novaCorreta = original.alternativas.find(a => !a.correta).letra;
+    const novoConteudo = { ...conteudo, codigo: codigo + "-v2", enunciado: "Versão revisada: " + conteudo.enunciado,
+        alternativas: conteudo.alternativas.map(a => ({ ...a, correta: a.letra === novaCorreta })) };
+    const nova = { ...novoConteudo, hash: crypto.createHash("sha256").update(JSON.stringify(novoConteudo)).digest("hex") };
+    const db = await banco.connect();
+    try {
+        // Alterar o conteúdo usando o mesmo código também continua sendo recusado.
+        await assert.rejects(importar(db, [{ ...nova, codigo }]), /Conteúdo alterado/);
+        assert.deepEqual(await importar(db, [nova]), { inseridas: 1, existentes: 0 });
+    } finally { db.release(); }
+    const depoisVersao = await historicoUS25();
+    assert.deepEqual(depoisVersao.respostas, antes.respostas);
+    assert.deepEqual(depoisVersao.certificacoes, antes.certificacoes);
+    assert.deepEqual(depoisVersao.questoes.filter(q => q.id === tentativa.questao),
+        antes.questoes.filter(q => q.id === tentativa.questao));
+    assert.deepEqual(depoisVersao.alternativas.filter(a => a.idquestao === tentativa.questao),
+        antes.alternativas.filter(a => a.idquestao === tentativa.questao));
+    assert.deepEqual((await solicitar(`/api/exames/respostas/${tentativa.id}`, cookie)).corpo, consultaAntes.corpo);
+    const gabaritoNovo = await banco.query(`SELECT a.letra FROM tbalternativa a
+        JOIN tbquestao q ON q.id=a.idquestao WHERE q.codigo_origem=$1 AND a.correta`, [nova.codigo]);
+    assert.equal(gabaritoNovo.rows[0].letra, novaCorreta);
+    // A preparação completa (migrações e cargas) também preserva todos os registros históricos.
+    await preparar(banco, { log() {} });
+    await preparar(banco, { log() {} });
+    assert.deepEqual(await historicoUS25(), depoisVersao);
+});
+
+test("US25: migração 007 repetível sobre tentativas existentes preserva todos os encerramentos", opcoes, async () => {
+    // Reproduz uma instalação anterior à proteção, sem recriar tabelas nem registros.
+    await banco.query(`DROP TRIGGER tg_questao_historica ON tbquestao;
+        DROP TRIGGER tg_alternativa_historica ON tbalternativa;
+        DROP TRIGGER tg_travar_questao_tentativa ON tbresposta;`);
+    for (let ordem = 1; ordem <= 4; ordem++) await criarTema(ordem);
+    const cookie = await criarCandidato();
+    for (let ordem = 1; ordem <= 2; ordem++) {
+        const q = await iniciar(cookie, ordem);
+        const escolha = q.alternativas[ordem - 1].id;
+        const envio = await solicitar(`/api/exames/respostas/${q.id}`, cookie, { alternativa: escolha });
+        assert.equal(envio.status, 200);
+        const r = await lerResposta(q.id);
+        assert.equal(r.idalternativa, escolha);
+        assert.equal(r.situacao, "respondida");
+        assert.equal(r.acertou, ordem === 1);
+        assert.ok(r.data_hora_resposta instanceof Date);
+        assert.ok(r.data_hora_encerramento >= r.data_hora_resposta);
+    }
+    const expirada = await iniciar(cookie, 3);
+    await recuarExibicao(expirada.id, 153);
+    await solicitar("/api/exames/progresso", cookie);
+    const interrompida = await iniciar(cookie, 4);
+    await solicitar(`/api/exames/respostas/${interrompida.id}/interromper`, cookie, {});
+    assert.equal((await lerResposta(expirada.id)).situacao, "tempo_esgotado");
+    for (const id of [expirada.id, interrompida.id]) {
+        const r = await lerResposta(id);
+        assert.equal(r.idalternativa, null);
+        assert.equal(r.data_hora_resposta, null);
+        assert.equal(r.acertou, false);
+        assert.ok(r.data_hora_encerramento instanceof Date);
+    }
+    const antes = await historicoUS25();
+    const migracao = fs.readFileSync(path.join(__dirname, "../../database/migrations/007_historico_questoes.sql"), "utf8");
+    await banco.query(migracao);
+    await banco.query(migracao);
+    assert.deepEqual(await historicoUS25(), antes);
+    await assert.rejects(banco.query("UPDATE tbalternativa SET texto='Alterado' WHERE id=$1",
+        [antes.alternativas[0].id]), erro => erro.constraint === "ck_alternativa_historica");
+
+    // Repetição completa também preserva os quatro tipos de encerramento.
+    const { preparar } = require("../scripts/preparar-banco");
+    await preparar(banco, { log() {} });
+    const aposPrimeiraCarga = await historicoUS25();
+    assert.deepEqual(aposPrimeiraCarga.respostas, antes.respostas);
+    assert.deepEqual(aposPrimeiraCarga.certificacoes, antes.certificacoes);
+    await preparar(banco, { log() {} });
+    await preparar(banco, { log() {} });
+    assert.deepEqual(await historicoUS25(), aposPrimeiraCarga);
+});
+
+test("US25: manutenção concorrente aguarda a primeira tentativa e não altera seu catálogo", opcoes, async () => {
+    await criarTema(1);
+    await criarCandidato();
+    const cert = (await banco.query("INSERT INTO tbcertificacao (idcandidato) SELECT id FROM tbcandidato RETURNING id")).rows[0].id;
+    const q = (await banco.query("SELECT id,idtema FROM tbquestao")).rows[0];
+    const primeira = await banco.connect(), segunda = await banco.connect();
+    let alteracao;
+    try {
+        await primeira.query("BEGIN");
+        await primeira.query("INSERT INTO tbresposta (idcertificacao,idtema,idquestao) VALUES ($1,$2,$3)", [cert, q.idtema, q.id]);
+        const pid = (await segunda.query("SELECT pg_backend_pid() AS pid")).rows[0].pid;
+        await segunda.query("SET lock_timeout='5s'");
+        // Captura a rejeição imediatamente para não gerar promise rejection sem tratamento.
+        alteracao = segunda.query("UPDATE tbalternativa SET texto='Concorrente' WHERE idquestao=$1", [q.id])
+            .then(() => null, erro => erro);
+        let bloqueada = false;
+        for (let i = 0; i < 100; i++) {
+            const estado = await primeira.query("SELECT cardinality(pg_blocking_pids($1)) > 0 AS bloqueada", [pid]);
+            if (estado.rows[0].bloqueada) { bloqueada = true; break; }
+            await new Promise(resolve => setTimeout(resolve, 10));
+        }
+        assert.equal(bloqueada, true, "A manutenção deve aguardar a tentativa");
+        await primeira.query("COMMIT");
+        const erro = await alteracao;
+        assert.equal(erro?.constraint, "ck_alternativa_historica");
+        assert.equal((await banco.query("SELECT count(*)::int AS total FROM tbalternativa WHERE texto='Concorrente'")).rows[0].total, 0);
+    } finally {
+        await primeira.query("ROLLBACK");
+        if (alteracao) await alteracao;
+        primeira.release(); segunda.release();
+    }
+});

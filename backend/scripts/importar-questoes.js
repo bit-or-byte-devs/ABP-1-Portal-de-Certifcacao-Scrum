@@ -94,9 +94,9 @@ async function main() {
         db = await pool.connect();
         if (args.includes('--migrar')) {
             // Todas são repetíveis; a 005 aborta se alguma questão não tiver 4 alternativas e 1 correta.
-            for (const migracao of ['003_carga_questoes.sql', '005_alternativas_questao.sql', '006_sinal_questao.sql'])
+            for (const migracao of ['003_carga_questoes.sql', '005_alternativas_questao.sql', '006_sinal_questao.sql', '007_historico_questoes.sql'])
                 await db.query(fs.readFileSync(path.join(raiz, 'database/migrations', migracao), 'utf8'));
-            console.log('Migrações 003, 005 e 006 de questões aplicadas.');
+            console.log('Migrações 003, 005, 006 e 007 de questões aplicadas.');
         } else console.log(await importar(db, carregar(), { vincularImagens: args.includes('--vincular-imagens') }));
     } finally { db?.release(); await pool.end(); }
 }
