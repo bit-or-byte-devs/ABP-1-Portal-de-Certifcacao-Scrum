@@ -9,6 +9,7 @@
 
   const MSG_OBRIGATORIO = "Preencha este campo.";
   const MSG_CPF_DUPLICADO = "Este CPF já possui cadastro.";
+  const MSG_EMAIL_DUPLICADO = "Este e-mail já possui cadastro.";
   const MSG_ERRO_GENERICO = "Não foi possível concluir a solicitação. Tente novamente.";
 
   function somenteDigitos(valor) {
@@ -158,14 +159,20 @@
     });
   }
 
-  function mostrarCpfDuplicado(form, mensagem) {
-    const campoCpf = form.querySelector("[data-cpf]");
-    if (!campoCpf) {
+  // O servidor informa no 409 qual campo já está cadastrado; sem essa
+  // informação (ou com um valor desconhecido), o erro continua no CPF.
+  const SELETOR_DUPLICADO = { cpf: "[data-cpf]", email: 'input[name="email"]' };
+
+  function mostrarDuplicado(form, corpo) {
+    const nome = Object.prototype.hasOwnProperty.call(SELETOR_DUPLICADO, corpo.campo) ? corpo.campo : "cpf";
+    const campo = form.querySelector(SELETOR_DUPLICADO[nome]);
+    const mensagem = corpo.mensagem || (nome === "email" ? MSG_EMAIL_DUPLICADO : MSG_CPF_DUPLICADO);
+    if (!campo) {
       mostrarAviso(form, mensagem, "erro");
       return;
     }
-    marcarErro(campoCpf, mensagem);
-    campoCpf.focus();
+    marcarErro(campo, mensagem);
+    campo.focus();
   }
 
   async function lerJson(resposta) {
@@ -219,7 +226,7 @@
     if (botao) botao.disabled = false;
 
     if (resposta.status === 409) {
-      mostrarCpfDuplicado(form, corpo.mensagem || MSG_CPF_DUPLICADO);
+      mostrarDuplicado(form, corpo);
     } else if (resposta.status === 401 && form.dataset.redirecionar) {
       mostrarAviso(form, "CPF ou senha incorretos", "erro");
     } else if (resposta.ok) {
