@@ -18,7 +18,9 @@ um fundo de céu estrelado:
 
 - **Perfil (coluna esquerda, `#perfil`):** mascote, nome do candidato, a
   constelação dos 12 temas, a legenda "N de 12 temas estudados" e o resumo da
-  certificação (temas do exame respondidos e nota). No desktop a coluna fica
+  certificação: Exame (temas do exame respondidos) e Acertos ("Sai ao
+  concluir" até o fim do exame; depois, "X% (aprovado)" ou "X% (não
+  aprovado)", com o `percentual_acertos` da API). No desktop a coluna fica
   fixa (`sticky`) enquanto a página rola.
 - **Ações (coluna direita):** saudação "Olá {nome}!!", aviso de erro (quando
   houver), botão principal do exame e os atalhos Estudar os temas, Fazer o
@@ -95,7 +97,7 @@ Montado a partir de `/api/exames/progresso`, na ordem de prioridade abaixo:
 
 | Situação | Rótulo | Detalhe | Destino |
 | --- | --- | --- | --- |
-| Certificação concluída | Ver resultado | "Nota X, aprovado" ou "Nota X, não aprovado" | `certificados.html` |
+| Certificação concluída | Ver resultado | "X% de acertos, aprovado" ou "X% de acertos, não aprovado" | `certificados.html` |
 | Algum tema `em_andamento` | Retomar exame | "O tema N, nome, tem uma questão aberta" | `exames.html` |
 | Nenhum tema respondido | Iniciar exame | "Próximo: tema N, nome" | `exame.html?tema=N` |
 | Exame em curso | Continuar exame | "Próximo: tema N, nome" | `exame.html?tema=N` |
@@ -103,8 +105,9 @@ Montado a partir de `/api/exames/progresso`, na ordem de prioridade abaixo:
 
 Com uma questão aberta, o botão **nunca** leva a `exame.html`, porque reabrir o
 tema encerraria a questão como errada. A página `exames.html` trata a
-interrupção. A nota é formatada com
-`toLocaleString("pt-BR", { maximumFractionDigits: 1 })`.
+interrupção. O percentual de acertos vem de `percentual_acertos` e é formatado
+com `toLocaleString("pt-BR", { maximumFractionDigits: 1 })`, por exemplo
+"8,3% de acertos, não aprovado". A tela não usa `nota_final`.
 
 ## Bloqueio de Certificados
 

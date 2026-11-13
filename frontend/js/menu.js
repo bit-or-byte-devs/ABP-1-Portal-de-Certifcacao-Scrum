@@ -76,10 +76,11 @@
     texto("atalho-exames", respondidos + "/" + TOTAL_TEMAS);
 
     if (progresso.certificacao_concluida) {
-      const nota = Number(progresso.nota_final).toLocaleString("pt-BR", { maximumFractionDigits: 1 });
+      // Mostra o percentual de acertos (0 a 100), mais claro que a nota_final.
+      const acertos = Number(progresso.percentual_acertos).toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + "%";
       const situacao = progresso.aprovado ? "aprovado" : "não aprovado";
-      texto("exame-nota", nota + " (" + situacao + ")");
-      configurarContinuar("Ver resultado", "Nota " + nota + ", " + situacao, "certificados.html");
+      texto("exame-nota", acertos + " (" + situacao + ")");
+      configurarContinuar("Ver resultado", acertos + " de acertos, " + situacao, "certificados.html");
       certificados.classList.remove("is-bloqueado");
       certificados.removeAttribute("aria-disabled");
       texto("certificados-desc", "Consulte o resultado da sua certificação");
