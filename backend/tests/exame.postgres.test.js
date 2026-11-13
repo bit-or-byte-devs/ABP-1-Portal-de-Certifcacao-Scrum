@@ -209,6 +209,29 @@ test("Gabarito: oculto em andamento e disponível após o encerramento", opcoes,
     assert.deepEqual(repetida.corpo.alternativa_correta, alternativas[0]);
 });
 
+test("Revisão: lista resposta concluída e recupera resultado e horário", opcoes, async () => {
+    const alternativas = await criarTema(1);
+    await criarTema(2);
+    const cookie = await criarCandidato();
+    const questao = await iniciar(cookie);
+    const envio = await solicitar(`/api/exames/respostas/${questao.id}`, cookie, { alternativa: alternativas[0].id });
+    assert.equal(envio.status, 200);
+
+    const progresso = await solicitar("/api/exames/progresso", cookie);
+    assert.equal(progresso.status, 200);
+    const tema = progresso.corpo.temas.find(item => item.ordem === 1);
+    assert.equal(tema.estado, "concluido");
+    assert.equal(Number(tema.id_resposta), questao.id);
+
+    const revisao = await solicitar(`/api/exames/respostas/${tema.id_resposta}`, cookie);
+    assert.equal(revisao.status, 200);
+    assert.equal(revisao.corpo.situacao, "respondida");
+    assert.equal(revisao.corpo.acertou, true);
+    assert.equal(revisao.corpo.idalternativa, alternativas[0].id);
+    assert.deepEqual(revisao.corpo.alternativa_correta, alternativas[0]);
+    assert.ok(revisao.corpo.data_hora);
+});
+
 test("Varredura: respeita tolerância, horário final e conclusão da 12ª questão", opcoes, async () => {
     for (let ordem = 1; ordem <= 12; ordem++) await criarTema(ordem);
     const cookie = await criarCandidato();
@@ -328,7 +351,8 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     assert.equal(progresso.corpo.aprovado, false);
     assert.deepEqual(progresso.corpo, {
         temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1),
-            estado: indice < 2 ? "concluido" : indice === 2 ? "em_andamento" : "pendente" })),
+            estado: indice < 2 ? "concluido" : indice === 2 ? "em_andamento" : "pendente",
+            id_resposta: [primeira.id, segunda.id, terceira.id][indice] ?? null })),
         proximo_tema: 4, certificacao_concluida: false,
         total_acertos: 1, percentual_acertos: 8.33, nota_final: 8.33, aprovado: false,
     });
@@ -345,7 +369,7 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     const semCertificacao = await solicitar("/api/exames/progresso", outroCookie);
     assert.equal(semCertificacao.status, 200);
     assert.deepEqual(semCertificacao.corpo, {
-        temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1), estado: "pendente" })),
+        temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1), estado: "pendente", id_resposta: null })),
         proximo_tema: 1, certificacao_concluida: false,
         total_acertos: 0, percentual_acertos: 0, nota_final: 0, aprovado: false,
     });

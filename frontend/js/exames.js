@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.theme-card');
     const botaoContinuar = document.getElementById('btn-continuar-certificacao');
     const mensagem = document.getElementById('mensagem-certificacao');
-    const rotulos = { pendente: 'Iniciar exame', em_andamento: 'Em andamento', concluido: 'Concluído' };
+    const rotulos = { pendente: 'Iniciar exame', em_andamento: 'Em andamento', concluido: 'Revisar' };
     let progresso;
     let versaoConsulta = 0;
     let carregando = true;
@@ -21,12 +21,23 @@ document.addEventListener('DOMContentLoaded', () => {
         location.href = `exame.html?tema=${ordem}`;
     }
 
+    function abrirRevisao(ordem) {
+        if (carregando || !progresso) return;
+        const tema = progresso.temas.find(tema => tema.ordem === ordem);
+        if (tema?.estado !== 'concluido' || !tema.id_resposta) return;
+        location.href = `exame.html?resposta=${encodeURIComponent(tema.id_resposta)}`;
+    }
+
     // Os listeners são registrados uma vez; os cliques usam o estado atual da API.
     cards.forEach(card => {
         const botao = card.querySelector('.btn-iniciar');
         botao.addEventListener('click', evento => {
             evento.stopPropagation();
-            if (!botao.disabled) abrirTema(Number(card.dataset.id));
+            if (botao.disabled || carregando) return;
+            const ordem = Number(card.dataset.id);
+            const tema = progresso?.temas.find(tema => tema.ordem === ordem);
+            if (tema?.estado === 'concluido') abrirRevisao(ordem);
+            else abrirTema(ordem);
         });
     });
     botaoContinuar.addEventListener('click', () => {
@@ -47,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cards.forEach(card => {
                 const tema = progresso.temas.find(tema => tema.ordem === Number(card.dataset.id));
                 const botao = card.querySelector('.btn-iniciar');
-                botao.disabled = !tema || tema.estado === 'concluido';
+                botao.disabled = !tema || (tema.estado === 'concluido' && !tema.id_resposta);
                 card.querySelector('.progress-badge .green-text').textContent = tema?.estado === 'concluido' ? '100%' : '0%';
                 botao.textContent = tema ? rotulos[tema.estado] : 'Indisponível';
                 if (tema) card.querySelector('h3').textContent = `${tema.ordem}. ${tema.nome}`;
