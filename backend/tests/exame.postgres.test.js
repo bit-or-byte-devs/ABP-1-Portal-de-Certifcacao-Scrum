@@ -974,3 +974,29 @@ test("US25: manutenção concorrente aguarda a primeira tentativa e não altera 
         primeira.release(); segunda.release();
     }
 });
+
+test("Navegação circular: 12 volta ao 1, 4 pula 5 concluído e termina sem próximo tema", opcoes, async () => {
+    for (let ordem = 1; ordem <= 12; ordem++) await criarTema(ordem);
+    const cookie = await criarCandidato();
+    async function responder(ordem, proximoEsperado) {
+        const q = await iniciar(cookie, ordem);
+        const envio = await solicitar(`/api/exames/respostas/${q.id}`, cookie,
+            { alternativa: q.alternativas[0].id });
+        assert.equal(envio.status, 200);
+        assert.equal(envio.corpo.proximo_tema, proximoEsperado);
+    }
+    await responder(12, 1);
+    await responder(5, 6);
+    await responder(4, 6);
+    const restantes = [1, 2, 3, 6, 7, 8, 9, 10, 11];
+    for (let i = 0; i < restantes.length; i++) {
+        await responder(restantes[i], restantes[i + 1] ?? null);
+    }
+    const progresso = await solicitar("/api/exames/progresso", cookie);
+    assert.equal(progresso.status, 200);
+    assert.equal(progresso.corpo.proximo_tema, null);
+    assert.equal(progresso.corpo.certificacao_concluida, true);
+    assert.equal(progresso.corpo.total_acertos, 12);
+    assert.ok(progresso.corpo.temas.every(t => t.estado === "concluido"));
+    assert.equal((await banco.query("SELECT count(*)::int AS total FROM tbresposta")).rows[0].total, 12);
+});
