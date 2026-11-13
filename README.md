@@ -60,6 +60,7 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 | --- | --- | --- | --- | --- |
 | 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1](https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I) | [Vídeo de Apresentação 1](https://youtu.be/FVt_IMNGXu8) | Concluído |
 | 🔖 **Sprint 2** | 23/10/2026 - 05/11/2026 | [Documentação Sprint 2](https://1drv.ms/w/c/e8fba6c9b965020d/IQAEdC8AzIp_QbojhheMglW7AZ6KTPoo0g9ohUsBH44cuIs) | [Vídeo de Apresentação 2](https://youtu.be/K_Tbho3OMi8?is=4hczwcMjw8u2Ketj) | Concluído |
+| 🔖 **Sprint 3** | 06/11/2026 - 25/11/2026 | [Documentação Sprint 2](https://1drv.ms/w/c/e8fba6c9b965020d/IQAEdC8AzIp_QbojhheMglW7AZ6KTPoo0g9ohUsBH44cuIs) | [Vídeo de Apresentação 2](https://youtu.be/K_Tbho3OMi8?is=4hczwcMjw8u2Ketj) | Concluído |
 
 
 ## 💻 Tecnologias Utilizadas
@@ -235,20 +236,26 @@ Para imagens complementares como modelo conceitual, lógico, e Diagramas de Clas
 
 ---
 
-## 🔖 SPRINT 2 – Desenvolvimento do Núcleo da Certificação e Área de Estudos
-**Período:** 23/10/2026 a 05/11/2026
+# 🚀 Sprint 3 - Documentação do Incremento
+**Período da Sprint 3:** 06/11/2026 a 25/11/2026
+---
 
-### 🏃 DoR da Sprint 2 (Definition of Ready)
-- [x] **Modelagem de Dados Aprovada:** Modelagem do banco de dados validada (PostgreSQL) para suportar os 12 temas, 48 questões (4 por tema), alternativas, imagens ilustrativas, tentativas únicas por tema e histórico de interrupções.
-- [x] **Carga e Conteúdo Homologados:** Definição final dos 12 temas da certificação e estruturação dos arquivos JSON/scripts de migração contendo o conteúdo didático e as questões com imagens.
-- [x] **Protótipos de Alta Fidelidade (Figma):** Telas aprovadas pela equipe para a Área de Estudos, Fluxo da Prova (com cronômetro, enunciado, imagem e alternativas conforme a US43) e fluxo de interrupção/retomada.
-- [x] **Especificação de Regras de Negócio:** Critérios de aceite detalhados para o sorteio randômico de questões (US13), controle do cronômetro regressivo (US20), encerramento por tempo esgotado (US21) e tratamento de interrupções de sessão (US22/US23).
+## 📋 DoR da Sprint 3 (Definition of Ready)
+* **Protótipos de Alta Fidelidade (Figma) Aprovados:** Telas finais prototipadas e navegáveis para o cálculo/resultado final da certificação, visualização/download do certificado eletrônico, página pública de validação via QR Code e consulta ao histórico detalhado da avaliação (atendendo aos requisitos **RF16** a **RF20** e dando continuidade ao fluxo das Sprints anteriores).
+* **Especificação das Regras de Cálculo, Emissão e Segurança:** Critérios de aceite detalhados para o cálculo automático da nota no back-end (impedindo manipulação pelo front-end — **RNF04**), regra de corte para emissão do certificado ($\ge 65\%$ de aproveitamento — **RF17* e geração da URL/hash único para o QR Code **RP08*
+* **Modelagem e *Constraints* de Banco Homologadas:** Definição das restrições nativas (*constraints*) no PostgreSQL (obrigando exatamente 4 alternativas e 1 resposta correta por questão) e estruturação final das tabelas de histórico e certificados (`tbcertificado` e `tbresposta`), incorporando o plano de ação da Sprint 2.
+* **Automação de Carga Inicial (*Seeds* Docker) Especificada:** Mapeamento dos scripts DML e arquivos JSON dos 12 temas e 48 questões para execução automatizada na inicialização do `docker compose up`, resolvendo o débito técnico identificado na Sprint 2.
+* **Histórias de Usuário Refinadas (US24+):** User Stories fatiadas em subtarefas claras no GitHub Projects desde o dia 0, com estimativas definidas para evitar sobrecarga na reta final (lição aprendida nas Sprints 1 e 2).
 
-### 🏆 DoD da Sprint 2 (Definition of Done)
-- [x] **Banco de Dados e Povoamento:** Schema DDL e seeds DML executados via Docker Compose, com carga íntegra dos 12 temas e das 48 questões (4 por tema) e migrações (`001` a `005`) testadas e integradas.
-- [x] **Núcleo de Back-end (Motor do Simulado & Regras):** Endpoints implementados em Node.js para sorteio aleatório (US13), tentativa única (US16, US19), controle de cronômetro, tempo esgotado (US21) e tratamento/retomada de interrupções (US22, US23).
-- [x] **Área de Estudos & Interface (Front-end):** Telas desenvolvidas em HTML5, CSS3 e JavaScript puro, estruturadas nos 12 temas (US11, US15) e com reestruturação da tela de prova (US43) para enunciado, imagens e alternativas.
-- [x] **Feedback, Diagramas UML e Entrega:** Exibição da resposta correta após submissão (US18), diagramas UML de Classes, Casos de Uso e Sequência documentados (US44), e vídeo de apresentação da Sprint 2 publicado no YouTube (US45).
+---
+
+## ✅ DoD da Sprint 3 (Definition of Done)
+* **Cálculo de Desempenho e Emissão Automática de Certificado:** Back-end em Node.js calculando automaticamente a nota final e o percentual de acertos de forma segura (**RF16**, **RNF04**) e emitindo o certificado eletrônico apenas para candidatos com aproveitamento $\ge 65\%$, contendo todos os dados obrigatórios (nome completo, CPF, e-mail, data/hora de emissão, nota final, percentual e QR Code — **RF17**, **RF18**).
+* **Validação Pública via QR Code Funcional:** Página pública acessível sem necessidade de login (via leitura do QR Code ou código de verificação), validando a autenticidade do certificado diretamente no banco de dados (**RF19**, **RP08**).
+* **Histórico Completo da Certificação:** Funcionalidade implementada permitindo ao candidato consultar todas as avaliações realizadas (independentemente de aprovação), exibindo temas respondidos, questão sorteada, resposta escolhida, resposta correta e data/horário de cada resposta (**RF20**).
+* **Banco de Dados Blindado e Ambiente 100% Automatizado (Docker):** PostgreSQL operando com *constraints* de integridade ativas (**RP02**) e ambiente orquestrado via `docker compose up -d --build` subindo com esquema, 12 temas, 48 questões e imagens populados automaticamente sem intervenção manual (**RNF07**, **RP05**, **RP06**).
+* **Interface Responsiva em Tecnologias Nativas e Conformidade LGPD:** Todas as telas novas e existentes desenvolvidas exclusivamente em HTML5, CSS3 e JavaScript puro (**RP01**), responsivas para dispositivos móveis (**RNF01**) e com armazenamento seguro de dados pessoais em conformidade com a LGPD (**RNF03**).
+* **Versionamento, Documentação Final e Entrega MVP:** Merges diários consolidados na branch `develop` e integração final aprovada pelo PO na `main` (**RNF05**), acompanhados da documentação técnica completa atualizada (`README.md`, modelo de dados, instruções de instalação, documentação de todos os endpoints da API, descrição das funcionalidades — **RNF06**) e apresentação final do MVP funcional pronta para **26/11/2026** (**RP09**).
 
 
 ## Carga de questões
