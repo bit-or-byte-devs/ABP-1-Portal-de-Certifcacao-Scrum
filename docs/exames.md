@@ -65,3 +65,22 @@ Os testes de integração PostgreSQL ficam em
 `backend/tests/exame.postgres.test.js`. Execute `npm test` na pasta `backend`
 para os testes gerais. A suíte PostgreSQL exige `TEST_EXAME_POSTGRES=true` e as
 variáveis de conexão do banco configuradas no ambiente.
+
+## Comportamento após a integração das US24/US25
+A lista atualiza o progresso quando restaurada pelo histórico do navegador,
+bloqueando ações até concluir a consulta. Temas concluídos oferecem Revisar quando
+há id_resposta; a revisão consulta a tentativa existente sem iniciar outra.
+O próximo tema é calculado pelo servidor em sequência circular: depois do 12
+retorna ao primeiro pendente e pula os já encerrados. Sem pendências, oferece
+Voltar à lista. A revisão mantém Voltar aos exames.
+Somente o logout superior permanece; o botão adicional Encerrar sessão foi removido.
+
+Ao concluir todos os temas com pelo menos 65% de acertos, o servidor registra
+automaticamente um certificado em tbcertificado. Com 12 questões são necessários
+8 acertos. Emissão repetida não duplica o registro e não atualiza os dados
+copiados no momento da emissão. Isso não implementa PDF ou consulta pública.
+
+A proteção histórica é consolidada pela migração 008 após os dois arquivos 007.
+Consulte preparacao-banco.md e us25-manutencao-catalogo.md.
+Evidências desta integração: integracao-develop-us24-us25.md.
+A validação visual e o BFCache real continuam pendentes.

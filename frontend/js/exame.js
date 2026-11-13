@@ -10,7 +10,6 @@
     const feedback = document.getElementById('feedback');
     const dataTentativa = document.getElementById('data-tentativa');
     const linkContinuar = document.getElementById('link-continuar');
-    const botaoInterromper = document.getElementById('btn-interromper');
     let encerrada = false;
     let tempoEsgotado = false;
     let semConexao = false;
@@ -80,13 +79,11 @@
             linkContinuar.textContent = 'Voltar aos exames';
             linkContinuar.href = 'exames.html';
             linkContinuar.hidden = false;
-            botaoInterromper.hidden = true;
         } else {
             linkContinuar.textContent = dados.proximo_tema === null ? 'Voltar à lista' : 'Próximo tema';
             linkContinuar.href = dados.proximo_tema === null ? 'exames.html' : `exame.html?tema=${dados.proximo_tema}`;
-            linkContinuar.hidden = Number(tema) === 12;
-            botaoInterromper.textContent = 'Encerrar sessão';
-            botaoInterromper.hidden = false;
+            // A sequência circular é definida pela API, independentemente do tema atual.
+            linkContinuar.hidden = false;
         }
         botaoConfirmar.disabled = true;
         alternativas.disabled = true;
@@ -182,11 +179,11 @@
         window.addEventListener('online', () => { if (semConexao) reconciliarInterrupcao(); });
         // Saída da página: aviso sem garantia de entrega; o limite sem sinal no servidor cobre a falta dele.
         window.addEventListener('pagehide', () => {
-            if (!encerrada) navigator.sendBeacon(`${rotaResposta}/interromper`, new Blob(['{}'], { type: 'application/json' }));
+            if (!modoRevisao && !encerrada) navigator.sendBeacon(`${rotaResposta}/interromper`, new Blob(['{}'], { type: 'application/json' }));
         });
         // Voltar pelo histórico (página restaurada do cache): nada fica clicável antes de reconciliar.
         window.addEventListener('pageshow', evento => {
-            if (!evento.persisted || encerrada) return;
+            if (modoRevisao || !evento.persisted || encerrada) return;
             clearTimeout(sinalAgendado);
             clearTimeout(consultaAgendada);
             cronometro.parar();

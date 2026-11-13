@@ -4,7 +4,7 @@ As páginas de temas, estudos, exames e perfil exigem a sessão do login existen
 
 ## Banco existente
 
-Aplique as migrações até `database/migrations/004_conteudo_temas.sql`, execute `database/dml/seed.sql` e importe os temas. Não execute o schema inicial sobre um banco existente. Volumes Docker existentes não executam novamente os scripts de inicialização.
+Use a preparação completa descrita em `docs/preparacao-banco.md`: migrações 001 a 008, incluindo os dois arquivos 007, e cargas de temas e questões. Não execute o schema inicial sobre um banco existente. Volumes Docker existentes não executam novamente os scripts de inicialização.
 
 Em banco novo, `schema.sql` e `seed.sql` criam a estrutura e o catálogo dos temas. A carga dos materiais é feita pelo importador descrito em `docs/carga-temas.md`.
 
@@ -18,7 +18,7 @@ Em banco novo, `schema.sql` e `seed.sql` criam a estrutura e o catálogo dos tem
 
 `POST /api/exames/:ordem/iniciar` cria uma questão para o tema ou devolve o estado já registrado para aquele tema, mantendo uma certificação por candidato e uma resposta por tema. Não retoma uma questão encerrada. Reabrir uma questão ainda em andamento a encerra como interrompida. `POST /api/exames/respostas/:id` recebe `{ "alternativa": 123 }`, confere propriedade e alternativa, grava a resposta e calcula o resultado no servidor. Respostas concluídas não podem ser substituídas. `GET /api/exames/progresso` retorna o progresso da sessão autenticada. A certificação é concluída após os 12 temas; o resultado parcial usa o total de 12 questões como denominador.
 
-Cadastre questões reais em `tbquestao`, imagens em `tbimagem` e quatro alternativas A–D em `tbalternativa`, com uma correta. O seed atual não contém questões: nesse caso a tela informa a indisponibilidade, sem apresentar uma prova fictícia. A emissão de certificado continua fora deste fluxo; não é emitido documento apenas por concluir a leitura.
+Cadastre questões reais em `tbquestao`, imagens em `tbimagem` e quatro alternativas A–D em `tbalternativa`, com uma correta. O seed atual não contém questões: nesse caso a tela informa a indisponibilidade, sem apresentar uma prova fictícia. Ao concluir os 12 temas do exame com pelo menos 65% de acertos, o servidor registra um certificado em tbcertificado. Concluir a leitura não emite certificado; PDF e consulta pública não fazem parte deste registro.
 
 ## Verificação
 
