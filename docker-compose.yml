@@ -1,10 +1,12 @@
 # Sobe o Portal de Certificação (PostgreSQL + preparação + app):
+#   cp .env.example .env        (PowerShell: Copy-Item .env.example .env)
 #   docker compose up -d --build
 # Depois acesse http://localhost:3000/pages/index.html
 #
-# Os valores abaixo servem apenas para demonstração e desenvolvimento local.
-# Para usar outros segredos, defina SESSION_SECRET e RECUPERACAO_SECRET
-# (32 caracteres ou mais) no ambiente ou em um arquivo .env ao lado deste arquivo.
+# Os valores do banco e os segredos padrão abaixo servem apenas para demonstração
+# e desenvolvimento local. O envio de e-mail (RECUPERACAO_MODO e SMTP_*) vem só do
+# .env ao lado deste arquivo; nenhuma credencial fica escrita aqui. Sem essas
+# variáveis, o portal sobe normalmente e o log avisa que a recuperação não enviará códigos.
 
 services:
   db:
@@ -48,7 +50,7 @@ services:
       preparar-banco:
         condition: service_completed_successfully
     environment:
-      NODE_ENV: development
+      NODE_ENV: ${NODE_ENV:-development}
       PORT: "3000"
       DB_HOST: db
       DB_PORT: "5432"
@@ -57,10 +59,18 @@ services:
       DB_PASSWORD: portal_dev_123
       SESSION_SECRET: ${SESSION_SECRET:-3f9a1c7e5b2d48a6c0e1f7b93d5a2c84e6f10b7a9c3d5e2f48a1b6c7d9e0f123}
       RECUPERACAO_SECRET: ${RECUPERACAO_SECRET:-a7c2e9d4b1f6038c5e7a2d9b4f1c6e83d0a5b7c9e2f4a6d8b1c3e5f70912a4b6}
-      # Sem servidor SMTP: o código de recuperação aparece nos logs (docker compose logs app).
-      RECUPERACAO_MODO: console
+      # console (só em development): o código aparece em "docker compose logs app".
+      # smtp ou vazio: envio real, exige todas as SMTP_* preenchidas no .env.
+      RECUPERACAO_MODO: ${RECUPERACAO_MODO:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-}
+      SMTP_SECURE: ${SMTP_SECURE:-}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_FROM: ${SMTP_FROM:-}
     ports:
-      - "3000:3000"
+      # Porta do navegador; defina APP_PORT no .env se a 3000 estiver ocupada.
+      - "${APP_PORT:-3000}:3000"
     restart: unless-stopped
 
 volumes:
