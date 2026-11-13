@@ -7,12 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const nomeCandidato = document.getElementById('nome-candidato');
     const progressoCertificacao = document.getElementById('progresso-certificacao');
     const statusCertificacao = document.getElementById('status-certificacao');
-    const btnConsultarCodigo = document.getElementById('btn-consultar-codigo');
     const certificadoEmitido = document.getElementById('certificado-emitido');
-
-    btnConsultarCodigo?.addEventListener('click', () => {
-        window.location.href = 'consultar-certificado.html';
-    });
 
     resultadoFinal.hidden = false;
     certificadoEmitido.hidden = true;
@@ -83,23 +78,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
-    const carregarDados = async () => {
-        try {
-            const [usuario, progresso] = await Promise.all([
-                portal.pedir('/api/auth/usuario'),
-                portal.pedir('/api/exames/progresso')
-            ]);
+    try {
+        const [usuario, progresso] = await Promise.all([
+            portal.pedir('/api/auth/usuario'),
+            portal.pedir('/api/exames/progresso')
+        ]);
 
-            if (typeof usuario?.nome !== 'string' || !usuario.nome.trim()) {
-                throw new Error('Não foi possível confirmar o nome do usuário.');
-            }
-
-            atualizarProgresso(progresso, usuario);
-        } catch (erro) {
-            mensagem.textContent = erro.message;
+        if (typeof usuario?.nome !== 'string' || !usuario.nome.trim()) {
+            throw new Error('Não foi possível confirmar o nome do usuário.');
         }
-    };
 
-    await carregarDados();
-    setInterval(carregarDados, 4000);
+        atualizarProgresso(progresso, usuario);
+    } catch (erro) {
+        mensagem.textContent = erro.message;
+    }
 });
