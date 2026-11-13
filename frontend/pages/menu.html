@@ -1,94 +1,130 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BorB - Menu Principal</title>
-    <link rel="stylesheet" href="../css/menu-temas.css">
+    <title>BorB - Menu e perfil</title>
+    <link rel="preload" href="../assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../css/menu-principal.css">
 </head>
-<body>
+<body class="pagina-menu">
 
-    <!-- Barra de Navegação Superior -->
-    <header class="top-nav">
-        <div class="logo-area">
-            <div class="logo-icon">B</div>
-            <div class="logo-text">
-                <h2>BorB</h2>
-                <small>SCRUM_v8.1</small>
-            </div>
-        </div>
-        <div class="nav-buttons">
-            <button class="btn-nav">Perfil</button>
-            <button class="btn-nav" id="sair" type="button">Log Out</button>
-        </div>
+    <header class="topo">
+        <a class="marca" href="menu.html" aria-label="BorB, menu principal">
+            <span class="marca-logo" aria-hidden="true">
+                <img src="../assets/images/borb-logo.png" alt="" width="46" height="64">
+                <span class="marca-letra">B</span>
+            </span>
+            <span class="marca-texto">BorB<small>SCRUM_v0.1</small></span>
+        </a>
+        <nav class="topo-acoes" aria-label="Conta">
+            <a class="btn-topo" href="#perfil" id="ir-perfil">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+                Perfil
+            </a>
+            <button class="btn-topo btn-topo--sair" id="sair" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h10"/></svg>
+                Sair
+            </button>
+        </nav>
     </header>
 
-    <!-- Conteúdo Principal -->
-    <main class="main-container">
-        <h1 class="welcome-title" id="boas-vindas">Olá <span class="highlight">usuário</span>!!</h1>
-
-        <p id="aviso-menu" role="status" aria-live="polite"></p>
-
-        <div class="cards-wrapper">
-            <!-- Card Temas -->
-            <a href="temas.html" class="card card-temas">
-                <div class="card-title-row">
-                    <div class="icon-box">
-                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
-                    </div>
-                    <h2>Temas</h2>
+    <main class="painel">
+        <!-- Coluna do perfil -->
+        <section class="perfil" id="perfil" aria-labelledby="perfil-nome" tabindex="-1">
+            <div class="perfil-cabecalho">
+                <img class="perfil-mascote" src="../assets/images/borb-logo.png" alt="" width="69" height="96">
+                <div>
+                    <h2 class="perfil-nome" id="perfil-nome">Usuário</h2>
+                    <p class="perfil-papel">Candidato à certificação Scrum</p>
                 </div>
-                <div class="card-body-content">
-                    <p>✓ Inicie seus estudos por aqui!</p>
-                    <p>✓ 12 temas para descobrir!</p>
+            </div>
+
+            <figure class="constelacao">
+                <svg id="constelacao" viewBox="0 0 320 230" role="group" aria-label="Seus 12 temas de estudo"></svg>
+                <figcaption class="constelacao-legenda" id="constelacao-legenda" aria-live="polite">
+                    <strong id="temas-estudados">0 de 12</strong> temas estudados
+                </figcaption>
+            </figure>
+
+            <dl class="certificacao" aria-label="Certificação">
+                <div>
+                    <dt>Exame</dt>
+                    <dd id="exame-respondidos">0 de 12 temas</dd>
                 </div>
-                <div class="card-counter" id="temas-concluidos">0/12</div>
+                <div>
+                    <dt>Nota</dt>
+                    <dd id="exame-nota">Sai ao concluir</dd>
+                </div>
+            </dl>
+        </section>
+
+        <!-- Coluna das ações -->
+        <section class="acoes" aria-labelledby="saudacao">
+            <h1 class="saudacao" id="saudacao">Olá <span class="saudacao-nome" id="nome-usuario">Usuário</span>!!</h1>
+
+            <p id="aviso-menu" role="status" aria-live="polite"></p>
+
+            <a class="btn-principal" id="btn-continuar" href="exames.html">
+                <span class="btn-principal-icone" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg>
+                </span>
+                <span class="btn-principal-texto">
+                    <span class="btn-principal-acao" id="continuar-acao">Iniciar exame</span>
+                    <span class="btn-principal-detalhe" id="continuar-detalhe">Carregando seu progresso</span>
+                </span>
             </a>
 
-            <!-- Card Certificados -->
-            <a href="certificados.html" class="card card-certificados">
-                <div class="card-title-row">
-                    <div class="icon-box">
-                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm1 7h5v2h-5V9zm-7 7h10v2H8v-2zm0-4h12v2H8v-2zM8 7h5V5H8v2z"/></svg>
-                    </div>
-                    <h2>Certificados</h2>
-                </div>
-                <div class="card-body-content">
-                    <p>✓ Valide seu certificado de conclusão.</p>
-                    <p>Validação disponível em breve.</p>
-                </div>
-            </a>
+            <div class="atalhos">
+                <a class="atalho" href="temas.html">
+                    <span class="atalho-icone icone-verde" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"/></svg>
+                    </span>
+                    <span class="atalho-texto">
+                        <span class="atalho-titulo">Estudar os temas</span>
+                        <span class="atalho-desc">Os 12 temas, no seu ritmo</span>
+                    </span>
+                    <span class="atalho-dado" id="atalho-temas">0/12</span>
+                </a>
 
-            <!-- Card Exames -->
-            <a href="exames.html" class="card card-exames">
-                <div class="card-title-row">
-                    <div class="icon-box">
-                        <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/></svg>
-                    </div>
-                    <h2>Exames</h2>
-                </div>
-                <div class="exams-grid">
-                    <div class="exam-item">Exame 1</div>
-                    <div class="exam-item">Exame 2</div>
-                    <div class="exam-item">Exame 3</div>
-                    <div class="exam-item ver-mais">Ver mais &rarr;</div>
-                </div>
-            </a>
-        </div>
+                <a class="atalho" href="exames.html">
+                    <span class="atalho-icone icone-roxo" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.5h6V4M9 10l2 2 4-4M9 16h6"/></svg>
+                    </span>
+                    <span class="atalho-texto">
+                        <span class="atalho-titulo">Fazer o exame</span>
+                        <span class="atalho-desc">Uma questão por tema</span>
+                    </span>
+                    <span class="atalho-dado" id="atalho-exames">0/12</span>
+                </a>
+
+                <a class="atalho atalho--largo is-bloqueado" id="atalho-certificados" href="certificados.html" aria-disabled="true">
+                    <span class="atalho-icone icone-verde" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8"/></svg>
+                    </span>
+                    <span class="atalho-texto">
+                        <span class="atalho-titulo">Ver certificados</span>
+                        <span class="atalho-desc" id="certificados-desc">Libera ao concluir o exame</span>
+                    </span>
+                    <span class="atalho-dado atalho-cadeado" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                    </span>
+                </a>
+            </div>
+        </section>
     </main>
 
-    <!-- Rodapé -->
-    <footer class="footer-bar">
-        <div class="footer-left">
-            <span class="footer-brand">BorB</span>
-            <span class="footer-copy">&copy; 2026 Scrum Learning Platform. Todos os direitos reservados.</span>
-        </div>
-        <div class="footer-right">
-            <span>STATUS: <span class="green-text">SECURE_MATRIX</span></span>
-            <span>FRAMEWORK: <span class="green-text">SCRUM.ORG COMPLIANT</span></span>
-        </div>
+    <footer class="rodape">
+        <p class="rodape-copy"><strong>Bor<span class="marca-b">B</span></strong> &copy; 2026 Equipe Bit or Byte, FATEC Jacareí.</p>
+        <nav class="rodape-links" aria-label="Contato e informações legais">
+            <a href="mailto:bitorbyte6@gmail.com">bitorbyte6@gmail.com</a>
+            <a href="privacidade.html">Privacidade e LGPD</a>
+            <a href="termos.html">Termos de Uso</a>
+        </nav>
     </footer>
 
+    <script src="../js/ceu-estrelado.js"></script>
+    <script src="../js/constelacao.js"></script>
     <script src="../js/menu.js"></script>
 </body>
 </html>
