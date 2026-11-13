@@ -294,6 +294,7 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round
 .atalho-icone svg { width: 22px; height: 22px; }
 .icone-verde { background: #10301f; color: var(--green-accent); }
 .icone-roxo { background: #221d3a; color: var(--menu-roxo); }
+.icone-teal { background: #0f2e2b; color: var(--menu-teal); }
 
 .atalho-texto { display: flex; flex-direction: column; flex: 1; min-width: 0; }
 .atalho-titulo { font-size: 18px; font-weight: 600; line-height: 1.25; }

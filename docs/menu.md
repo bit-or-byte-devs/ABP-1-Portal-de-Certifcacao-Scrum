@@ -23,12 +23,14 @@ um fundo de céu estrelado:
   aprovado)", com o `percentual_acertos` da API). No desktop a coluna fica
   fixa (`sticky`) enquanto a página rola.
 - **Ações (coluna direita):** saudação "Olá {nome}!!", aviso de erro (quando
-  houver), botão principal do exame e os atalhos Estudar os temas, Fazer o
-  exame e Ver certificados.
+  houver), botão principal do exame e os atalhos. Estudar os temas e Fazer o
+  exame dividem a primeira linha; Revisar com flashcards (ícone verde-azulado,
+  leva a `flashcards.html`, sem dado à direita) e Ver certificados ocupam cada
+  um uma linha inteira (`atalho--largo`), nessa ordem.
 
 Abaixo de 960 px as colunas são empilhadas, com as ações primeiro e o perfil
-depois. Abaixo de 600 px os atalhos ficam em uma coluna e os botões do topo
-perdem o ícone.
+depois. Abaixo de 600 px os atalhos ficam em uma coluna (Temas, Exames,
+Flashcards, Certificados) e os botões do topo perdem o ícone.
 
 O botão **Perfil** do topo rola até a coluna de perfil, dá foco a ela e aplica
 um pulso de destaque de 1,2 s. Abrir `menu.html#perfil` aplica o mesmo
@@ -134,6 +136,10 @@ e a descrição passa a "Consulte o resultado da sua certificação".
 
 - `privacidade.html` e `termos.html` serão criadas em outra branch. Até lá, os
   links do rodapé levam a páginas inexistentes.
+- `flashcards.html` ainda não existe: o atalho Revisar com flashcards está
+  ativo e dá 404 até a página entrar. Quando for criada, ela precisa entrar na
+  lista `paginasPrivadas` do `backend/src/app.js`, porque os flashcards são só
+  para quem tem conta.
 - O rodapé novo existe só nesta página; as outras telas mantêm o rodapé antigo.
 
 ## Roteiro de verificação manual
