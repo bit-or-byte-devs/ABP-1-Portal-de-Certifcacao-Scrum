@@ -80,9 +80,10 @@
             linkContinuar.href = 'exames.html';
             linkContinuar.hidden = false;
         } else {
-            linkContinuar.textContent = dados.proximo_tema === null ? 'Voltar à lista' : 'Próximo tema';
-            linkContinuar.href = dados.proximo_tema === null ? 'exames.html' : `exame.html?tema=${dados.proximo_tema}`;
-            // A sequência circular é definida pela API, independentemente do tema atual.
+            const certificacaoConcluida = dados.proximo_tema === null;
+            linkContinuar.textContent = certificacaoConcluida ? 'Ver resultado final' : 'Próximo tema';
+            linkContinuar.href = certificacaoConcluida
+                ? 'certificados.html' : `exame.html?tema=${dados.proximo_tema}`;
             linkContinuar.hidden = false;
         }
         botaoConfirmar.disabled = true;

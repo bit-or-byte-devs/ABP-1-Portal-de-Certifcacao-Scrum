@@ -87,14 +87,17 @@ test('US24: falha ao retornar bloqueia ações e nova restauração permite recu
     assert.equal(p.continuar.disabled, false);
 });
 
-test('Integração: certificação concluída permite revisão e oculta continuar', async () => {
+test('Integração: certificação concluída permite revisão e acesso ao resultado', async () => {
     const p = montar();
     p.requisicoes[0].resolve(progresso(Object.fromEntries(Array.from({ length: 12 }, (_, i) => [i + 1, 'concluido'])), null));
     await concluir();
     assert.ok(p.cards.every(c => !c.querySelector('.btn-iniciar').disabled && c.querySelector('.btn-iniciar').textContent === 'Revisar'));
     p.cards[0].querySelector('.btn-iniciar').clicar();
     assert.equal(p.location.href, 'exame.html?resposta=101');
-    assert.equal(p.continuar.hidden, true);
+    assert.equal(p.continuar.hidden, false);
+    assert.equal(p.continuar.textContent, 'Ver resultado final');
+    p.continuar.clicar();
+    assert.equal(p.location.href, 'certificados.html');
     assert.match(p.mensagem.textContent, /Certificação concluída/);
 });
 

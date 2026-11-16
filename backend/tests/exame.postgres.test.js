@@ -333,6 +333,7 @@ test("Interrupção: reiniciar encerra pendências e preserva o tempo esgotado",
     assert.equal((await iniciar(cookie)).id, primeira.id);
     const certificacao = (await banco.query("SELECT * FROM tbcertificacao")).rows[0];
     assert.equal(certificacao.total_acertos, 0);
+    assert.equal(Number(certificacao.nota_final), 0);
     assert.equal(Number(certificacao.percentual_acertos), 0);
     assert.equal(certificacao.status, "em_andamento");
     assert.equal((await banco.query("SELECT count(*)::integer AS total FROM tbresposta")).rows[0].total, 3);
@@ -360,6 +361,7 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
             id_resposta: [primeira.id, segunda.id, terceira.id][indice] ?? null })),
         proximo_tema: 4, certificacao_concluida: false,
         total_acertos: 1, percentual_acertos: 8.33, nota_final: 8.33, aprovado: false,
+        resultado_final: null,
     });
     assert.equal((await lerResposta(segunda.id)).situacao, "tempo_esgotado");
     assert.equal((await lerResposta(terceira.id)).situacao, "em_andamento");
@@ -377,6 +379,7 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
         temas: Array.from({ length: 12 }, (_, indice) => ({ ordem: indice + 1, nome: "Tema " + (indice + 1), estado: "pendente", id_resposta: null })),
         proximo_tema: 1, certificacao_concluida: false,
         total_acertos: 0, percentual_acertos: 0, nota_final: 0, aprovado: false,
+        resultado_final: null,
     });
     const quantidade = await banco.query(`SELECT count(*)::integer AS total FROM tbcertificacao c
         JOIN tbcandidato candidato ON candidato.id=c.idcandidato WHERE candidato.cpf='11144477735'`);
@@ -400,6 +403,66 @@ test("Progresso: preserva questões abertas, encerra vencidas e não cria certif
     assert.equal(Number(concluida.corpo.nota_final), 8.33);
     assert.equal(concluida.corpo.aprovado, false);
     assert.equal((await banco.query("SELECT count(*)::integer AS total FROM tbcertificado")).rows[0].total, 0);
+});
+
+test("Resultado final: aplica o mínimo de 65% e não permite alterar respostas", opcoes, async () => {
+    for (let ordem = 1; ordem <= 12; ordem++) await criarTema(ordem);
+
+    async function concluir(correctas, cpf) {
+        const cookie = await criarCandidato(cpf);
+        let primeiraResposta;
+        for (let ordem = 1; ordem <= 12; ordem++) {
+            const questao = await iniciar(cookie, ordem);
+            const alternativa = questao.alternativas[ordem <= correctas ? 0 : 1];
+            const resposta = await solicitar(`/api/exames/respostas/${questao.id}`, cookie, {
+                alternativa: alternativa.id,
+            });
+            assert.equal(resposta.status, 200);
+            if (ordem === 11) {
+                const parcial = (await banco.query(`SELECT total_acertos, nota_final, percentual_acertos, status
+                    FROM tbcertificacao WHERE idcandidato=(SELECT id FROM tbcandidato WHERE cpf=$1)`, [cpf])).rows[0];
+                const percentualParcial = Number((correctas * 100 / 12).toFixed(2));
+                assert.deepEqual(parcial, {
+                    total_acertos: correctas,
+                    nota_final: percentualParcial,
+                    percentual_acertos: percentualParcial,
+                    status: "em_andamento",
+                });
+            }
+            if (ordem === 1) primeiraResposta = { id: questao.id, alternativa: questao.alternativas[1] };
+        }
+
+        const progresso = await solicitar("/api/exames/progresso", cookie);
+        assert.equal(progresso.status, 200);
+        assert.equal(progresso.corpo.certificacao_concluida, true);
+        assert.deepEqual(progresso.corpo.resultado_final, {
+            total_acertos: correctas,
+            nota_final: Number((correctas * 100 / 12).toFixed(2)),
+            percentual_acertos: Number((correctas * 100 / 12).toFixed(2)),
+            percentual_minimo_certificado: 65,
+            apto_certificado: correctas * 100 / 12 >= 65,
+        });
+
+        const alteracao = await solicitar(`/api/exames/respostas/${primeiraResposta.id}`, cookie, {
+            alternativa: primeiraResposta.alternativa.id,
+        });
+        assert.equal(alteracao.status, 409);
+        assert.equal(alteracao.corpo.situacao, "respondida");
+        const resultadoPersistido = (await banco.query(`SELECT c.total_acertos, c.nota_final, c.percentual_acertos, c.status
+            FROM tbcertificacao c JOIN tbcandidato candidato ON candidato.id=c.idcandidato
+            WHERE candidato.cpf=$1`, [cpf])).rows[0];
+        assert.equal(resultadoPersistido.total_acertos, correctas);
+        assert.equal(Number(resultadoPersistido.nota_final), Number((correctas * 100 / 12).toFixed(2)));
+        assert.equal(Number(resultadoPersistido.percentual_acertos), Number((correctas * 100 / 12).toFixed(2)));
+        assert.equal(resultadoPersistido.status, "concluida");
+        const certificados = await banco.query(`SELECT count(*)::integer AS total FROM tbcertificado cert
+            JOIN tbcertificacao c ON c.id=cert.idcertificacao
+            JOIN tbcandidato candidato ON candidato.id=c.idcandidato WHERE candidato.cpf=$1`, [cpf]);
+        assert.equal(certificados.rows[0].total, correctas * 100 / 12 >= 65 ? 1 : 0);
+    }
+
+    await concluir(8, "52998224725");
+    await concluir(7, "11144477735");
 });
 
 

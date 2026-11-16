@@ -18,7 +18,11 @@ Em banco novo, `schema.sql` e `seed.sql` criam a estrutura e o catálogo dos tem
 
 `POST /api/exames/:ordem/iniciar` cria uma questão para o tema ou devolve o estado já registrado para aquele tema, mantendo uma certificação por candidato e uma resposta por tema. Não retoma uma questão encerrada. Reabrir uma questão ainda em andamento a encerra como interrompida. `POST /api/exames/respostas/:id` recebe `{ "alternativa": 123 }`, confere propriedade e alternativa, grava a resposta e calcula o resultado no servidor. Respostas concluídas não podem ser substituídas. `GET /api/exames/progresso` retorna o progresso da sessão autenticada. A certificação é concluída após os 12 temas; o resultado parcial usa o total de 12 questões como denominador.
 
-Cadastre questões reais em `tbquestao`, imagens em `tbimagem` e quatro alternativas A–D em `tbalternativa`, com uma correta. O seed atual não contém questões: nesse caso a tela informa a indisponibilidade, sem apresentar uma prova fictícia. Ao concluir os 12 temas do exame com pelo menos 65% de acertos, o servidor registra um certificado em tbcertificado. Concluir a leitura não emite certificado; PDF e consulta pública não fazem parte deste registro.
+`GET /api/exames/progresso` retorna `resultado_final` somente após a conclusão dos 12 temas, com nota, percentual de acertos, quantidade de respostas corretas, percentual mínimo para aprovação (65%) e condição de aptidão para o certificado. A página de certificados exibe o progresso e o resultado em modo somente leitura.
+
+Ao concluir os 12 temas com pelo menos 65% de acertos, o servidor registra automaticamente o certificado em `tbcertificado`. A interface mostra o progresso e o resultado. O design visual do certificado e seu QR Code único por usuário serão integrados posteriormente.
+
+Cadastre questões reais em `tbquestao`, imagens em `tbimagem` e quatro alternativas A–D em `tbalternativa`, com uma correta. O seed atual não contém questões: nesse caso a tela informa a indisponibilidade, sem apresentar uma prova fictícia. Concluir a leitura não emite certificado.
 
 ## Verificação
 

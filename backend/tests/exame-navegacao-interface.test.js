@@ -50,11 +50,11 @@ test('Navegação: tema 4 oferece tema 6 indicado pela API', async () => {
 });
 
 for (const tema of [6, 12]) {
-    test('Navegação: último tema pendente ' + tema + ' oferece retorno à lista', async () => {
+    test('Navegação: certificação concluída no tema ' + tema + ' oferece resultado final', async () => {
         const { link } = await mostrarResultado('?tema=' + tema, null);
         assert.equal(link.hidden, false);
-        assert.equal(link.textContent, 'Voltar à lista');
-        assert.equal(link.href, 'exames.html');
+        assert.equal(link.textContent, 'Ver resultado final');
+        assert.equal(link.href, 'certificados.html');
     });
 }
 
