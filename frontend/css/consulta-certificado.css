@@ -189,6 +189,28 @@
     letter-spacing: 0.02em;
 }
 
+.pagina-consulta-certificado .certificado-qr {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    color: #0d2448;
+    font-size: 11px;
+    text-align: center;
+}
+
+.pagina-consulta-certificado .certificado-qr img {
+    display: block;
+    width: 112px;
+    height: 112px;
+    padding: 5px;
+    background: #fff;
+    image-rendering: pixelated;
+}
+
 .pagina-consulta-certificado .certificado-assinatura {
     position: relative;
     z-index: 1;

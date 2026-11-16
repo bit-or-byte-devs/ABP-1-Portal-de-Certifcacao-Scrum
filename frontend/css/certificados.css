@@ -84,6 +84,18 @@
     font-weight: 500;
 }
 
+.pagina-certificados #qr-certificado {
+    display: block;
+    width: 192px;
+    height: 192px;
+    max-width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    background: #fff;
+    image-rendering: pixelated;
+    object-fit: contain;
+}
+
 .pagina-certificados #status-certificacao {
     color: var(--green-accent);
 }

@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 dateStyle: 'medium', timeStyle: 'short',
             }).format(dataEmissao);
             document.getElementById('codigo-validado').textContent = codigo;
+            document.getElementById('qr-certificado-publico').src = `/api/certificados/${encodeURIComponent(codigo)}/qr`;
             mensagem.textContent = '';
             formConsulta.hidden = true;
             resultadoCertificado.hidden = false;
@@ -64,9 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
         consultar(codigo);
     });
 
-    const codigoUrl = new URLSearchParams(location.search).get('codigo');
-    if (codigoUrl) {
+    const parametrosUrl = new URLSearchParams(location.search);
+    const codigoUrl = parametrosUrl.get('codigo');
+    if (parametrosUrl.get('via') === 'qrcode' && codigoUrl && /^[a-f0-9]{64}$/i.test(codigoUrl)) {
         codigoInput.value = codigoUrl;
-        consultar(codigoUrl);
     }
 });

@@ -7,11 +7,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     const progressoCertificacao = document.getElementById('progresso-certificacao');
     const statusCertificacao = document.getElementById('status-certificacao');
     const codigoValidacaoContainer = document.getElementById('codigo-validacao-container');
+    const qrCertificadoContainer = document.getElementById('qr-certificado-container');
 
     resultadoFinal.hidden = false;
     linkExames.hidden = true;
     detalhesResultado.hidden = true;
     codigoValidacaoContainer.hidden = true;
+    qrCertificadoContainer.hidden = true;
 
     const formatarNumero = valor => new Intl.NumberFormat('pt-BR', {
         minimumFractionDigits: 2,
@@ -62,8 +64,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 throw new Error('Não foi possível carregar o código único do certificado.');
             }
             document.getElementById('codigo-validacao').textContent = resultado.codigo_validacao;
-            document.getElementById('link-validacao-publica').href = `consultar-certificado.html?codigo=${encodeURIComponent(resultado.codigo_validacao)}`;
+            document.getElementById('link-validacao-publica').href = 'consultar-certificado.html';
+            document.getElementById('qr-certificado').src = `/api/certificados/${encodeURIComponent(resultado.codigo_validacao)}/qr`;
             codigoValidacaoContainer.hidden = false;
+            qrCertificadoContainer.hidden = false;
         }
 
         detalhesResultado.hidden = false;
