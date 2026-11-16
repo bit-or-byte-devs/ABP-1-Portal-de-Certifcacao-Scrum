@@ -60,8 +60,10 @@ router.get("/progresso", async (req, res) => {
         const certificacao = await db.query("SELECT id FROM tbcertificacao WHERE idcandidato=$1 FOR UPDATE", [req.candidato.id]);
         const idcertificacao = certificacao.rows[0]?.id ?? null;
         if (idcertificacao !== null) await reconciliar(db, idcertificacao);
-        const resultadoCertificacao = idcertificacao === null ? null : await db.query(`SELECT total_acertos, percentual_acertos, nota_final
-            FROM tbcertificacao WHERE id=$1`, [idcertificacao]);
+        const resultadoCertificacao = idcertificacao === null ? null : await db.query(`SELECT c.total_acertos,
+            c.percentual_acertos, c.nota_final, cert.codigo_validacao
+            FROM tbcertificacao c LEFT JOIN tbcertificado cert ON cert.idcertificacao=c.id
+            WHERE c.id=$1`, [idcertificacao]);
         const { rows: temas } = await db.query(`SELECT t.ordem, t.nome, r.id AS id_resposta,
             CASE WHEN r.id IS NULL THEN 'pendente'
                 WHEN r.situacao='em_andamento' THEN 'em_andamento'
@@ -87,6 +89,7 @@ router.get("/progresso", async (req, res) => {
             percentual_acertos: percentualAcertos,
             percentual_minimo_certificado: PERCENTUAL_MINIMO_CERTIFICADO,
             apto_certificado: aprovado,
+            codigo_validacao: resultadoCertificacao?.rows[0]?.codigo_validacao ?? null,
         } : null;
         await db.query("COMMIT");
         res.json({ temas, proximo_tema: proximoTema,

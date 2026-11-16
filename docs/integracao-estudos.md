@@ -20,7 +20,7 @@ Em banco novo, `schema.sql` e `seed.sql` criam a estrutura e o catálogo dos tem
 
 `GET /api/exames/progresso` retorna `resultado_final` somente após a conclusão dos 12 temas, com nota, percentual de acertos, quantidade de respostas corretas, percentual mínimo para aprovação (65%) e condição de aptidão para o certificado. A página de certificados exibe o progresso e o resultado em modo somente leitura.
 
-Ao concluir os 12 temas com pelo menos 65% de acertos, o servidor registra automaticamente o certificado em `tbcertificado`. A interface mostra o progresso e o resultado. O design visual do certificado e seu QR Code único por usuário serão integrados posteriormente.
+Ao concluir os 12 temas com pelo menos 65% de acertos, o servidor registra automaticamente o certificado em `tbcertificado` e cria um código de validação único. O titular vê esse código no resultado autenticado; `POST /api/certificados/validar` permite validá-lo publicamente sem login e retorna somente nome, nota, percentual e data de emissão. O design visual final e a representação do código em QR Code serão integrados posteriormente.
 
 Cadastre questões reais em `tbquestao`, imagens em `tbimagem` e quatro alternativas A–D em `tbalternativa`, com uma correta. O seed atual não contém questões: nesse caso a tela informa a indisponibilidade, sem apresentar uma prova fictícia. Concluir a leitura não emite certificado.
 

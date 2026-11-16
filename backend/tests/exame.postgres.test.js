@@ -441,7 +441,10 @@ test("Resultado final: aplica o mínimo de 65% e não permite alterar respostas"
             percentual_acertos: Number((correctas * 100 / 12).toFixed(2)),
             percentual_minimo_certificado: 65,
             apto_certificado: correctas * 100 / 12 >= 65,
+            codigo_validacao: progresso.corpo.resultado_final.codigo_validacao,
         });
+        if (correctas * 100 / 12 >= 65) assert.match(progresso.corpo.resultado_final.codigo_validacao, /^[a-f0-9]{64}$/);
+        else assert.equal(progresso.corpo.resultado_final.codigo_validacao, null);
 
         const alteracao = await solicitar(`/api/exames/respostas/${primeiraResposta.id}`, cookie, {
             alternativa: primeiraResposta.alternativa.id,

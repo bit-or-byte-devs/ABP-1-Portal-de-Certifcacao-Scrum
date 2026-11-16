@@ -6,10 +6,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const nomeCandidato = document.getElementById('nome-candidato');
     const progressoCertificacao = document.getElementById('progresso-certificacao');
     const statusCertificacao = document.getElementById('status-certificacao');
+    const codigoValidacaoContainer = document.getElementById('codigo-validacao-container');
 
     resultadoFinal.hidden = false;
     linkExames.hidden = true;
     detalhesResultado.hidden = true;
+    codigoValidacaoContainer.hidden = true;
 
     const formatarNumero = valor => new Intl.NumberFormat('pt-BR', {
         minimumFractionDigits: 2,
@@ -54,6 +56,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         statusCertificacao.textContent = resultado.apto_certificado
             ? 'Certificado emitido automaticamente'
             : 'Aproveitamento abaixo de 65%';
+
+        if (resultado.apto_certificado) {
+            if (typeof resultado.codigo_validacao !== 'string' || !/^[a-f0-9]{64}$/i.test(resultado.codigo_validacao)) {
+                throw new Error('Não foi possível carregar o código único do certificado.');
+            }
+            document.getElementById('codigo-validacao').textContent = resultado.codigo_validacao;
+            document.getElementById('link-validacao-publica').href = `consultar-certificado.html?codigo=${encodeURIComponent(resultado.codigo_validacao)}`;
+            codigoValidacaoContainer.hidden = false;
+        }
 
         detalhesResultado.hidden = false;
         mensagem.textContent = 'Certificação concluída. Suas respostas e seu resultado são somente para consulta.';

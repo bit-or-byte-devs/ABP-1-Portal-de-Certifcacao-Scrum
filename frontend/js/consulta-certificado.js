@@ -1,32 +1,72 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const formConsulta = document.getElementById('consulta-form');
     const codigoInput = document.getElementById('codigo-consulta');
     const btnConsultar = document.getElementById('btn-consultar-codigo');
     const mensagem = document.getElementById('consulta-mensagem');
-    const formConsulta = document.getElementById('consulta-form');
     const resultadoCertificado = document.getElementById('resultado-certificado');
 
-    const codigoValido = '31EJLAKDFJAF-31DZSDFGEAGF';
+    async function consultar(codigo) {
+        btnConsultar.disabled = true;
+        mensagem.textContent = 'Consultando certificado...';
+        resultadoCertificado.hidden = true;
+        try {
+            const resposta = await fetch('/api/certificados/validar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ codigo }),
+                cache: 'no-store',
+            });
+            const dados = await resposta.json();
+            if (!resposta.ok || dados.valido !== true || !dados.certificado) {
+                throw new Error(dados.mensagem || 'Certificado inválido ou não encontrado.');
+            }
 
-    const exibirResultado = () => {
-        formConsulta.hidden = true;
-        resultadoCertificado.hidden = false;
-    };
+            const certificado = dados.certificado;
+            const nota = Number(certificado.nota_final);
+            const percentual = Number(certificado.percentual_acertos);
+            const dataEmissao = new Date(certificado.data_hora_emissao);
+            if (typeof certificado.nome !== 'string' || !certificado.nome.trim()
+                || !Number.isFinite(nota) || !Number.isFinite(percentual)
+                || Number.isNaN(dataEmissao.getTime())) {
+                throw new Error('Os dados do certificado são inválidos.');
+            }
 
-    btnConsultar?.addEventListener('click', () => {
-        const codigoDigitado = (codigoInput?.value || '').trim();
-        if (!codigoDigitado) {
-            mensagem.textContent = 'Informe o código de verificação.';
-            mensagem.style.color = '#ff8a8a';
-            return;
-        }
-
-        if (codigoDigitado === codigoValido) {
+            document.getElementById('nome-certificado').textContent = certificado.nome;
+            document.getElementById('nota-certificado').textContent = new Intl.NumberFormat('pt-BR', {
+                minimumFractionDigits: 2, maximumFractionDigits: 2,
+            }).format(nota);
+            document.getElementById('percentual-certificado').textContent = new Intl.NumberFormat('pt-BR', {
+                minimumFractionDigits: 2, maximumFractionDigits: 2,
+            }).format(percentual);
+            const elementoData = document.getElementById('data-emissao-certificado');
+            elementoData.dateTime = dataEmissao.toISOString();
+            elementoData.textContent = new Intl.DateTimeFormat('pt-BR', {
+                dateStyle: 'medium', timeStyle: 'short',
+            }).format(dataEmissao);
+            document.getElementById('codigo-validado').textContent = codigo;
             mensagem.textContent = '';
-            exibirResultado();
+            formConsulta.hidden = true;
+            resultadoCertificado.hidden = false;
+        } catch (erro) {
+            mensagem.textContent = erro.message || 'Não foi possível consultar o certificado.';
+        } finally {
+            btnConsultar.disabled = false;
+        }
+    }
+
+    formConsulta.addEventListener('submit', evento => {
+        evento.preventDefault();
+        const codigo = codigoInput.value.trim();
+        if (!/^[a-f0-9]{64}$/i.test(codigo)) {
+            mensagem.textContent = 'Informe um código de validação válido.';
             return;
         }
-
-        mensagem.textContent = 'Código inválido ou não encontrado.';
-        mensagem.style.color = '#ff8a8a';
+        consultar(codigo);
     });
+
+    const codigoUrl = new URLSearchParams(location.search).get('codigo');
+    if (codigoUrl) {
+        codigoInput.value = codigoUrl;
+        consultar(codigoUrl);
+    }
 });
