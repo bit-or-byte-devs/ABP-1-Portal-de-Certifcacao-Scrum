@@ -24,7 +24,7 @@ test("consulta pública valida código sem login e não expõe dados pessoais", 
     QRCode.toBuffer = async (url, opcoes) => {
         urlCodificada = url;
         assert.deepEqual(opcoes, { type: "png", errorCorrectionLevel: "H", width: 320, margin: 2 });
-        return Buffer.from("qr-png");
+        return gerarQROriginal(url, opcoes);
     };
     pool.query = async (sql, parametros) => {
         consultas++;
@@ -112,10 +112,19 @@ test("consulta pública valida código sem login e não expõe dados pessoais", 
     const qr = await fetch(`${base}/api/certificados/${codigoValido}/qr`);
     assert.equal(qr.status, 200);
     assert.match(qr.headers.get("content-type"), /image\/png/);
-    assert.equal((await qr.arrayBuffer()).byteLength, Buffer.byteLength("qr-png"));
+    const png = Buffer.from(await qr.arrayBuffer());
+    assert.deepEqual([...png.subarray(0, 4)], [137, 80, 78, 71]);
+    assert.equal(urlCodificada, `https://portal.example.test/pages/consultar-certificado.html?codigo=${codigoValido}&via=qrcode`);
+
+    const pdf = await fetch(`${base}/api/certificados/${codigoValido}/pdf`);
+    assert.equal(pdf.status, 200);
+    assert.match(pdf.headers.get("content-type"), /application\/pdf/);
+    assert.match(pdf.headers.get("content-disposition"), new RegExp(`attachment; filename="certificado-${codigoValido}\\.pdf"`));
+    const arquivoPdf = Buffer.from(await pdf.arrayBuffer());
+    assert.equal(arquivoPdf.subarray(0, 5).toString(), "%PDF-");
     assert.equal(urlCodificada, `https://portal.example.test/pages/consultar-certificado.html?codigo=${codigoValido}&via=qrcode`);
 
     const naoEncontrado = await validar("b".repeat(64));
     assert.equal(naoEncontrado.status, 404);
-    assert.equal(consultas, 3);
+    assert.equal(consultas, 4);
 });

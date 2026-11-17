@@ -252,6 +252,9 @@
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
+    color: var(--text-white);
+    text-align: center;
+    text-decoration: none;
 }
 
 @media (max-width: 600px) {

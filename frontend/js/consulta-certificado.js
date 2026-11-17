@@ -4,11 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnConsultar = document.getElementById('btn-consultar-codigo');
     const mensagem = document.getElementById('consulta-mensagem');
     const resultadoCertificado = document.getElementById('resultado-certificado');
+    const botaoBaixarPdf = document.getElementById('baixar-certificado-pdf');
 
     async function consultar(codigo) {
         btnConsultar.disabled = true;
         mensagem.textContent = 'Consultando certificado...';
         resultadoCertificado.hidden = true;
+        botaoBaixarPdf.hidden = true;
         try {
             const resposta = await fetch('/api/certificados/validar', {
                 method: 'POST',
@@ -45,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }).format(dataEmissao);
             document.getElementById('codigo-validado').textContent = codigo;
             document.getElementById('qr-certificado-publico').src = `/api/certificados/${encodeURIComponent(codigo)}/qr`;
+            botaoBaixarPdf.href = `/api/certificados/${encodeURIComponent(codigo)}/pdf`;
+            botaoBaixarPdf.download = `certificado-${codigo}.pdf`;
+            botaoBaixarPdf.hidden = false;
             mensagem.textContent = '';
             formConsulta.hidden = true;
             resultadoCertificado.hidden = false;
