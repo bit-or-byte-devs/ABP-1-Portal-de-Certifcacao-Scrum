@@ -29,7 +29,7 @@
         radio.type = 'radio'; radio.name = 'alternativa'; radio.value = alternativa.id; radio.required = true;
         radio.checked = marcada;
         const letra = document.createElement('span');
-        letra.className = 'alternativa__letra'; letra.textContent = `${alternativa.letra}.`;
+        letra.className = 'alternativa__letra'; letra.textContent = alternativa.letra;
         const texto = document.createElement('span');
         texto.className = 'alternativa__texto'; texto.textContent = alternativa.texto;
         label.append(radio, letra, texto);
@@ -73,7 +73,7 @@
                 label.append(indicacao);
             }
         });
-        feedback.textContent = `${resultado} Alternativa correta: ${correta.letra}. ${correta.texto}. ${dados.justificativa || ''}`;
+        feedback.textContent = `${resultado} Alternativa correta: ${correta.letra} ${correta.texto}. ${dados.justificativa || ''}`;
         botaoConfirmar.hidden = true;
         if (modoRevisao) {
             linkContinuar.textContent = 'Voltar aos exames';
@@ -97,7 +97,7 @@
         if (modoRevisao && questao.situacao === 'em_andamento') {
             throw new Error('Esta tentativa ainda está em andamento e não pode ser revisada.');
         }
-        document.getElementById('exame-titulo').textContent = `${modoRevisao ? 'Revisão' : 'Exame'}: ${questao.nome}`;
+        document.getElementById('exame-titulo').textContent = `QUESTÃO ${questao.ordem}`;
         if (modoRevisao) document.querySelector('.cronometro').hidden = true;
         document.getElementById('questao-titulo').textContent = questao.enunciado;
 

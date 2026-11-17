@@ -16,7 +16,7 @@ async function mostrarResultado(busca, proximoTema, situacao = 'respondida') {
         return elementos.get(id);
     }
     const avisos = [], chamadas = [];
-    const questao = { id: 42, nome: 'Tema', enunciado: 'Questão', imagem: null,
+    const questao = { id: 42, nome: 'Tema', ordem: Number(new URLSearchParams(busca).get('tema') || 1), enunciado: 'Questão', imagem: null,
         alternativas: [], situacao, acertou: situacao === 'respondida',
         alternativa_correta: { id: 1, letra: 'A', texto: 'Correta' },
         justificativa: '', proximo_tema: proximoTema };
@@ -30,12 +30,13 @@ async function mostrarResultado(busca, proximoTema, situacao = 'respondida') {
     };
     await vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../../frontend/js/exame.js'), 'utf8'), contexto);
     assert.deepEqual(avisos, []);
-    return { link: elemento('link-continuar'), chamadas };
+    return { link: elemento('link-continuar'), titulo: elemento('exame-titulo'), chamadas };
 }
 
 for (const situacao of ['respondida', 'tempo_esgotado', 'interrompida']) {
     test('Navegação: tema 12 oferece tema 1 após ' + situacao, async () => {
-        const { link } = await mostrarResultado('?tema=12', 1, situacao);
+        const { link, titulo } = await mostrarResultado('?tema=12', 1, situacao);
+        assert.equal(titulo.textContent, 'QUESTÃO 12');
         assert.equal(link.hidden, false);
         assert.equal(link.textContent, 'Próximo tema');
         assert.equal(link.href, 'exame.html?tema=1');
@@ -43,7 +44,8 @@ for (const situacao of ['respondida', 'tempo_esgotado', 'interrompida']) {
 }
 
 test('Navegação: tema 4 oferece tema 6 indicado pela API', async () => {
-    const { link } = await mostrarResultado('?tema=4', 6);
+    const { link, titulo } = await mostrarResultado('?tema=4', 6);
+    assert.equal(titulo.textContent, 'QUESTÃO 4');
     assert.equal(link.hidden, false);
     assert.equal(link.textContent, 'Próximo tema');
     assert.equal(link.href, 'exame.html?tema=6');

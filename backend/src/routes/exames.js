@@ -41,6 +41,7 @@ async function buscarEstadoResposta(db, id) {
         JOIN tbquestao q ON q.id=r.idquestao LEFT JOIN tbimagem i ON i.id=q.idimagem
         WHERE r.id=$1`, [id, DURACAO_QUESTAO_SEGUNDOS]);
     const { idcertificacao, ordem, ...resposta } = rows[0];
+    resposta.ordem = ordem;
     const alternativas = await db.query("SELECT id, letra, texto FROM tbalternativa WHERE idquestao=$1 ORDER BY letra", [resposta.questao]);
     resposta.alternativas = alternativas.rows;
     if (resposta.situacao === 'em_andamento') resposta.intervalo_sinal_segundos = INTERVALO_SINAL_SEGUNDOS;
