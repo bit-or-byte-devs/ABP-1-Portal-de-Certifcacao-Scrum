@@ -64,7 +64,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 throw new Error('Não foi possível carregar o código único do certificado.');
             }
             document.getElementById('codigo-validacao').textContent = resultado.codigo_validacao;
-            document.getElementById('link-validacao-publica').href = 'consultar-certificado.html';
             document.getElementById('qr-certificado').src = `/api/certificados/${encodeURIComponent(resultado.codigo_validacao)}/qr`;
             codigoValidacaoContainer.hidden = false;
             qrCertificadoContainer.hidden = false;

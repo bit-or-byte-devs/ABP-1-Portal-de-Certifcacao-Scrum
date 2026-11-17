@@ -84,11 +84,11 @@
     font-weight: 500;
 }
 
-.pagina-certificados #codigo-validacao-container dd {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+.pagina-certificados #codigo-validacao {
+    display: block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-all;
 }
 
 .pagina-certificados #qr-certificado {
