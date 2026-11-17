@@ -5,7 +5,9 @@ const {
     DURACAO_QUESTAO_SEGUNDOS, TOLERANCIA_REDE_SEGUNDOS, INTERVALO_SINAL_SEGUNDOS, LIMITE_SEM_SINAL_SEGUNDOS,
     reconciliarQuestoesAbertas, interromperQuestoesEmAndamento,
 } = require("../services/encerramentoQuestao");
-const { recalcularCertificacao, buscarProximoTemaPendente } = require("../services/certificacao");
+const {
+    PERCENTUAL_MINIMO_CERTIFICADO, recalcularCertificacao, buscarProximoTemaPendente,
+} = require("../services/certificacao");
 const router = express.Router();
 
 // Toda rota reconcilia antes de ler ou alterar uma questão: a regra fica só no servidor.
@@ -39,6 +41,7 @@ async function buscarEstadoResposta(db, id) {
         JOIN tbquestao q ON q.id=r.idquestao LEFT JOIN tbimagem i ON i.id=q.idimagem
         WHERE r.id=$1`, [id, DURACAO_QUESTAO_SEGUNDOS]);
     const { idcertificacao, ordem, ...resposta } = rows[0];
+    resposta.ordem = ordem;
     const alternativas = await db.query("SELECT id, letra, texto FROM tbalternativa WHERE idquestao=$1 ORDER BY letra", [resposta.questao]);
     resposta.alternativas = alternativas.rows;
     if (resposta.situacao === 'em_andamento') resposta.intervalo_sinal_segundos = INTERVALO_SINAL_SEGUNDOS;
@@ -58,8 +61,10 @@ router.get("/progresso", async (req, res) => {
         const certificacao = await db.query("SELECT id FROM tbcertificacao WHERE idcandidato=$1 FOR UPDATE", [req.candidato.id]);
         const idcertificacao = certificacao.rows[0]?.id ?? null;
         if (idcertificacao !== null) await reconciliar(db, idcertificacao);
-        const resultadoCertificacao = idcertificacao === null ? null : await db.query(`SELECT total_acertos, percentual_acertos, nota_final
-            FROM tbcertificacao WHERE id=$1`, [idcertificacao]);
+        const resultadoCertificacao = idcertificacao === null ? null : await db.query(`SELECT c.total_acertos,
+            c.percentual_acertos, c.nota_final, cert.codigo_validacao
+            FROM tbcertificacao c LEFT JOIN tbcertificado cert ON cert.idcertificacao=c.id
+            WHERE c.id=$1`, [idcertificacao]);
         const { rows: temas } = await db.query(`SELECT t.ordem, t.nome, r.id AS id_resposta,
             CASE WHEN r.id IS NULL THEN 'pendente'
                 WHEN r.situacao='em_andamento' THEN 'em_andamento'
@@ -78,14 +83,23 @@ router.get("/progresso", async (req, res) => {
         const totalAcertos = Number(resultadoCertificacao?.rows[0]?.total_acertos ?? 0);
         const percentualAcertos = Number(resultadoCertificacao?.rows[0]?.percentual_acertos ?? 0);
         const notaFinal = Number(resultadoCertificacao?.rows[0]?.nota_final ?? 0);
-        const aprovado = percentualAcertos >= 65;
+        const aprovado = percentualAcertos >= PERCENTUAL_MINIMO_CERTIFICADO;
+        const resultadoFinal = certificacaoConcluida ? {
+            total_acertos: totalAcertos,
+            nota_final: notaFinal,
+            percentual_acertos: percentualAcertos,
+            percentual_minimo_certificado: PERCENTUAL_MINIMO_CERTIFICADO,
+            apto_certificado: aprovado,
+            codigo_validacao: resultadoCertificacao?.rows[0]?.codigo_validacao ?? null,
+        } : null;
         await db.query("COMMIT");
         res.json({ temas, proximo_tema: proximoTema,
             certificacao_concluida: certificacaoConcluida,
             total_acertos: totalAcertos,
             percentual_acertos: percentualAcertos,
             nota_final: notaFinal,
-            aprovado });
+            aprovado,
+            resultado_final: resultadoFinal });
     } catch { if (db) await db.query("ROLLBACK").catch(() => {}); res.status(503).json({ mensagem: "Não foi possível consultar o progresso da certificação." }); }
     finally { db?.release(); }
 });

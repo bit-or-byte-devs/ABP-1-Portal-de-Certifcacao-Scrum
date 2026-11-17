@@ -29,7 +29,7 @@
         radio.type = 'radio'; radio.name = 'alternativa'; radio.value = alternativa.id; radio.required = true;
         radio.checked = marcada;
         const letra = document.createElement('span');
-        letra.className = 'alternativa__letra'; letra.textContent = `${alternativa.letra}.`;
+        letra.className = 'alternativa__letra'; letra.textContent = alternativa.letra;
         const texto = document.createElement('span');
         texto.className = 'alternativa__texto'; texto.textContent = alternativa.texto;
         label.append(radio, letra, texto);
@@ -73,16 +73,17 @@
                 label.append(indicacao);
             }
         });
-        feedback.textContent = `${resultado} Alternativa correta: ${correta.letra}. ${correta.texto}. ${dados.justificativa || ''}`;
+        feedback.textContent = `${resultado} Alternativa correta: ${correta.letra} ${correta.texto}. ${dados.justificativa || ''}`;
         botaoConfirmar.hidden = true;
         if (modoRevisao) {
             linkContinuar.textContent = 'Voltar aos exames';
             linkContinuar.href = 'exames.html';
             linkContinuar.hidden = false;
         } else {
-            linkContinuar.textContent = dados.proximo_tema === null ? 'Voltar à lista' : 'Próximo tema';
-            linkContinuar.href = dados.proximo_tema === null ? 'exames.html' : `exame.html?tema=${dados.proximo_tema}`;
-            // A sequência circular é definida pela API, independentemente do tema atual.
+            const certificacaoConcluida = dados.proximo_tema === null;
+            linkContinuar.textContent = certificacaoConcluida ? 'Ver resultado final' : 'Próximo tema';
+            linkContinuar.href = certificacaoConcluida
+                ? 'certificados.html' : `exame.html?tema=${dados.proximo_tema}`;
             linkContinuar.hidden = false;
         }
         botaoConfirmar.disabled = true;
@@ -96,7 +97,7 @@
         if (modoRevisao && questao.situacao === 'em_andamento') {
             throw new Error('Esta tentativa ainda está em andamento e não pode ser revisada.');
         }
-        document.getElementById('exame-titulo').textContent = `${modoRevisao ? 'Revisão' : 'Exame'}: ${questao.nome}`;
+        document.getElementById('exame-titulo').textContent = `QUESTÃO ${questao.ordem}`;
         if (modoRevisao) document.querySelector('.cronometro').hidden = true;
         document.getElementById('questao-titulo').textContent = questao.enunciado;
 

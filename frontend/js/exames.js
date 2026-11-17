@@ -41,7 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     botaoContinuar.addEventListener('click', () => {
-        if (!botaoContinuar.disabled) abrirTema(progresso?.proximo_tema);
+        if (botaoContinuar.disabled) return;
+        if (progresso?.certificacao_concluida) location.href = 'certificados.html';
+        else abrirTema(progresso?.proximo_tema);
     });
 
     async function atualizarProgresso() {
@@ -63,10 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 botao.textContent = tema ? rotulos[tema.estado] : 'Indisponível';
                 if (tema) card.querySelector('h3').textContent = `${tema.ordem}. ${tema.nome}`;
             });
+            const temasConcluidos = progresso.temas.filter(tema => tema.estado === 'concluido').length;
             mensagem.textContent = progresso.certificacao_concluida
-                ? `Certificação concluída. ${progresso.total_acertos}/12 acertos (${Number(progresso.percentual_acertos ?? 0).toFixed(2)}%) — ${progresso.aprovado ? 'Aprovado' : 'Reprovado'}.`
-                : '';
-            botaoContinuar.hidden = progresso.certificacao_concluida || progresso.proximo_tema == null;
+                ? `Certificação concluída. ${progresso.total_acertos}/12 acertos (${Number(progresso.percentual_acertos ?? 0).toFixed(2)}%) — ${progresso.aprovado ? 'Certificado emitido automaticamente.' : 'Aproveitamento abaixo de 65%.'}`
+                : `Progresso da certificação: ${temasConcluidos}/12 temas concluídos.`;
+            botaoContinuar.textContent = progresso.certificacao_concluida
+                ? 'Ver resultado final' : 'Continuar certificação';
+            botaoContinuar.hidden = !progresso.certificacao_concluida && progresso.proximo_tema == null;
             botaoContinuar.disabled = botaoContinuar.hidden;
             carregando = false;
         } catch (erro) {

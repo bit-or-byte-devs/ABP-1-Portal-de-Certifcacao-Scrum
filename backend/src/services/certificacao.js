@@ -1,4 +1,5 @@
 const { randomBytes } = require("node:crypto");
+const PERCENTUAL_MINIMO_CERTIFICADO = 65;
 
 async function recalcularCertificacao(db, idcertificacao) {
     await db.query(`WITH atualizada AS (UPDATE tbcertificacao SET total_acertos=s.acertos,
@@ -15,8 +16,8 @@ async function recalcularCertificacao(db, idcertificacao) {
     SELECT c.id, $2, candidato.nome_completo, candidato.cpf, candidato.email,
         c.nota_final, c.percentual_acertos
     FROM atualizada c JOIN tbcandidato candidato ON candidato.id=c.idcandidato
-    WHERE c.status='concluida' AND c.percentual_acertos >= 65
-    ON CONFLICT (idcertificacao) DO NOTHING`, [idcertificacao, randomBytes(32).toString("hex")]);
+    WHERE c.status='concluida' AND c.percentual_acertos >= $3
+    ON CONFLICT (idcertificacao) DO NOTHING`, [idcertificacao, randomBytes(32).toString("hex"), PERCENTUAL_MINIMO_CERTIFICADO]);
 }
 
 async function buscarProximoTemaPendente(db, idcertificacao, ordemAtual) {
@@ -27,4 +28,4 @@ async function buscarProximoTemaPendente(db, idcertificacao, ordemAtual) {
     return rows[0]?.ordem ?? null;
 }
 
-module.exports = { recalcularCertificacao, buscarProximoTemaPendente };
+module.exports = { PERCENTUAL_MINIMO_CERTIFICADO, recalcularCertificacao, buscarProximoTemaPendente };

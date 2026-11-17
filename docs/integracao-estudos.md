@@ -18,7 +18,13 @@ Em banco novo, `schema.sql` e `seed.sql` criam a estrutura e o catálogo dos tem
 
 `POST /api/exames/:ordem/iniciar` cria uma questão para o tema ou devolve o estado já registrado para aquele tema, mantendo uma certificação por candidato e uma resposta por tema. Não retoma uma questão encerrada. Reabrir uma questão ainda em andamento a encerra como interrompida. `POST /api/exames/respostas/:id` recebe `{ "alternativa": 123 }`, confere propriedade e alternativa, grava a resposta e calcula o resultado no servidor. Respostas concluídas não podem ser substituídas. `GET /api/exames/progresso` retorna o progresso da sessão autenticada. A certificação é concluída após os 12 temas; o resultado parcial usa o total de 12 questões como denominador.
 
-Cadastre questões reais em `tbquestao`, imagens em `tbimagem` e quatro alternativas A–D em `tbalternativa`, com uma correta. O seed atual não contém questões: nesse caso a tela informa a indisponibilidade, sem apresentar uma prova fictícia. Ao concluir os 12 temas do exame com pelo menos 65% de acertos, o servidor registra um certificado em tbcertificado. Concluir a leitura não emite certificado; PDF e consulta pública não fazem parte deste registro.
+`GET /api/exames/progresso` retorna `resultado_final` somente após a conclusão dos 12 temas, com nota, percentual de acertos, quantidade de respostas corretas, percentual mínimo para aprovação (65%) e condição de aptidão para o certificado. A página de certificados exibe o progresso e o resultado em modo somente leitura.
+
+Ao concluir os 12 temas com pelo menos 65% de acertos, o servidor registra automaticamente o certificado em `tbcertificado` e cria um código de validação único. O titular vê esse código no resultado autenticado; `POST /api/certificados/validar` permite validá-lo publicamente sem login e retorna somente nome, nota, percentual e data de emissão. O design visual final do certificado será integrado posteriormente.
+
+O resultado autenticado também exibe um QR Code PNG que aponta diretamente para `/pages/consultar-certificado.html?codigo=<código>&via=qrcode`; esse marcador permite pré-preencher o campo somente quando o acesso vem do QR. Em produção, configure `PUBLIC_BASE_URL` com a origem HTTPS pública do portal; o Compose usa `http://localhost:3000` por padrão para desenvolvimento.
+
+Cadastre questões reais em `tbquestao`, imagens em `tbimagem` e quatro alternativas A–D em `tbalternativa`, com uma correta. O seed atual não contém questões: nesse caso a tela informa a indisponibilidade, sem apresentar uma prova fictícia. Concluir a leitura não emite certificado.
 
 ## Verificação
 
