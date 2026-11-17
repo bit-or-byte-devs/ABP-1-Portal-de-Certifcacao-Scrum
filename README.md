@@ -14,32 +14,30 @@
 
 É comum que estudantes e profissionais iniciantes em TI encontrem dificuldades para fixar conceitos teóricos de metodologias ágeis (como Scrum e Kanban) e aplicá-los em cenários reais de desenvolvimento.
 
-A falta de ferramentas práticas e interativas para mensurar o aprendizado gera uma lacuna no processo de formação. O **Portal de Certificação em Metodologias Ágeis** visa resolver esse problema oferecendo uma trilha de simulados randômicos e cronometrados, acompanhada de uma Área de Estudos completa com 12 temas fundamentais, validando o conhecimento adquirido por meio da emissão de um certificado digital autêntico.
+A falta de ferramentas práticas e interativas para mensurar o aprendizado gera uma lacuna no processo de formação. O **BorB - Plataforma de Estudos Scrum** visa resolver esse problema oferecendo uma trilha de simulados randômicos e cronometrados, acompanhada de uma Área de Estudos completa com 12 temas fundamentais, validando o conhecimento adquirido por meio da emissão de um certificado digital autêntico.
 
 
 ---
 
-## 📋 Backlog do Produto - SPRINT 2 .
+## 📋 Backlog do Produto - SPRINT 3
 
 | Rank | Prioridade | User Story | Story Points | Sprint | Requisito Relacionado | Status |
 | :---: | :---: | :--- | :---: | :---: | :---: | :---: |
-| **1** | Alta (2) | **US11 - Organizar questões por tema:** Como responsável pelo sistema, quero que as questões sejam organizadas por tema para manter a base de questões estruturada conforme a certificação. | 1 | 2 | RF06 / RP06 | Concluída |
-| **2** | Alta (3) | **US12 - Estruturar questão da certificação:** Como responsável pelo sistema, quero que cada questão possua os elementos obrigatórios para que possa ser utilizada na certificação. | 2 | 2 | RF08 | Concluída |
-| **3** | Alta (5) | **US13 - Sortear questão para o candidato:** Como candidato, quero receber uma questão sorteada aleatoriamente para cada tema para realizar a certificação conforme as regras da avaliação. | 2 | 2 | RF06 | Concluída |
-| **4** | Alta (3) | **US14 - Armazenar alternativas e resposta correta:** Como responsável pelo sistema, quero armazenar alternativas e a resposta correta para cada questão. | 2 | 2 | RF08 / RP04 | Concluída |
-| **5** | Alta (3) | **US15 - Visualizar temas da certificação:** Como candidato, quero visualizar os temas da certificação para acompanhar quais ainda preciso responder. | 2 | 2 | RF05 / RF21 | Concluída |
-| **6** | Alta (5) | **US16 - Iniciar questão de um tema:** Como candidato, quero iniciar a questão de um tema pendente para avançar na certificação. | 2 | 2 | RF05 | Concluída |
-| **7** | Alta (5) | **US17 - Responder questão da certificação:** Como candidato, quero selecionar e enviar uma alternativa para registrar minha resposta à questão. | 2 | 2 | RF08 | Concluída |
-| **8** | Alta (3) | **US18 - Visualizar correção da questão:** Como candidato, quero visualizar a resposta correta após responder uma questão para saber qual era a alternativa correta. | 2 | 2 | RF09 | Concluída |
-| **9** | Alta (3) | **US19 - Escolher continuidade da certificação:** Como candidato, quero decidir após cada questão se desejo continuar a certificação ou encerrar a sessão para poder realizá-la em momentos diferentes. | 3 | 2 | RF12 / RF13 | Concluída |
-| **10** | Alta (5) | **US20 - Controlar tempo de resposta da questão:** Como candidato, quero visualizar o tempo restante para responder uma questão para saber quanto tempo tenho disponível. | 3 | 2 | RF10 | Concluída |
-| **11** | Alta (5) | **US21 - Encerrar questão por tempo esgotado:** Como candidato, quero ser informado quando o tempo da questão terminar para saber que aquela tentativa foi encerrada. | 5 | 2 | RF11 | Concluída |
-| **12** | Alta (8) | **US22 - Tratar interrupção durante uma questão:** Como sistema, quero encerrar uma questão quando ocorrer uma interrupção durante sua resolução para garantir que cada tema tenha apenas uma tentativa. | 8 | 2 | RF14 / RF15 | Concluída |
-| **13** | Alta (5) | **US23 - Retomar certificação interrompida:** Como candidato, quero retomar uma certificação interrompida para continuar respondendo aos temas ainda pendentes. | 8 | 2 | RF13 | Concluída |
-| **14** | Média (2) | **US43 - Reestruturação da tela de realização da questão:** Como candidato, quero uma tela de questão clara e organizada, com enunciado,imagem seleção de alternativas e confirmar minha resposta. | 2 | 2 | RF08, RNF01 | Concluída |
-| **15** | Baixa (1) | **US44 - Elaborar diagramas de Classes, Casos de Uso e Sequência:** Como integrante da equipe, quero documentar o Portal de Certificação com diagramas UML para facilitar a compreensão de seus atores, sua estrutura e seus fluxos. | 2 | 2 | RNF06 | Concluída |
-| **16** | Alta (8) | **US45 - Produzir o vídeo da Sprint 2:** Como professor, quero assistir um vídeo que mostre todas as funcionalidades entregues da sprint 2 na plataforma. | 8 | 2 | RNF05 | Concluída |
-
+| **1** | Alta (3) | **US24 - Atualizar e preservar o progresso da certificação:** Como candidato, quero acompanhar estados atualizados da minha certificação para saber quais temas concluí e quais permanecem pendentes. | 1 | 3 | RF21 / RP09 | Concluída |
+| **2** | Alta (5) | **US25 - Registrar histórico das respostas:** Como candidato, quero que as tentativas da certificação sejam registradas de forma durável para manter um histórico fiel do que realizei. | 2 | 3 | RF20 / RP04 | Concluída |
+| **3** | Média (3) | **US26 - Consultar histórico da certificação:** Como candidato, quero consultar meu histórico para visualizar as informações das questões que já realizei. | 2 | 3 | RF20 | Concluída |
+| **4** | Alta (5) | **US27 - Calcular resultado final da certificação:** Como candidato, quero que meu resultado seja calculado automaticamente após concluir todos os temas para conhecer meu desempenho na certificação. | 2 | 3 | RF16 | Concluída |
+| **5** | Alta (3) | **US28 - Visualizar resultado da certificação:** Como candidato, quero visualizar meu resultado ao concluir a certificação para conhecer meu desempenho. | 2 | 3 | RF16 / RF17 | Em progresso |
+| **6** | Alta (3) | **US29 - Verificar aprovação para certificação:** Como candidato, quero iniciar a questão de um tema pendente para avançar na certificação. | 2 | 3 | RF17 / RF18 | Em progresso |
+| **7** | Alta (8) | **US30 - Emitir certificado eletrônico:** Como candidato aprovado, quero receber meu certificado eletrônico para comprovar minha aprovação na certificação. | 2 | 3 | RF17 / RF18 | Concluída |
+| **8** | Alta (5) | **US31 - Gerar QR Code para validação do certificado:** Como candidato aprovado, quero que meu certificado possua um QR Code para permitir a validação de sua autenticidade. | 2 | 3 | RF18 / RP08 | Concluída |
+| **9** | Alta (3) | **US32 - Acessar validação pública do certificado:** Como pessoa interessada em verificar um certificado, quero acessar sua página de validação através do QR Code para verificar sua autenticidade. | 3 | 3 | RF19 / RP08 | Em progresso |
+| **10** | Alta (5) | **US33 - Validar autenticidade do certificado:** Como pessoa interessada em verificar um certificado, quero saber se o certificado consultado é autêntico para confirmar sua validade. | 3 | 3 | RF19 | Em progresso |
+| **11** | Alta (5) | **US34 - Garantir responsividade da interface:** Como candidato, quero utilizar o portal em diferentes tamanhos de tela para conseguir acessar suas funcionalidades também em dispositivos móveis. | 5 | 3 | RNF01 | Concluída |
+| **12** | Alta (8) | **US35 - Garantir segurança dos dados e resultados:** Como responsável pelo sistema, quero proteger os dados e resultados da certificação para evitar acessos e alterações indevidas. | 8 | 3 | RNF03 / RNF04 | Concluída |
+| **13** | Alta (5) | **US38 - Executar aplicação com Docker:** Como equipe de desenvolvimento, queremos executar o portal utilizando containers para padronizar o ambiente da aplicação. | 8 | 3 | RNF07 / RP05 | Concluída |
+| **14** | Média (2) | **US39 - Documentar a aplicação:** Como equipe de desenvolvimento, queremos documentar a aplicação para permitir compreender, instalar e utilizar tecnicamente o projeto. | 2 | 3 | RNF06 | Concluída |
+| **15** | Baixa (1) | **Task - Finalizar função de recuperação de senha:** Finalizar a função de recuperação de senha existente no Portal de Certificação Scrum, considerando as pendências identificadas desde a última alteração da feature. | 2 | 3 | RF03 / RF04 | Em progresso |
 ---
 
 ## 📈 Cronograma de Evolução do Projeto
@@ -60,6 +58,7 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 | --- | --- | --- | --- | --- |
 | 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1](https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/blob/main/docs-sprint-1/documento%20Sprint1.pdf) | [Vídeo de Apresentação 1](https://youtu.be/FVt_IMNGXu8) | Concluído |
 | 🔖 **Sprint 2** | 23/10/2026 - 05/11/2026 | [Documentação Sprint 2](https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/blob/main/docs-sprint-1/Documento%20Sprint%202-%20BitorByte.pdf) | [Vídeo de Apresentação 2](https://youtu.be/K_Tbho3OMi8?is=4hczwcMjw8u2Ketj) | Concluído |
+| 🔖 **Sprint 3** | 06/11 - 25/11/2026 | [Documentação Sprint 3](em andamento) | [Vídeo de Apresentação 3](em andamento) | Concluído |
 
 
 ## 💻 Tecnologias Utilizadas
@@ -235,20 +234,27 @@ Para imagens complementares como modelo conceitual, lógico, e Diagramas de Clas
 
 ---
 
-## 🔖 SPRINT 2 – Desenvolvimento do Núcleo da Certificação e Área de Estudos
-**Período:** 23/10/2026 a 05/11/2026
+# 🚀 Sprint 3 - Documentação do Incremento
+**Período da Sprint 3:** 06/11/2026 a 25/11/2026
+---
 
-### 🏃 DoR da Sprint 2 (Definition of Ready)
-- [x] **Modelagem de Dados Aprovada:** Modelagem do banco de dados validada (PostgreSQL) para suportar os 12 temas, 48 questões (4 por tema), alternativas, imagens ilustrativas, tentativas únicas por tema e histórico de interrupções.
-- [x] **Carga e Conteúdo Homologados:** Definição final dos 12 temas da certificação e estruturação dos arquivos JSON/scripts de migração contendo o conteúdo didático e as questões com imagens.
-- [x] **Protótipos de Alta Fidelidade (Figma):** Telas aprovadas pela equipe para a Área de Estudos, Fluxo da Prova (com cronômetro, enunciado, imagem e alternativas conforme a US43) e fluxo de interrupção/retomada.
-- [x] **Especificação de Regras de Negócio:** Critérios de aceite detalhados para o sorteio randômico de questões (US13), controle do cronômetro regressivo (US20), encerramento por tempo esgotado (US21) e tratamento de interrupções de sessão (US22/US23).
+## 📋 DoR da Sprint 3 (Definition of Ready)
+* **Protótipos de Alta Fidelidade (Figma) Aprovados:** Telas finais prototipadas e navegáveis para o cálculo/resultado final da certificação, visualização/download do certificado eletrônico, página pública de validação via QR Code e consulta ao histórico detalhado da avaliação (atendendo aos requisitos **RF16** a **RF20** e dando continuidade ao fluxo das Sprints anteriores).
+* **Especificação das Regras de Cálculo, Emissão e Segurança:** Critérios de aceite detalhados para o cálculo automático da nota no back-end (impedindo manipulação pelo front-end — **RNF04**), regra de corte para emissão do certificado ($\ge 65\%$ de aproveitamento — **RF17* e geração da URL/hash único para o QR Code **RP08*
+* **Modelagem e *Constraints* de Banco Homologadas:** Definição das restrições nativas (*constraints*) no PostgreSQL (obrigando exatamente 4 alternativas e 1 resposta correta por questão) e estruturação final das tabelas de histórico e certificados (`tbcertificado` e `tbresposta`), incorporando o plano de ação da Sprint 2.
+* **Automação de Carga Inicial (*Seeds* Docker) Especificada:** Mapeamento dos scripts DML e arquivos JSON dos 12 temas e 48 questões para execução automatizada na inicialização do `docker compose up`, resolvendo o débito técnico identificado na Sprint 2.
+* **Histórias de Usuário Refinadas (US24+):** User Stories fatiadas em subtarefas claras no GitHub Projects desde o dia 0, com estimativas definidas para evitar sobrecarga na reta final (lição aprendida nas Sprints 1 e 2).
 
-### 🏆 DoD da Sprint 2 (Definition of Done)
-- [x] **Banco de Dados e Povoamento:** Schema DDL e seeds DML executados via Docker Compose, com carga íntegra dos 12 temas e das 48 questões (4 por tema) e migrações (`001` a `005`) testadas e integradas.
-- [x] **Núcleo de Back-end (Motor do Simulado & Regras):** Endpoints implementados em Node.js para sorteio aleatório (US13), tentativa única (US16, US19), controle de cronômetro, tempo esgotado (US21) e tratamento/retomada de interrupções (US22, US23).
-- [x] **Área de Estudos & Interface (Front-end):** Telas desenvolvidas em HTML5, CSS3 e JavaScript puro, estruturadas nos 12 temas (US11, US15) e com reestruturação da tela de prova (US43) para enunciado, imagens e alternativas.
-- [x] **Feedback, Diagramas UML e Entrega:** Exibição da resposta correta após submissão (US18), diagramas UML de Classes, Casos de Uso e Sequência documentados (US44), e vídeo de apresentação da Sprint 2 publicado no YouTube (US45).
+---
+
+## ✅ DoD da Sprint 3 (Definition of Done)
+* **Cálculo de Desempenho e Emissão Automática de Certificado:** Back-end em Node.js calculando automaticamente a nota final e o percentual de acertos de forma segura (**RF16**, **RNF04**) e emitindo o certificado eletrônico apenas para candidatos com aproveitamento $\ge 65\%$, contendo todos os dados obrigatórios (nome completo, CPF, e-mail, data/hora de emissão, nota final, percentual e QR Code — **RF17**, **RF18**).
+* **Validação Pública via QR Code Funcional:** Página pública acessível sem necessidade de login (via leitura do QR Code ou código de verificação), validando a autenticidade do certificado diretamente no banco de dados (**RF19**, **RP08**).
+* **Histórico Completo da Certificação:** Funcionalidade implementada permitindo ao candidato consultar todas as avaliações realizadas (independentemente de aprovação), exibindo temas respondidos, questão sorteada, resposta escolhida, resposta correta e data/horário de cada resposta (**RF20**).
+* **Banco de Dados Blindado e Ambiente 100% Automatizado (Docker):** PostgreSQL operando com *constraints* de integridade ativas (**RP02**) e ambiente orquestrado via `docker compose up -d --build` subindo com esquema, 12 temas, 48 questões e imagens populados automaticamente sem intervenção manual (**RNF07**, **RP05**, **RP06**).
+* **Interface Responsiva em Tecnologias Nativas e Conformidade LGPD:** Todas as telas novas e existentes desenvolvidas exclusivamente em HTML5, CSS3 e JavaScript puro (**RP01**), responsivas para dispositivos móveis (**RNF01**) e com armazenamento seguro de dados pessoais em conformidade com a LGPD (**RNF03**).
+* **Versionamento, Documentação Final e Entrega MVP:** Merges diários consolidados na branch `develop` e integração final aprovada pelo PO na `main` (**RNF05**), acompanhados da documentação técnica completa atualizada (`README.md`, modelo de dados, instruções de instalação, documentação de todos os endpoints da API, descrição das funcionalidades — **RNF06**) e apresentação final do MVP funcional pronta para **26/11/2026** (**RP09**).
+
 
 
 ## Carga de questões
