@@ -1,4 +1,4 @@
-#SPRINT 2
+SPRINT 3
 
 # 🎯 BorB - Plataforma de Estudos Scrum
 
