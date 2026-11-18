@@ -37,7 +37,8 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 | **12** | Alta (8) | **US35 - Garantir segurança dos dados e resultados:** Como responsável pelo sistema, quero proteger os dados e resultados da certificação para evitar acessos e alterações indevidas. | 8 | 3 | RNF03 / RNF04 | Em progresso |
 | **13** | Alta (5) | **US38 - Executar aplicação com Docker:** Como equipe de desenvolvimento, queremos executar o portal utilizando containers para padronizar o ambiente da aplicação. | 8 | 3 | RNF07 / RP05 | Concluída |
 | **14** | Média (2) | **US39 - Documentar a aplicação:** Como equipe de desenvolvimento, queremos documentar a aplicação para permitir compreender, instalar e utilizar tecnicamente o projeto. | 2 | 3 | RNF06 | Concluída |
-| **15** | Baixa (1) | **Task - Finalizar função de recuperação de senha:** Finalizar a função de recuperação de senha existente no Portal de Certificação Scrum, considerando as pendências identificadas desde a última alteração da feature. | 2 | 3 | RF03 / RF04 | Em progresso |
+| **15** | Alta (8) | **Task - Finalizar função de recuperação de senha:** Finalizar a função de recuperação de senha existente no Portal de Certificação Scrum, considerando as pendências identificadas desde a última alteração da feature. | 2 | 3 | RF03 / RF04 | Em progresso |
+| **16** | Alta (3) | **Task-002 - Criar as páginas de Política de Privacidade (LGPD) e Termos de Uso:** Criar as páginas públicas de Política de Privacidade (LGPD) e Termos de Uso do Portal de Certificação Scrum e ligá-las ao cadastro e ao rodapé do menu.| 2 | 3 | RF03 / RF04 | Em progresso |
 ---
 
 ## 📈 Cronograma de Evolução do Projeto
@@ -58,7 +59,7 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 | --- | --- | --- | --- | --- |
 | 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1](https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/blob/main/docs-sprint-1/documento%20Sprint1.pdf) | [Vídeo de Apresentação 1](https://youtu.be/FVt_IMNGXu8) | Concluído |
 | 🔖 **Sprint 2** | 23/10/2026 - 05/11/2026 | [Documentação Sprint 2](https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/blob/main/docs-sprint-1/Documento%20Sprint%202-%20BitorByte.pdf) | [Vídeo de Apresentação 2](https://youtu.be/K_Tbho3OMi8?is=4hczwcMjw8u2Ketj) | Concluído |
-| 🔖 **Sprint 3** | 06/11 - 25/11/2026 | [Documentação Sprint 3](em andamento) | [Vídeo de Apresentação 3](em andamento) | Concluído |
+| 🔖 **Sprint 3** | 06/11 - 25/11/2026 | [Documentação Sprint 3](em andamento) | [Vídeo de Apresentação 3](em andamento) | Em andamento |
 
 
 ## 💻 Tecnologias Utilizadas
