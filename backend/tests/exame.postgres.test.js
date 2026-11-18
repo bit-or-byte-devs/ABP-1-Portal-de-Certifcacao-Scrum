@@ -421,7 +421,7 @@ test("Resultado final: aplica o mínimo de 65% e não permite alterar respostas"
             if (ordem === 11) {
                 const parcial = (await banco.query(`SELECT total_acertos, nota_final, percentual_acertos, status
                     FROM tbcertificacao WHERE idcandidato=(SELECT id FROM tbcandidato WHERE cpf=$1)`, [cpf])).rows[0];
-                const percentualParcial = Number((correctas * 100 / 12).toFixed(2));
+                const percentualParcial = (correctas * 100 / 12).toFixed(2);
                 assert.deepEqual(parcial, {
                     total_acertos: correctas,
                     nota_final: percentualParcial,
@@ -446,11 +446,16 @@ test("Resultado final: aplica o mínimo de 65% e não permite alterar respostas"
         if (correctas * 100 / 12 >= 65) assert.match(progresso.corpo.resultado_final.codigo_validacao, /^[a-f0-9]{64}$/);
         else assert.equal(progresso.corpo.resultado_final.codigo_validacao, null);
 
+        const respostaAntes = await lerResposta(primeiraResposta.id);
+        const { rows: [certificacaoAntes] } = await banco.query("SELECT * FROM tbcertificacao WHERE id=$1", [respostaAntes.idcertificacao]);
         const alteracao = await solicitar(`/api/exames/respostas/${primeiraResposta.id}`, cookie, {
             alternativa: primeiraResposta.alternativa.id,
         });
         assert.equal(alteracao.status, 409);
         assert.equal(alteracao.corpo.situacao, "respondida");
+        assert.deepEqual(await lerResposta(primeiraResposta.id), respostaAntes);
+        const { rows: [certificacaoDepois] } = await banco.query("SELECT * FROM tbcertificacao WHERE id=$1", [respostaAntes.idcertificacao]);
+        assert.deepEqual(certificacaoDepois, certificacaoAntes);
         const resultadoPersistido = (await banco.query(`SELECT c.total_acertos, c.nota_final, c.percentual_acertos, c.status
             FROM tbcertificacao c JOIN tbcandidato candidato ON candidato.id=c.idcandidato
             WHERE candidato.cpf=$1`, [cpf])).rows[0];

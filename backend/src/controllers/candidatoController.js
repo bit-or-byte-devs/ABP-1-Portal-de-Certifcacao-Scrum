@@ -70,8 +70,7 @@ async function cadastrar(req, res) {
       return res.status(409).json({ mensagem: MSG_CPF_DUPLICADO });
     }
 
-    // Só o código vai para o log
-    console.error("Erro ao cadastrar candidato:", erroCadastro.code || erroCadastro.message);
+    console.error("Erro ao cadastrar candidato.");
     return res.status(500).json({ mensagem: "Não foi possível concluir o cadastro." });
   }
 }

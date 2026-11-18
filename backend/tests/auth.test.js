@@ -10,6 +10,11 @@ const app = require("../src/app");
 test("login, sessão, proteção e saída sem modificar o banco", async (t) => {
     const senhaHash = await gerarHash("Senha123");
     assert.equal(await verificarSenha("Senha123", senhaHash), true);
+    const segundoHash = await gerarHash("Senha123");
+    const formatoScrypt = /^scrypt\$[a-f0-9]{32}\$[a-f0-9]{128}$/;
+    assert.match(senhaHash, formatoScrypt);
+    assert.match(segundoHash, formatoScrypt);
+    assert.ok(senhaHash.split("$")[1] !== segundoHash.split("$")[1], "os salts devem ser independentes");
     assert.equal(await verificarSenha("Errada123", senhaHash), false);
     for (const hash of [null, "texto", "scrypt$xx$xx", senhaHash + "$extra"]) {
         assert.equal(await verificarSenha("Senha123", hash), false);
@@ -68,6 +73,7 @@ test("login, sessão, proteção e saída sem modificar o banco", async (t) => {
         body: JSON.stringify({ nome: "Maria Silva", cpf: "52998224725", email: "maria@example.com", senha: "Senha123", aceiteTermos: true }),
     });
     assert.equal(resposta.status, 201);
+    assert.deepEqual(await resposta.json(), { mensagem: "Cadastro realizado com sucesso." });
     const cookieCadastro = resposta.headers.get("set-cookie").split(";")[0];
     resposta = await pedir("/api/auth/usuario", { headers: { Cookie: cookieCadastro } });
     assert.equal(resposta.status, 200);
@@ -112,6 +118,7 @@ test("login, sessão, proteção e saída sem modificar o banco", async (t) => {
     assert.equal(resposta.status, 200);
     assert.match(resposta.headers.get("set-cookie"), /Expires=Thu, 01 Jan 1970/);
     assert.equal(errosRegistrados.length, 1);
+    assert.equal(errosRegistrados[0].length, 1);
     assert.match(String(errosRegistrados[0][0]), /interromper a questão no logout/);
     assert.equal((await pedir("/api/auth/usuario", { headers: { Cookie: cookie } })).status, 401);
     assert.equal((await pedir("/pages/menu.html", { headers: { Cookie: cookie } })).status, 302);
