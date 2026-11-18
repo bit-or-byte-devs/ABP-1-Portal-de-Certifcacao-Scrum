@@ -5,18 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="BorB — plataforma de aprendizagem sobre Scrum.">
   <title>BorB | Desvende o Código do Scrum</title>
+  <link rel="preload" href="../assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/menu-principal.css">
   <link rel="stylesheet" href="../css/inicial.css">
 </head>
-<body>
-  <header class="topbar">
-    <a class="brand" href="index.html" aria-label="BorB — página inicial">
-      <span class="brand-logo-slot" aria-hidden="true">B</span>
-      <span class="brand-text">BorB<small>SCRUM_v0.1</small></span>
+<body class="pagina-menu">
+  <header class="topo">
+    <a class="marca" href="index.html" aria-label="BorB — página inicial">
+      <span class="marca-logo" aria-hidden="true">
+        <img src="../assets/images/borb-logo.png" alt="" width="46" height="64">
+        <span class="marca-letra">B</span>
+      </span>
+      <span class="marca-texto">BorB<small>SCRUM_v0.1</small></span>
     </a>
-    <nav class="top-actions" aria-label="Navegação principal"><a class="top-link" href="consultar-certificado.html">Consultar código do certificado</a><a class="top-link" href="login.html">Entrar</a></nav>
+    <nav class="topo-acoes" aria-label="Navegação principal">
+      <a class="btn-topo" href="consultar-certificado.html">Consultar código do certificado</a>
+      <a class="btn-topo" href="login.html">Entrar</a>
+    </nav>
   </header>
 
-  <main>
+  <main class="inicio">
     <section class="hero" id="inicio">
       <div class="hero-copy">
         <h1>Desvende o Código do<br><span>Scrum</span> com a BorB</h1>
@@ -56,12 +64,14 @@
     </section>
   </main>
 
-  <footer>
-    <span><strong>BorB</strong> © 2026 Scrum Learning Platform. Todos os direitos reservados.</span>
-    <nav aria-label="Links do rodapé">
-      <a href="#inicio">Voltar ao início</a>
-      <a href="#sobre">Sobre o curso</a>
+  <footer class="rodape">
+    <p class="rodape-copy"><strong>Bor<span class="marca-b">B</span></strong> &copy; 2026 Equipe Bit or Byte, FATEC Jacareí.</p>
+    <nav class="rodape-links" aria-label="Contato e informações legais">
+      <a href="mailto:bitorbyte6@gmail.com">bitorbyte6@gmail.com</a>
+      <a href="privacidade.html">Privacidade e LGPD</a>
+      <a href="termos.html">Termos de Uso</a>
     </nav>
   </footer>
+  <script src="../js/ceu-estrelado.js"></script>
 </body>
 </html>
