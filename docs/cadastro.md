@@ -73,7 +73,9 @@ origem.
   número, e limite de 1024 caracteres. A confirmação deve ser igual, mas não
   é enviada à API.
 - O aceite dos Termos de Uso e da Política de Privacidade é obrigatório. A
-  confirmação fica registrada em data_aceite_termos.
+  confirmação fica registrada em data_aceite_termos. Os dois documentos abrem
+  em páginas públicas próprias, em uma nova aba, sem apagar o formulário já
+  preenchido.
 
 ## Caminho dos dados
 
@@ -110,4 +112,3 @@ Roteiro manual:
    possui cadastro, sem criar uma segunda conta.
 6. Volte a abrir o menu; para confirmar que a sessão permite entrar, não deve
    ser necessário preencher novamente as credenciais.
-

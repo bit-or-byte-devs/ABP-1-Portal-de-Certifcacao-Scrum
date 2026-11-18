@@ -40,7 +40,8 @@ na lista de páginas privadas do `backend/src/app.js`.
 
 O rodapé desta página traz a marca, os créditos da equipe e os links de
 contato, Privacidade e LGPD (`privacidade.html`) e Termos de Uso
-(`termos.html`).
+(`termos.html`). As páginas legais são públicas para que possam ser lidas
+antes da criação da conta.
 
 ## O que faz cada arquivo
 
@@ -134,8 +135,6 @@ e a descrição passa a "Consulte o resultado da sua certificação".
 
 ## Limites atuais
 
-- `privacidade.html` e `termos.html` serão criadas em outra branch. Até lá, os
-  links do rodapé levam a páginas inexistentes.
 - `flashcards.html` ainda não existe: o atalho Revisar com flashcards está
   ativo e dá 404 até a página entrar. Quando for criada, ela precisa entrar na
   lista `paginasPrivadas` do `backend/src/app.js`, porque os flashcards são só
