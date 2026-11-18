@@ -83,7 +83,7 @@ router.get("/progresso", async (req, res) => {
         const totalAcertos = Number(resultadoCertificacao?.rows[0]?.total_acertos ?? 0);
         const percentualAcertos = Number(resultadoCertificacao?.rows[0]?.percentual_acertos ?? 0);
         const notaFinal = Number(resultadoCertificacao?.rows[0]?.nota_final ?? 0);
-        const aprovado = percentualAcertos >= PERCENTUAL_MINIMO_CERTIFICADO;
+        const aprovado = certificacaoConcluida && percentualAcertos >= PERCENTUAL_MINIMO_CERTIFICADO;
         const resultadoFinal = certificacaoConcluida ? {
             total_acertos: totalAcertos,
             nota_final: notaFinal,
