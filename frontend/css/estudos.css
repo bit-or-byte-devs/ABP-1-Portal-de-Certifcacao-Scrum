@@ -7,52 +7,58 @@
 }
 
 body {
-    background: linear-gradient(180deg, #4969c8 0%, #2d4079 100%);
+    background-color: var(--bg-blue);
+    background-image: linear-gradient(135deg, #4358a9 0%, #314282 100%);
+    color: var(--text-white);
     min-height: 100vh;
-    color: #0d1b2a;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 18px 18px;
 }
 
-/* --- Cabeçalho --- */
-.navbar {
-    width: 100%;
-    max-width: 1200px;
-    background-color: #071f4d;
+/* Navbar Superior */
+.top-nav {
+    background-color: #111827;
     border-radius: 40px;
-    padding: 8px 30px;
+    width: calc(100% - 100px);
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 12px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 0 16px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
-.logo-container {
+.logo-area {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
 }
 
 .logo-icon {
-    font-size: 32px;
-    background: #6c5ce7;
-    border-radius: 12px;
-    padding: 4px 8px;
+    background-color: #00ff66;
+    color: #111;
+    font-weight: 800;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 18px;
 }
 
 .logo-text h2 {
-    color: #ffffff;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--text-white);
 }
 
-.logo-text span {
-    color: #00cec9;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+.logo-text small {
+    font-size: 9px;
+    color: var(--text-white);
 }
 
 .nav-buttons {
@@ -60,26 +66,28 @@ body {
     gap: 12px;
 }
 
-.btn-dark {
-    background-color: #172a45;
-    color: #00cec9;
+.btn-nav {
+    background-color: #1f2937;
+    color: var(--text-white);
     border: none;
-    padding: 8px 18px;
+    padding: 8px 22px;
     border-radius: 20px;
-    cursor: pointer;
-    font-weight: 600;
     font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
     transition: background 0.2s;
+    color: var(--text-white);
 }
 
-.btn-dark:hover {
-    background-color: #203a60;
+.btn-nav:hover {
+    background-color: #374151;
 }
 
 /* --- Container Principal --- */
 .main-container {
     width: 100%;
     max-width: 1200px;
+    margin: 0 auto;
     background-color: #7588ba;
     border-radius: 30px;
     padding: 18px 20px 20px;
@@ -342,7 +350,9 @@ body {
         padding: 0 10px 10px;
     }
 
-    .navbar {
+    .top-nav {
+        width: calc(100% - 20px);
+        margin: 10px auto;
         padding: 8px 18px;
     }
 
