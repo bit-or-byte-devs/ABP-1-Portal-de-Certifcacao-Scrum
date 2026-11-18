@@ -65,17 +65,30 @@
     min-height: 44px;
     padding: 10px 28px;
     border: none;
-    border-radius: 18px;
+    border-radius: 999px;
     background: #00ff66;
     color: #0b0f19;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
-    transition: background 0.2s ease;
+    box-shadow: 0 4px 0 #00a844, 0 10px 24px rgba(0, 0, 0, 0.2);
+    transition: background 0.18s, transform 0.12s, box-shadow 0.12s;
 }
 
 .pagina-consulta-certificado .consulta-button:hover {
-    background: #66ffa3;
+    background: #4dff94;
+}
+
+.pagina-consulta-certificado .consulta-button:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #00a844, 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+.pagina-consulta-certificado .top-nav,
+.pagina-consulta-certificado .main-container,
+.pagina-consulta-certificado .footer-bar {
+    position: relative;
+    z-index: 1;
 }
 
 .pagina-consulta-certificado .consulta-mensagem {

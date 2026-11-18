@@ -335,6 +335,55 @@ a {
   text-decoration: underline;
 }
 
+.pagina-menu .auth-header,
+.pagina-menu .pagina,
+.pagina-menu .rodape {
+  position: relative;
+  z-index: 1;
+}
+
+.pagina-menu .auth-header__link {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  border: 1px solid rgba(31, 184, 154, 0.45);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-white);
+  font: 600 14px var(--fonte-menu);
+  text-decoration: none;
+  transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+
+.pagina-menu .auth-header__link:hover {
+  border-color: var(--menu-teal);
+  background: rgba(31, 184, 154, 0.16);
+}
+
+.pagina-menu .btn {
+  border-radius: 999px;
+  background: var(--green-accent);
+  box-shadow: 0 4px 0 #00a844, 0 10px 24px rgba(0, 0, 0, 0.2);
+  color: #04140b;
+  transition: background 0.18s, transform 0.12s, box-shadow 0.12s;
+}
+
+.pagina-menu .btn:hover {
+  background: #4dff94;
+}
+
+.pagina-menu .btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #00a844, 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+.pagina-menu .btn:focus-visible {
+  outline: 3px solid var(--green-accent);
+  outline-offset: 4px;
+}
+
 @media (max-width: 740px) {
   .logo__nome {
     font-size: 68px;

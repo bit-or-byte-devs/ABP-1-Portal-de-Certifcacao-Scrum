@@ -259,6 +259,35 @@
     background-color: var(--btn-escuro);
 }
 
+.pagina-menu .top-nav,
+.pagina-menu .main-container,
+.pagina-menu .footer-bar {
+    position: relative;
+    z-index: 1;
+}
+
+.pagina-menu .btn-confirmar {
+    border-radius: 999px;
+    background: var(--green-accent);
+    color: #04140b;
+    box-shadow: 0 4px 0 #00a844, 0 10px 24px rgba(0, 0, 0, 0.2);
+    transition: background 0.18s, transform 0.12s, box-shadow 0.12s;
+}
+
+.pagina-menu .btn-confirmar:hover:not(:disabled) {
+    background: #4dff94;
+}
+
+.pagina-menu .btn-confirmar:active:not(:disabled) {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #00a844, 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+.pagina-menu .btn-confirmar:focus-visible {
+    outline: 3px solid var(--green-accent);
+    outline-offset: 4px;
+}
+
 .questao__acoes [hidden] {
     display: none;
 }
@@ -353,6 +382,10 @@ button:disabled {
     .alternativa,
     .btn-confirmar {
         transition: none;
+    }
+
+    .pagina-menu .btn-confirmar:active:not(:disabled) {
+        transform: none;
     }
 
     .alternativa:hover {
