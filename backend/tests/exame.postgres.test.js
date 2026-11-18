@@ -418,6 +418,27 @@ test("Resultado final: aplica o mínimo de 65% e não permite alterar respostas"
                 alternativa: alternativa.id,
             });
             assert.equal(resposta.status, 200);
+            if (ordem === 8 && correctas === 8) {
+                const parcial = await solicitar("/api/exames/progresso", cookie);
+                assert.equal(parcial.status, 200);
+                assert.equal(parcial.corpo.total_acertos, 8);
+                assert.equal(parcial.corpo.percentual_acertos, 66.67);
+                assert.equal(parcial.corpo.temas.filter(tema => tema.estado === "pendente").length, 4);
+                assert.equal(parcial.corpo.certificacao_concluida, false);
+                assert.equal(parcial.corpo.resultado_final, null);
+
+                const { idcertificacao } = await lerResposta(questao.id);
+                const { rows: [persistido] } = await banco.query(`
+                    SELECT c.status, c.total_acertos, c.percentual_acertos,
+                        (SELECT count(*)::integer FROM tbresposta WHERE idcertificacao=c.id) AS respostas,
+                        (SELECT count(*)::integer FROM tbcertificado WHERE idcertificacao=c.id) AS certificados
+                    FROM tbcertificacao c WHERE c.id=$1`, [idcertificacao]);
+                assert.deepEqual(persistido, {
+                    status: "em_andamento", total_acertos: 8, percentual_acertos: "66.67",
+                    respostas: 8, certificados: 0,
+                });
+                assert.equal(parcial.corpo.aprovado, false);
+            }
             if (ordem === 11) {
                 const parcial = (await banco.query(`SELECT total_acertos, nota_final, percentual_acertos, status
                     FROM tbcertificacao WHERE idcandidato=(SELECT id FROM tbcandidato WHERE cpf=$1)`, [cpf])).rows[0];
@@ -435,6 +456,7 @@ test("Resultado final: aplica o mínimo de 65% e não permite alterar respostas"
         const progresso = await solicitar("/api/exames/progresso", cookie);
         assert.equal(progresso.status, 200);
         assert.equal(progresso.corpo.certificacao_concluida, true);
+        assert.equal(progresso.corpo.aprovado, correctas === 8);
         assert.deepEqual(progresso.corpo.resultado_final, {
             total_acertos: correctas,
             nota_final: Number((correctas * 100 / 12).toFixed(2)),
@@ -463,6 +485,12 @@ test("Resultado final: aplica o mínimo de 65% e não permite alterar respostas"
         assert.equal(Number(resultadoPersistido.nota_final), Number((correctas * 100 / 12).toFixed(2)));
         assert.equal(Number(resultadoPersistido.percentual_acertos), Number((correctas * 100 / 12).toFixed(2)));
         assert.equal(resultadoPersistido.status, "concluida");
+        const historico = await banco.query(`SELECT t.ordem, r.situacao, r.acertou
+            FROM tbresposta r JOIN tbtema t ON t.id=r.idtema
+            WHERE r.idcertificacao=$1 ORDER BY t.ordem`, [respostaAntes.idcertificacao]);
+        assert.deepEqual(historico.rows, Array.from({ length: 12 }, (_, indice) => ({
+            ordem: indice + 1, situacao: "respondida", acertou: indice < correctas,
+        })));
         const certificados = await banco.query(`SELECT count(*)::integer AS total FROM tbcertificado cert
             JOIN tbcertificacao c ON c.id=cert.idcertificacao
             JOIN tbcandidato candidato ON candidato.id=c.idcandidato WHERE candidato.cpf=$1`, [cpf]);
