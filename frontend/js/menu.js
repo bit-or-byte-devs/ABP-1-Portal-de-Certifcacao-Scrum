@@ -159,7 +159,10 @@
     perfil.scrollIntoView({ behavior: reduzirMovimento.matches ? "auto" : "smooth", block: "start" });
     destacarPerfil();
   });
-  if (window.location.hash === "#perfil") destacarPerfil();
+  if (window.location.hash === "#perfil") {
+    destacarPerfil();
+    history.replaceState(null, "", location.pathname + location.search);
+  }
 
   sair.addEventListener("click", async function () {
     sair.disabled = true;
