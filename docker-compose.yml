@@ -61,7 +61,7 @@ services:
       # Sem servidor SMTP: o código de recuperação aparece nos logs (docker compose logs app).
       RECUPERACAO_MODO: console
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     restart: unless-stopped
 
 volumes:
