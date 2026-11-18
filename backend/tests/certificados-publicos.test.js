@@ -18,7 +18,6 @@ test("consulta pública valida código sem login e não expõe dados pessoais", 
     const consultaOriginal = pool.query;
     const gerarQROriginal = QRCode.toBuffer;
     const urlBaseOriginal = process.env.PUBLIC_BASE_URL;
-    process.env.PUBLIC_BASE_URL = "https://portal.example.test";
     let urlCodificada;
     let consultas = 0;
     QRCode.toBuffer = async (url, opcoes) => {
@@ -109,22 +108,34 @@ test("consulta pública valida código sem login e não expõe dados pessoais", 
         },
     });
 
-    const qr = await fetch(`${base}/api/certificados/${codigoValido}/qr`);
+    // O endereço usado pelo navegador pode ser local; o QR deve usar a URL pública configurada.
+    const baseLocalhost = base.replace("127.0.0.1", "localhost");
+    process.env.PUBLIC_BASE_URL = "http://192.168.1.42:3000";
+    const destinoEsperado = `/pages/consultar-certificado.html?codigo=${codigoValido}&via=qrcode`;
+    const qr = await fetch(`${baseLocalhost}/api/certificados/${codigoValido}/qr`);
     assert.equal(qr.status, 200);
     assert.match(qr.headers.get("content-type"), /image\/png/);
     const png = Buffer.from(await qr.arrayBuffer());
     assert.deepEqual([...png.subarray(0, 4)], [137, 80, 78, 71]);
-    assert.equal(urlCodificada, `https://portal.example.test/pages/consultar-certificado.html?codigo=${codigoValido}&via=qrcode`);
+    assert.equal(urlCodificada, process.env.PUBLIC_BASE_URL + destinoEsperado);
 
-    const pdf = await fetch(`${base}/api/certificados/${codigoValido}/pdf`);
+    const pdf = await fetch(`${baseLocalhost}/api/certificados/${codigoValido}/pdf`);
     assert.equal(pdf.status, 200);
     assert.match(pdf.headers.get("content-type"), /application\/pdf/);
     assert.match(pdf.headers.get("content-disposition"), new RegExp(`attachment; filename="certificado-${codigoValido}\\.pdf"`));
     const arquivoPdf = Buffer.from(await pdf.arrayBuffer());
     assert.equal(arquivoPdf.subarray(0, 5).toString(), "%PDF-");
-    assert.equal(urlCodificada, `https://portal.example.test/pages/consultar-certificado.html?codigo=${codigoValido}&via=qrcode`);
+    assert.equal(urlCodificada, process.env.PUBLIC_BASE_URL + destinoEsperado);
+
+    process.env.PUBLIC_BASE_URL = "http://192.168.1.43:3000";
+    for (const formato of ["qr", "pdf"]) {
+        const atualizado = await fetch(`${baseLocalhost}/api/certificados/${codigoValido}/${formato}`);
+        assert.equal(atualizado.status, 200);
+        await atualizado.arrayBuffer();
+        assert.equal(urlCodificada, process.env.PUBLIC_BASE_URL + destinoEsperado);
+    }
 
     const naoEncontrado = await validar("b".repeat(64));
     assert.equal(naoEncontrado.status, 404);
-    assert.equal(consultas, 4);
+    assert.equal(consultas, 6);
 });

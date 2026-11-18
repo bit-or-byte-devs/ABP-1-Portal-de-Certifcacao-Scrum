@@ -186,6 +186,24 @@ Para atualizar uma instalação em uso, pare a aplicação antes de preparar o b
 3. **Acessar a Aplicação:**
 Abra o navegador em `http://localhost:3000/pages/index.html`
 
+### 📱 Validar certificados pelo celular na rede local
+
+No Windows, inicie o Docker Desktop e execute, na raiz do repositório:
+
+```powershell
+.\iniciar-rede-local.ps1
+# Quando houver vários endereços ou uma VPN, informe o IPv4 da rede usada pelo celular:
+.\iniciar-rede-local.ps1 -LanIp 192.168.1.42
+```
+
+O script usa o IPv4 da interface física ativa quando há uma única opção. Com o IP explícito, ele verifica se o endereço pertence ao próprio computador. O Compose publica a porta 3000 no endereço selecionado, além de preservar `http://localhost:3000`. O comando padrão `docker compose up -d --build` mantém a publicação apenas no loopback.
+
+Abra o portal no computador e recarregue a página do certificado. O QR agora aponta para `http://<IP_DO_HOST>:3000`, inclusive no PDF baixado nesse modo. Escaneie o QR com o celular conectado à mesma rede. O link abre a página de validação com o código preenchido.
+
+Se trocar de rede ou o IP mudar, execute o script novamente e recarregue a página. Baixe um novo PDF para atualizar o QR nele. O código de validação do certificado permanece o mesmo.
+
+Se o link não abrir no celular, tente o endereço mostrado pelo script no navegador do aparelho. Confira se a porta TCP 3000 está acessível no perfil **Privado** do Firewall do Windows e se o Wi-Fi permite comunicação entre dispositivos. Redes de convidados podem isolar os aparelhos. Use esse modo em uma rede local de confiança.
+
 ### 🔧 Comandos úteis
 
 ```bash
