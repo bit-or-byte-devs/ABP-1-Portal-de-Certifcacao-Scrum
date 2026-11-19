@@ -326,38 +326,193 @@
 
 @media (max-width: 600px) {
     .pagina-certificados .top-nav {
-        width: calc(100% - 32px);
-        margin: 16px auto;
-        padding: 12px 14px;
+        width: calc(100% - 24px);
+        margin: 8px auto;
+        padding: 10px 12px;
+        gap: 10px;
         border-radius: 18px;
     }
 
+    .pagina-certificados .logo-area {
+        gap: 9px;
+    }
+
+    .pagina-certificados .logo-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        font-size: 16px;
+    }
+
+    .pagina-certificados .logo-text h2 {
+        font-size: 15px;
+    }
+
+    .pagina-certificados .logo-text small {
+        font-size: 8px;
+    }
+
+    .pagina-certificados .nav-buttons {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 6px;
+    }
+
+    .pagina-certificados .nav-buttons .btn-dark,
+    .pagina-certificados .nav-buttons .btn-nav {
+        min-height: 40px;
+        padding: 8px 11px;
+        font-size: 12px;
+        text-align: center;
+    }
+
     .pagina-certificados .main-container {
-        padding: 16px 16px 32px;
+        width: 100%;
+        padding: 12px 12px 28px;
     }
 
     .pagina-certificados .top-header-row {
-        margin: 14px auto 18px;
-        gap: 12px;
+        width: 100%;
+        margin: 10px auto 16px;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .pagina-certificados .btn-voltar {
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 16px;
     }
 
     .pagina-certificados .page-title {
-        font-size: 28px;
+        margin-top: 2px;
+        font-size: 26px;
+        line-height: 1.15;
     }
 
     .pagina-certificados .resultado-certificacao.card {
-        padding: 20px 18px 22px;
+        width: 100%;
+        padding: 16px 14px 18px;
+        border-radius: 16px;
+    }
+
+    .pagina-certificados .resultado-certificacao > h2 {
+        padding-bottom: 14px;
+        font-size: 17px;
+    }
+
+    .pagina-certificados .card-body-content {
+        padding-top: 12px;
+    }
+
+    .pagina-certificados #mensagem-resultado {
+        margin-bottom: 14px;
+        font-size: 13px;
+    }
+
+    .pagina-certificados .resultado-certificacao__metricas {
+        gap: 10px;
+    }
+
+    .pagina-certificados .resultado-certificacao__metricas dt {
+        margin-bottom: 5px;
+        font-size: 13px;
+    }
+
+    .pagina-certificados .resultado-certificacao__metricas dd {
+        min-width: 0;
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .pagina-certificados #qr-certificado {
+        width: min(192px, 100%);
+        height: auto;
+        aspect-ratio: 1;
+    }
+
+    .pagina-certificados #codigo-validacao {
+        font-size: 12px;
+    }
+
+    .pagina-certificados .resultado-certificacao__detalhes dd {
+        line-height: 1.4;
+    }
+
+    .pagina-certificados #link-exames a {
+        min-height: 44px;
     }
 
     .pagina-certificados .footer-bar {
-        flex-wrap: wrap;
+        align-items: flex-start;
+        flex-direction: column;
         gap: 12px;
         padding: 18px 16px;
     }
 
     .pagina-certificados .footer-left,
     .pagina-certificados .footer-right {
+        width: 100%;
         flex-wrap: wrap;
-        gap: 10px 16px;
+        gap: 8px 14px;
+    }
+
+    .pagina-certificados .footer-right {
+        flex-direction: column;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pagina-certificados .top-nav {
+        width: calc(100% - 16px);
+        margin: 8px auto;
+        padding: 8px 10px;
+    }
+
+    .pagina-certificados .nav-buttons .btn-dark {
+        display: none;
+    }
+
+    .pagina-certificados .nav-buttons .btn-nav {
+        padding-inline: 9px;
+        font-size: 11px;
+    }
+
+    .pagina-certificados .main-container {
+        padding-inline: 8px;
+    }
+
+    .pagina-certificados .resultado-certificacao.card {
+        padding-inline: 12px;
+    }
+
+    .pagina-certificados .page-title {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 340px) {
+    .pagina-certificados .top-nav {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .pagina-certificados .nav-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .pagina-certificados .nav-buttons .btn-nav {
+        flex: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pagina-certificados * {
+        scroll-behavior: auto;
     }
 }
