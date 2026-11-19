@@ -1,4 +1,5 @@
 /* Tema compartilhado por login e cadastro. */
+@import url("navbar-logo.css");
 :root {
   --roxo: #00ff66;
   --roxo-hover: #66ffa3;
