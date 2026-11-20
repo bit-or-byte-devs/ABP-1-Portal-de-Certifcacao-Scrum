@@ -22,7 +22,36 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Enquanto o Scrum organiza o trabalho em ciclos (Sprints), o Kanban ajuda a visualizar e gerenciar o fluxo de ponta a ponta. Originado na indústria automobilística, associado ao Sistema Toyota de Produção, usa a visualização do trabalho para identificar gargalos, reduzir desperdícios e entregar valor de forma sustentável."
+          "conteudo": [
+            {
+              "tipo": "texto",
+              "texto": "Enquanto o Scrum organiza o trabalho em ciclos (Sprints), o "
+            },
+            {
+              "tipo": "destaque",
+              "texto": "Kanban"
+            },
+            {
+              "tipo": "texto",
+              "texto": " ajuda a visualizar e gerenciar o fluxo de ponta a ponta. Originado na indústria automobilística, associado ao Sistema Toyota de Produção, usa a visualização do trabalho para identificar gargalos, reduzir desperdícios e entregar valor de forma sustentável."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Kanban é um método para visualizar, gerenciar e melhorar o fluxo. Ele pode ser usado dentro de uma Sprint ou em um fluxo contínuo, sem ser confundido com o Scrum inteiro."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No portal, o quadro pode mostrar desde a seleção até a disponibilização de uma melhoria. Isso permite observar onde o trabalho espera ou se acumula."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O objetivo é acompanhar a passagem dos itens até a conclusão, não apenas mostrar quem está realizando cada tarefa."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Para aplicar Kanban, o time explicita como o trabalho percorre o fluxo: o que conta como item, quando começa e termina, quais estados atravessa, quais políticas valem e como o trabalho em andamento será controlado. Esse acordo torna o quadro mais do que uma coleção de colunas e permite que as pessoas interpretem os dados de maneira consistente."
         }
       ]
     },
@@ -72,6 +101,31 @@
               "texto": ". Cartões representam as demandas e avançam conforme o trabalho progride; assim todos conseguem ver onde cada item está."
             }
           ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "As colunas devem refletir o processo real"
+            },
+            {
+              "tipo": "texto",
+              "texto": ". Uma etapa como revisão ou validação não pode ficar invisível."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Políticas claras explicam quando um item entra e sai de cada etapa. Isso reduz interpretações diferentes."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Bloqueios e dependências também devem aparecer. Um cartão parado pode aguardar uma informação, aprovação ou integração."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Imagine um conteúdo de estudo do BorB atravessando as etapas Em preparação, Em revisão e Pronto para publicação. Se vários cartões se acumulam em revisão, a visualização mostra uma fila que talvez estivesse escondida quando cada integrante acompanhava apenas suas próprias tarefas. As colunas devem representar o fluxo real e os cartões precisam avançar quando as condições acordadas forem atendidas."
         }
       ]
     },
@@ -83,7 +137,32 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "WIP (Work in Progress) é o trabalho em andamento. Limitar a quantidade de itens simultâneos evita sobrecarga e multitarefa. A equipe procura terminar o que já começou antes de puxar novos itens, respeitando sua capacidade."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "WIP (Work in Progress)"
+            },
+            {
+              "tipo": "texto",
+              "texto": " é o trabalho em andamento. Limitar a quantidade de itens simultâneos evita sobrecarga e multitarefa. A equipe procura terminar o que já começou antes de puxar novos itens, respeitando sua capacidade."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O limite reduz troca de contexto e incentiva a conclusão. Ao atingir o WIP, o time investiga por que os itens não avançam em vez de iniciar mais trabalho."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O limite deve ser ajustado pela experiência. Um valor muito alto permite excesso de tarefas; muito baixo pode deixar capacidade ociosa em certas dependências."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No BorB, iniciar novos temas enquanto vários aguardam revisão pode piorar o fluxo. Pode ser mais eficiente reduzir entradas e ajudar a concluir revisões pendentes."
+        },
+        {
+          "conteudo": "Controlar o WIP também favorece um sistema de puxar trabalho: um novo item entra quando há um sinal de capacidade, em vez de ser iniciado apenas porque alguém está disponível naquele momento. Se a revisão de conteúdos do BorB estiver acumulada, por exemplo, o time pode ajudar a concluir os itens em andamento antes de começar outros temas.",
+          "tipo": "paragrafo"
         }
       ]
     },
@@ -95,7 +174,16 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Quando o trabalho se acumula em uma coluna, há um gargalo. A equipe identifica o ponto de espera e atua para destravá-lo antes de iniciar mais tarefas. A melhoria contínua (Kaizen) usa ajustes incrementais e métricas como Cycle Time para melhorar o fluxo."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Quando o trabalho se acumula"
+            },
+            {
+              "tipo": "texto",
+              "texto": " em uma coluna, há um gargalo. A equipe identifica o ponto de espera e atua para destravá-lo antes de iniciar mais tarefas. A melhoria contínua (Kaizen) usa ajustes incrementais e métricas como Cycle Time para melhorar o fluxo."
+            }
+          ]
         },
         {
           "tipo": "paragrafo",
@@ -109,6 +197,26 @@
               "texto": " Kanban visualiza o fluxo em colunas e cartões, limita o WIP e ajuda a equipe a detectar gargalos. As tarefas avançam continuamente conforme a capacidade, sem depender de ciclos fixos."
             }
           ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Um gargalo pode ser dependência, espera de informação ou concentração da revisão em uma pessoa. A equipe precisa investigar a causa antes de agir."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Cycle Time, throughput e work item age oferecem perspectivas sobre o fluxo. Devem ser interpretados em conjunto com o contexto."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Pequenas mudanças podem redistribuir conhecimento, esclarecer critérios ou reduzir transferências. Kaizen busca melhorar o processo em incrementos."
+        },
+        {
+          "conteudo": "Uma referência atual do Kanban acompanha quatro métricas de fluxo: WIP (itens iniciados e ainda não concluídos), throughput (itens concluídos por unidade de tempo), idade do item em andamento e cycle time (tempo entre início e conclusão, conforme os limites definidos no fluxo). Esses dados ganham sentido quando ajudam a identificar esperas e decidir melhorias. A melhoria pode ser pequena ou ampla, conforme o problema observado; não precisa acontecer apenas em mudanças incrementais.",
+          "tipo": "paragrafo"
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Se um tema permanece muitos dias aguardando revisão, a idade do item pode chamar atenção antes que ele seja concluído; se muitos temas são concluídos por semana, o throughput mostra a quantidade de saídas do fluxo. Essas medidas não indicam sozinhas a causa de um problema. A equipe combina observação do trabalho com conversa sobre dependências, capacidade e políticas para escolher uma mudança adequada."
         }
       ]
     }
