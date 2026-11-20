@@ -30,11 +30,32 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "O Product Backlog é uma lista ordenada e emergente do que é necessário para melhorar o produto e a fonte única de trabalho do Scrum Team. Ele muda conforme o produto, o mercado e o entendimento das pessoas evoluem."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "O Product Backlog"
+            },
+            {
+              "tipo": "texto",
+              "texto": " é uma lista ordenada e emergente do que é necessário para melhorar o produto e a fonte única de trabalho do Scrum Team. Ele muda conforme o produto, o mercado e o entendimento das pessoas evoluem."
+            }
+          ]
         },
         {
           "tipo": "paragrafo",
           "conteudo": "O Product Goal descreve um estado futuro do produto e funciona como objetivo de longo prazo do Scrum Team. O time deve cumprir ou abandonar um Product Goal antes de assumir outro. O Product Owner responde por maximizar o valor do produto e gerir o backlog de forma eficaz: comunicar o Product Goal, criar e ordenar itens e manter o backlog transparente e compreendido."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O backlog não é uma lista definitiva. Ele reúne necessidades que podem ser divididas, combinadas, reescritas ou removidas conforme o entendimento aumenta."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A ordenação considera valor, risco, urgência e dependências. No BorB, um objetivo de plataforma completa pode orientar conteúdos, simulados e acompanhamento sem detalhar tudo no início."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Product Owner mantém a direção clara, mas stakeholders e Developers contribuem com contexto e informações técnicas."
         }
       ]
     },
@@ -46,11 +67,28 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "O Sprint Backlog contém a Sprint Goal, os itens do Product Backlog selecionados para a Sprint e um plano acionável para criar o Incremento. Os Developers o criam e atualizam durante a Sprint conforme o aprendizado aumenta."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "O Sprint Backlog"
+            },
+            {
+              "tipo": "texto",
+              "texto": " contém a Sprint Goal, os itens do Product Backlog selecionados para a Sprint e um plano acionável para criar o Incremento. Os Developers o criam e atualizam durante a Sprint conforme o aprendizado aumenta."
+            }
+          ]
         },
         {
           "tipo": "paragrafo",
           "conteudo": "A Sprint Goal é o objetivo único da Sprint. Ela cria coerência e foco, mas permite flexibilidade sobre o trabalho exato necessário. Se o trabalho se revelar diferente do esperado, os Developers colaboram com o Product Owner para negociar o escopo sem comprometer a meta."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Sprint Backlog é um plano vivo dos Developers. As tarefas e prioridades podem mudar, mas o resultado pretendido continua orientando as decisões."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A meta é o compromisso associado ao planejamento; a quantidade selecionada é uma previsão baseada em entendimento e capacidade."
         }
       ]
     },
@@ -95,6 +133,27 @@
               }
             ]
           ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Se o Product Goal"
+            },
+            {
+              "tipo": "texto",
+              "texto": " buscar uma trilha completa de estudo, o backlog pode reunir consulta de temas, progresso e simulados. A Sprint anterior pode entregar o acesso aos conteúdos."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A meta da Sprint dá unidade ao conjunto de itens. Os Developers definem o plano técnico e atualizam o trabalho conforme aprendem."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Incremento precisa permitir ao estudante consultar um tema de forma integrada e atendendo à DoD, não apenas consistir em arquivos isolados."
         }
       ]
     },
@@ -106,7 +165,16 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Um Incremento é um passo concreto em direção ao Product Goal. Deve somar-se aos incrementos anteriores, ser verificado e permanecer utilizável. Pode haver vários incrementos em uma Sprint, e valor pode ser liberado antes da Sprint Review."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Um Incremento"
+            },
+            {
+              "tipo": "texto",
+              "texto": " é um passo concreto em direção ao Product Goal. Deve somar-se aos incrementos anteriores, ser verificado e permanecer utilizável. Pode haver vários incrementos em uma Sprint, e valor pode ser liberado antes da Sprint Review."
+            }
+          ]
         },
         {
           "tipo": "paragrafo",
@@ -123,6 +191,14 @@
           "caminho": "/imagens/temas/tema-6-criterios-de-qualidade.png",
           "texto_alternativo": "Critérios de qualidade e verificação de um Incremento",
           "legenda": "Uma definição de qualidade ajuda o time a verificar se o Incremento está pronto."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Um Incremento é integrado ao produto existente e pode ser verificado. Uma tela desenvolvida separadamente ainda não representa um avanço utilizável."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A DoD torna qualidade comum explícita e evita critérios diferentes entre integrantes. Critérios de aceitação são específicos de um item; a DoD vale para o Incremento."
         }
       ]
     },
@@ -134,7 +210,16 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "O Product Goal indica a direção estratégica. Em cada Sprint, a Sprint Goal define um resultado intermediário coerente. O Incremento oferece evidência concreta do progresso, desde que satisfaça a DoD. A inspeção do que foi concluído alimenta novas decisões sobre o Product Backlog."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "O Product Goal"
+            },
+            {
+              "tipo": "texto",
+              "texto": " indica a direção estratégica. Em cada Sprint, a Sprint Goal define um resultado intermediário coerente. O Incremento oferece evidência concreta do progresso, desde que satisfaça a DoD. A inspeção do que foi concluído alimenta novas decisões sobre o Product Backlog."
+            }
+          ]
         },
         {
           "tipo": "lista",
@@ -153,23 +238,16 @@
           "legenda": "Os compromissos ajudam a inspecionar o estado de cada artefato."
         },
         {
-          "tipo": "referencia",
-          "conteudo": [
-            {
-              "tipo": "texto",
-              "texto": "Referência: Schwaber e Sutherland, "
-            },
-            {
-              "tipo": "link",
-              "texto": "The Scrum Guide (2020)",
-              "url": "https://scrumguides.org/scrum-guide.html",
-              "nova_aba": true
-            },
-            {
-              "tipo": "texto",
-              "texto": "."
-            }
-          ]
+          "tipo": "paragrafo",
+          "conteudo": "O Product Goal orienta o backlog, a Sprint Goal orienta o plano e a DoD verifica qualidade. Os resultados observados retornam ao backlog e influenciam as próximas decisões."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Quando vários times trabalham no mesmo produto, uma DoD compartilhada evita incrementos incompatíveis ou com padrões de qualidade diferentes."
+        },
+        {
+          "conteudo": "No BorB, o Product Goal pode expressar a criação de uma trilha de estudos confiável; uma Sprint Goal intermediária pode focar o acesso integrado a um tema; e o Incremento correspondente só conta como pronto quando atende à Definition of Done. Essa relação conecta direção de longo prazo, foco do ciclo e evidência concreta de progresso.",
+          "tipo": "paragrafo"
         }
       ]
     }
