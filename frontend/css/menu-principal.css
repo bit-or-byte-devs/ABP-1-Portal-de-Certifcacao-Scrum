@@ -160,10 +160,12 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round
 .perfil-cabecalho { display: flex; align-items: center; gap: 16px; }
 .perfil-mascote {
     flex: none;
-    width: 58px; height: auto;
-    padding: 6px 8px;
-    border-radius: 18px;
-    background: radial-gradient(circle at 50% 40%, #24356b, #131c33);
+    width: 64px;
+    height: 64px;
+    padding: 0;
+    border-radius: 50%;
+    object-fit: contain;
+    background: transparent;
 }
 .perfil-nome { margin: 0; font-size: 22px; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
 .perfil-papel { margin: 2px 0 0; color: var(--menu-texto-suave); font-size: 14px; }
