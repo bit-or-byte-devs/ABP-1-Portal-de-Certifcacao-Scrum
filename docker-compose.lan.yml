@@ -1,0 +1,4 @@
+services:
+  app:
+    ports:
+      - "${PORTAL_LAN_IP:?Informe o IP do host pelo script iniciar-rede-local.ps1}:3000:3000"
