@@ -34,9 +34,14 @@ function criarPdfCertificado(certificado, codigo, qr) {
         pdf.font("Helvetica").fontSize(14).text("Este certificado confirma que", 80, 180, {
             width: width - 160, align: "center",
         });
-        pdf.font("Helvetica-Bold").fontSize(24).text(certificado.nome_completo_emitido, 80, 216, {
-            width: width - 160, align: "center",
-        });
+        const nome = certificado.nome_completo_emitido;
+        const opcoesNome = { width: width - 160, align: "center" };
+        let tamanhoNome = 24;
+        pdf.font("Helvetica-Bold").fontSize(tamanhoNome);
+        while (pdf.heightOfString(nome, opcoesNome) > 48) {
+            pdf.fontSize(--tamanhoNome);
+        }
+        pdf.text(nome, 80, 216, opcoesNome);
         pdf.font("Helvetica").fontSize(13).text("concluiu a certificacao Scrum do Portal BorB.", 80, 270, {
             width: width - 160, align: "center",
         });
@@ -49,9 +54,10 @@ function criarPdfCertificado(certificado, codigo, qr) {
         const emissao = new Intl.DateTimeFormat("pt-BR", { dateStyle: "long", timeZone: "UTC" })
             .format(new Date(certificado.data_hora_emissao));
         pdf.text(`Emitido em ${emissao}`, 100, 374, { width: width - 200, align: "center" });
-        pdf.fontSize(8).text(`Codigo de validacao: ${codigo}`, 56, height - 48, { width: width - 250 });
-        pdf.image(qr, width - 164, height - 164, { width: 112, height: 112 });
-        pdf.fontSize(8).text("Escaneie para validar", width - 186, height - 46, { width: 156, align: "center" });
+        const linhaRodape = pdf.page.maxY() - 14;
+        pdf.fontSize(8).text(`Codigo de validacao: ${codigo}`, 56, linhaRodape, { width: width - 250 });
+        pdf.image(qr, width - 164, linhaRodape - 118, { width: 112, height: 112 });
+        pdf.fontSize(8).text("Escaneie para validar", width - 186, linhaRodape, { width: 156, align: "center" });
         pdf.end();
     });
 }
