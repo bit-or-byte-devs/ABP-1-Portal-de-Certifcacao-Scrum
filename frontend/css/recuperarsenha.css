@@ -367,3 +367,92 @@ a:focus-visible,
   * { transition: none !important; }
   .pagina-menu .btn:active { transform: none; }
 }
+
+
+/* Identidade visual compartilhada com a página inicial. */
+body.pagina-menu {
+  background:
+    linear-gradient(180deg, #4a6ad0 0%, #3f56a8 22%, #2c3a6e 42%, #36498c 62%, #4258a6 100%)
+    fixed var(--bg-blue);
+  font-family: var(--fonte-menu);
+  line-height: 1.5;
+}
+
+.pagina-menu .auth-header {
+  width: min(100% - 48px, var(--largura));
+  min-height: 70px;
+  margin: 18px auto 0;
+  padding: 6px 28px 6px 64px;
+  border: 0;
+  border-radius: 40px;
+  background: var(--menu-topo);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.pagina-menu .auth-brand { gap: 16px; }
+.pagina-menu .auth-brand__icon {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+}
+.pagina-menu .auth-brand__name { font-size: 20px; }
+.pagina-menu .auth-brand__version {
+  color: var(--menu-teal);
+  font: 400 10px var(--fonte-mono);
+}
+.pagina-menu .auth-header__link {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  border: 1px solid rgba(31, 184, 154, 0.45);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-white);
+  font: 600 14px var(--fonte-menu);
+  transition: background 0.18s, border-color 0.18s;
+}
+.pagina-menu .auth-header__link:hover {
+  border-color: var(--menu-teal);
+  background: rgba(31, 184, 154, 0.16);
+}
+.pagina-menu .rodape {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding: 26px max(24px, calc((100% - var(--largura)) / 2));
+  border: 0;
+  background: var(--menu-topo);
+  color: var(--menu-texto-suave);
+  text-align: left;
+  font: 14px/1.5 var(--fonte-menu);
+}
+.pagina-menu .rodape-copy { margin: 0; }
+.pagina-menu .rodape-copy strong { margin-right: 8px; color: var(--text-white); }
+.pagina-menu .marca-b { color: var(--menu-teal); }
+.pagina-menu .rodape-links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.pagina-menu .rodape-links a {
+  color: #dfe5f2;
+  font-weight: 400;
+  text-decoration: none;
+}
+.pagina-menu .rodape-links a:hover { color: var(--text-white); text-decoration: underline; }
+
+@media (max-width: 960px) {
+  .pagina-menu .auth-header { padding: 6px 18px 6px 28px; }
+}
+@media (max-width: 600px) {
+  .pagina-menu .auth-header {
+    width: calc(100% - 24px);
+    margin-top: 12px;
+    padding: 6px 16px;
+  }
+  .pagina-menu .auth-brand { gap: 10px; }
+  .pagina-menu .auth-header__link { padding: 0 14px; font-size: 13px; }
+  .pagina-menu .rodape { padding: 22px 16px; flex-direction: column; align-items: flex-start; }
+}
