@@ -26,11 +26,32 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "A Definition of Done (DoD) é um acordo explícito e compartilhado sobre o que significa um item estar realmente concluído. Definition of Ready (DoR) ajuda a indicar quando um item está pronto para começar; DoD define quando pode ser considerado pronto para entrega."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "A Definition of Done"
+            },
+            {
+              "tipo": "texto",
+              "texto": " (DoD) é um acordo explícito e compartilhado sobre o que significa um item estar realmente concluído. Definition of Ready (DoR) ajuda a indicar quando um item está pronto para começar; DoD define quando pode ser considerado pronto para entrega."
+            }
+          ]
         },
         {
           "tipo": "paragrafo",
           "conteudo": "Critérios comuns incluem código revisado por outra pessoa, testes automatizados aprovados, integração ao repositório principal, documentação técnica atualizada e validação em ambiente de homologação. Se os critérios da DoD não foram atendidos, a funcionalidade não está pronta para ser entregue."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A DoD evita que integrantes usem critérios diferentes para concluir o trabalho. Ela deve ser explícita, verificável e aplicada de maneira consistente."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "DoR não é obrigatório pelo Scrum Guide. Os critérios de aceitação são específicos da história, enquanto a DoD define o padrão comum do Incremento."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No BorB, um fluxo de cadastro só está concluído após integrar, validar e testar o comportamento necessário, não apenas implementar a tela."
         }
       ]
     },
@@ -42,7 +63,16 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "São scripts que verificam partes do sistema automaticamente. Em ciclos curtos, repetir todos os testes manualmente após cada alteração é impraticável; automação ajuda a detectar regressões rapidamente."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "São scripts que verificam partes do sistema automaticamente"
+            },
+            {
+              "tipo": "texto",
+              "texto": ". Em ciclos curtos, repetir todos os testes manualmente após cada alteração é impraticável; automação ajuda a detectar regressões rapidamente."
+            }
+          ]
         },
         {
           "tipo": "lista",
@@ -79,6 +109,22 @@
               }
             ]
           ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Unitários são rápidos e ajudam a localizar defeitos. Integração verifica comunicação entre módulos e sistemas; testes de sistema observam fluxos completos."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Os níveis se complementam: unitários não garantem integração externa e testes completos podem ser mais lentos. A estratégia considera risco e comportamento."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A automação não substitui testes exploratórios e observação humana. No BorB, pode combinar validação local, backend e fluxo completo de autenticação."
+        },
+        {
+          "conteudo": "Testes automatizados verificam comportamentos conhecidos com rapidez e repetibilidade, mas não demonstram que o sistema está livre de defeitos. Testes exploratórios, avaliações de usabilidade e observação humana podem revelar problemas que os casos automatizados não cobrem. No BorB, um teste pode confirmar que o progresso de uma seção foi salvo, enquanto uma sessão de uso pode mostrar que o estudante não percebeu como acompanhar esse progresso.",
+          "tipo": "paragrafo"
         }
       ]
     },
@@ -90,7 +136,28 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Na Integração Contínua (CI), as pessoas integram código ao repositório compartilhado várias vezes ao dia ou pelo menos diariamente. Cada envio pode acionar processos automatizados que compilam o sistema e executam testes. Isso revela rapidamente se uma mudança quebrou algo e evita o “inferno da integração”, quando código desenvolvido isoladamente por muito tempo só é combinado no final."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Na Integração Contínua (CI)"
+            },
+            {
+              "tipo": "texto",
+              "texto": ", as pessoas integram código ao repositório compartilhado várias vezes ao dia ou pelo menos diariamente. Cada envio pode acionar processos automatizados que compilam o sistema e executam testes. Isso revela rapidamente se uma mudança quebrou algo e evita o “inferno da integração”, quando código desenvolvido isoladamente por muito tempo só é combinado no final."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O pipeline pode executar instalação, análise, compilação e testes. Uma falha fornece um sinal rápido para a equipe localizar a causa."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Branches curtos, alterações pequenas e testes confiáveis reduzem o tempo entre mudança e descoberta. CI não significa publicar automaticamente; entrega e implantação contínuas são práticas relacionadas, porém distintas."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Quando o processo falha, a equipe deve corrigir a causa em vez de ignorar o pipeline. Isso mantém a integração confiável."
         }
       ]
     },
@@ -102,7 +169,28 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Refatorar é reestruturar e limpar o código sem alterar o comportamento externo nem as funcionalidades oferecidas ao usuário. O objetivo é melhorar legibilidade, reduzir complexidade e duplicação e facilitar manutenção. É como organizar uma gaveta de ferramentas sem mudar para que cada ferramenta serve. Refatoração frequente ajuda o sistema a continuar flexível e saudável."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Refatorar"
+            },
+            {
+              "tipo": "texto",
+              "texto": " é reestruturar e limpar o código sem alterar o comportamento externo nem as funcionalidades oferecidas ao usuário. O objetivo é melhorar legibilidade, reduzir complexidade e duplicação e facilitar manutenção. É como organizar uma gaveta de ferramentas sem mudar para que cada ferramenta serve. Refatoração frequente ajuda o sistema a continuar flexível e saudável."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A segurança da refatoração aumenta com testes que confirmam que o comportamento externo permanece. Mudanças pequenas facilitam identificar o efeito de cada ajuste."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No BorB, centralizar uma regra de validação copiada em várias telas pode reduzir duplicação e divergências sem alterar o comportamento esperado."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Refatoração não é uma etapa distante: ela faz parte do cuidado contínuo com o código e da capacidade de evoluir o produto com menor risco."
         }
       ]
     },
@@ -114,7 +202,16 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Dívida técnica é o custo implícito de escolher uma solução rápida ou de baixa qualidade em vez de uma solução mais limpa e sustentável. Um atalho pode ajudar a aproveitar uma oportunidade no curto prazo, mas, sem tempo para corrigir e refatorar, o código fica frágil e difícil de modificar. A equipe passa a gastar mais esforço mantendo problemas antigos e menos criando valor novo."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Dívida técnica"
+            },
+            {
+              "tipo": "texto",
+              "texto": " é o custo implícito de escolher uma solução rápida ou de baixa qualidade em vez de uma solução mais limpa e sustentável. Um atalho pode ajudar a aproveitar uma oportunidade no curto prazo, mas, sem tempo para corrigir e refatorar, o código fica frágil e difícil de modificar. A equipe passa a gastar mais esforço mantendo problemas antigos e menos criando valor novo."
+            }
+          ]
         },
         {
           "tipo": "paragrafo",
@@ -130,53 +227,20 @@
           ]
         },
         {
-          "tipo": "referencia",
-          "conteudo": [
-            {
-              "tipo": "texto",
-              "texto": "Fontes do material: "
-            },
-            {
-              "tipo": "link",
-              "texto": "Martin Fowler — Continuous Integration",
-              "url": "https://martinfowler.com/articles/continuousIntegration.html",
-              "nova_aba": true
-            },
-            {
-              "tipo": "texto",
-              "texto": ", "
-            },
-            {
-              "tipo": "link",
-              "texto": "Technical Debt",
-              "url": "https://martinfowler.com/bliki/TechnicalDebt.html",
-              "nova_aba": true
-            },
-            {
-              "tipo": "texto",
-              "texto": ", "
-            },
-            {
-              "tipo": "link",
-              "texto": "Refactoring Guru",
-              "url": "https://refactoring.guru/refactoring",
-              "nova_aba": true
-            },
-            {
-              "tipo": "texto",
-              "texto": " e "
-            },
-            {
-              "tipo": "link",
-              "texto": "Scrum Guide",
-              "url": "https://scrumguides.org/scrum-guide.html",
-              "nova_aba": true
-            },
-            {
-              "tipo": "texto",
-              "texto": "."
-            }
-          ]
+          "tipo": "paragrafo",
+          "conteudo": "Dívida pode surgir por decisão consciente ou falta de conhecimento. O problema cresce quando o compromisso assumido deixa de ser visível."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Os efeitos aparecem em retrabalho, testes difíceis e alterações pequenas que exigem mudanças em muitos lugares."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Nem toda solução provisória é errada. O importante é registrar risco e decidir quando aprimorar. Melhorias pequenas e frequentes podem reduzir dívida sem interromper todo o trabalho."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Qualidade deve estar presente no trabalho diário: DoD define padrões, testes verificam, CI revela mudanças cedo e refatoração mantém o sistema sustentável."
         }
       ]
     }

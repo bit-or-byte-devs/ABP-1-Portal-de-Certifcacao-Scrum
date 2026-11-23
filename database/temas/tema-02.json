@@ -19,6 +19,10 @@
     {
       "tipo": "paragrafo",
       "conteudo": "A frase que resume sua intenção é: “Estamos descobrindo maneiras melhores de desenvolver software, fazendo-o nós mesmos e ajudando outros a fazerem o mesmo”. O Manifesto não rejeita os itens à direita; valoriza mais os itens à esquerda."
+    },
+    {
+      "tipo": "paragrafo",
+      "conteudo": "O Manifesto expressa valores e princípios, mas não descreve uma receita completa de etapas, papéis ou ferramentas. Seus autores vieram de diferentes abordagens de desenvolvimento e buscaram uma base comum, não um método único. Por isso, adotar Scrum, XP ou outra abordagem não basta, por si só, para trabalhar de forma ágil: as escolhas do time precisam refletir os valores e princípios no contexto do produto."
     }
   ],
   "secoes": [
@@ -73,6 +77,43 @@
               }
             ]
           ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Os quatro valores"
+            },
+            {
+              "tipo": "texto",
+              "texto": " devem ser lidos em conjunto. Eles não afirmam que processos, ferramentas, documentação, contratos ou planos deixaram de ser importantes; apenas orientam a preferência quando existe um conflito. Os itens à direita continuam tendo valor, mas recebem menor prioridade diante das necessidades das pessoas, do produto, da parceria e da capacidade de adaptação."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Valorizar indivíduos e interações significa reconhecer que ferramentas não resolvem sozinhas problemas de comunicação e colaboração. Um quadro pode mostrar o estado do trabalho, mas é a conversa que permite esclarecer dúvidas e perceber impedimentos. Processos ajudam a dar consistência desde que não substituam o diálogo."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Valorizar software em funcionamento não exige eliminar documentação. A documentação deve apoiar a construção de um produto utilizável. Uma especificação completa não prova que a solução atende ao usuário; uma versão funcional permite observar o comportamento real e obter feedback concreto."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A colaboração com o cliente vai além de receber requisitos no início. Equipe e pessoas interessadas mantêm contato para esclarecer prioridades, avaliar entregas e ajustar expectativas, reduzindo a distância entre quem constrói o software e quem conhece o problema."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Responder a mudanças significa avaliar novas informações e adaptar o caminho quando isso gera melhores resultados. Não é aceitar qualquer alteração sem considerar impacto, custo ou risco: o plano continua necessário como orientação que pode ser revista."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No BorB, esses valores aparecem quando a equipe conversa diretamente sobre uma dificuldade, valida uma versão navegável, coleta a percepção de estudantes e reorganiza prioridades após observar o uso real. A agilidade se manifesta nas decisões e no modo de trabalhar, não apenas em reuniões ou ferramentas."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No BorB, valorizar pessoas e interações não exige abandonar o quadro de tarefas, os registros de decisões ou os arquivos JSON. Esses recursos ajudam a equipe a acompanhar o trabalho e preservar informações. Se uma descrição de conteúdo estiver ambígua, porém, a ferramenta sozinha não resolve a dúvida: a conversa entre quem escreveu, revisa e implementa permite construir entendimento comum, que depois pode ser registrado para orientar o restante do time."
         }
       ]
     },
@@ -102,36 +143,48 @@
         },
         {
           "tipo": "paragrafo",
-          "conteudo": "Na prática, ciclos curtos e feedback permitem adaptar o produto; conversa frequente evita mal-entendidos; excelência técnica reduz dívida; e retrospectivas apoiam a melhoria contínua."
-        },
-        {
-          "tipo": "referencia",
           "conteudo": [
             {
-              "tipo": "texto",
-              "texto": "Fontes do material: "
-            },
-            {
-              "tipo": "link",
-              "texto": "Manifesto Ágil",
-              "url": "https://agilemanifesto.org/iso/ptbr/manifesto.html",
-              "nova_aba": true
+              "tipo": "destaque",
+              "texto": "Na prática"
             },
             {
               "tipo": "texto",
-              "texto": " e seus "
-            },
-            {
-              "tipo": "link",
-              "texto": "doze princípios",
-              "url": "https://agilemanifesto.org/iso/ptbr/principles.html",
-              "nova_aba": true
-            },
-            {
-              "tipo": "texto",
-              "texto": "."
+              "texto": ", ciclos curtos e feedback permitem adaptar o produto; conversa frequente evita mal-entendidos; excelência técnica reduz dívida; e retrospectivas apoiam a melhoria contínua."
             }
           ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Os princípios ajudam a transformar os valores em decisões práticas. Eles se reforçam: entregar valor cedo cria oportunidades de feedback, o feedback ajuda a adaptar requisitos e a qualidade técnica torna as mudanças menos arriscadas."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Entregas antecipadas tornam benefícios visíveis antes do fim do projeto. Aceitar mudanças exige avaliar seu valor e reorganizar prioridades com transparência. Ciclos curtos reduzem o período sem verificar se o caminho continua adequado."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A colaboração exige proximidade entre pessoas de negócio e desenvolvimento, equipes motivadas e comunicação direta. Confiança e autonomia são importantes: responsabilidades não funcionam quando todas as decisões dependem de alguém distante do trabalho."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Software funcionando oferece evidência concreta de progresso. O ritmo deve ser sustentável, e bom design, testes e integração são condições que facilitam a evolução e reduzem o custo das mudanças."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Simplicidade significa evitar trabalho que não contribui ao resultado, sem confundir isso com fazer algo de qualquer jeito. Equipes auto-organizáveis decidem como realizar o trabalho dentro de objetivos e limites acordados."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Imagine que o BorB planeje uma área de simulados. Em vez de desenvolver todas as funcionalidades de uma vez, a equipe pode entregar um fluxo simples, observar sua utilização e ajustar navegação e resultados com base no aprendizado."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Os princípios não são frases de efeito. Uma equipe pode fazer reuniões diárias sem colaborar, entregar versões sem gerar valor ou dizer que aceita mudanças sem discutir prioridades. Eles só se tornam úteis quando orientam decisões reais."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Entrega frequente não significa publicar qualquer alteração imediatamente nem impor o mesmo intervalo a todo produto. O princípio recomenda ciclos curtos para que a equipe obtenha retorno cedo; cada entrega precisa estar funcional e adequada ao uso pretendido. No BorB, uma versão navegável de um tema, com explicações organizadas e acesso claro ao conteúdo, poderia ser avaliada antes de a equipe concluir todos os aprimoramentos dos materiais. O retorno ajudaria a orientar os próximos ajustes sem apresentar um rascunho incompleto como produto pronto."
         }
       ]
     }
