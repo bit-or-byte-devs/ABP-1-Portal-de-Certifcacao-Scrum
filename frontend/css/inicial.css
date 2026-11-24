@@ -111,8 +111,7 @@ main { max-width: 1120px; margin: 0 auto; padding: 28px 50px 64px; }
 .journey-heading {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: clamp(12px, 3vw, 28px);
+  gap: 12px;
   margin-bottom: 40px;
 }
 .journey-mascot {
