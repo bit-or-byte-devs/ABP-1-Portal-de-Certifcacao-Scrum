@@ -90,6 +90,12 @@ main { max-width: 1120px; margin: 0 auto; padding: 28px 50px 64px; }
   margin-top: 66px;
   scroll-margin-top: 24px;
 }
+.learning-journey > .journey-mascot {
+  display: block;
+  width: clamp(104px, 14vw, 156px);
+  height: auto;
+  margin: 0 auto 16px;
+}
 .learning-journey > h2 {
   margin: 0 0 40px;
   text-align: center;
