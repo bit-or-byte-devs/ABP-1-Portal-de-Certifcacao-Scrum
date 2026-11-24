@@ -9,6 +9,9 @@
 - `database/dml`: cadastro inicial de temas.
 - `database/temas`: conteúdo estruturado e versionado dos 12 temas de estudo.
 - `database/questoes`: dados revisados para importação; contém gabaritos e não é publicado como pasta estática.
+- `database/flashcards`: cartões de estudo versionados por tema (10 por arquivo), importados por `backend/scripts/importar-flashcards.js`; consulte `docs/carga-flashcards.md` e `docs/flashcards.md`.
+- `docs/flashcards.md`: documentação da funcionalidade de flashcards (regra Leitner, API, tela, testes); o roteiro de teste está em `docs/homologacao-task-003.md`.
+- `docs/imagens/flashcards`: capturas de tela usadas na documentação de flashcards (PNG).
 - `docs/questoes/questoes-pdf`: documentos originais.
 - `docs/questoes/questoes-imagens`: referências documentais, não publicadas pelo servidor.
 - `imagens`: imagens públicas utilizadas pelas telas. Novas imagens de questões devem ficar em `imagens/questoes`, com a URL `/imagens/questoes/arquivo.png`.
@@ -27,6 +30,9 @@ npm run db:temas
 npm run db:questoes -- --validar
 npm run db:questoes -- --migrar
 npm run db:questoes
+npm run db:flashcards -- --validar
+npm run db:flashcards -- --migrar
+npm run db:flashcards
 ```
 
 As dependências pertencem somente a `backend/package.json` e são instaladas em `backend/node_modules`. O package.json da raiz apenas encaminha comandos; `npm install` na raiz não instala o backend. O Docker continua usando `backend/package-lock.json` com npm ci. O backend carrega suas variáveis de backend/.env quando iniciado pelos comandos acima.

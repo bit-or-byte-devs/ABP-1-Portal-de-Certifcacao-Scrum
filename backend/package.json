@@ -11,6 +11,7 @@
     "start": "node server.js",
     "db:preparar": "node scripts/preparar-banco.js",
     "db:questoes": "node scripts/importar-questoes.js",
+    "db:flashcards": "node scripts/importar-flashcards.js",
     "db:temas": "node scripts/importar-temas.js"
   },
   "keywords": [],

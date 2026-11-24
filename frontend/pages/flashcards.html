@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BorB - Flashcards</title>
+    <link rel="stylesheet" href="../css/menu-temas.css">
+    <link rel="stylesheet" href="../css/rodape.css">
+    <link rel="stylesheet" href="../css/flashcards.css">
+</head>
+<body class="pagina-flashcards">
+
+    <header class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">B</div>
+            <div class="logo-text">
+                <h2>BorB</h2>
+                <small>SCRUM_v0.1</small>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <a class="btn-nav" href="perfil.html">Perfil</a>
+            <button class="btn-nav" type="button" data-logout>Log Out</button>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="top-header-row">
+            <a href="menu.html" class="btn-voltar">&larr; Voltar</a>
+            <h1 class="page-title">Flashcards</h1>
+        </div>
+
+        <p id="aviso-flashcards" class="fc-aviso" role="status" aria-live="polite"></p>
+        <button type="button" class="fc-secundario fc-tentar" id="fc-tentar-novamente" hidden>Tentar novamente</button>
+
+        <!-- Estado 1: seleção de modo e temas -->
+        <div id="fc-estado-selecao" aria-busy="true">
+            <section class="fc-resumo" aria-labelledby="fc-resumo-titulo">
+                <h2 id="fc-resumo-titulo">Seu domínio geral</h2>
+                <p id="fc-resumo-texto">Carregando seus flashcards…</p>
+                <div class="fc-barra" id="fc-resumo-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="fc-resumo-titulo" hidden><span></span></div>
+            </section>
+
+            <!-- Legenda dos quatro estados: recolhida por padrão, abre com Enter ou Espaço -->
+            <details class="fc-legenda" id="fc-legenda">
+                <summary>Entenda os estados dos cartões</summary>
+                <dl class="fc-legenda-lista">
+                    <div><dt>Novos</dt><dd>Cartões que você ainda não respondeu.</dd></div>
+                    <div><dt>Errados</dt><dd>A última resposta foi "Não sabia".</dd></div>
+                    <div><dt>Em aprendizado</dt><dd>Você acertou uma vez e falta confirmar.</dd></div>
+                    <div><dt>Dominados</dt><dd>Você acertou de novo, em outra sessão.</dd></div>
+                </dl>
+                <p class="fc-legenda-regra">Um cartão é dominado depois de dois acertos em sessões diferentes. Errar devolve o cartão para Errados.</p>
+            </details>
+
+            <!-- Esqueleto enquanto o domínio carrega; some quando a seleção é montada -->
+            <div class="fc-grid" id="fc-esqueleto" aria-hidden="true">
+                <div class="fc-esqueleto"></div><div class="fc-esqueleto"></div><div class="fc-esqueleto"></div>
+            </div>
+
+            <form id="fc-selecao" class="fc-selecao" hidden>
+                <fieldset class="fc-modos">
+                    <legend>Modo de estudo</legend>
+                    <label class="fc-modo">
+                        <input type="radio" name="modo" value="tema" checked>
+                        <span>Por tema</span>
+                    </label>
+                    <label class="fc-modo">
+                        <input type="radio" name="modo" value="aleatorio">
+                        <span>Aleatório geral</span>
+                    </label>
+                    <label class="fc-modo">
+                        <input type="radio" name="modo" value="revisao" aria-describedby="fc-motivo-revisao">
+                        <span>Revisar os que errei</span>
+                    </label>
+                    <p class="fc-motivo" id="fc-motivo-revisao" hidden></p>
+                </fieldset>
+
+                <fieldset class="fc-temas" id="fc-temas">
+                    <legend>Escolha os temas <span id="fc-selecionados" class="fc-selecionados"></span></legend>
+                    <p class="fc-dica" id="fc-dica-modo"></p>
+                    <div class="fc-grid" id="fc-grid"></div>
+                </fieldset>
+
+                <div class="fc-acoes">
+                    <button type="submit" class="fc-comecar" id="fc-comecar" aria-describedby="fc-comecar-aviso">Começar</button>
+                    <span class="fc-comecar-aviso" id="fc-comecar-aviso"></span>
+                </div>
+            </form>
+        </div>
+
+        <!-- Estado 2: sessão de estudo -->
+        <section id="fc-estado-sessao" class="fc-sessao" aria-labelledby="fc-sessao-modo" hidden>
+            <div class="fc-sessao-topo">
+                <h2 class="fc-sessao-modo" id="fc-sessao-modo"></h2>
+                <p class="fc-sessao-contador" id="fc-sessao-contador" aria-live="polite" aria-atomic="true"></p>
+            </div>
+            <div class="fc-barra" id="fc-sessao-barra" role="progressbar" aria-valuemin="0" aria-label="Progresso da sessão"><span></span></div>
+            <p class="fc-feedback" id="fc-feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+            <p class="fc-so-leitor" id="fc-anuncio" role="status" aria-live="polite" aria-atomic="true"></p>
+
+            <div class="fc-cartao-area">
+                <div class="fc-cartao" id="fc-cartao" tabindex="-1" role="group" aria-roledescription="cartão">
+                    <div class="fc-cartao-interno">
+                        <div class="fc-face fc-face--frente" id="fc-face-frente">
+                            <p class="fc-cartao-tema" id="fc-frente-tema"></p>
+                            <p class="fc-cartao-rotulo">Pergunta</p>
+                            <h3 class="fc-cartao-texto" id="fc-frente-texto"></h3>
+                            <div class="fc-cartao-imagem" id="fc-frente-imagem"></div>
+                        </div>
+                        <div class="fc-face fc-face--verso" id="fc-face-verso" inert aria-hidden="true">
+                            <p class="fc-cartao-tema" id="fc-verso-tema"></p>
+                            <p class="fc-cartao-rotulo">Resposta</p>
+                            <h3 class="fc-cartao-texto" id="fc-verso-texto"></h3>
+                            <div class="fc-cartao-detalhe">
+                                <p class="fc-cartao-rotulo">Explicação</p>
+                                <p class="fc-cartao-explicacao" id="fc-verso-explicacao"></p>
+                            </div>
+                            <p class="fc-cartao-fonte">Fonte: <span id="fc-verso-fonte"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc-sessao-acoes">
+                <button type="button" class="fc-comecar" id="fc-virar" aria-keyshortcuts="Enter Space">Virar <kbd>Enter</kbd></button>
+                <div class="fc-respostas" id="fc-respostas" hidden>
+                    <button type="button" class="fc-resposta fc-resposta--nao" id="fc-nao-sabia" aria-keyshortcuts="1">Não sabia <kbd>1</kbd></button>
+                    <button type="button" class="fc-resposta fc-resposta--sim" id="fc-sabia" aria-keyshortcuts="2">Sabia <kbd>2</kbd></button>
+                </div>
+                <button type="button" class="fc-secundario" id="fc-encerrar">Encerrar</button>
+            </div>
+            <p class="fc-dica fc-atalhos">Atalhos: Enter ou Espaço vira o cartão; depois, 1 para Não sabia e 2 para Sabia.</p>
+        </section>
+
+        <!-- Estado 3: resumo da sessão -->
+        <section id="fc-estado-fim" class="fc-fim" aria-labelledby="fc-fim-titulo" hidden>
+            <h2 id="fc-fim-titulo" tabindex="-1">Resumo da sessão</h2>
+            <p class="fc-dica" id="fc-fim-texto"></p>
+            <h3 class="fc-fim-subtitulo" id="fc-fim-respostas-titulo">Suas respostas</h3>
+            <dl class="fc-contadores fc-fim-contadores fc-fim-respostas" aria-labelledby="fc-fim-respostas-titulo">
+                <div class="fc-contador fc-contador--dominados"><dt>Sabia</dt><dd id="fc-fim-sabia">0</dd></div>
+                <div class="fc-contador fc-contador--erros"><dt>Não sabia</dt><dd id="fc-fim-nao-sabia">0</dd></div>
+            </dl>
+            <h3 class="fc-fim-subtitulo" id="fc-fim-estados-titulo">Como os cartões terminaram</h3>
+            <dl class="fc-contadores fc-fim-contadores" aria-labelledby="fc-fim-estados-titulo">
+                <div class="fc-contador fc-contador--dominados"><dt>Dominados</dt><dd id="fc-fim-dominados">0</dd></div>
+                <div class="fc-contador fc-contador--aprendendo"><dt>Em aprendizado</dt><dd id="fc-fim-aprendizado">0</dd></div>
+                <div class="fc-contador fc-contador--erros"><dt>Errados</dt><dd id="fc-fim-errados">0</dd></div>
+            </dl>
+            <p class="fc-orientacao" id="fc-fim-orientacao" hidden>Acerte estes cartões de novo em outra sessão para dominá-los.</p>
+            <div class="fc-acoes">
+                <button type="button" class="fc-comecar" id="fc-revisar-agora" aria-describedby="fc-motivo-fim">Revisar os que errei agora</button>
+                <button type="button" class="fc-secundario" id="fc-nova-sessao">Nova sessão</button>
+                <a class="fc-secundario" href="menu.html">Voltar ao menu</a>
+            </div>
+            <p class="fc-motivo" id="fc-motivo-fim" hidden></p>
+        </section>
+
+        <!-- Confirmação ao usar Voltar do navegador no meio da sessão -->
+        <dialog id="fc-dialogo-saida" class="fc-dialogo" aria-labelledby="fc-dialogo-titulo" aria-describedby="fc-dialogo-texto">
+            <h2 id="fc-dialogo-titulo">Sair da sessão?</h2>
+            <p id="fc-dialogo-texto"></p>
+            <div class="fc-acoes">
+                <button type="button" class="fc-comecar" id="fc-continuar-sessao">Continuar estudando</button>
+                <button type="button" class="fc-secundario" id="fc-sair-sessao">Sair da sessão</button>
+            </div>
+        </dialog>
+    </main>
+
+    <footer class="rodape-site">
+        <p class="rodape-site__marca"><strong>Bor<span class="rodape-site__b">B</span></strong> &copy; 2026 Equipe Bit or Byte, FATEC Jacareí.</p>
+        <nav class="rodape-site__links" aria-label="Links do rodapé">
+            <a class="rodape-site__email" href="mailto:bitorbyte6@gmail.com">bitorbyte6@gmail.com</a>
+            <a href="consultar-certificado.html">Verificar Código</a>
+            <a href="privacidade.html">Privacidade e LGPD</a>
+            <a href="termos.html">Termos de Uso</a>
+        </nav>
+    </footer>
+
+    <script src="../js/logout.js"></script>
+    <script src="../js/sessao-estudos.js"></script>
+    <script src="../js/flashcards.js"></script>
+</body>
+</html>

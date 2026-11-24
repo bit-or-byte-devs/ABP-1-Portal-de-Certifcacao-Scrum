@@ -108,6 +108,19 @@
     }
   }
 
+  // Atalho de flashcards: continua clicável; o contador só aparece com dados reais da API.
+  async function mostrarFlashcards() {
+    const contador = document.getElementById("atalho-flashcards");
+    try {
+      const resposta = await fetch("/api/flashcards", { cache: "no-store" });
+      if (resposta.status === 401) { window.location.replace("/pages/login.html"); return; }
+      if (!resposta.ok) throw new Error("/api/flashcards");
+      const geral = (await resposta.json()).geral;
+      texto("flashcards-contador", geral.caixa3 + "/" + geral.total);
+      contador.hidden = false;
+    } catch { contador.hidden = true; }
+  }
+
   async function carregarUsuario() {
     limparAviso();
     let resposta;
@@ -129,6 +142,7 @@
     const [estudos, exame] = await Promise.allSettled([
       pedirJson("/api/estudos"),
       pedirJson("/api/exames/progresso"),
+      mostrarFlashcards(),
     ]);
     if (estudos.status === "fulfilled" && Array.isArray(estudos.value)) mostrarEstudos(estudos.value);
     else desenharConstelacao([]);

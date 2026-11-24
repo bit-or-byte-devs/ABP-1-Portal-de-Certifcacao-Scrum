@@ -117,11 +117,13 @@ ABP-1-Portal-de-Certifcacao-Scrum/
 │   │   └── 008_email_unico.sql           # Unicidade de e-mail sem diferenciar maiúsculas
 │   ├── temas/                            # Conteúdo estruturado dos temas
 │   ├── questoes/                         # Banco de questões em JSON
+│   ├── flashcards/                       # Catálogo de 120 cartões de estudo (10 por tema)
 │   └── diagrams/                         # Diagramas do banco
 ├── docs/                                 # Guias técnicos e documentação funcional
 │   ├── recuperacao-senha.md              # Fluxo, segurança, configuração e testes
 │   ├── login.md, cadastro.md              # Autenticação e cadastro
 │   ├── preparacao-banco.md                # Preparação e atualização do banco
+│   ├── flashcards.md                      # Flashcards: regra Leitner, API, tela e testes
 │   └── questoes/                          # Mapeamentos e materiais das questões
 ├── imagens/                              # Logos e imagens institucionais do projeto
 ├── Dockerfile                            # Imagem da aplicação
@@ -284,3 +286,5 @@ Consulte [as instruções de importação](docs/carga-questoes.md), [o mapeament
 ## Carga dos temas
 
 Consulte [as instruções de importação dos conteúdos de estudo](docs/carga-temas.md). Os arquivos JSON em `database/temas` substituem o antigo conteúdo HTML centralizado no backend.
+## Flashcards
+Os flashcards são a revisão ativa do candidato antes do exame: 120 cartões (10 por tema), com repetição espaçada pelo método de Leitner em 3 caixas e progresso individual. A tela fica em `frontend/pages/flashcards.html`, com atalho no menu e na tela de estudos. Consulte [a documentação da funcionalidade](docs/flashcards.md), [as instruções de carga do catálogo](docs/carga-flashcards.md) e [o roteiro de homologação](docs/homologacao-task-003.md).

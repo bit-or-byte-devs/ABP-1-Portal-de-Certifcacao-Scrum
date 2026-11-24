@@ -131,5 +131,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             subtitulos.forEach(item => observador.observe(item.elemento));
         }
         document.querySelector('.btn-exam').href = `exame.html?tema=${tema}`;
+        document.querySelector('.btn-flashcards').href = `flashcards.html?tema=${tema}`;
     } catch (erro) { portal.avisar(erro.message); }
 });

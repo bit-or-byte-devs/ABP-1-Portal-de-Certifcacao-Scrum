@@ -6,6 +6,7 @@
     <title>BorB - Menu e perfil</title>
     <link rel="preload" href="../assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../css/menu-principal.css">
+    <link rel="stylesheet" href="../css/rodape.css">
 </head>
 <body class="pagina-menu">
 
@@ -102,6 +103,7 @@
                         <span class="atalho-titulo">Revisar com flashcards</span>
                         <span class="atalho-desc">Fixe os conceitos dos 12 temas com cartões de revisão</span>
                     </span>
+                    <span class="atalho-dado atalho-dado--legenda" id="atalho-flashcards" hidden><span id="flashcards-contador">0/0</span> <small>dominados</small></span>
                 </a>
 
                 <a class="atalho atalho--largo is-bloqueado" id="atalho-certificados" href="certificados.html" aria-disabled="true">
@@ -120,10 +122,11 @@
         </section>
     </main>
 
-    <footer class="rodape">
-        <p class="rodape-copy"><strong>Bor<span class="marca-b">B</span></strong> &copy; 2026 Equipe Bit or Byte, FATEC Jacareí.</p>
-        <nav class="rodape-links" aria-label="Contato e informações legais">
-            <a href="mailto:bitorbyte6@gmail.com">bitorbyte6@gmail.com</a>
+    <footer class="rodape-site">
+        <p class="rodape-site__marca"><strong>Bor<span class="rodape-site__b">B</span></strong> &copy; 2026 Equipe Bit or Byte, FATEC Jacareí.</p>
+        <nav class="rodape-site__links" aria-label="Links do rodapé">
+            <a class="rodape-site__email" href="mailto:bitorbyte6@gmail.com">bitorbyte6@gmail.com</a>
+            <a href="consultar-certificado.html">Verificar Código</a>
             <a href="privacidade.html">Privacidade e LGPD</a>
             <a href="termos.html">Termos de Uso</a>
         </nav>
