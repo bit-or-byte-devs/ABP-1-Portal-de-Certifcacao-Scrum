@@ -62,6 +62,16 @@ main { max-width: 1120px; margin: 0 auto; padding: 28px 50px 64px; }
 .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 12px 24px; border-radius: 20px; background: var(--green); color: #0b0f19; font-size: 16px; font-weight: 700; text-decoration: none; transition: background .2s; }
 .button:hover { background: #66ffa3; }
 .hero-side .button { width: 100%; }
+.certification-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+.certification-link:hover, .certification-link:focus-visible { color: var(--green); }
 .tiny { margin: 20px 0 0; color: var(--muted); font-size: 13px; }
 .tiny strong { color: var(--green); }
 .learning { scroll-margin-top: 24px; }
@@ -89,6 +99,7 @@ main { max-width: 1120px; margin: 0 auto; padding: 28px 50px 64px; }
 .learning-grid strong { color: #fff; }
 .learning-journey {
   margin-top: 66px;
+  scroll-margin-top: 24px;
 }
 .learning-journey > h2 {
   margin: 0 0 40px;
@@ -98,22 +109,35 @@ main { max-width: 1120px; margin: 0 auto; padding: 28px 50px 64px; }
 }
 .learning-journey-grid {
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 34px;
-  align-items: start;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.journey-objectives { text-align: left; }
-.journey-objectives h3 { margin: 0 0 22px; font-size: 20px; }
-.journey-objectives p, .journey-description p { color: #e0e6f5; font-size: 15px; }
-.journey-objectives p { margin: 0 0 18px; }
-.journey-description p { margin: 0 0 18px; }
-.journey-description img {
-  display: block;
-  width: min(44%, 220px);
-  height: auto;
-  margin: 0 auto -12px;
+.learning-journey .journey-step {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--card);
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
 }
-.journey-objectives strong, .journey-description strong { color: #fff; }
+.learning-journey .journey-step-number {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  background: var(--green);
+  color: #111;
+  font-size: 18px;
+  font-weight: 800;
+}
+.learning-journey .journey-step h3 { margin: 0 0 12px; font-size: 20px; line-height: 1.3; }
+.learning-journey .journey-step p { margin: 0; color: var(--muted); }
+.learning-journey .journey-step p + p { margin-top: 12px; }
+.learning-journey .journey-step strong { color: #fff; }
 footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px 50px; background: #0b0f19; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; }
 footer strong { margin-right: 12px; color: #fff; }
 footer nav { display: flex; flex-wrap: wrap; gap: 20px; }
@@ -141,7 +165,6 @@ footer a:hover { color: var(--green); }
   .learning > h2 { font-size: 28px; }
   .learning-journey { margin-top: 46px; }
   .learning-journey-grid { gap: 18px; }
-  .journey-description img { width: min(55%, 190px); }
   footer { padding: 22px 16px; }
 }
 @media (prefers-reduced-motion: reduce) {
