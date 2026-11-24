@@ -41,10 +41,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const elementoData = document.getElementById('data-emissao-certificado');
             elementoData.dateTime = dataEmissao.toISOString();
             elementoData.textContent = new Intl.DateTimeFormat('pt-BR', {
-                dateStyle: 'medium', timeStyle: 'short',
+                dateStyle: 'medium', timeStyle: 'short', timeZone: 'America/Sao_Paulo',
             }).format(dataEmissao);
             document.getElementById('codigo-validado').textContent = codigo;
-            document.getElementById('qr-certificado-publico').src = `/api/certificados/${encodeURIComponent(codigo)}/qr`;
+            document.getElementById('modelo-nome').textContent = certificado.nome;
+            document.getElementById('modelo-data').textContent = new Intl.DateTimeFormat('pt-BR', {
+                dateStyle: 'short', timeZone: 'America/Sao_Paulo',
+            }).format(dataEmissao);
+            document.getElementById('modelo-hora').textContent = new Intl.DateTimeFormat('pt-BR', {
+                timeStyle: 'short', timeZone: 'America/Sao_Paulo',
+            }).format(dataEmissao);
+            document.getElementById('modelo-nota').textContent = document.getElementById('nota-certificado').textContent;
+            document.getElementById('modelo-acertos').textContent = `${document.getElementById('percentual-certificado').textContent}%`;
+            const certificadoUrl = `/api/certificados/${encodeURIComponent(codigo)}`;
+            document.getElementById('qr-certificado-publico').src = `${certificadoUrl}/qr`;
+            document.getElementById('baixar-certificado-publico').href = `${certificadoUrl}/pdf-publico`;
             mensagem.textContent = '';
             formConsulta.hidden = true;
             resultadoCertificado.hidden = false;

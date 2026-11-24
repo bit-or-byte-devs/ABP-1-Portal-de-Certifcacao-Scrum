@@ -1,0 +1,84 @@
+/* Rodapé padrão do site (Figma): marca e direitos à esquerda, links à direita.
+   Use <footer class="rodape-site"> com <nav aria-label="Links do rodapé">. Não confundir com
+   .rodape, o rodapé das telas de login e cadastro, que tem outro sentido e continua em seus CSS.
+   Base extraída do rodapé do menu (mesmo azul-marinho, teal e fonte Space Grotesk). A fonte é
+   carregada pelo CSS de cada página; aqui só se declara a família, com a do global.css de reserva. */
+@import url("global.css");
+
+.rodape-site {
+    --rodape-fundo: #021f4f;
+    --rodape-texto: #b9c1d1;     /* 8,85:1 sobre o fundo */
+    --rodape-link: #dfe5f2;      /* 12,68:1 */
+    --rodape-destaque: #1fb89a;  /* 6,39:1 */
+    --rodape-largura: 1172px;    /* alinha às bordas da barra do topo */
+    --rodape-alvo: 44px;
+
+    /* Acima do céu estrelado (canvas fixo em z-index 0) das páginas logadas. */
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+    padding: 14px max(24px, calc((100% - var(--rodape-largura)) / 2));
+    background: var(--rodape-fundo);
+    color: var(--rodape-texto);
+    font-family: "Space Grotesk", var(--fonte-texto);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.rodape-site__marca { margin: 0; }
+.rodape-site__marca strong { margin-right: 4px; color: var(--text-white); font-weight: 700; }
+.rodape-site__b { color: var(--rodape-destaque); }
+
+.rodape-site__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 24px;
+}
+
+.rodape-site__links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--rodape-alvo);
+    color: var(--rodape-link);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.rodape-site__links a:hover { color: var(--text-white); text-decoration: underline; }
+
+/* O e-mail aparece sempre sublinhado, como no Figma. */
+.rodape-site__links a.rodape-site__email {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.rodape-site a:focus-visible {
+    outline: 3px solid var(--green-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Telas estreitas: marca e links em linhas centralizadas, sem rolagem horizontal a partir de 360 px. */
+@media (max-width: 640px) {
+    .rodape-site {
+        flex-direction: column;
+        justify-content: center;
+        gap: 2px;
+        padding: 16px;
+        text-align: center;
+    }
+
+    .rodape-site__links {
+        justify-content: center;
+        gap: 0 20px;
+    }
+}
+
+@media (forced-colors: active) {
+    .rodape-site { border-top: 1px solid CanvasText; }
+}

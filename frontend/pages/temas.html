@@ -4,23 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BorB - Escolha o Tema</title>
+    <link rel="preload" href="../assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../css/menu-temas.css">
+    <link rel="stylesheet" href="../css/menu-principal.css">
+    <link rel="stylesheet" href="../css/temas-menu.css">
 </head>
-<body>
+<body class="pagina-menu">
 
     <!-- Barra de Navegação Superior -->
-    <header class="top-nav">
-        <div class="logo-area">
-            <div class="logo-icon">B</div>
-            <div class="logo-text">
-                <h2>BorB</h2>
-                <small>SCRUM_v8.1</small>
-            </div>
-        </div>
-        <div class="nav-buttons">
-            <a class="btn-dark" href="perfil.html">Perfil</a>
-            <button data-logout class="btn-nav">Log Out</button>
-        </div>
+    <header class="topo">
+        <a class="marca" href="menu.html" aria-label="BorB, menu principal">
+            <span class="marca-logo" aria-hidden="true">
+                <img class="navbar-marca-imagem" src="../../imagens/borb-logo.png" alt="Logo BorB" width="48" height="48">
+            </span>
+        </a>
+        <nav class="topo-acoes" aria-label="Conta">
+            <a class="btn-topo" href="perfil.html">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+                Perfil
+            </a>
+            <button class="btn-topo btn-topo--sair" type="button" data-logout>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4h4v16h-4"/><path d="M10 8l-4 4 4 4"/><path d="M6 12h10"/></svg>
+                Sair
+            </button>
+        </nav>
     </header>
 
     <!-- Conteúdo Principal -->
@@ -294,19 +301,18 @@
     </main>
 
     <!-- Rodapé -->
-    <footer class="footer-bar">
-        <div class="footer-left">
-            <span class="footer-brand">BorB</span>
-            <span class="footer-copy">&copy; 2026 Scrum Learning Platform. Todos os direitos reservados.</span>
-        </div>
-        <div class="footer-right">
-            <span>STATUS: <span class="green-text">SECURE_MATRIX</span></span>
-            <span>FRAMEWORK: <span class="green-text">SCRUM.ORG COMPLIANT</span></span>
-        </div>
+    <footer class="rodape">
+        <p class="rodape-copy"><strong>Bor<span class="marca-b">B</span></strong> &copy; 2026 Equipe Bit or Byte, FATEC Jacareí.</p>
+        <nav class="rodape-links" aria-label="Contato e informações legais">
+            <a href="mailto:bitorbyte6@gmail.com">bitorbyte6@gmail.com</a>
+            <a href="privacidade.html">Privacidade e LGPD</a>
+            <a href="termos.html">Termos de Uso</a>
+        </nav>
     </footer>
 
     <script src="../js/menu-temas.js"></script>
 <script src="../js/sessao-estudos.js"></script>
 <script src="../js/logout.js"></script>
+    <script src="../js/ceu-estrelado.js"></script>
 </body>
 </html>
