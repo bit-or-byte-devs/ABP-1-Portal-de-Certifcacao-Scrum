@@ -85,6 +85,11 @@ router.post('/:codigo/resultado', exigirJson, async (req, res) => {
     if (!CODIGO.test(codigo)) return res.status(400).json({ mensagem: 'Código de flashcard inválido.' });
     const sabia = req.body?.sabia;
     if (typeof sabia !== 'boolean') return res.status(400).json({ mensagem: 'Informe sabia como verdadeiro ou falso.' });
+    // Opcional: a caixa que o cliente viu ao exibir o cartão (null para cartão sem progresso).
+    const informouCaixa = req.body.caixaAnterior !== undefined;
+    const caixaAnterior = req.body.caixaAnterior;
+    if (informouCaixa && caixaAnterior !== null && ![1, 2, 3].includes(caixaAnterior))
+        return res.status(400).json({ mensagem: 'caixaAnterior deve ser 1, 2, 3 ou null.' });
     let db;
     try {
         db = await pool.connect();
@@ -99,7 +104,13 @@ router.post('/:codigo/resultado', exigirJson, async (req, res) => {
         await db.query('SELECT pg_advisory_xact_lock($1, $2)', [req.candidato.id, id]);
         const atual = await db.query('SELECT caixa FROM tbprogresso_flashcard WHERE idcandidato=$1 AND idflashcard=$2',
             [req.candidato.id, id]);
-        const caixa = proximaCaixa(atual.rows[0]?.caixa ?? null, sabia);
+        const caixaAtual = atual.rows[0]?.caixa ?? null;
+        // Resposta de uma sessão desatualizada (por exemplo, outra aba): não altera nada.
+        if (informouCaixa && caixaAnterior !== caixaAtual) {
+            await db.query('ROLLBACK');
+            return res.status(409).json({ mensagem: 'Este cartão já foi respondido em outra sessão.', caixaAtual });
+        }
+        const caixa = proximaCaixa(caixaAtual, sabia);
         const { rows } = await db.query(`INSERT INTO tbprogresso_flashcard (idcandidato, idflashcard, caixa, acertos, erros, ultima_revisao)
             VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP)
             ON CONFLICT (idcandidato, idflashcard) DO UPDATE SET caixa=EXCLUDED.caixa,

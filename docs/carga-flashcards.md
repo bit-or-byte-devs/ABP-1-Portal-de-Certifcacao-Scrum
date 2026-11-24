@@ -91,7 +91,16 @@ Resposta: `{ modo, cartoes: [{ codigo, tema: { ordem, nome }, frente, verso, exp
 
 ### `POST /api/flashcards/:codigo/resultado`
 
-Corpo JSON `{ "sabia": true | false }` (booleano estrito; outro tipo de conteúdo responde 415). Código fora do padrão `tema-NN-fcNN[-vN]` responde 400; cartão inexistente ou inativo, 404.
+Corpo JSON `{ "sabia": true | false, "caixaAnterior": 1 | 2 | 3 | null }` (`sabia` é booleano estrito; outro tipo de conteúdo responde 415). Código fora do padrão `tema-NN-fcNN[-vN]` responde 400; cartão inexistente ou inativo, 404.
+
+`caixaAnterior` é opcional e informa a caixa em que o cliente viu o cartão ao exibi-lo (`null` para cartão sem progresso). Serve para recusar respostas de uma sessão desatualizada, como uma segunda aba com a mesma revisão aberta: sem ele, a segunda resposta "Sabia" levaria o cartão da caixa 2 para a 3 sem uma nova revisão.
+
+- Ausente: o comportamento é o de sempre, a transição parte da caixa gravada.
+- Presente e igual à caixa gravada (ou `null` com cartão sem progresso): a transição se aplica normalmente.
+- Presente e diferente da caixa gravada, incluindo `null` quando já existe progresso: responde 409 com `{ mensagem, caixaAtual }` (`caixaAtual` é 1, 2, 3 ou `null`) e não altera acertos, erros, caixa nem data da revisão.
+- Valor fora de 1, 2, 3 e `null`: 400.
+
+A comparação e a gravação acontecem na mesma transação, sob o bloqueio por candidato e cartão; de várias respostas simultâneas com a mesma `caixaAnterior`, só uma é aplicada.
 
 A nova caixa vem de `proximaCaixa` (`backend/src/services/leitner.js`):
 
@@ -109,7 +118,7 @@ Exemplo no PowerShell, com a sessão do navegador em `$s` (`Invoke-WebRequest ..
 ```powershell
 Invoke-RestMethod "http://localhost:3000/api/flashcards/sessao?modo=tema&temas=1,2&limite=10" -WebSession $s
 Invoke-RestMethod "http://localhost:3000/api/flashcards/tema-01-fc01/resultado" -Method Post -WebSession $s `
-  -ContentType "application/json" -Body '{"sabia":true}'
+  -ContentType "application/json" -Body '{"sabia":true,"caixaAnterior":null}'
 ```
 
 ## Tela de flashcards
@@ -125,4 +134,4 @@ docker compose up -d --build
 docker compose exec -e TEST_EXAME_POSTGRES=true app npm test
 ```
 
-`importar-flashcards.test.js` cobre a validação sem banco e `leitner.test.js`, a tabela de transições de `proximaCaixa`. `flashcards.postgres.test.js`, habilitada por `TEST_EXAME_POSTGRES=true`, roda em um schema isolado e cobre migração repetível, importação repetível, rollback por hash alterado, desativação por nova versão, o resumo isolado entre dois candidatos, as sessões nos três modos, a validação dos parâmetros, as transições pela rota, o 404 de cartão inativo e o isolamento do progresso e da revisão entre candidatos.
+`importar-flashcards.test.js` cobre a validação sem banco e `leitner.test.js`, a tabela de transições de `proximaCaixa`. `flashcards.postgres.test.js`, habilitada por `TEST_EXAME_POSTGRES=true`, roda em um schema isolado e cobre migração repetível, importação repetível, rollback por hash alterado, desativação por nova versão, o resumo isolado entre dois candidatos, as sessões nos três modos, a validação dos parâmetros, as transições pela rota, o 404 de cartão inativo, o isolamento do progresso e da revisão entre candidatos e o `caixaAnterior` (transição normal, 409 na resposta desatualizada e nas simultâneas, `null` com e sem progresso, ausência do campo e valores inválidos).

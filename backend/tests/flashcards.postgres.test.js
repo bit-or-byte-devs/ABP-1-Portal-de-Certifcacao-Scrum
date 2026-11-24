@@ -384,3 +384,67 @@ test('resultado: um candidato não vê nem altera o progresso do outro', opcoes,
     assert.equal((await resumo(um.cookie)).corpo.temas[4].caixa3, 1);
     assert.equal((await resumo(dois.cookie)).corpo.temas[4].caixa3, 0);
 });
+
+test('resultado: caixaAnterior igual à caixa atual aplica a transição; a segunda resposta antiga recebe 409', opcoes, async () => {
+    await importar(importador.carregar());
+    const um = await criarCandidato('52998224725', emailUnico());
+    await definirProgresso(um.id, { 'tema-03-fc01': 1 });
+    // Duas abas com a mesma sessão de revisão: ambas viram o cartão na caixa 1.
+    const primeira = await responder(um.cookie, 'tema-03-fc01', { sabia: true, caixaAnterior: 1 });
+    assert.deepEqual(primeira, { status: 200, corpo: { caixa: 2, acertos: 1, erros: 0, dominioTema: 0 } });
+    const segunda = await responder(um.cookie, 'tema-03-fc01', { sabia: true, caixaAnterior: 1 });
+    assert.equal(segunda.status, 409);
+    assert.equal(segunda.corpo.caixaAtual, 2);
+    assert.equal(typeof segunda.corpo.mensagem, 'string');
+    assert.ok(segunda.corpo.mensagem.length > 0);
+    // O 409 não altera nada: o cartão termina na caixa 2, sem somar acerto nem erro.
+    assert.deepEqual(await progresso(um.id, 'tema-03-fc01'), { caixa: 2, acertos: 1, erros: 0 });
+    // Resposta "Não sabia" desatualizada também é recusada.
+    assert.equal((await responder(um.cookie, 'tema-03-fc01', { sabia: false, caixaAnterior: 1 })).status, 409);
+    assert.deepEqual(await progresso(um.id, 'tema-03-fc01'), { caixa: 2, acertos: 1, erros: 0 });
+});
+
+test('resultado: respostas simultâneas com a mesma caixaAnterior aplicam só uma', opcoes, async () => {
+    await importar(importador.carregar());
+    const um = await criarCandidato('52998224725', emailUnico());
+    await definirProgresso(um.id, { 'tema-03-fc02': 1 });
+    const respostas = await Promise.all([1, 2, 3, 4].map(() =>
+        responder(um.cookie, 'tema-03-fc02', { sabia: true, caixaAnterior: 1 })));
+    assert.deepEqual(respostas.map(r => r.status).sort(), [200, 409, 409, 409]);
+    assert.deepEqual(await progresso(um.id, 'tema-03-fc02'), { caixa: 2, acertos: 1, erros: 0 });
+});
+
+test('resultado: sem caixaAnterior mantém o comportamento antigo', opcoes, async () => {
+    await importar(importador.carregar());
+    const um = await criarCandidato('52998224725', emailUnico());
+    await definirProgresso(um.id, { 'tema-03-fc03': 1 });
+    assert.equal((await responder(um.cookie, 'tema-03-fc03', { sabia: true })).corpo.caixa, 2);
+    assert.equal((await responder(um.cookie, 'tema-03-fc03', { sabia: true })).corpo.caixa, 3);
+    assert.deepEqual(await progresso(um.id, 'tema-03-fc03'), { caixa: 3, acertos: 2, erros: 0 });
+});
+
+test('resultado: caixaAnterior null vale só para cartão sem progresso', opcoes, async () => {
+    await importar(importador.carregar());
+    const um = await criarCandidato('52998224725', emailUnico());
+    // Cartão novo: null confere e a transição de cartão novo se aplica.
+    const novo = await responder(um.cookie, 'tema-03-fc04', { sabia: true, caixaAnterior: null });
+    assert.deepEqual(novo, { status: 200, corpo: { caixa: 2, acertos: 1, erros: 0, dominioTema: 0 } });
+    // Já existe progresso: null deixou de conferir.
+    const antigo = await responder(um.cookie, 'tema-03-fc04', { sabia: true, caixaAnterior: null });
+    assert.equal(antigo.status, 409);
+    assert.equal(antigo.corpo.caixaAtual, 2);
+    assert.deepEqual(await progresso(um.id, 'tema-03-fc04'), { caixa: 2, acertos: 1, erros: 0 });
+    // Cartão sem progresso e caixaAnterior numérico: também não confere, e nada é criado.
+    const fantasma = await responder(um.cookie, 'tema-03-fc05', { sabia: true, caixaAnterior: 2 });
+    assert.equal(fantasma.status, 409);
+    assert.equal(fantasma.corpo.caixaAtual, null);
+    assert.equal(await progresso(um.id, 'tema-03-fc05'), undefined);
+});
+
+test('resultado: caixaAnterior inválida responde 400 sem alterar progresso', opcoes, async () => {
+    await importar(importador.carregar());
+    const um = await criarCandidato('52998224725', emailUnico());
+    for (const caixaAnterior of [0, 4, -1, 1.5, '1', true, [], {}])
+        assert.equal((await responder(um.cookie, 'tema-03-fc06', { sabia: true, caixaAnterior })).status, 400, JSON.stringify(caixaAnterior));
+    assert.equal(await contar('SELECT count(*)::int AS n FROM tbprogresso_flashcard'), 0);
+});
