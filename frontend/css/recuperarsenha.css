@@ -254,6 +254,109 @@ a:focus-visible,
   outline-offset: 4px;
 }
 
+/* ---------- Etapas da página única ---------- */
+
+.etapas {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: -12px 0 26px;
+  padding: 0;
+  list-style: none;
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, 'Courier New', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.etapas__item {
+  flex: 1;
+  padding: 8px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: #8c95a5;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.etapas__numero { color: inherit; font-weight: 700; }
+
+.etapas__item[aria-current="step"] {
+  border-color: var(--roxo);
+  color: var(--roxo);
+  background: rgba(0, 255, 102, 0.06);
+}
+
+.destaque {
+  color: var(--texto);
+  overflow-wrap: anywhere;
+}
+
+/* Código: seis dígitos com espaçamento de terminal */
+.campo__input--codigo {
+  text-align: center;
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, 'Courier New', monospace;
+  font-size: 26px;
+  letter-spacing: 12px;
+  padding-left: 24px;
+}
+
+.campo__input--codigo::placeholder { letter-spacing: 12px; }
+
+/* Ações secundárias (reenviar, trocar e-mail) */
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.btn-link {
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: var(--roxo);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-link:hover:not(:disabled) { text-decoration: underline; }
+
+.btn-link:disabled {
+  color: #8c95a5;
+  cursor: not-allowed;
+}
+
+.btn-link:focus-visible {
+  outline: 3px solid var(--roxo);
+  outline-offset: 4px;
+}
+
+/* Mostrar/ocultar senha (mesmo padrão do login) */
+.campo__caixa--senha .campo__input { padding-right: 60px; }
+
+.btn-olho {
+  position: absolute;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--texto-suave);
+  cursor: pointer;
+}
+
+.btn-olho:hover { color: var(--roxo); }
+.btn-olho svg { width: 24px; height: 24px; }
+.btn-olho .icone-ocultar { display: none; }
+.btn-olho[aria-pressed="true"] .icone-mostrar { display: none; }
+.btn-olho[aria-pressed="true"] .icone-ocultar { display: block; }
+
 /* ---------- Mensagens ---------- */
 
 .aviso {
@@ -312,6 +415,8 @@ a:focus-visible,
   .pagina { padding: 20px 16px 32px; }
   .card { padding: 28px 20px; }
   .card__titulo { font-size: 26px; }
+  .etapas { font-size: 11px; gap: 6px; }
+  .campo__input--codigo { font-size: 22px; letter-spacing: 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
