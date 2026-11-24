@@ -1,4 +1,6 @@
 const crypto = require("crypto");
+// Único ponto que define a validade do código: model, texto do e-mail e resposta da API usam este valor.
+const VALIDADE_MINUTOS = 10;
 function obterSegredo() {
     const segredo = process.env.RECUPERACAO_SECRET;
     if (!segredo || segredo.length < 32 || segredo === process.env.SESSION_SECRET) {
@@ -27,4 +29,4 @@ function protegerLimite(tipo, valor) {
 function solicitacoesLivres() {
     return process.env.NODE_ENV === "development" && process.env.RECUPERACAO_SOLICITACOES_LIVRES === "true";
 }
-module.exports = { obterSegredo, gerarCodigo, protegerCodigo, conferirCodigo, protegerLimite, solicitacoesLivres };
+module.exports = { VALIDADE_MINUTOS, obterSegredo, gerarCodigo, protegerCodigo, conferirCodigo, protegerLimite, solicitacoesLivres };
