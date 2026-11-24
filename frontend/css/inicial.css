@@ -108,15 +108,21 @@ main { max-width: 1120px; margin: 0 auto; padding: 28px 50px 64px; }
 .learning-journey {
   margin-top: 66px;
 }
-.learning-journey > .journey-mascot {
-  display: block;
-  width: clamp(104px, 14vw, 156px);
-  height: auto;
-  margin: 0 auto 16px;
+.journey-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 28px);
+  margin-bottom: 40px;
 }
-.learning-journey > h2 {
-  margin: 0 0 40px;
-  text-align: center;
+.journey-mascot {
+  display: block;
+  flex: none;
+  width: clamp(64px, 11vw, 132px);
+  height: auto;
+}
+.journey-heading h2 {
+  margin: 0;
   font-size: clamp(26px, 3.2vw, 36px);
   line-height: 1.2;
 }
