@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,14 +30,20 @@
         </div>
 
         <p id="aviso-flashcards" class="fc-aviso" role="status" aria-live="polite"></p>
+        <button type="button" class="fc-secundario fc-tentar" id="fc-tentar-novamente" hidden>Tentar novamente</button>
 
         <!-- Estado 1: seleção de modo e temas -->
-        <div id="fc-estado-selecao">
+        <div id="fc-estado-selecao" aria-busy="true">
             <section class="fc-resumo" aria-labelledby="fc-resumo-titulo">
                 <h2 id="fc-resumo-titulo">Seu domínio geral</h2>
                 <p id="fc-resumo-texto">Carregando seus flashcards…</p>
                 <div class="fc-barra" id="fc-resumo-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="fc-resumo-titulo" hidden><span></span></div>
             </section>
+
+            <!-- Esqueleto enquanto o domínio carrega; some quando a seleção é montada -->
+            <div class="fc-grid" id="fc-esqueleto" aria-hidden="true">
+                <div class="fc-esqueleto"></div><div class="fc-esqueleto"></div><div class="fc-esqueleto"></div>
+            </div>
 
             <form id="fc-selecao" class="fc-selecao" hidden>
                 <fieldset class="fc-modos">
@@ -77,6 +83,8 @@
                 <p class="fc-sessao-contador" id="fc-sessao-contador" aria-live="polite" aria-atomic="true"></p>
             </div>
             <div class="fc-barra" id="fc-sessao-barra" role="progressbar" aria-valuemin="0" aria-label="Progresso da sessão"><span></span></div>
+            <p class="fc-feedback" id="fc-feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+            <p class="fc-so-leitor" id="fc-anuncio" role="status" aria-live="polite" aria-atomic="true"></p>
 
             <div class="fc-cartao-area">
                 <div class="fc-cartao" id="fc-cartao" tabindex="-1" role="group" aria-roledescription="cartão">
@@ -91,7 +99,10 @@
                             <p class="fc-cartao-tema" id="fc-verso-tema"></p>
                             <p class="fc-cartao-rotulo">Resposta</p>
                             <h3 class="fc-cartao-texto" id="fc-verso-texto"></h3>
-                            <p class="fc-cartao-explicacao" id="fc-verso-explicacao"></p>
+                            <div class="fc-cartao-detalhe">
+                                <p class="fc-cartao-rotulo">Explicação</p>
+                                <p class="fc-cartao-explicacao" id="fc-verso-explicacao"></p>
+                            </div>
                             <p class="fc-cartao-fonte">Fonte: <span id="fc-verso-fonte"></span></p>
                         </div>
                     </div>
@@ -125,6 +136,16 @@
             </div>
             <p class="fc-motivo" id="fc-motivo-fim" hidden></p>
         </section>
+
+        <!-- Confirmação ao usar Voltar do navegador no meio da sessão -->
+        <dialog id="fc-dialogo-saida" class="fc-dialogo" aria-labelledby="fc-dialogo-titulo" aria-describedby="fc-dialogo-texto">
+            <h2 id="fc-dialogo-titulo">Sair da sessão?</h2>
+            <p id="fc-dialogo-texto"></p>
+            <div class="fc-acoes">
+                <button type="button" class="fc-comecar" id="fc-continuar-sessao">Continuar estudando</button>
+                <button type="button" class="fc-secundario" id="fc-sair-sessao">Sair da sessão</button>
+            </div>
+        </dialog>
     </main>
 
     <footer class="footer-bar">
