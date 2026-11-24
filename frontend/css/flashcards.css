@@ -246,6 +246,30 @@
     font-weight: 700;
 }
 
+/* Contadores do tema: 2 x 2 (Novos | Errados / Em aprendizado | Dominados);
+   4 em linha só quando o cartão tem largura para os rótulos inteiros. */
+.fc-tema {
+    container-type: inline-size;
+}
+
+.fc-tema .fc-contadores {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fc-tema .fc-contador dt {
+    white-space: nowrap;
+}
+
+@container (min-width: 440px) {
+    .fc-tema .fc-contadores {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.fc-contador--aprendendo dd {
+    color: #fbbf24;
+}
+
 .fc-contador--dominados dd {
     color: var(--green-accent);
 }
@@ -280,29 +304,260 @@
     font-size: 13px;
 }
 
+.pagina-flashcards [hidden] {
+    display: none !important;
+}
+
+.fc-motivo {
+    flex-basis: 100%;
+    color: #fbbf24;
+    font-size: 13px;
+}
+
+.fc-contador--erros dd {
+    color: #f87171;
+}
+
+.fc-secundario {
+    display: inline-flex;
+    align-items: center;
+    background-color: #1f2937;
+    color: var(--text-white);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 10px 22px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.fc-secundario:hover {
+    background-color: #374151;
+}
+
+.pagina-flashcards kbd {
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    border: 1px solid currentColor;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-left: 6px;
+    opacity: 0.75;
+}
+
+/* Sessão de estudo */
+.fc-sessao-topo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px 18px;
+    margin-bottom: 10px;
+}
+
+.fc-sessao-modo {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.fc-sessao-contador {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+}
+
+.fc-cartao-area {
+    perspective: 1400px;
+    margin: 22px 0;
+}
+
+.fc-cartao {
+    border-radius: 22px;
+}
+
+.fc-cartao:focus-visible {
+    outline: 2px solid var(--green-accent);
+    outline-offset: 4px;
+}
+
+.fc-cartao-interno {
+    display: grid;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fc-cartao.is-virado .fc-cartao-interno {
+    transform: rotateY(180deg);
+}
+
+.fc-cartao.sem-transicao .fc-cartao-interno {
+    transition: none;
+}
+
+/* As duas faces ocupam a mesma célula: a altura acompanha a face maior. */
+.fc-face {
+    grid-area: 1 / 1;
+    min-height: 280px;
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 22px;
+    padding: 30px 34px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-wrap: anywhere;
+}
+
+.fc-face--verso {
+    transform: rotateY(180deg);
+    border-color: rgba(0, 255, 102, 0.25);
+}
+
+.fc-cartao-tema {
+    color: var(--green-accent);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.fc-cartao-rotulo {
+    color: var(--text-muted);
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.fc-cartao-texto {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.fc-cartao-explicacao {
+    color: #d1d5db;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.fc-cartao-fonte {
+    margin-top: auto;
+    color: var(--text-muted);
+    font-size: 12.5px;
+}
+
+.fc-cartao-imagem img {
+    max-width: 100%;
+    max-height: 220px;
+    border-radius: 12px;
+}
+
+.fc-sessao-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+}
+
+.fc-respostas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.fc-resposta {
+    border: 1px solid transparent;
+    padding: 10px 26px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.fc-resposta--nao {
+    background-color: #3b1f24;
+    color: #fca5a5;
+    border-color: rgba(248, 113, 113, 0.45);
+}
+
+.fc-resposta--nao:hover {
+    background-color: #4c2329;
+}
+
+.fc-resposta--sim {
+    background-color: var(--green-accent);
+    color: var(--inner-box);
+}
+
+.fc-resposta:disabled {
+    opacity: 0.55;
+    cursor: progress;
+}
+
+#fc-encerrar {
+    margin-left: auto;
+}
+
+.fc-atalhos {
+    margin-top: 14px;
+}
+
+/* Resumo */
+.fc-fim {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 18px;
+    padding: 26px 28px;
+}
+
+.fc-fim h2 {
+    font-size: 22px;
+    margin-bottom: 6px;
+}
+
+.fc-fim h2:focus {
+    outline: none;
+}
+
+.fc-fim-contadores {
+    margin-top: 16px;
+}
+
+.fc-fim-contadores dd {
+    font-size: 26px;
+}
+
+.fc-fim .fc-motivo {
+    margin-top: 12px;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .fc-barra span,
     .fc-tema,
     .fc-modo span {
         transition: none;
     }
+
+    /* Sem giro 3D: a face escondida some e a outra aparece no lugar. */
+    .fc-cartao-interno,
+    .fc-cartao.is-virado .fc-cartao-interno,
+    .fc-face--verso {
+        transform: none;
+        transition: none;
+    }
+
+    .fc-face[inert] {
+        visibility: hidden;
+    }
 }
 
 /* Cabeçalho, conteúdo e rodapé cabem em telas a partir de 360 px. */
 @media (max-width: 600px) {
-    .pagina-flashcards .top-nav {
-        margin: 12px 16px;
-        padding: 10px 14px;
-    }
-
-    .pagina-flashcards .nav-buttons {
-        gap: 8px;
-    }
-
-    .pagina-flashcards .btn-nav {
-        padding: 8px 14px;
-    }
-
+    /* O cabeçalho segue a responsividade comum de menu-temas.css. */
     .pagina-flashcards .main-container {
         padding: 12px 16px 32px;
     }
@@ -322,6 +577,41 @@
 
     .fc-grid {
         grid-template-columns: 1fr;
+    }
+
+    .fc-face {
+        min-height: 240px;
+        padding: 22px 20px;
+    }
+
+    .fc-cartao-texto {
+        font-size: 19px;
+    }
+
+    .fc-sessao-acoes,
+    .fc-respostas,
+    .fc-fim .fc-acoes {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .fc-respostas > *,
+    .fc-sessao-acoes > button,
+    .fc-fim .fc-acoes > * {
+        width: 100%;
+        justify-content: center;
+    }
+
+    #fc-encerrar {
+        margin-left: 0;
+    }
+
+    .fc-fim {
+        padding: 20px 18px;
+    }
+
+    .fc-fim-contadores dd {
+        font-size: 22px;
     }
 
     .pagina-flashcards .footer-bar,

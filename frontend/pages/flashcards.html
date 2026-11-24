@@ -29,38 +29,102 @@
             <h1 class="page-title">Flashcards</h1>
         </div>
 
-        <section class="fc-resumo" aria-labelledby="fc-resumo-titulo">
-            <h2 id="fc-resumo-titulo">Seu domínio geral</h2>
-            <p id="fc-resumo-texto">Carregando seus flashcards…</p>
-            <div class="fc-barra" id="fc-resumo-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="fc-resumo-titulo" hidden><span></span></div>
-        </section>
-
         <p id="aviso-flashcards" class="fc-aviso" role="status" aria-live="polite"></p>
 
-        <form id="fc-selecao" class="fc-selecao" hidden>
-            <fieldset class="fc-modos">
-                <legend>Modo de estudo</legend>
-                <label class="fc-modo">
-                    <input type="radio" name="modo" value="tema" checked>
-                    <span>Por tema</span>
-                </label>
-                <label class="fc-modo">
-                    <input type="radio" name="modo" value="aleatorio">
-                    <span>Aleatório geral</span>
-                </label>
-            </fieldset>
+        <!-- Estado 1: seleção de modo e temas -->
+        <div id="fc-estado-selecao">
+            <section class="fc-resumo" aria-labelledby="fc-resumo-titulo">
+                <h2 id="fc-resumo-titulo">Seu domínio geral</h2>
+                <p id="fc-resumo-texto">Carregando seus flashcards…</p>
+                <div class="fc-barra" id="fc-resumo-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="fc-resumo-titulo" hidden><span></span></div>
+            </section>
 
-            <fieldset class="fc-temas" id="fc-temas">
-                <legend>Escolha os temas <span id="fc-selecionados" class="fc-selecionados"></span></legend>
-                <p class="fc-dica" id="fc-dica-aleatorio" hidden>No modo aleatório geral, os cartões de todos os temas disponíveis entram na sessão.</p>
-                <div class="fc-grid" id="fc-grid"></div>
-            </fieldset>
+            <form id="fc-selecao" class="fc-selecao" hidden>
+                <fieldset class="fc-modos">
+                    <legend>Modo de estudo</legend>
+                    <label class="fc-modo">
+                        <input type="radio" name="modo" value="tema" checked>
+                        <span>Por tema</span>
+                    </label>
+                    <label class="fc-modo">
+                        <input type="radio" name="modo" value="aleatorio">
+                        <span>Aleatório geral</span>
+                    </label>
+                    <label class="fc-modo">
+                        <input type="radio" name="modo" value="revisao" aria-describedby="fc-motivo-revisao">
+                        <span>Revisar os que errei</span>
+                    </label>
+                    <p class="fc-motivo" id="fc-motivo-revisao" hidden></p>
+                </fieldset>
 
-            <div class="fc-acoes">
-                <button type="submit" class="fc-comecar" id="fc-comecar" disabled aria-describedby="fc-comecar-aviso">Começar</button>
-                <span class="fc-comecar-aviso" id="fc-comecar-aviso">Disponível em breve</span>
+                <fieldset class="fc-temas" id="fc-temas">
+                    <legend>Escolha os temas <span id="fc-selecionados" class="fc-selecionados"></span></legend>
+                    <p class="fc-dica" id="fc-dica-modo"></p>
+                    <div class="fc-grid" id="fc-grid"></div>
+                </fieldset>
+
+                <div class="fc-acoes">
+                    <button type="submit" class="fc-comecar" id="fc-comecar" aria-describedby="fc-comecar-aviso">Começar</button>
+                    <span class="fc-comecar-aviso" id="fc-comecar-aviso"></span>
+                </div>
+            </form>
+        </div>
+
+        <!-- Estado 2: sessão de estudo -->
+        <section id="fc-estado-sessao" class="fc-sessao" aria-labelledby="fc-sessao-modo" hidden>
+            <div class="fc-sessao-topo">
+                <h2 class="fc-sessao-modo" id="fc-sessao-modo"></h2>
+                <p class="fc-sessao-contador" id="fc-sessao-contador" aria-live="polite" aria-atomic="true"></p>
             </div>
-        </form>
+            <div class="fc-barra" id="fc-sessao-barra" role="progressbar" aria-valuemin="0" aria-label="Progresso da sessão"><span></span></div>
+
+            <div class="fc-cartao-area">
+                <div class="fc-cartao" id="fc-cartao" tabindex="-1" role="group" aria-roledescription="cartão">
+                    <div class="fc-cartao-interno">
+                        <div class="fc-face fc-face--frente" id="fc-face-frente">
+                            <p class="fc-cartao-tema" id="fc-frente-tema"></p>
+                            <p class="fc-cartao-rotulo">Pergunta</p>
+                            <h3 class="fc-cartao-texto" id="fc-frente-texto"></h3>
+                            <div class="fc-cartao-imagem" id="fc-frente-imagem"></div>
+                        </div>
+                        <div class="fc-face fc-face--verso" id="fc-face-verso" inert aria-hidden="true">
+                            <p class="fc-cartao-tema" id="fc-verso-tema"></p>
+                            <p class="fc-cartao-rotulo">Resposta</p>
+                            <h3 class="fc-cartao-texto" id="fc-verso-texto"></h3>
+                            <p class="fc-cartao-explicacao" id="fc-verso-explicacao"></p>
+                            <p class="fc-cartao-fonte">Fonte: <span id="fc-verso-fonte"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc-sessao-acoes">
+                <button type="button" class="fc-comecar" id="fc-virar" aria-keyshortcuts="Enter Space">Virar <kbd>Enter</kbd></button>
+                <div class="fc-respostas" id="fc-respostas" hidden>
+                    <button type="button" class="fc-resposta fc-resposta--nao" id="fc-nao-sabia" aria-keyshortcuts="1">Não sabia <kbd>1</kbd></button>
+                    <button type="button" class="fc-resposta fc-resposta--sim" id="fc-sabia" aria-keyshortcuts="2">Sabia <kbd>2</kbd></button>
+                </div>
+                <button type="button" class="fc-secundario" id="fc-encerrar">Encerrar</button>
+            </div>
+            <p class="fc-dica fc-atalhos">Atalhos: Enter ou Espaço vira o cartão; depois, 1 para Não sabia e 2 para Sabia.</p>
+        </section>
+
+        <!-- Estado 3: resumo da sessão -->
+        <section id="fc-estado-fim" class="fc-fim" aria-labelledby="fc-fim-titulo" hidden>
+            <h2 id="fc-fim-titulo" tabindex="-1">Resumo da sessão</h2>
+            <p class="fc-dica" id="fc-fim-texto"></p>
+            <dl class="fc-contadores fc-fim-contadores">
+                <div class="fc-contador fc-contador--dominados"><dt>Sabia</dt><dd id="fc-fim-sabia">0</dd></div>
+                <div class="fc-contador fc-contador--erros"><dt>Não sabia</dt><dd id="fc-fim-nao-sabia">0</dd></div>
+                <div class="fc-contador"><dt>Chegaram à caixa 3</dt><dd id="fc-fim-caixa3">0</dd></div>
+            </dl>
+            <div class="fc-acoes">
+                <button type="button" class="fc-comecar" id="fc-revisar-agora" aria-describedby="fc-motivo-fim">Revisar os que errei agora</button>
+                <button type="button" class="fc-secundario" id="fc-nova-sessao">Nova sessão</button>
+                <a class="fc-secundario" href="menu.html">Voltar ao menu</a>
+            </div>
+            <p class="fc-motivo" id="fc-motivo-fim" hidden></p>
+        </section>
     </main>
 
     <footer class="footer-bar">
