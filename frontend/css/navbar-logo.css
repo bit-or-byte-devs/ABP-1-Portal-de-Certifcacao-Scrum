@@ -1,9 +1,9 @@
 /* Marca compartilhada pelas barras de navegação do portal. */
 .navbar-marca-imagem {
   display: block;
-  width: 48px;
-  height: 48px;
-  flex: 0 0 48px;
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
   object-fit: contain;
   object-position: center;
 }
@@ -16,12 +16,14 @@
   align-items: center;
 }
 
+.marca, .auth-brand, .legal-marca, .logo-area, .logo-container { margin-left: -8px; }
+
 .auth-brand__icon {
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
-  flex: 0 0 48px;
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
   border-radius: 0;
   background: transparent;
 }
@@ -34,10 +36,10 @@
 .logo-icon {
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
+  width: 54px;
+  height: 54px;
   padding: 0;
-  flex: 0 0 48px;
+  flex: 0 0 54px;
   border-radius: 0;
   background: transparent;
   font-size: 0;
@@ -60,8 +62,8 @@
 
 .marca-logo .navbar-marca-imagem {
   position: static;
-  width: 48px;
-  height: 48px;
+  width: 54px;
+  height: 54px;
   filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
 }
 
@@ -85,8 +87,8 @@
 .marca-logo {
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
+  width: 54px;
+  height: 54px;
 }
 
 .marca-letra { display: none; }
@@ -100,8 +102,9 @@
   .auth-brand__icon,
   .logo-icon,
   .marca-logo {
-    width: 42px;
-    height: 42px;
-    flex-basis: 42px;
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
   }
+  .marca-logo .navbar-marca-imagem { width: 46px; height: 46px; }
 }
