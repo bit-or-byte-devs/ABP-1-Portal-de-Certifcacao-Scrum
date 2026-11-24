@@ -15,7 +15,7 @@
 
 /* Marca do cabeçalho em <p> para não criar título antes do <h1> */
 .logo-text .logo-nome {
-    font-size: var(--fs-md);
+    font-size: 18px;
     font-weight: 700;
     letter-spacing: 0.5px;
 }
