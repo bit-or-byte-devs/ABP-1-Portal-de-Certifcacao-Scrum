@@ -8,12 +8,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const statusCertificacao = document.getElementById('status-certificacao');
     const codigoValidacaoContainer = document.getElementById('codigo-validacao-container');
     const qrCertificadoContainer = document.getElementById('qr-certificado-container');
+    const certificadoEmitido = document.getElementById('certificado-emitido');
 
     resultadoFinal.hidden = false;
     linkExames.hidden = true;
     detalhesResultado.hidden = true;
     codigoValidacaoContainer.hidden = true;
     qrCertificadoContainer.hidden = true;
+    certificadoEmitido.hidden = true;
 
     const formatarNumero = valor => new Intl.NumberFormat('pt-BR', {
         minimumFractionDigits: 2,
@@ -64,9 +66,27 @@ document.addEventListener('DOMContentLoaded', async () => {
                 throw new Error('Não foi possível carregar o código único do certificado.');
             }
             document.getElementById('codigo-validacao').textContent = resultado.codigo_validacao;
-            document.getElementById('qr-certificado').src = `/api/certificados/${encodeURIComponent(resultado.codigo_validacao)}/qr`;
+            const urlQr = `/api/certificados/${encodeURIComponent(resultado.codigo_validacao)}/qr`;
+            document.getElementById('qr-certificado-detalhes').src = urlQr;
             codigoValidacaoContainer.hidden = false;
             qrCertificadoContainer.hidden = false;
+            const dataEmissao = new Date(resultado.data_hora_emissao);
+            if (Number.isNaN(dataEmissao.getTime())) throw new Error('Data de emissão do certificado inválida.');
+            const cpf = String(resultado.cpf_emitido || '').replace(/\D/g, '');
+            const dadosCertificado = {
+                'cert-nome': resultado.nome_emitido || usuario.nome.trim(),
+                'cert-cpf': cpf.length === 11 ? cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1.$2.$3-$4') : 'CPF não informado',
+                'cert-email': resultado.email_emitido || 'E-mail não informado',
+                'cert-data': new Intl.DateTimeFormat('pt-BR', { dateStyle: 'long', timeZone: 'America/Sao_Paulo' }).format(dataEmissao),
+                'cert-hora': new Intl.DateTimeFormat('pt-BR', { timeStyle: 'short', timeZone: 'America/Sao_Paulo' }).format(dataEmissao),
+                'cert-nota': formatarNumero(valores[0]),
+                'cert-percentual': formatarNumero(valores[1]) + '%',
+            };
+            Object.entries(dadosCertificado).forEach(([id, texto]) => {
+                document.getElementById(id).textContent = texto;
+            });
+            document.getElementById('baixar-certificado-pdf').href = `/api/certificados/${encodeURIComponent(resultado.codigo_validacao)}/pdf`;
+            certificadoEmitido.hidden = false;
         }
 
         detalhesResultado.hidden = false;

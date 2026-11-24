@@ -1,3 +1,15 @@
+.pagina-certificados {
+    --fonte-certificado: "Space Grotesk", "Segoe UI", sans-serif;
+}
+
+@font-face {
+    font-family: "Space Grotesk";
+    src: url("../assets/fonts/space-grotesk-latin-wght-normal.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+}
+
 .pagina-certificados .top-nav {
     width: calc(100% - 96px);
     max-width: 1120px;
@@ -91,7 +103,7 @@
     word-break: break-all;
 }
 
-.pagina-certificados #qr-certificado {
+.pagina-certificados #qr-certificado-detalhes {
     display: block;
     width: 192px;
     height: 192px;
@@ -324,6 +336,70 @@
     cursor: pointer;
 }
 
+.pagina-certificados .certificado-modelo {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #eaf5f7;
+    color: #173d42;
+}
+
+.pagina-certificados .certificado-fundo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.pagina-certificados .campo-certificado {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 0 2px;
+    color: #173f43;
+    font-family: var(--fonte-certificado);
+    font-size: clamp(6px, 1.4vw, 12px);
+    font-weight: 500;
+    line-height: 1.1;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.pagina-certificados .campo-nome { left: 17.6%; top: 36.8%; width: 62.3%; height: 5.3%; font-size: clamp(10px, 2.2vw, 20px); font-weight: 600; letter-spacing: 0.015em; }
+.pagina-certificados .campo-cpf { left: 17.8%; top: 42.9%; width: 25.7%; height: 3.3%; }
+.pagina-certificados .campo-email { left: 52.6%; top: 42.9%; width: 26.9%; height: 3.3%; }
+.pagina-certificados .campo-data { left: 26.8%; top: 58.3%; width: 22.7%; height: 4.3%; }
+.pagina-certificados .campo-carga { left: 52.7%; top: 58.3%; width: 23%; height: 4.3%; }
+.pagina-certificados .campo-hora { left: 25.7%; top: 64.7%; width: 12.8%; height: 3%; font-size: clamp(5px, 1vw, 8px); }
+.pagina-certificados .campo-nota { left: 41.9%; top: 64.7%; width: 12.8%; height: 3%; font-size: clamp(5px, 1vw, 8px); }
+.pagina-certificados .campo-percentual { left: 58.3%; top: 64.7%; width: 12.5%; height: 3%; font-size: clamp(5px, 1vw, 8px); }
+
+.pagina-certificados .certificado-emitido .certificado-botao {
+    width: fit-content;
+    text-decoration: none;
+}
+
+@media print {
+    .pagina-certificados .top-nav,
+    .pagina-certificados .top-header-row,
+    .pagina-certificados .resultado-certificacao > h2,
+    .pagina-certificados .resultado-certificacao__metricas,
+    .pagina-certificados #mensagem-resultado,
+    .pagina-certificados .certificado-botao,
+    .pagina-certificados .footer-bar { display: none !important; }
+    .pagina-certificados,
+    .pagina-certificados .main-container,
+    .pagina-certificados .resultado-certificacao.card { width: 100%; max-width: none; margin: 0; padding: 0; background: #fff; box-shadow: none; }
+    .pagina-certificados #certificado-emitido { display: block !important; margin: 0; }
+    .pagina-certificados .certificado-modelo { width: 100vw; }
+    @page { size: landscape; margin: 0; }
+}
+
 @media (max-width: 600px) {
     .pagina-certificados .top-nav {
         width: calc(100% - 24px);
@@ -428,7 +504,7 @@
         font-size: 13px;
     }
 
-    .pagina-certificados #qr-certificado {
+    .pagina-certificados #qr-certificado-detalhes {
         width: min(192px, 100%);
         height: auto;
         aspect-ratio: 1;

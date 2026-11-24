@@ -411,11 +411,106 @@ body {
 }
 
 @media (max-width: 600px) {
-    .cards-wrapper {
-        grid-template-columns: 1fr;
+    .top-nav {
+        flex-wrap: wrap;
+        width: calc(100% - 24px);
+        margin: 12px auto;
+        padding: 10px 12px;
+        gap: 10px;
+    }
+
+    .main-container {
+        padding-inline: 12px;
+    }
+
+    .top-header-row {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .theme-main-row {
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .theme-controls {
+        min-width: 0;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .theme-main-row h3 {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .btn-iniciar {
+        min-height: 40px;
+        max-width: 100%;
+    }
+
+    .footer-bar {
+        flex-wrap: wrap;
+    }
+
+    .footer-left,
+    .footer-right {
+        min-width: 0;
+        flex-wrap: wrap;
     }
 }
 
+@media (max-width: 360px) {
+    .top-nav {
+        width: calc(100% - 16px);
+        margin-inline: auto;
+    }
+
+    .logo-area {
+        min-width: 0;
+    }
+
+    .logo-text small {
+        display: none;
+    }
+
+    .nav-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .main-container {
+        padding-inline: 8px;
+    }
+
+    .page-title {
+        font-size: 26px;
+    }
+
+    .theme-card {
+        padding: 18px 14px;
+    }
+
+    .theme-main-row {
+        flex-direction: column;
+    }
+
+    .theme-controls {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .footer-bar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .footer-right {
+        width: 100%;
+        flex-direction: column;
+        gap: 6px;
+    }
+}
 
 /* Estados do exame ficam visíveis também nos cards recolhidos. */
 .pagina-exames .theme-card .btn-iniciar {

@@ -65,10 +65,24 @@
                         <div id="qr-certificado-container" hidden>
                             <dt>QR Code de validação</dt>
                             <dd>
-                                <img id="qr-certificado" width="192" height="192" alt="QR Code para validar este certificado">
+                                <img id="qr-certificado-detalhes" width="192" height="192" alt="QR Code para validar este certificado">
                             </dd>
                         </div>
                     </dl>
+                    <section id="certificado-emitido" class="certificado-emitido" hidden aria-label="Certificado de conclusão">
+                        <div class="certificado-modelo">
+                            <img class="certificado-fundo" src="/imagens/questoes/Certificado2.png" alt="Modelo do certificado BorB">
+                            <span class="campo-certificado campo-nome" id="cert-nome"></span>
+                            <span class="campo-certificado campo-cpf" id="cert-cpf"></span>
+                            <span class="campo-certificado campo-email" id="cert-email"></span>
+                            <span class="campo-certificado campo-data" id="cert-data"></span>
+                            <span class="campo-certificado campo-carga">Não informada</span>
+                            <span class="campo-certificado campo-hora" id="cert-hora"></span>
+                            <span class="campo-certificado campo-nota" id="cert-nota"></span>
+                            <span class="campo-certificado campo-percentual" id="cert-percentual"></span>
+                        </div>
+                        <a id="baixar-certificado-pdf" class="certificado-botao" download>Baixar certificado em PDF</a>
+                    </section>
                 </div>
                 <p id="link-exames" hidden><a class="btn-nav" href="exames.html">Continuar certificação</a></p>
             </div>
