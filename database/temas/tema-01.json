@@ -23,7 +23,28 @@
       "titulo": "O contexto e a crise do software",
       "nivel": 3,
       "ordem": 1,
-      "blocos": []
+      "blocos": [
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O crescimento da utilização dos computadores fez com que os programas deixassem de ser ferramentas pequenas e isoladas. Aos poucos, organizações passaram a depender de sistemas para controlar operações financeiras, armazenar informações, administrar estoques, realizar comunicação e apoiar decisões importantes. Com isso, o software se tornou maior, mais complexo e mais difícil de desenvolver e manter."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Nesse cenário, produzir um programa que simplesmente executasse uma tarefa deixou de ser suficiente. Era necessário construir sistemas confiáveis, capazes de atender a diferentes usuários, funcionar por longos períodos e continuar evoluindo conforme as necessidades mudassem. O desenvolvimento também passou a envolver equipes maiores, diferentes especialidades, prazos, orçamento e integração entre várias partes do sistema."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A dificuldade estava em conciliar todos esses fatores. Um projeto podia até começar com uma ideia bem definida, mas, durante sua execução, surgiam dúvidas sobre os requisitos, limitações técnicas e necessidades que não haviam sido percebidas inicialmente. Quanto maior o sistema, mais difícil era antecipar todas as situações antes de começar a desenvolvê-lo."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A chamada crise do software representa justamente esse conjunto de dificuldades enfrentadas pela engenharia de software. Ela evidenciou que desenvolver sistemas complexos exigia métodos mais consistentes de planejamento, construção, verificação e manutenção. Esse contexto ajuda a entender por que diferentes formas de organizar o trabalho foram propostas ao longo do tempo, incluindo abordagens que valorizam ciclos de desenvolvimento, feedback e adaptação."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Considere o próprio BorB: a plataforma precisa coordenar conteúdos de estudo, progresso por seção, questões e certificação. Esses elementos se relacionam entre si; uma decisão sobre como identificar uma seção, por exemplo, afeta tanto a importação do conteúdo quanto o registro do que cada estudante já leu. Esse tipo de dependência ajuda a explicar por que sistemas maiores exigem planejamento, integração e manutenção cuidadosos."
+        }
+      ]
     },
     {
       "codigo": "tema-01-s02",
@@ -34,6 +55,26 @@
         {
           "tipo": "paragrafo",
           "conteudo": "Entre as décadas de 1960 e 1980, o desenvolvimento tentou espelhar processos industriais e de engenharia civil. O modelo em cascata era linear: levantamento completo de requisitos, arquitetura, codificação, testes e implantação final. Cada etapa precisava ser concluída, aprovada e documentada antes da seguinte."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A lógica desse modelo era organizar o projeto em fases com entregas e responsabilidades relativamente bem definidas. Primeiro, a equipe procurava descobrir e registrar o que o sistema deveria fazer. Depois, essas necessidades eram traduzidas em decisões de arquitetura e projeto. Somente então a implementação avançava, seguida pela etapa de testes e, por fim, pela disponibilização do sistema."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Essa organização oferece vantagens em determinados contextos. A sequência pode facilitar o acompanhamento formal, a documentação e a definição antecipada de responsabilidades. Quando o escopo é estável, as tecnologias são conhecidas e as exigências estão bem estabelecidas, trabalhar com etapas planejadas pode ser adequado."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A dificuldade aparece quando uma fase depende de decisões que ainda não foram totalmente compreendidas. Se uma necessidade importante for descoberta durante os testes, por exemplo, a equipe pode precisar retornar ao levantamento de requisitos, rever o projeto, alterar o código e repetir parte das verificações. Uma mudança pode atravessar várias etapas que já pareciam encerradas."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Por isso, o modelo tradicional não deve ser entendido como algo que nunca funciona. Sua limitação está em utilizá-lo de forma rígida em projetos nos quais há muitas incertezas e mudanças frequentes. O desafio é escolher uma forma de trabalho compatível com a natureza do projeto, em vez de presumir que uma única sequência será ideal para qualquer situação."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No BorB, imagine que a estrutura das seções e seus códigos fosse definida de forma rígida antes de a equipe compreender como o progresso seria registrado. Uma mudança descoberta durante a integração entre os arquivos de conteúdo e a área de estudos poderia exigir ajustes em mais de uma parte do sistema. Esse exemplo mostra como uma sequência de fases pode funcionar quando as decisões são estáveis, mas pode tornar mudanças tardias mais trabalhosas quando há dependências ainda pouco conhecidas."
         }
       ]
     },
@@ -46,6 +87,26 @@
         {
           "tipo": "paragrafo",
           "conteudo": "O modelo partia da ideia de que todas as necessidades, problemas e tecnologias poderiam ser antecipados e congelados no início. Projetos de software, porém, não se comportam como construir uma ponte: requisitos e contexto mudam enquanto o produto é desenvolvido."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No início de um projeto, a equipe normalmente conhece apenas uma parte do problema. Algumas necessidades são claras, mas outras só aparecem quando usuários experimentam uma funcionalidade, quando dados reais são utilizados ou quando uma integração começa a funcionar. Isso significa que o conhecimento sobre o produto cresce durante o próprio desenvolvimento."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Também é comum que as prioridades mudem. Uma funcionalidade considerada essencial no planejamento inicial pode perder importância depois de uma mudança no mercado. Em outro caso, uma dificuldade encontrada pelos usuários pode revelar que uma função aparentemente simples precisa ser redesenhada. Essas descobertas não significam necessariamente que o planejamento foi malfeito; muitas vezes, elas fazem parte do processo de compreender melhor o problema."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Quando o plano inicial é tratado como imutável, a equipe pode continuar investindo esforço em algo que já não representa a necessidade mais importante. O trabalho passa a ser avaliado apenas pela conformidade com o que foi definido meses antes, e não pelo valor que está sendo produzido no momento."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Uma alternativa é reconhecer que o planejamento precisa acompanhar o aprendizado. Isso não elimina a necessidade de definir objetivos, estimar esforço ou organizar atividades. Significa revisar as decisões quando novas informações relevantes surgem, mantendo claro o propósito do projeto e avaliando os impactos das mudanças."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No BorB, a leitura dos materiais pode revelar algo que o planejamento não antecipou: talvez certos conceitos precisem de mais contexto ou de um exemplo ligado ao projeto para ficarem claros. Esse retorno oferece evidência para revisar o conteúdo e orientar melhorias seguintes. O plano continua útil como referência, enquanto o que a equipe aprende durante o desenvolvimento ajuda a decidir onde ajustar o produto."
         }
       ]
     },
@@ -58,6 +119,22 @@
         {
           "tipo": "paragrafo",
           "conteudo": "O termo ganhou repercussão na Conferência da OTAN de 1968 para descrever falhas sistêmicas da indústria de TI: atrasos de anos, orçamentos estourados, sistemas com bugs críticos e projetos cancelados antes do lançamento."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Esses problemas não se resumiam a atrasos ou a dificuldades de programação. Um sistema podia ser entregue dentro de um cronograma e, ainda assim, não resolver o problema que motivou sua criação. Também podia funcionar em uma demonstração, mas apresentar falhas quando recebesse muitos acessos, dados diferentes ou fosse integrado a outros sistemas."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Outro desafio importante era a manutenção. Um software não deixa de precisar de cuidados depois de ser entregue. Regras de negócio mudam, vulnerabilidades precisam ser corrigidas, equipamentos e plataformas evoluem e novas funcionalidades passam a ser necessárias. Quando o sistema é construído sem organização suficiente, compreender o código e realizar alterações pode se tornar cada vez mais caro."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A crise do software ajudou a destacar que qualidade não depende apenas de escrever código. Ela envolve compreender o problema, organizar o trabalho, projetar soluções, testar comportamentos, documentar decisões importantes e manter o sistema ao longo do tempo. Também deixou evidente que métodos de desenvolvimento precisam lidar com riscos e incertezas, em vez de considerar que todos os detalhes estarão conhecidos desde o primeiro dia."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "É importante perceber que a agilidade não surgiu como uma solução mágica para todos esses problemas. Ela faz parte de uma evolução mais ampla das maneiras de desenvolver software e propõe formas de responder melhor às mudanças, aprender com entregas frequentes e manter a colaboração entre as pessoas envolvidas."
         }
       ]
     },
@@ -70,6 +147,22 @@
         {
           "tipo": "paragrafo",
           "conteudo": "Mercado, economia, tecnologia e comportamento dos usuários mudam rapidamente. Em ciclos longos, o sistema podia ficar pronto conforme o plano antigo, mas obsoleto e distante da necessidade real do negócio."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Em projetos de software, as mudanças podem ter diferentes origens. Uma regra de negócio pode ser atualizada, um concorrente pode lançar uma solução nova, uma tecnologia pode deixar de ser adequada ou os próprios usuários podem descobrir uma necessidade que não haviam percebido antes. Mesmo quando a equipe trabalha com cuidado, nem todas essas situações podem ser previstas antecipadamente."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Considere o desenvolvimento de um portal educacional. No planejamento, a equipe pode acreditar que os estudantes encontrarão facilmente os materiais organizados por tema. Depois que uma primeira versão é utilizada, porém, pode perceber que os alunos precisam de uma navegação diferente, de explicações adicionais ou de uma maneira mais clara de acompanhar o conteúdo estudado. O contato com o uso real revela informações que dificilmente seriam obtidas apenas em reuniões de planejamento."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Quando o desenvolvimento ocorre em ciclos menores, essas descobertas podem ser consideradas antes que grande parte do orçamento e do tempo seja investida em uma direção inadequada. A equipe consegue avaliar o que foi construído, conversar com as pessoas interessadas e reorganizar o trabalho seguinte de acordo com as prioridades atualizadas."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Isso não quer dizer que toda solicitação de mudança deva ser aceita imediatamente. Cada alteração precisa ser avaliada considerando seu benefício, custo, urgência, riscos e impacto no objetivo do produto. Adaptar-se significa tomar decisões conscientes diante de novas informações, e não mudar de direção sem critério."
         }
       ]
     },
@@ -104,6 +197,30 @@
               }
             ]
           ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Uma diferença importante entre essas abordagens está na maneira como o conhecimento é utilizado ao longo do projeto. Em um processo muito sequencial, boa parte das decisões é concentrada no início. Já em uma abordagem ágil, o planejamento é revisitado durante o trabalho, porque cada entrega e cada retorno recebido podem trazer informações úteis para as próximas decisões."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "É nesse contexto que aparecem os conceitos de desenvolvimento iterativo e incremental. No desenvolvimento iterativo, uma solução é revisada e aprimorada em ciclos sucessivos. Uma primeira versão pode cumprir o objetivo básico e, depois, receber melhorias a partir de testes e feedback. No desenvolvimento incremental, o produto cresce por meio da adição de partes funcionais. Cada incremento acrescenta alguma capacidade ao que já foi construído."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "As duas ideias podem ser utilizadas juntas. Uma equipe pode disponibilizar uma funcionalidade inicial, acrescentar novas capacidades em entregas posteriores e, ao mesmo tempo, aperfeiçoar aquilo que já existe. O importante é que os incrementos sejam integrados ao produto e tragam resultados que possam ser avaliados, em vez de representar apenas partes isoladas de trabalho sem utilidade para o conjunto."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Também é importante evitar uma interpretação equivocada: desenvolvimento ágil não significa ausência de planejamento, documentação, processos ou testes. Esses elementos continuam existindo, mas são utilizados de maneira compatível com a necessidade de entregar, avaliar e adaptar o produto. A diferença está em não tratar o plano inicial como uma previsão perfeita de tudo o que acontecerá."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Assim, a comparação não deve ser reduzida a dizer que o tradicional é ruim e o ágil é sempre melhor. Cada abordagem tem características e contextos de aplicação. A escolha precisa considerar estabilidade dos requisitos, riscos, exigências regulatórias, tamanho da equipe, frequência das mudanças e participação dos usuários."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No BorB, a equipe pode trabalhar de forma incremental ao disponibilizar capacidades em etapas, como a área de estudos, o acompanhamento de progresso e a certificação. Cada parte precisa funcionar com as anteriores para formar um produto coerente. O trabalho também é iterativo quando a equipe revisa os materiais ou a navegação após observar como os estudantes utilizam o portal. Assim, o incremento acrescenta uma capacidade, enquanto a iteração permite aperfeiçoar uma solução existente."
         }
       ]
     },
@@ -168,6 +285,30 @@
               }
             ]
           ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A mitigação precoce de riscos acontece porque o trabalho é verificado com frequência. Em vez de descobrir apenas no final que duas partes do sistema não funcionam juntas, a equipe pode integrar e testar essas partes durante o desenvolvimento. Problemas técnicos, dúvidas sobre requisitos e dificuldades de uso tornam-se visíveis mais cedo, quando ainda pode ser mais simples corrigir o caminho."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O retorno antecipado sobre o investimento está relacionado à possibilidade de disponibilizar funcionalidades úteis antes que todo o produto esteja concluído. Isso permite que a organização comece a obter benefícios, aprenda com a utilização e decida com mais informação quais capacidades devem receber prioridade. Uma entrega parcial, porém, precisa ser funcional e ter qualidade suficiente para o uso previsto; entregar algo inacabado não representa, por si só, agilidade."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O alinhamento com o usuário melhora quando as pessoas que conhecem o problema participam das validações ao longo do projeto. Ao observar resultados concretos, elas conseguem comentar pontos específicos, esclarecer dúvidas e ajudar a equipe a distinguir funcionalidades realmente importantes de ideias que pareciam necessárias apenas no planejamento inicial. Esse contato reduz o risco de construir algo tecnicamente correto, mas pouco útil."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A flexibilidade também contribui para a competitividade. Quando uma mudança de prioridade é identificada, o time pode avaliar o que deve ser feito primeiro e reorganizar o trabalho futuro. Isso não significa abandonar o que já foi combinado sem avaliar consequências; significa ter mecanismos para discutir mudanças e ajustar o plano de maneira transparente."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Por fim, a sustentabilidade do trabalho depende de uma rotina que possa ser mantida. Colaboração, comunicação clara, divisão adequada das atividades e autonomia responsável ajudam a evitar que a equipe dependa continuamente de jornadas excessivas para cumprir compromissos. Um ritmo sustentável favorece a qualidade das entregas e a continuidade do aprendizado."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "É importante lembrar que esses benefícios não aparecem automaticamente com o uso do termo “ágil”. Eles dependem de práticas consistentes, participação das pessoas envolvidas, transparência sobre o andamento do trabalho e atenção contínua à qualidade. Uma equipe pode realizar reuniões frequentes e ainda assim não ser ágil se não utilizar o que aprende para melhorar o produto e suas decisões."
         },
         {
           "tipo": "referencia",

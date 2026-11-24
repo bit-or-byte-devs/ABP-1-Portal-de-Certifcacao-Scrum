@@ -5,17 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="no-referrer">
   <title>BorB — Recuperar senha</title>
+  <link rel="stylesheet" href="../css/menu-principal.css">
   <link rel="stylesheet" href="../css/recuperarsenha.css">
   <link rel="stylesheet" href="../css/auth-tema.css">
 </head>
-<body>
+<body class="pagina-menu">
   <header class="auth-header">
     <a class="auth-brand" href="index.html" aria-label="BorB — página inicial">
-      <span class="auth-brand__icon" aria-hidden="true">B</span>
-      <span class="auth-brand__copy">
-        <span class="auth-brand__name">BorB</span>
-        <span class="auth-brand__version">SCRUM_v0.1</span>
-      </span>
+      <span class="auth-brand__icon"><img class="navbar-marca-imagem" src="../../imagens/borb-logo.png" alt="Logo BorB" width="48" height="48"></span>
     </a>
     <a class="auth-header__link" href="login.html">Entrar</a>
   </header>
@@ -24,8 +21,17 @@
     <section class="card" aria-labelledby="titulo-recuperar">
       <h1 class="card__titulo" id="titulo-recuperar">Recuperar senha</h1>
 
-      <form class="form" id="form-solicitar" novalidate>
-        <p class="card__descricao">Informe o e-mail cadastrado. Se ele tiver uma conta no portal, você receberá um código de seis dígitos para redefinir sua senha.</p>
+      <ol class="etapas" aria-label="Etapas da recuperação">
+        <li class="etapas__item" data-etapa="email" aria-current="step"><span class="etapas__numero">01</span> E-mail</li>
+        <li class="etapas__item" data-etapa="codigo"><span class="etapas__numero">02</span> Código</li>
+        <li class="etapas__item" data-etapa="senha"><span class="etapas__numero">03</span> Nova senha</li>
+      </ol>
+
+      <!-- Os campos não têm "name" e os formulários usam POST: mesmo sem o script, nada vai para a URL. -->
+
+      <!-- Etapa (a): e-mail -->
+      <form class="form" id="form-email" method="post" novalidate>
+        <p class="card__descricao">Informe o e-mail cadastrado. Se houver uma conta com ele, enviaremos um código de seis dígitos.</p>
 
         <div class="campo">
           <label class="sr-only" for="email">E-mail cadastrado</label>
@@ -34,16 +40,87 @@
               <rect x="3" y="5" width="18" height="14" rx="2"/>
               <path d="M3.5 6.5 12 13l8.5-6.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <input class="campo__input" type="email" id="email" name="email"
+            <input class="campo__input" type="email" id="email"
                    placeholder="Digite seu e-mail" maxlength="254"
                    autocomplete="email" required aria-describedby="email-erro">
           </div>
           <span class="campo__erro" id="email-erro" aria-live="polite"></span>
         </div>
 
-        <p class="aviso" id="aviso-solicitar" role="status"></p>
+        <p class="aviso" id="aviso-email" role="status"></p>
 
-        <button class="btn" id="solicitar" type="submit">Enviar código</button>
+        <button class="btn" id="enviar-codigo" type="submit">Enviar código</button>
+      </form>
+
+      <!-- Etapa (b): código -->
+      <form class="form" id="form-codigo" method="post" novalidate hidden>
+        <p class="card__descricao">
+          Se houver uma conta com <strong class="destaque" id="email-informado"></strong>, enviamos um código para ela.
+          <span id="validade"></span>
+        </p>
+
+        <div class="campo">
+          <label class="sr-only" for="codigo">Código de seis dígitos</label>
+          <input class="campo__input campo__input--codigo" type="text" id="codigo"
+                 placeholder="000000" inputmode="numeric" pattern="\d{6}"
+                 autocomplete="one-time-code" required aria-describedby="codigo-erro">
+          <span class="campo__erro" id="codigo-erro" aria-live="polite"></span>
+        </div>
+
+        <p class="aviso" id="aviso-codigo" role="status"></p>
+
+        <button class="btn" id="confirmar-codigo" type="submit">Confirmar código</button>
+
+        <div class="acoes">
+          <button class="btn-link" id="reenviar" type="button">Reenviar código</button>
+          <button class="btn-link" id="trocar-email" type="button">Usar outro e-mail</button>
+        </div>
+      </form>
+
+      <!-- Etapa (c): nova senha -->
+      <form class="form" id="form-senha" method="post" novalidate hidden>
+        <p class="card__descricao">Código confirmado. Crie uma nova senha para acessar o portal.</p>
+
+        <div class="campo">
+          <label class="sr-only" for="senha">Nova senha</label>
+          <div class="campo__caixa campo__caixa--icone campo__caixa--senha">
+            <svg class="campo__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="4.5" y="10.5" width="15" height="10" rx="2"/>
+              <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>
+            </svg>
+            <input class="campo__input" type="password" id="senha"
+                   placeholder="Nova senha" maxlength="1024"
+                   autocomplete="new-password" required aria-describedby="regra-senha senha-erro">
+            <button class="btn-olho" type="button" aria-controls="senha" aria-pressed="false" aria-label="Mostrar senha">
+              <svg class="icone-mostrar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="icone-ocultar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.2M6.6 6.6C3.8 8.4 2 12 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+            </button>
+          </div>
+          <small class="campo__ajuda" id="regra-senha">De 8 a 1024 caracteres, incluindo letras e números.</small>
+          <span class="campo__erro" id="senha-erro" aria-live="polite"></span>
+        </div>
+
+        <div class="campo">
+          <label class="sr-only" for="confirmar-senha">Confirme a nova senha</label>
+          <div class="campo__caixa campo__caixa--icone campo__caixa--senha">
+            <svg class="campo__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="4.5" y="10.5" width="15" height="10" rx="2"/>
+              <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>
+            </svg>
+            <input class="campo__input" type="password" id="confirmar-senha"
+                   placeholder="Confirme a nova senha" maxlength="1024"
+                   autocomplete="new-password" required aria-describedby="confirmar-senha-erro">
+            <button class="btn-olho" type="button" aria-controls="confirmar-senha" aria-pressed="false" aria-label="Mostrar senha">
+              <svg class="icone-mostrar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="icone-ocultar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.2M6.6 6.6C3.8 8.4 2 12 2 12s3.5 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+            </button>
+          </div>
+          <span class="campo__erro" id="confirmar-senha-erro" aria-live="polite"></span>
+        </div>
+
+        <p class="aviso" id="aviso-senha" role="status"></p>
+
+        <button class="btn" id="alterar-senha" type="submit">Alterar senha</button>
       </form>
     </section>
 
@@ -54,7 +131,7 @@
     Ainda não tem uma conta? <a href="cadastro.html">Cadastre-se</a>
   </footer>
 
-  <script src="../js/recuperacao-fluxo.js"></script>
-  <script src="../js/recuperacao.js"></script>
+  <script src="../js/recuperar-senha.js"></script>
+  <script src="../js/ceu-estrelado.js"></script>
 </body>
 </html>

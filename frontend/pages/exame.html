@@ -4,19 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BorB - Exame por tema</title>
-    <link rel="stylesheet" href="../css/global.css">
+    <link rel="preload" href="../assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../css/menu-temas.css">
+    <link rel="stylesheet" href="../css/menu-principal.css">
+    <link rel="stylesheet" href="../css/temas-menu.css">
     <link rel="stylesheet" href="../css/exame.css">
 </head>
-<body>
+<body class="pagina-menu">
 
     <header class="top-nav">
         <div class="logo-area">
-            <div class="logo-icon" aria-hidden="true">B</div>
-            <div class="logo-text">
-                <p class="logo-nome">BorB</p>
-                <small>SCRUM_v8.1</small>
-            </div>
+            <div class="logo-icon"><img class="navbar-marca-imagem" src="../../imagens/borb-logo.png" alt="Logo BorB" width="48" height="48"></div>
         </div>
         <nav class="nav-buttons" aria-label="Conta">
             <a class="btn-nav" href="perfil.html">Perfil</a>
@@ -41,6 +39,7 @@
                 </p>
                 <p id="cronometro-aviso" class="sr-only" aria-live="polite"></p>
             </header>
+            <p id="data-tentativa" class="questao__data" hidden></p>
 
             <form id="form-questao" class="questao__form">
                 <div class="questao__corpo">
@@ -58,7 +57,6 @@
                 <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
 
                 <div class="questao__acoes">
-                    <button id="btn-interromper" class="btn-nav" type="button" data-logout hidden>Encerrar sessão</button>
                     <button id="btn-confirmar" class="btn-confirmar" type="submit">Confirmar &rarr;</button>
                     <a id="link-continuar" class="btn-confirmar" href="exames.html" hidden>Próximo tema</a>
                 </div>
@@ -81,5 +79,6 @@
     <script src="../js/logout.js"></script>
     <script src="../js/cronometro.js"></script>
     <script src="../js/exame.js"></script>
+    <script src="../js/ceu-estrelado.js"></script>
 </body>
 </html>

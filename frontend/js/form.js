@@ -4,11 +4,15 @@
   "use strict";
 
   const CHAVE_CPF = "borb:cpfCadastrado";
+  // Gravada pela recuperação de senha (recuperar-senha.js); só um aviso, sem dados pessoais.
+  const CHAVE_SENHA_REDEFINIDA = "borb:senhaRedefinida";
+  const MSG_SENHA_REDEFINIDA = "Senha redefinida com sucesso. Entre com sua nova senha.";
   const PAGINA_MENU = "menu.html";
   const DURACAO_SUCESSO = 3000;
 
   const MSG_OBRIGATORIO = "Preencha este campo.";
   const MSG_CPF_DUPLICADO = "Este CPF já possui cadastro.";
+  const MSG_EMAIL_DUPLICADO = "Este e-mail já possui cadastro.";
   const MSG_ERRO_GENERICO = "Não foi possível concluir a solicitação. Tente novamente.";
 
   function somenteDigitos(valor) {
@@ -130,6 +134,18 @@
     }
   }
 
+  // Exibe uma única vez: a chave é apagada assim que lida.
+  function avisarSenhaRedefinida(form) {
+    let redefinida = null;
+    try {
+      redefinida = sessionStorage.getItem(CHAVE_SENHA_REDEFINIDA);
+      sessionStorage.removeItem(CHAVE_SENHA_REDEFINIDA);
+    } catch (e) {
+      return;
+    }
+    if (redefinida === "1") mostrarAviso(form, MSG_SENHA_REDEFINIDA, "sucesso");
+  }
+
   function preencherCpf(form) {
     const cpf = somenteDigitos(lerCpfCadastrado());
     const campoCpf = form.querySelector("[data-cpf]");
@@ -158,14 +174,20 @@
     });
   }
 
-  function mostrarCpfDuplicado(form, mensagem) {
-    const campoCpf = form.querySelector("[data-cpf]");
-    if (!campoCpf) {
+  // O servidor informa no 409 qual campo já está cadastrado; sem essa
+  // informação (ou com um valor desconhecido), o erro continua no CPF.
+  const SELETOR_DUPLICADO = { cpf: "[data-cpf]", email: 'input[name="email"]' };
+
+  function mostrarDuplicado(form, corpo) {
+    const nome = Object.prototype.hasOwnProperty.call(SELETOR_DUPLICADO, corpo.campo) ? corpo.campo : "cpf";
+    const campo = form.querySelector(SELETOR_DUPLICADO[nome]);
+    const mensagem = corpo.mensagem || (nome === "email" ? MSG_EMAIL_DUPLICADO : MSG_CPF_DUPLICADO);
+    if (!campo) {
       mostrarAviso(form, mensagem, "erro");
       return;
     }
-    marcarErro(campoCpf, mensagem);
-    campoCpf.focus();
+    marcarErro(campo, mensagem);
+    campo.focus();
   }
 
   async function lerJson(resposta) {
@@ -219,7 +241,7 @@
     if (botao) botao.disabled = false;
 
     if (resposta.status === 409) {
-      mostrarCpfDuplicado(form, corpo.mensagem || MSG_CPF_DUPLICADO);
+      mostrarDuplicado(form, corpo);
     } else if (resposta.status === 401 && form.dataset.redirecionar) {
       mostrarAviso(form, "CPF ou senha incorretos", "erro");
     } else if (resposta.ok) {
@@ -261,6 +283,7 @@
 
     configurarOlhos(form);
     if (form.hasAttribute("data-preencher-cpf")) preencherCpf(form);
+    if (form.hasAttribute("data-aviso-senha-redefinida")) avisarSenhaRedefinida(form);
     form.addEventListener("submit", enviar);
   }
 

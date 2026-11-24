@@ -31,7 +31,28 @@
         },
         {
           "tipo": "paragrafo",
-          "conteudo": "No planejamento tradicional, grande parte do projeto é definida de antemão e mudanças podem exigir revisões extensas. No planejamento ágil, o plano é atualizado em diferentes níveis, entregas de valor podem ocorrer a cada iteração e resultados, qualidade e adaptação também contam como sucesso. Agilidade não significa falta de planejamento: significa planejar continuamente com informações atualizadas."
+          "conteudo": [
+            {
+              "tipo": "texto",
+              "texto": "No planejamento tradicional, grande parte do projeto é definida de antemão e mudanças podem exigir revisões extensas. "
+            },
+            {
+              "tipo": "destaque",
+              "texto": "No planejamento ágil"
+            },
+            {
+              "tipo": "texto",
+              "texto": ", o plano é atualizado em diferentes níveis, entregas de valor podem ocorrer a cada iteração e resultados, qualidade e adaptação também contam como sucesso. Agilidade não significa falta de planejamento: significa planejar continuamente com informações atualizadas."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O planejamento ocorre em diferentes níveis e detalhes: objetivos amplos no início e itens mais específicos conforme se aproximam da execução."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Um plano útil comunica intenção e permite adaptação quando novas informações surgem. No BorB, pode priorizar o próximo resultado sem detalhar antecipadamente todas as funcionalidades futuras."
         }
       ]
     },
@@ -43,11 +64,28 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Uma Sprint é um período fixo de um mês ou menos em que a equipe trabalha para atingir um objetivo e produzir um Incremento de valor. Sprints de uma, duas ou três semanas são comuns; a duração deve se adequar ao produto e manter uma cadência consistente. O ciclo inclui Sprint Planning, Daily Scrum, desenvolvimento e testes, Sprint Review e Sprint Retrospective."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Uma Sprint"
+            },
+            {
+              "tipo": "texto",
+              "texto": " é um período fixo de um mês ou menos em que a equipe trabalha para atingir um objetivo e produzir um Incremento de valor. Sprints de uma, duas ou três semanas são comuns; a duração deve se adequar ao produto e manter uma cadência consistente. O ciclo inclui Sprint Planning, Daily Scrum, desenvolvimento e testes, Sprint Review e Sprint Retrospective."
+            }
+          ]
         },
         {
           "tipo": "paragrafo",
           "conteudo": "O Sprint Planning define por que a Sprint é importante, o que pode ser realizado e como o trabalho será feito. Participam Product Owner, Scrum Master e Developers: o Product Owner apresenta valor e prioridades; Developers avaliam capacidade e planejam o trabalho; Scrum Master apoia a compreensão e a produtividade do evento."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A duração fixa facilita comparar ciclos. Alterá-la constantemente dificulta a previsibilidade e reduz a cadência de aprendizado."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A Sprint Goal oferece direção sobre o resultado, enquanto o plano inicial permanece adaptável. A seleção precisa considerar qualidade e capacidade, não apenas quantidade."
         }
       ]
     },
@@ -71,7 +109,24 @@
         },
         {
           "tipo": "paragrafo",
-          "conteudo": "Para uma Sprint de um mês, o Scrum Guide define duração máxima de oito horas para a Sprint Planning. Em Sprints menores o evento tende a ser mais curto. O resultado deve conectar o Sprint Goal, os itens selecionados, um plano inicial e o entendimento sobre qualidade."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Para uma Sprint de um mês"
+            },
+            {
+              "tipo": "texto",
+              "texto": ", o Scrum Guide define duração máxima de oito horas para a Sprint Planning. Em Sprints menores o evento tende a ser mais curto. O resultado deve conectar o Sprint Goal, os itens selecionados, um plano inicial e o entendimento sobre qualidade."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A preparação ocorre no refinamento contínuo. Ela evita descobrir apenas na Planning regras e dependências que já poderiam estar claras."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Capacidade considera ausências, suporte e trabalho invisível como testes e integração. O plano inicial é detalhado o suficiente para começar e atualizado conforme novas informações aparecem."
         }
       ]
     },
@@ -83,7 +138,24 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Em um aplicativo de vendas, o Product Backlog pode incluir consultar catálogo e adicionar ao carrinho (alta prioridade), calcular frete e aplicar cupom (média) e criar lista de desejos (baixa). Um objetivo possível é permitir que a pessoa selecione produtos e prepare o carrinho. O time seleciona os itens coerentes com essa meta; frete pode ficar para outra Sprint se não for necessário para atingi-la."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Em um aplicativo de vendas"
+            },
+            {
+              "tipo": "texto",
+              "texto": ", o Product Backlog pode incluir consultar catálogo e adicionar ao carrinho (alta prioridade), calcular frete e aplicar cupom (média) e criar lista de desejos (baixa). Um objetivo possível é permitir que a pessoa selecione produtos e prepare o carrinho. O time seleciona os itens coerentes com essa meta; frete pode ficar para outra Sprint se não for necessário para atingi-la."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O time pode perceber dependências de persistência e integração. Essas descobertas ajudam a revisar o plano e reduzir riscos antes da execução."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A meta dá mais direção do que uma lista de tarefas. Ela permite adaptar a solução sem perder o resultado pretendido."
         }
       ]
     },
@@ -95,7 +167,16 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Story Points estimam o tamanho relativo de um item do Product Backlog. Em vez de prever horas exatas, a equipe compara esforço, complexidade, incerteza e risco. Os pontos não são uma unidade universal: cada time estabelece referências próprias."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Story Points"
+            },
+            {
+              "tipo": "texto",
+              "texto": " estimam o tamanho relativo de um item do Product Backlog. Em vez de prever horas exatas, a equipe compara esforço, complexidade, incerteza e risco. Os pontos não são uma unidade universal: cada time estabelece referências próprias."
+            }
+          ]
         },
         {
           "tipo": "lista",
@@ -117,6 +198,14 @@
         {
           "tipo": "paragrafo",
           "conteudo": "Escalas como 1, 2, 3, 5, 8, 13 e 21 são comuns. Os valores não significam horas ou dias. Story Points facilitam comparação e discussão e ajudam a observar a capacidade histórica, mas dependem do entendimento do time, podem variar quando ele muda e não garantem volume fixo de trabalho."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Pontos não são horas disfarçadas. Uma estimativa muito alta pode indicar que o item precisa ser dividido ou investigado, não apenas planejado com mais trabalho."
+        },
+        {
+          "conteudo": "Story Points, Planning Poker e velocity são técnicas de apoio, não exigências do Scrum Guide. Um time pode usá-las se ajudarem a conversar sobre tamanho relativo e capacidade, mas não deve convertê-las em horas exatas, metas individuais ou comparação entre equipes. O que importa no planejamento é formar um entendimento suficiente do trabalho e produzir um plano coerente com o Sprint Goal.",
+          "tipo": "paragrafo"
         }
       ]
     },
@@ -128,7 +217,16 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Planning Poker é uma técnica colaborativa de estimativa, especialmente útil quando há incerteza ou diferentes interpretações. O responsável apresenta a história, o grupo esclarece regras, dependências e riscos, cada pessoa escolhe uma carta em segredo, todos revelam ao mesmo tempo e quem estimou mais alto e mais baixo explica seu raciocínio. Após nova discussão, a equipe pode estimar novamente e registra um valor compartilhado, sem exigir unanimidade matemática."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Planning Poker"
+            },
+            {
+              "tipo": "texto",
+              "texto": " é uma técnica colaborativa de estimativa, especialmente útil quando há incerteza ou diferentes interpretações. O responsável apresenta a história, o grupo esclarece regras, dependências e riscos, cada pessoa escolhe uma carta em segredo, todos revelam ao mesmo tempo e quem estimou mais alto e mais baixo explica seu raciocínio. Após nova discussão, a equipe pode estimar novamente e registra um valor compartilhado, sem exigir unanimidade matemática."
+            }
+          ]
         },
         {
           "tipo": "imagem",
@@ -149,6 +247,10 @@
         {
           "tipo": "paragrafo",
           "conteudo": "Explicar critérios com clareza, evitar influência antes da revelação, investigar diferenças e dividir histórias grandes são boas práticas. Os pontos não devem ser usados para pressionar a equipe."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "As diferenças revelam partes do problema vistas por especialidades diferentes. A técnica não força concordância; ela apoia uma compreensão compartilhada."
         }
       ]
     },
@@ -160,7 +262,16 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "O evento formal Sprint Planning é apoiado pelo trabalho contínuo de preparação do Product Backlog: compreender necessidades, ordenar itens, definir critérios, identificar riscos e dependências, dividir itens grandes e estimar quando útil. A velocidade soma os Story Points de itens concluídos conforme os critérios do time; a média de Sprints anteriores pode orientar a conversa, mas não é garantia."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "O evento formal Sprint Planning"
+            },
+            {
+              "tipo": "texto",
+              "texto": " é apoiado pelo trabalho contínuo de preparação do Product Backlog: compreender necessidades, ordenar itens, definir critérios, identificar riscos e dependências, dividir itens grandes e estimar quando útil. A velocidade soma os Story Points de itens concluídos conforme os critérios do time; a média de Sprints anteriores pode orientar a conversa, mas não é garantia."
+            }
+          ]
         },
         {
           "tipo": "paragrafo",
@@ -169,6 +280,14 @@
         {
           "tipo": "paragrafo",
           "conteudo": "Erros comuns incluem selecionar mais trabalho do que a capacidade permite, confundir ocupação com valor, iniciar itens sem entendimento suficiente, ignorar testes e integração, transformar pontos em metas individuais e tratar o Sprint Backlog como imutável."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Velocity conta somente trabalho que atende à DoD. Ela não mede valor ou qualidade e não deve ser usada para comparar times ou pressionar indivíduos."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Planejar exige equilibrar trabalho novo e capacidade de concluir. Selecionar menos itens com integração e qualidade pode gerar mais resultado utilizável que iniciar muitos."
         }
       ]
     },
@@ -180,11 +299,28 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Release é a disponibilização de uma versão ou funcionalidade para um público. O planejamento coordena entregas ao longo de várias Sprints e considera objetivos de negócio, valor, risco, qualidade e previsibilidade. Uma release pode conter várias Sprints; incrementos menores também podem ser disponibilizados continuamente."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Release"
+            },
+            {
+              "tipo": "texto",
+              "texto": " é a disponibilização de uma versão ou funcionalidade para um público. O planejamento coordena entregas ao longo de várias Sprints e considera objetivos de negócio, valor, risco, qualidade e previsibilidade. Uma release pode conter várias Sprints; incrementos menores também podem ser disponibilizados continuamente."
+            }
+          ]
         },
         {
           "tipo": "paragrafo",
           "conteudo": "Um plano de release considera objetivo e escopo prioritário, backlog ordenado por valor e dependências, estimativas e capacidade histórica, cronograma indicativo, riscos, critérios de qualidade e estratégia de implantação, monitoramento e resposta a problemas."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Concluir uma Sprint não é necessariamente publicar uma release. Um Incremento pronto pode ser disponibilizado antes ou agrupado a uma versão conforme estratégia operacional."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A decisão considera testes, segurança, migração, suporte e possibilidade de correção. Implantação faz parte da entrega de valor."
         }
       ]
     },
@@ -206,6 +342,23 @@
             "Preparar implantação, comunicação, suporte e monitoramento.",
             "Revisar o plano após cada Sprint com base no que foi aprendido."
           ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "O plano é uma previsão"
+            },
+            {
+              "tipo": "texto",
+              "texto": " baseada nas melhores informações disponíveis. Cenários evitam apresentar uma única data como certeza."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Revisar o plano após cada Sprint substitui suposições por dados reais e torna a previsão mais transparente."
         }
       ]
     },
@@ -274,7 +427,24 @@
         },
         {
           "tipo": "paragrafo",
-          "conteudo": "Se um backlog tem 110 pontos e a velocidade média observada é 22 pontos por Sprint, uma projeção simples indica cerca de cinco Sprints. É uma estimativa pontual: não considera variações de velocidade, mudanças de escopo, dependências ou incerteza. Releases podem ocorrer no meio ou ao final da Sprint, desde que qualidade e implantação sejam atendidas; concluir uma Sprint e liberar uma versão não são necessariamente o mesmo momento."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Se um backlog"
+            },
+            {
+              "tipo": "texto",
+              "texto": " tem 110 pontos e a velocidade média observada é 22 pontos por Sprint, uma projeção simples indica cerca de cinco Sprints. É uma estimativa pontual: não considera variações de velocidade, mudanças de escopo, dependências ou incerteza. Releases podem ocorrer no meio ou ao final da Sprint, desde que qualidade e implantação sejam atendidas; concluir uma Sprint e liberar uma versão não são necessariamente o mesmo momento."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A separação em releases permite validar o produto progressivamente. A projeção de cinco Sprints é referência inicial, não compromisso exato."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Mudanças de escopo e dependências externas precisam aparecer na revisão da previsão."
         }
       ]
     },
@@ -332,7 +502,24 @@
         },
         {
           "tipo": "paragrafo",
-          "conteudo": "O fluxo não é totalmente linear: o que se aprende durante a Sprint pode alterar prioridades, estimativas e releases futuras."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "O fluxo"
+            },
+            {
+              "tipo": "texto",
+              "texto": " não é totalmente linear: o que se aprende durante a Sprint pode alterar prioridades, estimativas e releases futuras."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Velocity orienta capacidade observada, mas não substitui a Sprint Goal, a prioridade do Product Owner ou a avaliação técnica dos Developers."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Cada ciclo usa resultados anteriores para revisar decisões seguintes."
         }
       ]
     },
@@ -344,7 +531,24 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "O Product Owner ordena histórias para consultar profissionais (3 pontos), ver horários (3), agendar (5), cancelar (3) e receber confirmação por e-mail (5). No Planning Poker, a conversa sobre concorrência por horários revela riscos e esclarece regras. A equipe define como Sprint Goal permitir que pacientes consultem profissionais e horários, seleciona as duas primeiras histórias (6 pontos), planeja integração e testes, acompanha o trabalho e adapta o Sprint Backlog. Depois, as releases podem acrescentar agendamento, confirmação, cancelamento e melhorias de comunicação conforme o aprendizado."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "O Product Owner"
+            },
+            {
+              "tipo": "texto",
+              "texto": " ordena histórias para consultar profissionais (3 pontos), ver horários (3), agendar (5), cancelar (3) e receber confirmação por e-mail (5). No Planning Poker, a conversa sobre concorrência por horários revela riscos e esclarece regras. A equipe define como Sprint Goal permitir que pacientes consultem profissionais e horários, seleciona as duas primeiras histórias (6 pontos), planeja integração e testes, acompanha o trabalho e adapta o Sprint Backlog. Depois, as releases podem acrescentar agendamento, confirmação, cancelamento e melhorias de comunicação conforme o aprendizado."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A conversa sobre concorrência revela regras técnicas e testes necessários antes da confirmação de um horário."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A meta permite entregar uma capacidade clara. Os resultados observados ajudam a planejar agendamento e cancelamento nas etapas seguintes."
         }
       ]
     }

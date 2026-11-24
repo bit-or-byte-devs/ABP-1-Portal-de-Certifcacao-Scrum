@@ -1,0 +1,214 @@
+.pagina-consulta-certificado .main-container {
+    max-width: 860px;
+    padding: 24px 24px 48px;
+}
+
+.pagina-consulta-certificado .top-header-row {
+    width: min(100%, 720px);
+    margin: 20px auto 18px;
+    gap: 16px;
+}
+
+.pagina-consulta-certificado .page-title {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.pagina-consulta-certificado .consulta-card {
+    width: min(100%, 720px);
+    margin: 0 auto;
+    padding: 26px 28px 28px;
+    border: 1px solid rgba(0, 255, 102, 0.473);
+    border-radius: 12px;
+    background: rgba(11, 18, 30, 0.9);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.pagina-consulta-certificado .consulta-card h2 {
+    margin: 0 0 20px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.pagina-consulta-certificado .consulta-label {
+    display: block;
+    margin: 20px 0 12px;
+    color: var(--text-white);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.pagina-consulta-certificado .consulta-input {
+    width: 100%;
+    height: 46px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    background: rgba(15, 22, 35, 0.9);
+    color: var(--text-white);
+    font-size: 15px;
+    outline: none;
+}
+
+.pagina-consulta-certificado .consulta-input:focus {
+    border-color: rgba(0, 255, 102, 0.35);
+    box-shadow: 0 0 0 2px rgba(0, 255, 102, 0.08);
+}
+
+.pagina-consulta-certificado .consulta-button {
+    display: block;
+    margin: 20px auto 0;
+    min-width: 170px;
+    min-height: 44px;
+    padding: 10px 28px;
+    border: none;
+    border-radius: 999px;
+    background: #00ff66;
+    color: #0b0f19;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #00a844, 0 10px 24px rgba(0, 0, 0, 0.2);
+    transition: background 0.18s, transform 0.12s, box-shadow 0.12s;
+}
+
+.pagina-consulta-certificado .consulta-button:hover {
+    background: #4dff94;
+}
+
+.pagina-consulta-certificado .consulta-button:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #00a844, 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+.pagina-consulta-certificado .top-nav,
+.pagina-consulta-certificado .main-container,
+.pagina-consulta-certificado .footer-bar {
+    position: relative;
+    z-index: 1;
+}
+
+.pagina-consulta-certificado .consulta-mensagem {
+    min-height: 22px;
+    margin-top: 12px;
+    color: #ff8a8a;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.pagina-consulta-certificado .resultado-certificado {
+    margin-top: 24px;
+}
+
+.pagina-consulta-certificado .resultado-status {
+    margin: 0 0 16px;
+    color: var(--text-white);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.pagina-consulta-certificado .resultado-status span {
+    color: #a6f4d1;
+}
+
+.pagina-consulta-certificado .certificado-documento {
+    position: relative;
+    container-type: inline-size;
+    color: #173f43;
+}
+
+.pagina-consulta-certificado .certificado-documento img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.pagina-consulta-certificado .certificado-campo {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    padding: 0 2px;
+    font-size: 1.25cqi;
+    line-height: 1;
+    text-align: center;
+}
+
+.pagina-consulta-certificado .certificado-campo--nome {
+    left: 18.5%; top: 36.6%; width: 60.5%; height: 5.3%;
+    font-size: 2cqi; font-weight: 700; overflow-wrap: anywhere;
+}
+.pagina-consulta-certificado .certificado-campo--via { left: 17.8%; top: 42.9%; width: 25.7%; height: 3%; }
+.pagina-consulta-certificado .certificado-campo--data { left: 52.6%; top: 42.9%; width: 26.9%; height: 3%; }
+.pagina-consulta-certificado .certificado-campo--hora { left: 25.7%; top: 64.7%; width: 12.8%; height: 3%; }
+.pagina-consulta-certificado .certificado-campo--nota { left: 41.9%; top: 64.7%; width: 12.8%; height: 3%; }
+.pagina-consulta-certificado .certificado-campo--acertos { left: 58.3%; top: 64.7%; width: 12.5%; height: 3%; }
+
+.pagina-consulta-certificado .certificado-validacao {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 20px;
+    align-items: start;
+    padding-top: 20px;
+}
+
+.pagina-consulta-certificado .certificado-dados { overflow-wrap: anywhere; }
+.pagina-consulta-certificado .certificado-dados h3 { margin: 0 0 12px; font-size: 18px; }
+.pagina-consulta-certificado .certificado-dados dl { margin: 0; }
+.pagina-consulta-certificado .certificado-dados dl > div + div { margin-top: 8px; }
+.pagina-consulta-certificado .certificado-dados dt { font-weight: 700; }
+.pagina-consulta-certificado .certificado-dados dd { margin: 0; color: var(--menu-texto-suave); }
+
+.pagina-consulta-certificado .certificado-qr {
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.pagina-consulta-certificado .certificado-qr img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    background: #fff;
+    image-rendering: pixelated;
+}
+
+.pagina-consulta-certificado .certificado-botao {
+    width: fit-content;
+    max-width: 100%;
+    text-align: center;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .pagina-consulta-certificado .main-container {
+        padding: 16px 16px 32px;
+    }
+
+    .pagina-consulta-certificado .top-header-row {
+        margin: 14px auto 18px;
+    }
+
+    .pagina-consulta-certificado .page-title {
+        font-size: 28px;
+    }
+
+    .pagina-consulta-certificado .consulta-card {
+        padding: 20px 18px 22px;
+    }
+
+    .pagina-consulta-certificado .certificado-validacao {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pagina-consulta-certificado .footer-bar {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 18px 16px;
+    }
+}

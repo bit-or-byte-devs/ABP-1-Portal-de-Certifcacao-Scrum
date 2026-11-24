@@ -4,19 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BorB — Criar conta</title>
+  <link rel="preload" href="../assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../css/cadastro.css">
   <link rel="stylesheet" href="../css/notificacao.css">
   <link rel="stylesheet" href="../css/auth-tema.css">
+  <link rel="stylesheet" href="../css/menu-principal.css">
+  <link rel="stylesheet" href="../css/temas-menu.css">
   <link rel="stylesheet" href="../css/cadastro-modal.css">
 </head>
-<body>
+<body class="pagina-menu">
   <header class="auth-header">
     <a class="auth-brand" href="index.html" aria-label="BorB — página inicial">
-      <span class="auth-brand__icon" aria-hidden="true">B</span>
-      <span class="auth-brand__copy">
-        <span class="auth-brand__name">BorB</span>
-        <span class="auth-brand__version">SCRUM_v0.1</span>
-      </span>
+      <span class="auth-brand__icon"><img class="navbar-marca-imagem" src="../../imagens/borb-logo.png" alt="Logo BorB" width="48" height="48"></span>
     </a>
     <a class="auth-header__link" href="login.html">Entrar</a>
   </header>
@@ -89,8 +88,8 @@
             <input type="checkbox" id="aceite" name="aceiteTermos" required
                    data-msg-obrigatorio="É preciso aceitar os termos para criar a conta."
                    aria-describedby="aceite-erro">
-            <span>Li e aceito os <a href="#" target="_blank">Termos de Uso</a> e a
-              <a href="#" target="_blank">Política de Privacidade</a>, e autorizo o uso
+            <span>Li e aceito os <a href="termos.html" target="_blank" rel="noopener">Termos de Uso</a> e a
+              <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>, e autorizo o uso
               dos meus dados para emissão do certificado.</span>
           </label>
           <span class="campo__erro" id="aceite-erro" aria-live="polite"></span>
@@ -127,5 +126,6 @@
   <script src="../js/notificacao.js"></script>
   <script src="../js/cadastro.js"></script>
   <script src="../js/form.js"></script>
+  <script src="../js/ceu-estrelado.js"></script>
 </body>
 </html>

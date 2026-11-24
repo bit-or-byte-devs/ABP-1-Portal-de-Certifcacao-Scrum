@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BorB - Consulta do certificado</title>
+    <link rel="preload" href="../assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../css/menu-temas.css">
+    <link rel="stylesheet" href="../css/menu-principal.css">
+    <link rel="stylesheet" href="../css/temas-menu.css">
+    <link rel="stylesheet" href="../css/consulta-certificado.css">
+</head>
+<body class="pagina-menu pagina-consulta-certificado">
+    <header class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon"><img class="navbar-marca-imagem" src="../../imagens/borb-logo.png" alt="Logo BorB" width="48" height="48"></div>
+        </div>
+
+    </header>
+
+    <main class="main-container">
+        <div class="top-header-row">
+            <a href="/pages/menu.html" class="btn-voltar">&larr; Voltar</a>
+            <h1 class="page-title">Certificação</h1>
+        </div>
+
+        <section class="card consulta-card" aria-labelledby="consulta-titulo">
+            <h2 id="consulta-titulo">Consulta do certificado</h2>
+
+            <form id="consulta-form">
+                <label class="consulta-label" for="codigo-consulta">Insira o código de verificação:</label>
+                <input id="codigo-consulta" class="consulta-input" name="codigo" type="text" maxlength="64" pattern="[a-fA-F0-9]{64}" autocomplete="off" placeholder="Código de 64 caracteres" aria-label="Código de verificação" required>
+                <button type="submit" class="button consulta-button" id="btn-consultar-codigo">Consultar</button>
+                <p id="consulta-mensagem" class="consulta-mensagem" aria-live="polite"></p>
+            </form>
+
+            <div id="resultado-certificado" class="resultado-certificado" hidden>
+                <p class="resultado-status">Status: <span id="status-certificado">Autenticidade confirmada</span></p>
+                <div class="certificado-documento" aria-hidden="true">
+                    <img src="/imagens/questoes/Certificado2.png" alt="" width="818" height="612">
+                    <span class="certificado-campo certificado-campo--nome" id="modelo-nome"></span>
+                    <span class="certificado-campo certificado-campo--via">Via pública</span>
+                    <span class="certificado-campo certificado-campo--data" id="modelo-data"></span>
+                    <span class="certificado-campo certificado-campo--hora" id="modelo-hora"></span>
+                    <span class="certificado-campo certificado-campo--nota" id="modelo-nota"></span>
+                    <span class="certificado-campo certificado-campo--acertos" id="modelo-acertos"></span>
+                </div>
+                <div class="certificado-validacao">
+                    <div class="certificado-dados">
+                        <h3 id="nome-certificado"></h3>
+                        <dl>
+                            <div><dt>Nota final</dt><dd><span id="nota-certificado"></span> / 100</dd></div>
+                            <div><dt>Acertos</dt><dd><span id="percentual-certificado"></span>%</dd></div>
+                            <div><dt>Emissão</dt><dd><time id="data-emissao-certificado"></time></dd></div>
+                            <div><dt>Código de validação</dt><dd><code id="codigo-validado"></code></dd></div>
+                        </dl>
+                    </div>
+                    <div class="certificado-qr">
+                        <img id="qr-certificado-publico" width="144" height="144" alt="QR Code para validar este certificado">
+                        <span>Escaneie para validar</span>
+                    </div>
+                </div>
+                <a id="baixar-certificado-publico" class="consulta-button certificado-botao" download>Baixar certificado em PDF</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-bar">
+        <div class="footer-left">
+            <span class="footer-brand">BorB</span>
+            <span class="footer-copy">&copy; 2026 Scrum Learning Platform. Todos os direitos reservados.</span>
+        </div>
+        <div class="footer-right">
+            <span>STATUS: <span class="green-text">SECURE_MATRIX</span></span>
+            <span>FRAMEWORK: <span class="green-text">SCRUM.ORG COMPLIANT</span></span>
+        </div>
+    </footer>
+
+    <script src="../js/consulta-certificado.js"></script>
+    <script src="../js/ceu-estrelado.js"></script>
+</body>
+</html>

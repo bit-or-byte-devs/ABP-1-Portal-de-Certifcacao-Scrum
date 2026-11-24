@@ -11,6 +11,8 @@ const migracoes = [
     '004_conteudo_temas.sql',
     '005_alternativas_questao.sql',
     '006_sinal_questao.sql',
+    '007_versionamento_questoes.sql',
+    '008_email_unico.sql',
 ];
 const tabelasBase = [
     'tbcandidato', 'tbtema', 'tbimagem', 'tbmaterial',

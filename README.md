@@ -57,9 +57,9 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 ## 🗓️ Tabela Descritiva das Sprints
 | Sprint | Período da Sprint | Documentação da Sprint | Vídeo do Incremento (YouTube) | Status |
 | --- | --- | --- | --- | --- |
-| 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1](https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/blob/main/docs-sprint-1/documento%20Sprint1.pdf) | [Vídeo de Apresentação 1](https://youtu.be/FVt_IMNGXu8) | Concluído |
-| 🔖 **Sprint 2** | 23/10/2026 - 05/11/2026 | [Documentação Sprint 2](https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/blob/main/docs-sprint-1/Documento%20Sprint%202-%20BitorByte.pdf) | [Vídeo de Apresentação 2](https://youtu.be/K_Tbho3OMi8?is=4hczwcMjw8u2Ketj) | Concluído |
-| 🔖 **Sprint 3** | 06/11 - 25/11/2026 | [Documentação Sprint 3](https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/blob/main/docs-sprint-1/Sprint%203%20-%20Bit%20or%20Byte.pdf) | [Vídeo de Apresentação 3](em andamento) | Em andamento |
+| 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1](https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I) | [Vídeo de Apresentação 1](https://youtu.be/FVt_IMNGXu8) | Concluído |
+| 🔖 **Sprint 2** | 23/10/2026 - 05/11/2026 | [Documentação Sprint 2](https://1drv.ms/w/c/e8fba6c9b965020d/IQAEdC8AzIp_QbojhheMglW7AZ6KTPoo0g9ohUsBH44cuIs) | [Vídeo de Apresentação 2](https://youtu.be/K_Tbho3OMi8?is=4hczwcMjw8u2Ketj) | Concluído |
+| 🔖 **Sprint 3** | 06/11/2026 - 25/11/2026 | [Documentação Sprint 2](https://1drv.ms/w/c/e8fba6c9b965020d/IQAEdC8AzIp_QbojhheMglW7AZ6KTPoo0g9ohUsBH44cuIs) | [Vídeo de Apresentação 2](https://youtu.be/K_Tbho3OMi8?is=4hczwcMjw8u2Ketj) | Concluído |
 
 
 ## 💻 Tecnologias Utilizadas
@@ -149,7 +149,7 @@ docker compose up -d --build
 * [Git](https://git-scm.com) instalado.
 * [Docker Desktop](https://www.docker.com/products/docker-desktop/) em execução (inclui o Docker Compose).
 
-Não é preciso instalar Node.js nem PostgreSQL, nem criar arquivos `.env`: o `docker-compose.yml` já traz toda a configuração.
+Não é preciso instalar Node.js nem PostgreSQL. O único arquivo de configuração é o `.env`, criado a partir do `.env.example` no passo 2. Ele nunca é versionado (está no `.gitignore`).
 
 ### 🚀 Executando a Aplicação
 
@@ -159,16 +159,49 @@ git clone https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum.
 cd ABP-1-Portal-de-Certifcacao-Scrum
 ```
 
-2. **Subir os Contêineres (Docker Compose):**
+2. **Criar o `.env` e subir os Contêineres (Docker Compose):**
 ```bash
+cp .env.example .env              # Linux/macOS
+# Copy-Item .env.example .env     # Windows (PowerShell)
 docker compose up -d --build
 ```
+O `.env` copiado já vem com `RECUPERACAO_MODO=console`: o código de recuperação de senha aparece no log da `app` e nenhum e-mail é enviado. Para o envio real pelo Gmail da equipe, preencha as variáveis `SMTP_*` no seu `.env` (veja [Recuperação de senha](docs/recuperacao-senha.md)).
 O serviço `db` inicia o PostgreSQL 16; em um volume novo, executa o schema e o seed. Depois, `preparar-banco` aplica as migrações e importa os materiais e questões dos JSONs. A `app` (API Node.js que também serve o front-end) inicia somente após o sucesso da preparação. É esperado que `preparar-banco` apareça como `Exited (0)`. A primeira execução baixa as imagens e pode levar alguns minutos.
 
 Para atualizar uma instalação em uso, pare a aplicação antes de preparar o banco. Consulte os [comandos de preparação, atualização e validação](docs/preparacao-banco.md).
 
 3. **Acessar a Aplicação:**
 Abra o navegador em `http://localhost:3000/pages/index.html`
+
+### 📱 Validar certificados pelo celular na rede local
+
+No Linux, use o script para subir ou atualizar o portal no Docker:
+
+```bash
+./iniciar-rede-local.sh
+# Se o Docker exigir sudo:
+sudo ./iniciar-rede-local.sh
+# Se uma VPN selecionar a interface errada, informe o IPv4 da rede do celular:
+./iniciar-rede-local.sh 192.168.1.42
+```
+
+O script consulta o IPv4 da rota do computador a cada execução e configura a URL do QR Code com esse IP e a porta `APP_PORT` (3000 por padrão). Use o mesmo script depois de trocar de rede. O comando padrão `docker compose up -d --build` usa a `PUBLIC_BASE_URL` configurada ou `http://localhost:3000`.
+
+No Windows, inicie o Docker Desktop e execute, na raiz do repositório:
+
+```powershell
+.\iniciar-rede-local.ps1
+# Quando houver vários endereços ou uma VPN, informe o IPv4 da rede usada pelo celular:
+.\iniciar-rede-local.ps1 -LanIp 192.168.1.42
+```
+
+O script usa o IPv4 da interface física ativa quando há uma única opção. Com o IP explícito, ele verifica se o endereço pertence ao próprio computador.
+
+Abra o portal no computador e recarregue a página do certificado. O QR aponta para o endereço mostrado pelo script, inclusive no PDF baixado nesse modo. Escaneie o QR com o celular conectado à mesma rede. O link abre a página de validação com o código preenchido.
+
+Se trocar de rede ou o IP mudar, execute o script novamente e recarregue a página. Baixe um novo PDF para atualizar o QR nele. O código de validação do certificado permanece o mesmo.
+
+Se o link não abrir no celular, tente o endereço mostrado pelo script no navegador do aparelho. Confira se a porta TCP 3000 está acessível no perfil **Privado** do Firewall do Windows e se o Wi-Fi permite comunicação entre dispositivos. Redes de convidados podem isolar os aparelhos. Use esse modo em uma rede local de confiança.
 
 ### 🔧 Comandos úteis
 
@@ -183,9 +216,11 @@ docker compose down            # parar os serviços (os dados do banco são mant
 Observações:
 * O volume do banco é mantido entre execuções. Não o remova para repetir a carga.
 * Os JSONs atuais contêm 12 temas, 82 materiais e 48 questões, exatamente quatro por tema, com 192 alternativas. Consulte a [distribuição do catálogo](docs/questoes/mapeamento-temas.md) e as [pendências dos testes](docs/preparacao-banco.md).
-* A recuperação de senha roda em modo `console`: sem servidor SMTP, o código de verificação é impresso no log do serviço `app`.
-* Se a porta 3000 já estiver em uso, altere o mapeamento `ports` do serviço `app` no `docker-compose.yml` (por exemplo, `"3001:3000"`).
-* Os segredos do `docker-compose.yml` servem apenas para demonstração local. Para usar outros valores, defina `SESSION_SECRET` e `RECUPERACAO_SECRET` (32 caracteres ou mais) no ambiente.
+* Com `RECUPERACAO_MODO=console` (somente em `NODE_ENV=development`), o código de verificação é impresso no log do serviço `app`. Sem esse modo e sem as variáveis `SMTP_*`, o portal sobe normalmente, mas o log avisa quais variáveis faltam e a recuperação não envia códigos.
+* Se a porta 3000 já estiver em uso, defina `APP_PORT` no `.env` (por exemplo, `APP_PORT=3002`).
+* Os segredos do `docker-compose.yml` servem apenas para demonstração local. Para usar outros valores, defina `SESSION_SECRET` e `RECUPERACAO_SECRET` (32 caracteres ou mais) no `.env`.
+
+> ⚠️ **Já tem um `.env` antigo?** A variável `SMTP_PASSWORD` foi renomeada para **`SMTP_PASS`**. Renomeie a linha no seu `.env` (e no `backend/.env`, se usar `npm start`) e acrescente `RECUPERACAO_MODO` e as demais variáveis novas do `.env.example`. Com o nome antigo, o log da `app` acusa `SMTP_PASS` ausente e nenhum código é enviado.
 
 ---
 
@@ -240,7 +275,6 @@ Para imagens complementares como modelo conceitual, lógico, e Diagramas de Clas
 * **Banco de Dados Blindado e Ambiente 100% Automatizado (Docker):** PostgreSQL operando com *constraints* de integridade ativas (**RP02**) e ambiente orquestrado via `docker compose up -d --build` subindo com esquema, 12 temas, 48 questões e imagens populados automaticamente sem intervenção manual (**RNF07**, **RP05**, **RP06**).
 * **Interface Responsiva em Tecnologias Nativas e Conformidade LGPD:** Todas as telas novas e existentes desenvolvidas exclusivamente em HTML5, CSS3 e JavaScript puro (**RP01**), responsivas para dispositivos móveis (**RNF01**) e com armazenamento seguro de dados pessoais em conformidade com a LGPD (**RNF03**).
 * **Versionamento, Documentação Final e Entrega MVP:** Merges diários consolidados na branch `develop` e integração final aprovada pelo PO na `main` (**RNF05**), acompanhados da documentação técnica completa atualizada (`README.md`, modelo de dados, instruções de instalação, documentação de todos os endpoints da API, descrição das funcionalidades — **RNF06**) e apresentação final do MVP funcional pronta para **26/11/2026** (**RP09**).
-
 
 
 ## Carga de questões

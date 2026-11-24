@@ -5,18 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="BorB — plataforma de aprendizagem sobre Scrum.">
   <title>BorB | Desvende o Código do Scrum</title>
+  <link rel="preload" href="../assets/fonts/space-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/menu-principal.css">
   <link rel="stylesheet" href="../css/inicial.css">
+  <link rel="stylesheet" href="../css/navbar-logo.css">
 </head>
-<body>
-  <header class="topbar">
-    <a class="brand" href="index.html" aria-label="BorB — página inicial">
-      <span class="brand-logo-slot" aria-hidden="true">B</span>
-      <span class="brand-text">BorB<small>SCRUM_v0.1</small></span>
+<body class="pagina-menu">
+  <header class="topo">
+    <a class="marca" href="index.html" aria-label="BorB — página inicial">
+      <span class="marca-logo" aria-hidden="true">
+        <img class="navbar-marca-imagem" src="../../imagens/borb-logo.png" alt="Logo BorB" width="48" height="48">
+      </span>
     </a>
-    <nav class="top-actions" aria-label="Navegação principal"><a class="about-link" href="#sobre">Conheça a plataforma</a><a class="top-link" href="login.html">Entrar</a></nav>
+    <nav class="topo-acoes" aria-label="Navegação principal">
+      <a class="btn-topo" href="consultar-certificado.html">Consultar código do certificado</a>
+      <a class="btn-topo" href="login.html">Entrar</a>
+    </nav>
   </header>
 
-  <main>
+  <main class="inicio">
     <section class="hero" id="inicio">
       <div class="hero-copy">
         <h1>Desvende o Código do<br><span>Scrum</span> com a BorB</h1>
@@ -33,35 +40,81 @@
         <span class="eyebrow">SUA JORNADA COMEÇA AQUI</span>
         <h2>Pronto para aprender Scrum?</h2>
         <a class="button" href="login.html"><span aria-hidden="true">▶</span> Iniciar estudos</a>
+        <a class="certification-link" href="#como-funciona-certificacao">Como funciona a certificação</a>
         <p class="tiny">Inicie agora sua jornada pelos <strong>12 temas</strong><br>da plataforma, e domine essa metodologia.</p>
       </div>
     </section>
 
     <section class="learning" id="sobre">
       <h2>Aprenda com <br>Bor<span>B</span></h2>
-      <div class="learning-grid">
-        <div class="objectives">
-          <h3>O que você vai aprender:</h3>
-          <p><strong>Compreender a Agilidade:</strong> Dominar os valores e princípios do Manifesto Ágil aplicados a projetos modernos.</p>
-          <p><strong>Domínio do Framework Scrum:</strong> Entender em detalhes os papéis (Product Owner, Scrum Master, Developers), eventos (Sprint Planning, Daily, Review, Retrospective) e artefatos.</p>
-          <p><strong>Aplicação Prática:</strong> Saber criar e gerenciar User Stories, Product Backlog, quadros Kanban e aplicar métricas de acompanhamento.</p>
-          <p><strong>Garantia de Qualidade e Entrega de Valor:</strong> Desenvolver habilidades para promover a colaboração em equipe, organização e entrega contínua de valor.</p>
-        </div>
-        <div class="learning-description">
-          <p>Nesta plataforma, você passará por <strong>12 temas fundamentais</strong> com questões práticas e teóricas sobre a metodologia Scrum. O aprendizado ocorre em uma progressão totalmente interativa, permitindo que você acompanhe e gerencie seu progresso passo a passo, tanto ao longo de cada tema quanto na evolução geral do curso.</p>
-          <p>Prepare-se para testar seus conhecimentos e evoluir no próprio ritmo!</p>
-          <a class="button" href="cadastro.html">Criar minha conta <span aria-hidden="true">→</span></a>
-        </div>
+      <ul class="learning-journey-grid" role="list">
+        <li class="journey-step">
+          <div class="journey-step-heading">
+            <span class="journey-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h6a2 2 0 0 1 2 2v13a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a2 2 0 0 0-2 2v13a2 2 0 0 1 2-2h6z"/></svg></span>
+            <h3>Fundamentos ágeis</h3>
+          </div>
+          <p>Conheça os valores e princípios do Manifesto Ágil e como eles orientam o trabalho em equipe.</p>
+        </li>
+        <li class="journey-step">
+          <div class="journey-step-heading">
+            <span class="journey-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.5h6V4M9 10l2 2 4-4M9 16h6"/></svg></span>
+            <h3>Scrum na prática</h3>
+          </div>
+          <p>Entenda os papéis, eventos e artefatos do Scrum e como eles ajudam o time a organizar o trabalho e entregar valor.</p>
+        </li>
+        <li class="journey-step">
+          <div class="journey-step-heading">
+            <span class="journey-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 7V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/><rect x="3" y="7" width="13" height="14" rx="2"/><path d="M7 12h5M7 16h3"/></svg></span>
+            <h3>Planejamento e melhoria contínua</h3>
+          </div>
+          <p>Explore User Stories, Product Backlog, Kanban e métricas para planejar entregas, acompanhar o progresso e melhorar a qualidade.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="learning-journey" id="como-funciona-certificacao" aria-labelledby="learning-journey-title" tabindex="-1">
+      <div class="journey-heading">
+        <h2 id="learning-journey-title">Como funciona a certificação</h2>
+        <img class="journey-mascot" src="../../imagens/BorB1.png" alt="Mascote BorB comemorando" width="220" height="250">
       </div>
+      <ol class="learning-journey-grid" role="list">
+        <li class="journey-step">
+          <div class="journey-step-heading">
+            <span class="journey-step-icon" aria-hidden="true">1</span>
+            <h3>Prepare-se no seu ritmo</h3>
+          </div>
+          <p>Explore os materiais dos <strong>12 temas</strong> e acompanhe seu progresso na área de estudos.</p>
+        </li>
+        <li class="journey-step">
+          <div class="journey-step-heading">
+            <span class="journey-step-icon" aria-hidden="true">2</span>
+            <h3>Faça o exame</h3>
+          </div>
+          <p>São <strong>12 questões</strong>, uma sorteada por tema. Você tem <strong>2 minutos e 30 segundos</strong> e uma tentativa por questão.</p>
+          <p>Você pode parar entre questões e retomar depois. Se o tempo acabar ou você sair durante uma questão, ela conta como incorreta.</p>
+        </li>
+        <li class="journey-step">
+          <div class="journey-step-heading">
+            <span class="journey-step-icon" aria-hidden="true">3</span>
+            <h3>Confira seu resultado</h3>
+          </div>
+          <p>Ao concluir as 12 questões, você vê seu desempenho. Com <strong>pelo menos 8 acertos</strong>, o BorB emite seu certificado automaticamente.</p>
+          <p>A autenticidade pode ser verificada por <strong>QR Code</strong> ou pelo código de validação.</p>
+        </li>
+      </ol>
     </section>
   </main>
 
-  <footer>
-    <span><strong>BorB</strong> © 2026 Scrum Learning Platform. Todos os direitos reservados.</span>
-    <nav aria-label="Links do rodapé">
+  <footer class="rodape">
+    <p class="rodape-copy"><strong>Bor<span class="marca-b">B</span></strong> &copy; 2026 Equipe Bit or Byte, FATEC Jacareí.</p>
+    <nav class="rodape-links" aria-label="Links do rodapé">
       <a href="#inicio">Voltar ao início</a>
       <a href="#sobre">Sobre o curso</a>
+      <a href="mailto:bitorbyte6@gmail.com">bitorbyte6@gmail.com</a>
+      <a href="privacidade.html">Privacidade e LGPD</a>
+      <a href="termos.html">Termos de Uso</a>
     </nav>
   </footer>
+  <script src="../js/ceu-estrelado.js"></script>
 </body>
 </html>

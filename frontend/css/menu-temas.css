@@ -56,7 +56,7 @@ body {
 }
 
 .logo-text h2 {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 700;
     letter-spacing: 0.5px;
 }
@@ -411,11 +411,106 @@ body {
 }
 
 @media (max-width: 600px) {
-    .cards-wrapper {
-        grid-template-columns: 1fr;
+    .top-nav {
+        flex-wrap: wrap;
+        width: calc(100% - 24px);
+        margin: 12px auto;
+        padding: 10px 12px;
+        gap: 10px;
+    }
+
+    .main-container {
+        padding-inline: 12px;
+    }
+
+    .top-header-row {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .theme-main-row {
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .theme-controls {
+        min-width: 0;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .theme-main-row h3 {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .btn-iniciar {
+        min-height: 40px;
+        max-width: 100%;
+    }
+
+    .footer-bar {
+        flex-wrap: wrap;
+    }
+
+    .footer-left,
+    .footer-right {
+        min-width: 0;
+        flex-wrap: wrap;
     }
 }
 
+@media (max-width: 360px) {
+    .top-nav {
+        width: calc(100% - 16px);
+        margin-inline: auto;
+    }
+
+    .logo-area {
+        min-width: 0;
+    }
+
+    .logo-text small {
+        display: none;
+    }
+
+    .nav-buttons {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .main-container {
+        padding-inline: 8px;
+    }
+
+    .page-title {
+        font-size: 26px;
+    }
+
+    .theme-card {
+        padding: 18px 14px;
+    }
+
+    .theme-main-row {
+        flex-direction: column;
+    }
+
+    .theme-controls {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .footer-bar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .footer-right {
+        width: 100%;
+        flex-direction: column;
+        gap: 6px;
+    }
+}
 
 /* Estados do exame ficam visíveis também nos cards recolhidos. */
 .pagina-exames .theme-card .btn-iniciar {
@@ -432,4 +527,40 @@ body {
     background-color: var(--green-accent);
     color: var(--inner-box);
     font-weight: 700;
+}
+
+.resultado-certificacao h3 {
+    margin: 20px 0 12px;
+}
+
+.resultado-certificacao__metricas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+    gap: 12px;
+}
+
+.resultado-certificacao__metricas > div {
+    padding: 16px;
+    background-color: var(--inner-box);
+    border-radius: 12px;
+}
+
+.resultado-certificacao__metricas dt {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.resultado-certificacao__metricas dd {
+    margin-top: 6px;
+    color: var(--green-accent);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.resultado-certificacao [hidden] {
+    display: none;
+}
+
+#link-exames {
+    margin-top: 20px;
 }
