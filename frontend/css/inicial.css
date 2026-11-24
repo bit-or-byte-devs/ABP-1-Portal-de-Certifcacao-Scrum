@@ -114,13 +114,9 @@ main { max-width: 1120px; margin: 0 auto; padding: 28px 50px 64px; }
   gap: 12px;
   margin-bottom: 40px;
 }
-.journey-mascot-slot {
-  display: grid;
-  flex: 1 0 auto;
-  justify-items: center;
-}
 .journey-mascot {
   display: block;
+  flex: none;
   width: clamp(72px, 12vw, 150px);
   height: auto;
 }
