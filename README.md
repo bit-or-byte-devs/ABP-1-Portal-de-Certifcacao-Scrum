@@ -75,75 +75,60 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 
 ## 🏗️ Estrutura do Projeto
 
+```text
 ABP-1-Portal-de-Certifcacao-Scrum/
-├── backend/                        # API Node.js (Express) que também serve o front-end
-│   ├── server.js                   # Ponto de entrada: sobe o servidor na porta configurada
-│   ├── package.json                # Dependências e scripts do backend
+├── backend/                              # API Express, regras de negócio e testes
+│   ├── server.js                         # Inicialização do servidor
+│   ├── package.json                      # Scripts e dependências do backend
+│   ├── scripts/                          # Preparação do banco e importação de conteúdos
 │   ├── src/
-│   │   ├── app.js                  # Configuração do Express: sessão, rotas, arquivos estáticos
-│   │   ├── config/
-│   │   │   ├── db.js               # Conexão com o PostgreSQL (pool)
-│   │   │   └── sessao.js           # Sessão e cookie de autenticação
-│   │   ├── controllers/
-│   │   │   ├── authController.js         # Login, logout e usuário logado
-│   │   │   ├── candidatoController.js    # Cadastro de candidato e validações
-│   │   │   └── recuperacaoController.js  # Recuperação de senha
-│   │   ├── middlewares/
-│   │   │   └── autenticacao.js     # Proteção de rotas e páginas (menu) e checagem de JSON
-│   │   ├── models/
-│   │   │   ├── candidatoModel.js         # Acesso aos dados de candidatos
-│   │   │   └── recuperacaoModel.js       # Acesso aos dados de recuperação de senha
-│   │   ├── routes/
-│   │   │   ├── auth.js             # /api/auth (login, logout, usuário)
-│   │   │   ├── candidatos.js       # /api/candidatos (cadastro)
-│   │   │   ├── recuperacao.js      # /api/auth/recuperacao
-│   │   │   └── temas.js            # /temas (12 temas de estudo)
-│   │   └── services/
-│   │       ├── senha.js                  # Hash e verificação de senha
-│   │       ├── codigoRecuperacao.js      # Geração e validação do código de recuperação
-│   │       └── emailRecuperacao.js       # Envio do código (SMTP ou console, em desenvolvimento)
-│   └── tests/                      # Testes automatizados (node --test)
-│       ├── auth.test.js
+│   │   ├── app.js                        # Express, sessão, rotas e arquivos estáticos
+│   │   ├── config/                       # Conexão PostgreSQL e configuração de sessão
+│   │   ├── controllers/                  # Entrada HTTP de autenticação, cadastro e recuperação
+│   │   │   └── recuperacaoController.js  # Solicitação, verificação e redefinição
+│   │   ├── middlewares/                  # Autenticação e validação de JSON
+│   │   ├── models/                       # Acesso e transações do banco
+│   │   │   └── recuperacaoModel.js       # Pedidos, limites e consumo do código
+│   │   ├── routes/                       # Rotas da API e das áreas do portal
+│   │   │   └── recuperacao.js            # /api/auth/recuperacao
+│   │   └── services/                     # Serviços de domínio
+│   │       ├── codigoRecuperacao.js      # Código, HMAC, validade e limites de desenvolvimento
+│   │       ├── emailRecuperacao.js       # SMTP e console de desenvolvimento
+│   │       └── senha.js                  # Hash e verificação de senhas
+│   └── tests/                            # Testes unitários, HTTP, SMTP simulado e PostgreSQL isolado
 │       ├── recuperacao.test.js
-│       └── recuperacao.postgres.test.js  # Teste com PostgreSQL real (opcional)
-│
-├── frontend/                       # Interface em HTML, CSS e JavaScript puro
-│   ├── pages/                      # Telas
-│   │   ├── index.html              # Tela inicial
-│   │   ├── cadastro.html, login.html
-│   │   ├── menu.html               # Menu principal (exige login)
-│   │   ├── temas.html              # Área de estudos: 12 temas
-│   │   ├── exames.html, certificados.html, pop-up.html
-│   │   └── recuperar_senha.html, verificar_codigo.html, redefinir_senha.html
-│   ├── css/                        # Estilos de cada tela e componente
-│   ├── js/                         # Scripts de cadastro, formulário, menu, temas, logout e recuperação
-│   └── assets/                     # Reservado para ícones e imagens do front-end
-│
-├── database/                       # Banco de dados PostgreSQL
-│   ├── ddl/schema.sql              # Criação das tabelas
-│   ├── dml/seed.sql                # Carga inicial: os 12 temas de estudo
-│   ├── temas/                      # Conteúdo estruturado dos 12 temas
-│   ├── migrations/                 # Atualizações para bancos já existentes
-│   │   ├── 001_recuperacao_senha.sql
-│   │   ├── 002_progresso_estudos.sql
-│   │   ├── 003_carga_questoes.sql
-│   │   ├── 004_conteudo_temas.sql
-│   │   ├── 005_alternativas_questao.sql
-│   │   └── 006_sinal_questao.sql
-│   └── diagrams/                   # Reservado para diagramas do banco
-│
-├── imagens/                        # Logos do BorB, modelos conceitual e lógico, imagens das questões (temas 1 a 3)
-├── docs/                           # Documentação técnica
-│   ├── login.md                    # Fluxo de autenticação
-│   ├── recuperacao-senha.md        # Fluxo de recuperação de senha
-│   └── api/, installation/, requirements/   # Reservadas para as próximas sprints
-│
-├── Dockerfile                      # Imagem da aplicação (Node.js 22)
-├── docker-compose.yml              # Orquestração: PostgreSQL + preparação do banco + app
-├── .dockerignore                   # Arquivos excluídos da imagem
-├── .env.example                    # Modelo de variáveis de ambiente (execução fora do Docker)
-├── package.json, package-lock.json # Metadados npm da raiz do repositório
-└── README.md                       # Documentação principal
+│       ├── recuperacao.postgres.test.js
+│       └── transporte-email.test.js
+├── frontend/                             # Interface HTML, CSS e JavaScript puro
+│   ├── pages/                            # Telas públicas e autenticadas
+│   │   └── recuperar_senha.html          # Página única: e-mail, código e nova senha
+│   ├── css/
+│   │   └── recuperarsenha.css            # Estilos da recuperação
+│   ├── js/
+│   │   └── recuperar-senha.js            # Etapas, validações, reenvio e chamadas à API
+│   ├── assets/                           # Ícones e imagens de interface
+│   ├── imagens/                          # Imagens didáticas dos temas
+│   └── pdf/                              # Materiais em PDF para estudo
+├── database/                             # Estrutura e conteúdo PostgreSQL
+│   ├── ddl/schema.sql                    # Esquema inicial
+│   ├── dml/seed.sql                      # Dados iniciais
+│   ├── migrations/                       # Evoluções não destrutivas do banco
+│   │   ├── 001_recuperacao_senha.sql     # Pedidos de recuperação e versão de sessão
+│   │   └── 008_email_unico.sql           # Unicidade de e-mail sem diferenciar maiúsculas
+│   ├── temas/                            # Conteúdo estruturado dos temas
+│   ├── questoes/                         # Banco de questões em JSON
+│   └── diagrams/                         # Diagramas do banco
+├── docs/                                 # Guias técnicos e documentação funcional
+│   ├── recuperacao-senha.md              # Fluxo, segurança, configuração e testes
+│   ├── login.md, cadastro.md              # Autenticação e cadastro
+│   ├── preparacao-banco.md                # Preparação e atualização do banco
+│   └── questoes/                          # Mapeamentos e materiais das questões
+├── imagens/                              # Logos e imagens institucionais do projeto
+├── Dockerfile                            # Imagem da aplicação
+├── docker-compose.yml                    # PostgreSQL, preparação do banco e aplicação
+├── .env.example                          # Nomes das variáveis de ambiente, sem uso para segredos reais
+└── README.md                             # Documentação principal
+```
 
 
 ### 🧭 Como as partes se conectam
