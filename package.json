@@ -7,6 +7,7 @@
     "test": "npm --prefix backend test",
     "db:preparar": "npm --prefix backend run db:preparar --",
     "db:questoes": "npm --prefix backend run db:questoes --",
+    "db:flashcards": "npm --prefix backend run db:flashcards --",
     "db:temas": "npm --prefix backend run db:temas --"
   }
 }
