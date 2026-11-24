@@ -36,7 +36,24 @@
         },
         {
           "tipo": "paragrafo",
-          "conteudo": "O Scrum é propositalmente incompleto: define somente as partes necessárias para aplicar sua teoria. As pessoas completam o restante com práticas adequadas ao contexto. Papéis, eventos, artefatos e regras essenciais são interligados; retirar partes fundamentais significa deixar de usar o Scrum em sua totalidade."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "O Scrum é propositalmente incompleto"
+            },
+            {
+              "tipo": "texto",
+              "texto": ": define somente as partes necessárias para aplicar sua teoria. As pessoas completam o restante com práticas adequadas ao contexto. Papéis, eventos, artefatos e regras essenciais são interligados; retirar partes fundamentais significa deixar de usar o Scrum em sua totalidade."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O ciclo está organizado em torno de um objetivo de produto e de Sprints. O Product Owner torna a direção visível, os Developers criam um Incremento utilizável e o time inspeciona os resultados para decidir os próximos passos."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Os eventos não são reuniões desconectadas: a Planning cria direção, a Daily adapta o plano, a Review avalia o produto e a Retrospective melhora o trabalho. Artefatos e compromissos tornam o progresso transparente."
         }
       ]
     },
@@ -48,7 +65,24 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "O nome vem do rugby, em que os jogadores se agrupam e avançam como uma unidade. Em 1986, Hirotaka Takeuchi e Ikujiro Nonaka usaram essa metáfora ao descrever equipes multidisciplinares que desenvolviam produtos juntas, em vez de passar o trabalho em etapas isoladas. Jeff Sutherland e Ken Schwaber aplicaram ideias semelhantes ao desenvolvimento de software e apresentaram o Scrum em 1995. Em 2010 publicaram a primeira versão do Scrum Guide; o guia foi atualizado ao longo dos anos, e a versão de 2020 é a referência usada neste material."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "O nome vem do rugby"
+            },
+            {
+              "tipo": "texto",
+              "texto": ", em que os jogadores se agrupam e avançam como uma unidade. Em 1986, Hirotaka Takeuchi e Ikujiro Nonaka usaram essa metáfora ao descrever equipes multidisciplinares que desenvolviam produtos juntas, em vez de passar o trabalho em etapas isoladas. Jeff Sutherland e Ken Schwaber aplicaram ideias semelhantes ao desenvolvimento de software e apresentaram o Scrum em 1995. Em 2010 publicaram a primeira versão do Scrum Guide; o guia foi atualizado ao longo dos anos, e a versão de 2020 é a referência usada neste material."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A metáfora mostra que o resultado depende da atuação coordenada do grupo, aproximando produto, tecnologia, qualidade e experiência do usuário."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Quadros, estimativas e ferramentas podem apoiar o Scrum, mas não são todos elementos obrigatórios do framework. Práticas adicionais podem ser usadas sem substituir responsabilidades, eventos, artefatos e compromissos essenciais."
         }
       ]
     },
@@ -116,7 +150,28 @@
         },
         {
           "tipo": "paragrafo",
-          "conteudo": "Scrum não é uma fórmula mágica: não resolve sozinho falta de habilidade técnica, liderança autoritária ou metas impossíveis. Torna problemas visíveis para que possam ser tratados."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Scrum não é uma fórmula mágica"
+            },
+            {
+              "tipo": "texto",
+              "texto": ": não resolve sozinho falta de habilidade técnica, liderança autoritária ou metas impossíveis. Torna problemas visíveis para que possam ser tratados."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Scrum é útil em problemas complexos, nos quais parte das respostas aparece durante o desenvolvimento. Ciclos curtos permitem comparar expectativas com resultados observados."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Produzir incrementos cedo reduz o tempo em que riscos de entendimento, tecnologia ou qualidade permanecem invisíveis. Isso não elimina os riscos, apenas permite tratá-los mais cedo."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No BorB, a equipe pode evoluir primeiro pelo acesso, depois pela navegação e pelo acompanhamento de progresso. A ordem deve considerar objetivos, riscos e retorno dos estudantes."
         }
       ]
     },
@@ -128,7 +183,16 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "O empirismo parte da experiência e do que é observado para produzir conhecimento e tomar decisões. O pensamento Lean procura reduzir desperdício e concentrar esforço no que gera valor. Na prática, o empirismo se apoia em três pilares:"
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "O empirismo"
+            },
+            {
+              "tipo": "texto",
+              "texto": " parte da experiência e do que é observado para produzir conhecimento e tomar decisões. O pensamento Lean procura reduzir desperdício e concentrar esforço no que gera valor. Na prática, o empirismo se apoia em três pilares:"
+            }
+          ]
         },
         {
           "tipo": "lista",
@@ -165,6 +229,22 @@
               }
             ]
           ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O conhecimento confiável é construído pela experiência e pela observação. O time realiza trabalho, verifica o resultado e usa o aprendizado para ajustar decisões."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Transparência torna o estado visível; inspeção percebe desvios em momentos regulares; adaptação muda o plano, a ordem ou a prática quando necessário."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O pensamento Lean chama atenção para esperas, trabalho iniciado em excesso e retrabalho. Testes e documentação necessários não são desperdício quando contribuem para qualidade e aprendizado."
+        },
+        {
+          "conteudo": "Os pilares funcionam em conjunto: sem transparência, a inspeção parte de uma visão incompleta; sem inspeção, desvios podem permanecer invisíveis; sem adaptação, observar não muda o resultado. No BorB, uma integração que falha entre a tela de estudos e o registro de progresso precisa ser visível, investigada e seguida de um ajuste no trabalho.",
+          "tipo": "paragrafo"
         }
       ]
     },
@@ -188,23 +268,25 @@
           ]
         },
         {
-          "tipo": "referencia",
+          "tipo": "paragrafo",
           "conteudo": [
             {
-              "tipo": "texto",
-              "texto": "Referência: "
-            },
-            {
-              "tipo": "link",
-              "texto": "Scrum Guide 2020",
-              "url": "https://scrumguides.org/scrum-guide.html",
-              "nova_aba": true
+              "tipo": "destaque",
+              "texto": "Os valores"
             },
             {
               "tipo": "texto",
-              "texto": "."
+              "texto": " orientam comportamento e tornam o empirismo possível. Comprometimento significa assumir responsabilidade pelos objetivos, não prometer tudo independentemente das circunstâncias."
             }
           ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Foco concentra o trabalho na meta da Sprint; abertura permite falar sobre problemas; respeito considera conhecimentos diferentes; coragem ajuda a enfrentar riscos e tomar decisões difíceis."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No BorB, esses valores se veem quando integrantes comunicam impedimentos cedo, escutam testes reais e ajustam o plano sem procurar culpados."
         }
       ]
     }

@@ -45,25 +45,30 @@ async function usuarioLogado(req, res) {
     } catch { return falhar(res); }
 }
 // Sair durante uma questão a encerra como interrompida (RF14).
-async function interromperQuestaoDoCandidato(idcandidato) {
+async function interromperQuestaoDoCandidato(idcandidato, versaoSessao) {
     let db;
     try {
         db = await pool.connect(); await db.query("BEGIN");
-        const { rows } = await db.query("SELECT id FROM tbcertificacao WHERE idcandidato=$1 FOR UPDATE", [idcandidato]);
-        if (rows.length) {
-            const reconciliadas = await reconciliarQuestoesAbertas(db, rows[0].id);
-            const interrompidas = await interromperQuestoesEmAndamento(db, rows[0].id);
-            if (reconciliadas.length || interrompidas) await recalcularCertificacao(db, rows[0].id);
+        const { rows } = await db.query(`SELECT id FROM tbcandidato
+            WHERE id=$1 AND versao_sessao=$2 FOR UPDATE`, [idcandidato, versaoSessao]);
+        const certificacao = rows.length ? await db.query(
+            "SELECT id FROM tbcertificacao WHERE idcandidato=$1 FOR UPDATE", [idcandidato]
+        ) : { rows: [] };
+        if (certificacao.rows.length) {
+            const idcertificacao = certificacao.rows[0].id;
+            const reconciliadas = await reconciliarQuestoesAbertas(db, idcertificacao);
+            const interrompidas = await interromperQuestoesEmAndamento(db, idcertificacao);
+            if (reconciliadas.length || interrompidas) await recalcularCertificacao(db, idcertificacao);
         }
         await db.query("COMMIT");
-    } catch (erro) {
+    } catch {
         if (db) await db.query("ROLLBACK").catch(() => {});
         // Sem sessão a página para de mandar sinal; o servidor interrompe sozinho em até 15 s.
-        console.error("Não foi possível interromper a questão no logout:", erro);
+        console.error("Não foi possível interromper a questão no logout.");
     } finally { db?.release(); }
 }
 async function logout(req, res) {
-    if (req.session.candidatoId) await interromperQuestaoDoCandidato(req.session.candidatoId);
+    if (req.session.candidatoId) await interromperQuestaoDoCandidato(req.session.candidatoId, req.session.versaoSessao);
     req.session.destroy((erro) => {
         if (erro) return falhar(res);
         res.clearCookie(NOME_COOKIE, OPCOES_COOKIE);

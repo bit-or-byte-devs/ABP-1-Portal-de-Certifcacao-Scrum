@@ -11,7 +11,7 @@ docker compose up -d --build
 A ordem configurada é:
 
 1. `db`: inicializa o PostgreSQL e, somente em um volume novo, executa `schema.sql` e `seed.sql`.
-2. `preparar-banco`: aguarda o banco ficar saudável, valida os JSONs e imagens, confere as tabelas base, aplica as migrações 001 a 006 e importa temas e questões.
+2. `preparar-banco`: aguarda o banco ficar saudável, valida os JSONs e imagens, confere as tabelas base, aplica as migrações 001 a 008 (incluindo os dois arquivos 007) e importa temas e questões.
 3. `app`: inicia após a preparação encerrar com código zero.
 
 O serviço de preparação usa o mesmo Dockerfile da aplicação e não publica portas. É esperado que apareça como `Exited (0)` após o sucesso; não é um servidor permanente. O healthcheck do banco usa TCP para não considerar pronto o servidor temporário usado durante a inicialização dos SQLs.
@@ -40,7 +40,7 @@ Os comandos individuais `db:temas` e `db:questoes` continuam disponíveis.
 
 ## Volumes existentes e atualizações
 
-O volume `pgdata` é preservado. As migrações são executadas na ordem 001 a 007; a 002 cria a tabela de progresso necessária à 004, a 005 recusa a execução se encontrar questão sem exatamente 4 alternativas e 1 correta, a 006 registra o último sinal da página aberta para o servidor encerrar como interrompida uma questão abandonada (US22), e a 007 impede alterar questões e alternativas já usadas em tentativas. Para corrigir uma questão histórica, cadastre uma nova versão em vez de modificar a anterior. Não reaplique o schema sobre um banco existente.
+O volume `pgdata` é preservado. As migrações são executadas na ordem 001, 002, 003, 004, 005, 006, 007_versionamento_questoes, 007_historico_questoes e 008_consolidacao_historico; a 002 cria a tabela de progresso necessária à 004, a 005 recusa a execução se encontrar questão sem exatamente 4 alternativas e 1 correta, e a 006 cria em `tbresposta` a coluna `data_hora_ultimo_sinal`, que registra o último sinal da página aberta para o servidor encerrar como interrompida a questão abandonada (US22). A 007 protege questões e alternativas com tentativas e preserva os vínculos históricos. Consulte [a manutenção do catálogo](us25-manutencao-catalogo.md). Não reaplique o schema sobre um banco existente.
 
 Para atualizar uma instalação já em uso, pare a aplicação antes da preparação:
 
@@ -134,3 +134,15 @@ docker compose -p portal-validacao-falha -f docker-compose.yml -f compose-falha.
 Esperado: comando de subida sinaliza erro, preparação encerra com código 1 e a aplicação não entra em execução. Esse cenário verifica o bloqueio pelo Compose; as falhas internas da preparação já são cobertas pelos testes unitários.
 
 Ao encerrar os testes, use `docker compose -p portal-validacao down` e o equivalente com os dois arquivos para `portal-validacao-falha`. Os volumes são mantidos.
+
+## Consolidação das proteções do histórico
+Os arquivos 007_versionamento_questoes.sql e 007_historico_questoes.sql permanecem
+preservados. A preparação executa primeiro a 007 da develop, depois a 007 da US25
+e finalmente 008_consolidacao_historico.sql, antes de qualquer importação.
+A 008 remove os triggers e funções antigos redundantes e mantém somente a proteção
+da US25, com SQLSTATE 23514 e identificação da restrição.
+Não execute somente uma migração antiga para atualizar a instalação consolidada.
+Use a preparação completa com app parada. Não remova volumes nem reaplique schema.
+A 008 é repetível e preserva dados; o schema inicial já contém os mesmos triggers
+finais. Instalações vindas de qualquer 007 são atendidas.
+Veja também [a manutenção do catálogo](us25-manutencao-catalogo.md).

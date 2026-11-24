@@ -77,4 +77,7 @@ test('falha nos temas impede a importação das questões', async t => {
     assert.match(chamadas[6], /data_hora_ultimo_sinal/);
     assert.match(chamadas[7], /tg_questao_historico_imutavel/);
     assert.match(chamadas[7], /tg_alternativa_historico_imutavel/);
+    assert.match(chamadas[8], /ck_vinculo_historico/);
+    assert.match(chamadas[9], /DROP TRIGGER IF EXISTS tg_questao_historico_imutavel/);
+    assert.match(chamadas[9], /ck_vinculo_historico/);
 });

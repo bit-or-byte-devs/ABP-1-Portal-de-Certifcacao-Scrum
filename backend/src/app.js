@@ -12,6 +12,7 @@ app.use(express.json({ limit: "16kb" }));
 app.use(sessao);
 app.use("/api/auth", authRoutes);
 app.use("/api/auth/recuperacao", require("./routes/recuperacao"));
+app.use("/api/certificados", require("./routes/certificados"));
 // Normaliza antes de servir arquivos para que aliases também exijam sessão.
 const paginasPrivadas = new Set(["menu.html", "temas.html", "estudos.html", "exames.html", "exame.html", "certificados.html", "perfil.html"]);
 app.use((req, res, next) => {

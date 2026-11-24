@@ -26,7 +26,28 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Responsável por maximizar o valor do produto. Cria e comunica a visão e o Product Goal, gere o Product Backlog e mantém seus itens claros, ordenados e alinhados às necessidades dos usuários e do negócio. Comunica-se com stakeholders para alinhar expectativas e decisões. Entre as habilidades úteis estão tomada de decisão, comunicação, conhecimento do domínio e priorização baseada em valor."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Responsável por maximizar o valor do produto"
+            },
+            {
+              "tipo": "texto",
+              "texto": ". Cria e comunica a visão e o Product Goal, gere o Product Backlog e mantém seus itens claros, ordenados e alinhados às necessidades dos usuários e do negócio. Comunica-se com stakeholders para alinhar expectativas e decisões. Entre as habilidades úteis estão tomada de decisão, comunicação, conhecimento do domínio e priorização baseada em valor."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A responsabilidade combina visão de produto, decisão e comunicação. Gerir o backlog não significa apenas registrar pedidos: o objetivo é tornar claro por que um trabalho importa e como ele contribui ao produto."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Stakeholders podem apresentar necessidades e restrições, mas a accountability pela direção do backlog pertence ao Product Owner. No BorB, estudantes, professores e a equipe técnica podem valorizar coisas diferentes; cabe integrar essas perspectivas e comunicar prioridades."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Product Owner não distribui tarefas aos Developers. Ele define prioridade e direção, enquanto o time decide como realizar o trabalho."
         }
       ]
     },
@@ -38,7 +59,28 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Responsável por promover o entendimento e a aplicação correta do Scrum. Atua como facilitador, mentor e agente de mudança, apoiando o Product Owner e os Developers na colaboração e na melhoria de práticas. Ajuda a remover impedimentos e trabalha com a organização para eliminar barreiras à agilidade. Facilitação, coaching, liderança servidora e conhecimento do Scrum são habilidades importantes."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Responsável por promover o entendimento e a aplicação correta do Scrum"
+            },
+            {
+              "tipo": "texto",
+              "texto": ". Atua como facilitador, mentor e agente de mudança, apoiando o Product Owner e os Developers na colaboração e na melhoria de práticas. Ajuda a remover impedimentos e trabalha com a organização para eliminar barreiras à agilidade. Facilitação, coaching, liderança servidora e conhecimento do Scrum são habilidades importantes."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Sua atuação não se limita a marcar reuniões ou cobrar preenchimento de quadros. Ele ajuda o time a compreender responsabilidades, eventos, artefatos e compromissos."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Como líder servidor, cria condições para o autogerenciamento. No BorB, pode tornar visível uma aprovação externa que bloqueia o portal, facilitar uma conversa e ajudar a encontrar uma solução."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Scrum Master não é chefe de projeto nem fiscal individual. Ele apoia o Product Owner e os Developers e trabalha com a organização para remover barreiras mais amplas."
         }
       ]
     },
@@ -50,7 +92,32 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Responsáveis por criar um Incremento que atenda à Definition of Done. Planejam o trabalho da Sprint, participam do refinamento do backlog, cuidam da qualidade técnica e adaptam o plano conforme aprendem. Colaboração, engenharia de software, estimativa, planejamento e autogestão são competências úteis."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Responsáveis por criar um Incremento"
+            },
+            {
+              "tipo": "texto",
+              "texto": " que atenda à Definition of Done. Planejam o trabalho da Sprint, participam do refinamento do backlog, cuidam da qualidade técnica e adaptam o plano conforme aprendem. Colaboração, engenharia de software, estimativa, planejamento e autogestão são competências úteis."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Developers podem reunir conhecimentos de desenvolvimento, testes, design, dados, segurança e conteúdo conforme o produto exigir."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Eles planejam o Sprint Backlog e decidem como transformar itens em Incremento. Autonomia vem acompanhada de responsabilidade pela qualidade e pela transparência."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No BorB, cadastro pode exigir interface, validação, backend, banco e testes. O time precisa coordenar essas partes para entregar um fluxo integrado, não componentes isolados."
+        },
+        {
+          "conteudo": "No Scrum, Developers não designa apenas programadores nem exige cargos separados para teste, design ou conteúdo. As pessoas que contribuem para criar o Incremento compartilham a responsabilidade pela qualidade e pelo plano da Sprint. No BorB, isso significa que a validação do cadastro e a integração com o banco fazem parte do trabalho coletivo, mesmo quando integrantes têm especialidades diferentes.",
+          "tipo": "paragrafo"
         }
       ]
     },
@@ -108,7 +175,24 @@
         },
         {
           "tipo": "paragrafo",
-          "conteudo": "Uma pessoa que acumula outra responsabilidade pode participar da Daily Scrum como Developer quando contribui com itens do Sprint Backlog. O acúmulo exige tempo e atenção e pode ter custos para o trabalho."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Uma pessoa que acumula outra responsabilidade"
+            },
+            {
+              "tipo": "texto",
+              "texto": " pode participar da Daily Scrum como Developer quando contribui com itens do Sprint Backlog. O acúmulo exige tempo e atenção e pode ter custos para o trabalho."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "As responsabilidades são diferentes e interdependentes. O Product Owner esclarece valor e prioridade; os Developers planejam e criam; o Scrum Master melhora o uso do Scrum e a eficácia das interações."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Durante o refinamento, o Scrum Master pode facilitar entendimentos diferentes e os Developers podem identificar riscos técnicos. O time compartilha compromisso pelo Incremento, sem apagar responsabilidades específicas."
         }
       ]
     },
@@ -155,23 +239,21 @@
           ]
         },
         {
-          "tipo": "referencia",
+          "tipo": "paragrafo",
           "conteudo": [
             {
-              "tipo": "texto",
-              "texto": "Referência: "
-            },
-            {
-              "tipo": "link",
-              "texto": "Scrum Guide",
-              "url": "https://scrumguides.org/scrum-guide.html",
-              "nova_aba": true
+              "tipo": "destaque",
+              "texto": "Essas responsabilidades"
             },
             {
               "tipo": "texto",
-              "texto": "."
+              "texto": " não representam níveis de autoridade. Elas funcionam melhor quando decisões são tomadas por quem possui responsabilidade e conhecimento apropriados, com comunicação aberta."
             }
           ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Acumular funções em uma organização exige atenção à disponibilidade e a conflitos de interesse. É importante deixar claro quando a pessoa atua em cada contexto."
         }
       ]
     }

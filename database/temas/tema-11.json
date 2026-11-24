@@ -26,11 +26,32 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Mede a quantidade de Story Points de itens que a equipe concluiu integralmente em uma Sprint. Se itens concluídos valem 3, 5 e 5 pontos, a Velocity é 13. O histórico, como a média das últimas Sprints, ajuda a prever capacidade e planejar entregas."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Mede a quantidade"
+            },
+            {
+              "tipo": "texto",
+              "texto": " de Story Points de itens que a equipe concluiu integralmente em uma Sprint. Se itens concluídos valem 3, 5 e 5 pontos, a Velocity é 13. O histórico, como a média das últimas Sprints, ajuda a prever capacidade e planejar entregas."
+            }
+          ]
         },
         {
           "tipo": "paragrafo",
           "conteudo": "Velocity não serve para comparar equipes, pois as escalas são próprias de cada time, nem deve virar meta de pressão para produzir mais a qualquer custo."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A métrica só faz sentido no histórico do mesmo time e com uma maneira razoavelmente estável de estimar. Composição e contexto podem alterar os resultados."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Somam-se apenas itens concluídos integralmente conforme a DoD. Trabalho parcialmente concluído não representa capacidade entregue."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Velocity não mede valor, qualidade ou satisfação. Usá-la como meta pode incentivar estimativas infladas; seu uso saudável é apoiar previsões e planejamento."
         }
       ]
     },
@@ -42,7 +63,28 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Mostra o trabalho restante ao longo do tempo. O eixo vertical representa o trabalho restante (horas, tarefas ou pontos) e o horizontal representa os dias. A linha ideal desce até zero; a linha real mostra o progresso observado. Se a linha real fica muito acima da ideal, o time pode investigar riscos e ajustar o plano."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Mostra o trabalho restante"
+            },
+            {
+              "tipo": "texto",
+              "texto": " ao longo do tempo. O eixo vertical representa o trabalho restante (horas, tarefas ou pontos) e o horizontal representa os dias. A linha ideal desce até zero; a linha real mostra o progresso observado. Se a linha real fica muito acima da ideal, o time pode investigar riscos e ajustar o plano."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Uma linha acima da ideal pode indicar descoberta de detalhes, dependência, interrupção ou estimativa incompleta, não necessariamente baixa produtividade."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Mudanças de escopo podem tornar a leitura confusa. Além disso, chegar a zero não prova que o resultado alcançou a qualidade ou a Sprint Goal; o gráfico precisa ser interpretado junto ao trabalho concluído."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Suponha que uma Sprint comece com 20 pontos previstos e, no terceiro dia, ainda restem 17 quando a linha de referência indicava 12. A diferença é um sinal para conversar: pode haver uma integração mais difícil, itens maiores que o entendido ou trabalho de qualidade ainda não refletido no gráfico. O burndown não identifica a causa nem autoriza reduzir testes para fazer a linha chegar a zero."
         }
       ]
     },
@@ -54,7 +96,28 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Mostra o trabalho concluído e também a evolução do escopo total. Uma linha representa o trabalho acumulado entregue; outra representa o escopo. Se a linha do escopo subir, novos requisitos foram adicionados, tornando visível o efeito das mudanças nas previsões."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Mostra o trabalho concluído"
+            },
+            {
+              "tipo": "texto",
+              "texto": " e também a evolução do escopo total. Uma linha representa o trabalho acumulado entregue; outra representa o escopo. Se a linha do escopo subir, novos requisitos foram adicionados, tornando visível o efeito das mudanças nas previsões."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O Burnup separa conclusão de escopo. Quando o escopo muda, isso fica visível sem confundir a entrega com atraso."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "É útil em releases e produtos com mudanças frequentes, mas não informa valor ou satisfação. Deve ser combinado com feedback e objetivos."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Em uma release, imagine que dez itens tenham sido concluídos enquanto novas necessidades aumentam o escopo planejado de trinta para trinta e cinco. O burnup mostra as duas mudanças separadamente: o trabalho entregue cresce e a linha de escopo também. Isso ajuda a explicar por que a data prevista pode mudar sem esconder o progresso já realizado."
         }
       ]
     },
@@ -92,36 +155,36 @@
         },
         {
           "tipo": "paragrafo",
-          "conteudo": "O Lead Time começa quando a demanda é solicitada; o Cycle Time começa quando o trabalho é iniciado. Por isso, Lead Time é sempre maior ou igual ao Cycle Time."
-        },
-        {
-          "tipo": "referencia",
           "conteudo": [
             {
-              "tipo": "texto",
-              "texto": "Fontes do material: "
-            },
-            {
-              "tipo": "link",
-              "texto": "Scrum.org — Evidence-Based Management",
-              "url": "https://www.scrum.org/resources/evidence-based-management",
-              "nova_aba": true
+              "tipo": "destaque",
+              "texto": "O Lead Time"
             },
             {
               "tipo": "texto",
-              "texto": ", "
-            },
-            {
-              "tipo": "link",
-              "texto": "Atlassian — Agile Metrics",
-              "url": "https://www.atlassian.com/agile/project-management/metrics",
-              "nova_aba": true
-            },
-            {
-              "tipo": "texto",
-              "texto": " e Kanban University."
+              "texto": " começa quando a demanda é solicitada; o Cycle Time começa quando o trabalho é iniciado. Por isso, Lead Time é sempre maior ou igual ao Cycle Time."
             }
           ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Os pontos de início e fim precisam ser definidos com consistência. Comparações só são úteis quando a mesma definição é aplicada ao longo do tempo."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Lead Time inclui espera em filas e processamento; Cycle Time observa principalmente o período em execução. A diferença ajuda a identificar filas antes do início do trabalho."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Nenhuma métrica deve ranquear pessoas ou pressionar redução de tempo com perda de qualidade. Ela serve para identificar filas, gargalos e oportunidades de melhoria."
+        },
+        {
+          "conteudo": "Os nomes e limites de Lead Time variam entre organizações e referências. Neste material, ele começa quando a demanda é solicitada e termina quando chega ao usuário; o Cycle Time começa quando o item entra em execução e termina quando é concluído. Para interpretar os dados, o time precisa definir esses marcos e mantê-los consistentes. No Kanban, WIP, throughput e idade do item complementam o Cycle Time e ajudam a perceber tanto filas quanto itens que estão envelhecendo.",
+          "tipo": "paragrafo"
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Considere um fluxo com throughput estável, mas com alguns itens em andamento muito mais antigos que o padrão recente. A idade desses itens pode revelar risco de bloqueio antes de o Cycle Time final estar disponível. A equipe investiga esses casos e as filas; não transforma a redução de tempo em meta isolada que incentive cortes de qualidade."
         }
       ]
     }

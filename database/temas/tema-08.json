@@ -22,11 +22,36 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Imagine que você está construindo uma casa e tem uma lista grande de desejos: piscina, paredes, azulejos e telhado. Tentar fazer tudo ao mesmo tempo não funciona. No desenvolvimento de software, o Product Backlog é essa lista viva e organizada de tudo que pode ser necessário para construir ou melhorar o produto."
+          "conteudo": [
+            {
+              "tipo": "texto",
+              "texto": "Imagine que você está construindo uma casa e tem uma lista grande de desejos: piscina, paredes, azulejos e telhado. Tentar fazer tudo ao mesmo tempo não funciona. No desenvolvimento de software, o "
+            },
+            {
+              "tipo": "destaque",
+              "texto": "Product Backlog"
+            },
+            {
+              "tipo": "texto",
+              "texto": " é essa lista viva e organizada de tudo que pode ser necessário para construir ou melhorar o produto."
+            }
+          ]
         },
         {
           "tipo": "paragrafo",
           "conteudo": "No Scrum, é a fonte única de requisitos para qualquer mudança no produto. Nunca está completo: evolui conforme o produto e o ambiente em que é usado mudam."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O backlog reúne necessidades, correções, ajustes técnicos e oportunidades. Itens podem ser separados ou removidos quando o entendimento muda."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Uma lista transparente ajuda todos a compreender o que está sendo considerado e por que está naquela posição."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Essa lista ajuda o time a escolher o próximo trabalho sem assumir que todas as necessidades já são conhecidas. Um item pode começar como uma ideia ampla e ganhar detalhes conforme se aproxima da execução. O que não contribui mais para o Product Goal pode ser removido, evitando que o backlog vire um arquivo de desejos sem uso."
         }
       ]
     },
@@ -38,7 +63,28 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "O Product Owner responde pela gestão do Product Backlog. Cabe a ele manter a lista visível, transparente e clara para todos e ordenar os itens para maximizar o valor para o negócio e os usuários."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "O Product Owner"
+            },
+            {
+              "tipo": "texto",
+              "texto": " responde pela gestão do Product Backlog. Cabe a ele manter a lista visível, transparente e clara para todos e ordenar os itens para maximizar o valor para o negócio e os usuários."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Ordenar exige considerar benefício, urgência, risco, dependências e custo de oportunidade. Não significa aceitar primeiro o pedido mais recente."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Stakeholders contribuem com contexto, mas a accountability pela prioridade pertence ao Product Owner. O backlog também deve considerar qualidade, segurança e manutenção."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Por exemplo, uma solicitação de melhoria visual pode parecer importante, mas uma falha que impede candidatos de entrar no portal talvez tenha maior impacto imediato. A decisão compara consequências e explica a ordem escolhida; não significa que pedidos de stakeholders sejam ignorados, e sim que são avaliados dentro da direção do produto."
         }
       ]
     },
@@ -50,7 +96,28 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "O Product Owner organiza a ordem e o valor dos itens. O restante do time colabora estimando o esforço — por exemplo, usando Story Points — e refinando detalhes técnicos. A colaboração ajuda a criar entendimento compartilhado sobre o trabalho."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "O Product Owner"
+            },
+            {
+              "tipo": "texto",
+              "texto": " organiza a ordem e o valor dos itens. O restante do time colabora estimando o esforço — por exemplo, usando Story Points — e refinando detalhes técnicos. A colaboração ajuda a criar entendimento compartilhado sobre o trabalho."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Os Developers identificam alternativas, riscos e dependências. O Product Owner comunica o contexto do usuário e do negócio."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Estimativas não substituem entendimento. Se uma incerteza persiste, o time pode investigar ou dividir o item antes de planejar a Sprint."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "No Scrum Guide, os Developers são responsáveis por dimensionar os itens do Product Backlog. A conversa pode envolver o Product Owner para esclarecer valor e contexto, mas a estimativa não precisa usar Story Points nem produzir uma precisão que o time ainda não possui. Quando a incerteza é alta, investigação e divisão podem ser mais úteis que um número."
         }
       ]
     },
@@ -62,7 +129,32 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Backlog Refinement é a atividade contínua de detalhar, estimar e reavaliar itens para que histórias de usuário estejam compreendidas e preparadas para entrar em Sprints futuras. Épicos e funcionalidades podem ser detalhados em histórias menores com critérios claros."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Backlog Refinement"
+            },
+            {
+              "tipo": "texto",
+              "texto": " é a atividade contínua de detalhar, estimar e reavaliar itens para que histórias de usuário estejam compreendidas e preparadas para entrar em Sprints futuras. Épicos e funcionalidades podem ser detalhados em histórias menores com critérios claros."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "O refinamento não precisa ocorrer apenas em uma reunião formal. Itens distantes podem permanecer amplos; conforme se aproximam do topo, recebem detalhes e divisões necessárias."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A atividade pode esclarecer regras, critérios, dados e dependências, reduzindo discussões básicas durante a Sprint Planning."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Épicos representam necessidades amplas que podem ser divididas em itens menores. O objetivo é reduzir incerteza sem criar documentação excessiva."
+        },
+        {
+          "conteudo": "O refinamento é contínuo e não precisa seguir uma reunião ou técnica única. Itens mais próximos da execução podem ganhar detalhes, critérios, divisões e estimativas revisadas; itens distantes podem permanecer mais amplos. O objetivo é reduzir incerteza no momento adequado, sem tentar especificar todo o produto antecipadamente.",
+          "tipo": "paragrafo"
         }
       ]
     },
@@ -74,7 +166,32 @@
       "blocos": [
         {
           "tipo": "paragrafo",
-          "conteudo": "Os itens mais valiosos para o negócio e para os usuários ficam no topo. A ordem também considera dependências e o que é necessário para entregar valor com segurança."
+          "conteudo": [
+            {
+              "tipo": "destaque",
+              "texto": "Os itens mais valiosos"
+            },
+            {
+              "tipo": "texto",
+              "texto": " para o negócio e para os usuários ficam no topo. A ordem também considera dependências e o que é necessário para entregar valor com segurança."
+            }
+          ]
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Benefício, urgência, risco e esforço ajudam a comparar itens. Técnicas de classificação apoiam a conversa, mas não produzem uma ordem correta sozinhas."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Se tudo é urgente, a equipe perde foco. Priorizar também significa deixar temporariamente outros trabalhos para outra sequência."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Feedback de estudantes, falhas ou mudanças de dependência podem alterar a ordem. A revisão é adaptação baseada em informação atualizada."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "Uma prioridade também envolve custo de oportunidade: enquanto o time trabalha em uma melhoria, outra capacidade espera. No BorB, corrigir um problema que impede o acesso pode ser mais valioso que adiantar um refinamento visual, mesmo que ambos sejam desejáveis. A ordem deve ser explícita para que stakeholders entendam o que será atendido primeiro e o que ficará para depois."
         }
       ]
     },
@@ -88,36 +205,9 @@
           "tipo": "lista",
           "ordenada": false,
           "itens": [
-            [
-              {
-                "tipo": "destaque",
-                "texto": "Alta prioridade:"
-              },
-              {
-                "tipo": "texto",
-                "texto": " tela de login e cadastro, base essencial para o funcionamento do portal."
-              }
-            ],
-            [
-              {
-                "tipo": "destaque",
-                "texto": "Prioridade seguinte:"
-              },
-              {
-                "tipo": "texto",
-                "texto": " listagem de cursos, que entrega valor após o acesso."
-              }
-            ],
-            [
-              {
-                "tipo": "destaque",
-                "texto": "Futuro:"
-              },
-              {
-                "tipo": "texto",
-                "texto": " sistema de pagamento por Pix, que depende da base estar pronta."
-              }
-            ]
+            "Alta prioridade: garantir acesso ao portal e leitura dos temas de estudo, base para as demais capacidades.",
+            "Prioridade seguinte: registrar o progresso por seção, permitindo ao estudante acompanhar o que já consultou.",
+            "Etapa posterior: aprimorar exames, resultados e certificados, considerando os dados e a qualidade necessários para esse fluxo."
           ]
         },
         {
@@ -138,17 +228,25 @@
           ]
         },
         {
-          "tipo": "referencia",
+          "tipo": "paragrafo",
+          "conteudo": "No BorB, dificuldades observadas na busca podem elevar sua prioridade, assim como uma falha de segurança pode preceder melhorias visuais."
+        },
+        {
+          "tipo": "paragrafo",
+          "conteudo": "A transparência permite que todos compreendam o que está sendo priorizado e por quê."
+        },
+        {
           "conteudo": [
             {
               "tipo": "destaque",
-              "texto": "Fontes consultadas no material:"
+              "texto": "No contexto do BorB"
             },
             {
               "tipo": "texto",
-              "texto": " Guia de Product Backlog (Scrum.com.br); Product Backlog no Scrum (Escritório de Projetos); boas práticas de backlog (Scrum Alliance)."
+              "texto": ", uma ordenação possível começa por garantir que o estudante consiga acessar os temas e ler o material. Depois, pode priorizar registrar o progresso por seção e, em seguida, aperfeiçoar a experiência de exames e certificados. Essa ordem é apenas um cenário: o Product Owner a revisaria diante de dados de uso, riscos, dependências e objetivos atualizados."
             }
-          ]
+          ],
+          "tipo": "paragrafo"
         }
       ]
     }

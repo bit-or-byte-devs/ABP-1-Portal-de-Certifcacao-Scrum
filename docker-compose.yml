@@ -52,6 +52,7 @@ services:
     environment:
       NODE_ENV: ${NODE_ENV:-development}
       PORT: "3000"
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:3000}
       DB_HOST: db
       DB_PORT: "5432"
       DB_NAME: portal_certificacao
