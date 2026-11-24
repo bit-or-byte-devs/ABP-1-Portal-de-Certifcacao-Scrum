@@ -328,11 +328,16 @@
         feedback.className = 'fc-feedback';
     }
 
-    // Resultado da resposta recém-enviada: texto com ícone (nunca só cor), some sozinho em alguns segundos.
-    function mostrarFeedback(sabia, caixa) {
+    // Estado de um cartão a partir da caixa (null: ainda não respondido), com os rótulos da tela.
+    const ROTULO_ESTADO = { 1: 'Errado', 2: 'Em aprendizado', 3: 'Dominado' };
+    const rotuloEstado = caixa => (caixa === null ? 'Novo' : ROTULO_ESTADO[caixa]);
+
+    // Resultado da resposta recém-enviada, como "Novo → Em aprendizado". O ícone é só decoração visual:
+    // o texto, que a região role="status" anuncia, é o mesmo que aparece na tela.
+    function mostrarFeedback(sabia, caixaAnterior, caixa) {
         limparFeedback();
         feedback.className = 'fc-feedback ' + (sabia ? 'fc-feedback--sabia' : 'fc-feedback--nao');
-        feedback.textContent = sabia ? 'Sabia · vai para a caixa ' + caixa : 'Não sabia · volta para a caixa ' + caixa;
+        feedback.textContent = rotuloEstado(caixaAnterior) + ' → ' + rotuloEstado(caixa);
         temporizadorFeedback = window.setTimeout(limparFeedback, 3500);
     }
 
@@ -436,7 +441,7 @@
             sessao.respondidos.push({ codigo: cartao.codigo, sabia, caixaAnterior: cartao.caixa, caixa: resultado.caixa });
             avisar('');
             avancar();
-            mostrarFeedback(sabia, resultado.caixa);
+            mostrarFeedback(sabia, cartao.caixa, resultado.caixa);
         } catch (erro) {
             if (redirecionouParaLogin(erro)) return;
             if (erro.status === 409) {
@@ -486,7 +491,12 @@
         const sabia = respondidos.filter(item => item.sabia).length;
         $('fc-fim-sabia').textContent = String(sabia);
         $('fc-fim-nao-sabia').textContent = String(respondidos.length - sabia);
-        $('fc-fim-caixa3').textContent = String(respondidos.filter(item => item.caixa === 3 && item.caixaAnterior !== 3).length);
+        // Estado em que cada cartão terminou nesta sessão (a caixa devolvida pelo servidor na resposta).
+        const terminaram = caixa => respondidos.filter(item => item.caixa === caixa).length;
+        $('fc-fim-dominados').textContent = String(terminaram(3));
+        $('fc-fim-aprendizado').textContent = String(terminaram(2));
+        $('fc-fim-errados').textContent = String(terminaram(1));
+        $('fc-fim-orientacao').hidden = terminaram(2) === 0;
         $('fc-fim-texto').textContent = (respondidos.length
             ? 'Você respondeu ' + respondidos.length + (respondidos.length === 1 ? ' cartão.' : ' cartões.')
             : 'Nenhum cartão foi respondido nesta sessão.')

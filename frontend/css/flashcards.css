@@ -117,6 +117,87 @@
     margin: 0 0 1.125rem;
 }
 
+/* ---------- Legenda dos estados (seleção) ---------- */
+.fc-legenda {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 18px;
+    margin-bottom: 1.125rem;
+    color: var(--text-muted);
+}
+
+.fc-legenda summary {
+    display: flex;
+    align-items: center;
+    min-height: var(--fc-alvo);
+    padding: 0.5rem 1.25rem;
+    border-radius: 18px;
+    color: var(--text-white);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+}
+
+.fc-legenda summary::-webkit-details-marker {
+    display: none;
+}
+
+.fc-legenda summary::after {
+    content: "▸";
+    content: "▸" / "";
+    margin-left: auto;
+    font-size: 1rem;
+}
+
+.fc-legenda[open] summary::after {
+    content: "▾";
+    content: "▾" / "";
+}
+
+.fc-legenda-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+    gap: 0.5rem 0.75rem;
+    padding: 0.25rem 1.25rem 0;
+}
+
+.fc-legenda-lista > div {
+    background-color: var(--inner-box);
+    border-radius: 10px;
+    padding: 0.5rem 0.75rem;
+}
+
+.fc-legenda-lista dt {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--text-white);
+}
+
+.fc-legenda-lista > div:nth-child(2) dt {
+    color: var(--fc-erro);
+}
+
+.fc-legenda-lista > div:nth-child(3) dt {
+    color: var(--fc-atencao);
+}
+
+.fc-legenda-lista > div:nth-child(4) dt {
+    color: var(--green-accent);
+}
+
+.fc-legenda-lista dd {
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+.fc-legenda-regra {
+    padding: 0.75rem 1.25rem 1rem;
+    color: #d1d5db;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+}
+
 /* ---------- Carregamento (esqueleto) ---------- */
 .fc-esqueleto {
     height: 7.5rem;
@@ -489,11 +570,13 @@
 
 .fc-feedback--sabia::before {
     content: "✓ ";
+    content: "✓ " / "";
     color: var(--green-accent);
 }
 
 .fc-feedback--nao::before {
     content: "✕ ";
+    content: "✕ " / "";
     color: #fca5a5;
 }
 
@@ -670,7 +753,27 @@
 }
 
 .fc-fim-contadores {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
+}
+
+.fc-fim-subtitulo {
+    margin-top: 1.125rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+.fc-fim-respostas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Orientação quando há cartões em aprendizado: texto, com a faixa na cor do estado. */
+.fc-orientacao {
+    margin-top: 0.875rem;
+    padding-left: 0.75rem;
+    border-left: 4px solid var(--fc-atencao);
+    color: #d1d5db;
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
 .fc-fim-contadores dd {
@@ -753,6 +856,7 @@
     .fc-tema,
     .fc-face,
     .fc-resumo,
+    .fc-legenda,
     .fc-fim,
     .fc-modo span,
     .fc-secundario {

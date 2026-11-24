@@ -40,6 +40,18 @@
                 <div class="fc-barra" id="fc-resumo-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="fc-resumo-titulo" hidden><span></span></div>
             </section>
 
+            <!-- Legenda dos quatro estados: recolhida por padrão, abre com Enter ou Espaço -->
+            <details class="fc-legenda" id="fc-legenda">
+                <summary>Entenda os estados dos cartões</summary>
+                <dl class="fc-legenda-lista">
+                    <div><dt>Novos</dt><dd>Cartões que você ainda não respondeu.</dd></div>
+                    <div><dt>Errados</dt><dd>A última resposta foi "Não sabia".</dd></div>
+                    <div><dt>Em aprendizado</dt><dd>Você acertou uma vez e falta confirmar.</dd></div>
+                    <div><dt>Dominados</dt><dd>Você acertou de novo, em outra sessão.</dd></div>
+                </dl>
+                <p class="fc-legenda-regra">Um cartão é dominado depois de dois acertos em sessões diferentes. Errar devolve o cartão para Errados.</p>
+            </details>
+
             <!-- Esqueleto enquanto o domínio carrega; some quando a seleção é montada -->
             <div class="fc-grid" id="fc-esqueleto" aria-hidden="true">
                 <div class="fc-esqueleto"></div><div class="fc-esqueleto"></div><div class="fc-esqueleto"></div>
@@ -124,11 +136,18 @@
         <section id="fc-estado-fim" class="fc-fim" aria-labelledby="fc-fim-titulo" hidden>
             <h2 id="fc-fim-titulo" tabindex="-1">Resumo da sessão</h2>
             <p class="fc-dica" id="fc-fim-texto"></p>
-            <dl class="fc-contadores fc-fim-contadores">
+            <h3 class="fc-fim-subtitulo" id="fc-fim-respostas-titulo">Suas respostas</h3>
+            <dl class="fc-contadores fc-fim-contadores fc-fim-respostas" aria-labelledby="fc-fim-respostas-titulo">
                 <div class="fc-contador fc-contador--dominados"><dt>Sabia</dt><dd id="fc-fim-sabia">0</dd></div>
                 <div class="fc-contador fc-contador--erros"><dt>Não sabia</dt><dd id="fc-fim-nao-sabia">0</dd></div>
-                <div class="fc-contador"><dt>Chegaram à caixa 3</dt><dd id="fc-fim-caixa3">0</dd></div>
             </dl>
+            <h3 class="fc-fim-subtitulo" id="fc-fim-estados-titulo">Como os cartões terminaram</h3>
+            <dl class="fc-contadores fc-fim-contadores" aria-labelledby="fc-fim-estados-titulo">
+                <div class="fc-contador fc-contador--dominados"><dt>Dominados</dt><dd id="fc-fim-dominados">0</dd></div>
+                <div class="fc-contador fc-contador--aprendendo"><dt>Em aprendizado</dt><dd id="fc-fim-aprendizado">0</dd></div>
+                <div class="fc-contador fc-contador--erros"><dt>Errados</dt><dd id="fc-fim-errados">0</dd></div>
+            </dl>
+            <p class="fc-orientacao" id="fc-fim-orientacao" hidden>Acerte estes cartões de novo em outra sessão para dominá-los.</p>
             <div class="fc-acoes">
                 <button type="button" class="fc-comecar" id="fc-revisar-agora" aria-describedby="fc-motivo-fim">Revisar os que errei agora</button>
                 <button type="button" class="fc-secundario" id="fc-nova-sessao">Nova sessão</button>
