@@ -44,6 +44,7 @@ test("consulta pública valida código sem login e não expõe dados pessoais", 
     pool.query = async (sql, parametros) => {
         consultas++;
         assert.match(sql, /FROM tbcertificado\s+WHERE codigo_validacao=\$1/);
+        assert.doesNotMatch(sql, /cpf_emitido|email_emitido/i);
         assert.deepEqual(parametros, [parametros[0], 65]);
         const certificado = certificados.get(parametros[0]);
         return { rows: certificado ? [certificado] : [] };
@@ -68,6 +69,7 @@ test("consulta pública valida código sem login e não expõe dados pessoais", 
     assert.doesNotMatch(html, /sessao-estudos\.js/);
     assert.match(html, /id="status-certificado">Autenticidade confirmada</);
     assert.match(html, /id="qr-certificado-publico"/);
+    assert.match(html, /id="baixar-certificado-publico"/);
 
     function codigoPreenchido(search) {
         const codigoInput = { value: "" };
@@ -105,6 +107,8 @@ test("consulta pública valida código sem login e não expõe dados pessoais", 
 
     const invalido = await validar("nao-e-um-codigo");
     assert.equal(invalido.status, 404);
+    assert.equal((await fetch(`${base}/api/certificados/invalido/pdf-publico`)).status, 404);
+    assert.equal((await fetch(`${base}/api/certificados/${codigoValido}/pdf`)).status, 401);
     assert.equal(consultas, 0);
 
     const resposta = await validar(codigoValido);
@@ -132,10 +136,11 @@ test("consulta pública valida código sem login e não expõe dados pessoais", 
     assert.equal(urlCodificada, process.env.PUBLIC_BASE_URL + destinoEsperado);
 
     for (const [codigo, certificado] of certificados) {
-        const pdf = await fetch(`${baseLocalhost}/api/certificados/${codigo}/pdf`);
+        const pdf = await fetch(`${baseLocalhost}/api/certificados/${codigo}/pdf-publico`);
         assert.equal(pdf.status, 200);
         assert.match(pdf.headers.get("content-type"), /application\/pdf/);
-        assert.equal(pdf.headers.get("content-disposition"), `attachment; filename="certificado-${codigo}.pdf"`);
+        assert.equal(pdf.headers.get("cache-control"), "no-store");
+        assert.equal(pdf.headers.get("content-disposition"), `attachment; filename="certificado-publico-${codigo}.pdf"`);
         const arquivoPdf = Buffer.from(await pdf.arrayBuffer()).toString("latin1");
         assert.ok(arquivoPdf.startsWith("%PDF-"));
         // O PDFKit grava o total de páginas no dicionário /Pages, fora dos streams compactados.
@@ -151,7 +156,7 @@ test("consulta pública valida código sem login e não expõe dados pessoais", 
     }
 
     process.env.PUBLIC_BASE_URL = "http://192.168.1.43:3000";
-    for (const formato of ["qr", "pdf"]) {
+    for (const formato of ["qr", "pdf-publico"]) {
         const atualizado = await fetch(`${baseLocalhost}/api/certificados/${codigoValido}/${formato}`);
         assert.equal(atualizado.status, 200);
         await atualizado.arrayBuffer();
@@ -160,5 +165,6 @@ test("consulta pública valida código sem login e não expõe dados pessoais", 
 
     const naoEncontrado = await validar("b".repeat(64));
     assert.equal(naoEncontrado.status, 404);
-    assert.equal(consultas, 9);
+    assert.equal((await fetch(`${base}/api/certificados/${"b".repeat(64)}/pdf-publico`)).status, 404);
+    assert.equal(consultas, 10);
 });
