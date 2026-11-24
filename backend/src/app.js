@@ -14,7 +14,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/auth/recuperacao", require("./routes/recuperacao"));
 app.use("/api/certificados", require("./routes/certificados"));
 // Normaliza antes de servir arquivos para que aliases também exijam sessão.
-const paginasPrivadas = new Set(["menu.html", "temas.html", "estudos.html", "exames.html", "exame.html", "certificados.html", "perfil.html"]);
+const paginasPrivadas = new Set(["menu.html", "temas.html", "estudos.html", "exames.html", "exame.html", "certificados.html", "perfil.html", "flashcards.html"]);
 app.use((req, res, next) => {
     try {
         const caminho = path.posix.normalize(decodeURIComponent(req.path).replace(/\\/g, "/"))
@@ -29,6 +29,7 @@ app.use((req, res, next) => {
 });
 app.use("/api/estudos", require("./routes/estudos"));
 app.use("/api/exames", require("./routes/exames"));
+app.use("/api/flashcards", require("./routes/flashcards"));
 app.use("/imagens", express.static(path.join(__dirname, "../../imagens")));
 app.use(express.static(path.join(__dirname, "../../frontend")));
 app.use("/temas", temasRoutes);

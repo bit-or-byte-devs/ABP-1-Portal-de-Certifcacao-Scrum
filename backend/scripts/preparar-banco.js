@@ -2,6 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const temas = require('./importar-temas');
 const questoes = require('./importar-questoes');
+const flashcards = require('./importar-flashcards');
 
 const raiz = path.resolve(__dirname, '../..');
 const migracoes = [
@@ -12,7 +13,12 @@ const migracoes = [
     '005_alternativas_questao.sql',
     '006_sinal_questao.sql',
     '007_versionamento_questoes.sql',
+    // Ordem da integração US24/US25: as duas 007 e depois a consolidação.
+    '007_historico_questoes.sql',
+    '008_consolidacao_historico.sql',
     '008_email_unico.sql',
+    // Flashcards por último: só depende de tbtema, tbimagem e tbcandidato.
+    '009_flashcards.sql',
 ];
 const tabelasBase = [
     'tbcandidato', 'tbtema', 'tbimagem', 'tbmaterial',
@@ -20,14 +26,16 @@ const tabelasBase = [
 ];
 
 function validarCatalogos(log = console.log) {
-    const catalogos = { temas: temas.carregar(), questoes: questoes.carregar() };
+    const catalogos = { temas: temas.carregar(), questoes: questoes.carregar(), flashcards: flashcards.carregar() };
     const secoes = catalogos.temas.reduce((total, tema) => total + tema.secoes.length, 0);
     log(`Catálogos validados: ${catalogos.temas.length} temas, ${secoes} seções e ${catalogos.questoes.length} questões.`);
+    const temasComCartoes = new Set(catalogos.flashcards.map(cartao => cartao.tema)).size;
+    log(`Flashcards validados: ${catalogos.flashcards.length} cartões em ${temasComCartoes} temas.`);
     return catalogos;
 }
 
 async function preparar(pool, { log = console.log } = {}) {
-    // Valida ambos os catálogos e imagens antes de qualquer alteração no banco.
+    // Valida todos os catálogos e imagens antes de qualquer alteração no banco.
     const catalogos = validarCatalogos(log);
     const db = await pool.connect();
     let etapa = 'conferência da estrutura inicial';
@@ -59,8 +67,13 @@ async function preparar(pool, { log = console.log } = {}) {
         log('Importando questões e alternativas...');
         const resultadoQuestoes = await questoes.importar(db, catalogos.questoes);
         log(`Questões: ${JSON.stringify(resultadoQuestoes)}`);
+
+        etapa = 'importação dos flashcards';
+        log('Importando flashcards...');
+        const resultadoFlashcards = await flashcards.importar(db, catalogos.flashcards);
+        log(`Flashcards: ${JSON.stringify(resultadoFlashcards)}`);
         log('Preparação do banco concluída.');
-        return { temas: resultadoTemas, questoes: resultadoQuestoes };
+        return { temas: resultadoTemas, questoes: resultadoQuestoes, flashcards: resultadoFlashcards };
     } catch (erro) {
         // Encerra também transações abertas por uma migração que tenha falhado.
         await db.query('ROLLBACK').catch(() => {});

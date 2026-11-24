@@ -1,0 +1,994 @@
+/* Tela de flashcards: seleção, sessão e resumo. Usa as variáveis e componentes de menu-temas.css.
+   Tamanhos em rem (acompanham o tamanho de fonte do navegador); alvos de toque de no mínimo 44 px. */
+
+/* Fonte do rodapé padrão (rodape.css). Mesmas declarações de menu-principal.css; só o rodapé a usa nesta tela. */
+@font-face {
+    font-family: "Space Grotesk";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 300 700;
+    src: url("../assets/fonts/space-grotesk-latin-wght-normal.woff2") format("woff2-variations");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: "Space Grotesk";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 300 700;
+    src: url("../assets/fonts/space-grotesk-latin-ext-wght-normal.woff2") format("woff2-variations");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* O menu-temas.css fixa a fonte de todo elemento (* { font-family }), então os filhos do rodapé padrão
+   (p, strong, a) não herdam a Space Grotesk que o .rodape-site declara. Aqui eles voltam a herdar. */
+.pagina-flashcards .rodape-site * {
+    font-family: inherit;
+}
+
+.pagina-flashcards {
+    /* Texto secundário apoiado direto no fundo azul da página: 5,49:1 a 7,89:1.
+       O --text-muted do portal (2,17:1 nesse fundo) continua valendo dentro dos cartões. */
+    --fc-texto-suave: #e6ebf8;
+    --fc-alvo: max(44px, 2.75rem);
+    --fc-erro: #f87171;
+    --fc-atencao: #fbbf24;
+    --fc-borda: rgba(255, 255, 255, 0.08);
+}
+
+.pagina-flashcards a.btn-nav {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.pagina-flashcards :is(a, button, input, summary):focus-visible {
+    outline: 3px solid var(--green-accent);
+    outline-offset: 3px;
+}
+
+.pagina-flashcards [hidden] {
+    display: none !important;
+}
+
+/* A barra "Começar" fica fixa no pé: o foco por teclado nunca pode parar atrás dela. */
+:root:has(.pagina-flashcards) {
+    scroll-padding-bottom: 7rem;
+}
+
+/* Texto só para leitores de tela */
+.fc-so-leitor {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ---------- Transição entre seleção, sessão e resumo ---------- */
+@keyframes fc-entrada {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+}
+
+#fc-estado-selecao,
+#fc-estado-sessao,
+#fc-estado-fim {
+    animation: fc-entrada 0.18s ease-out;
+}
+
+/* ---------- Resumo geral ---------- */
+.fc-resumo {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 18px;
+    padding: 1.375rem 1.75rem;
+    margin-bottom: 1.125rem;
+}
+
+.fc-resumo h2 {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin-bottom: 0.375rem;
+}
+
+.fc-resumo p {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+}
+
+.fc-barra {
+    height: 0.5rem;
+    border-radius: 8px;
+    background-color: var(--inner-box);
+    overflow: hidden;
+}
+
+.fc-barra[hidden] {
+    display: none;
+}
+
+.fc-barra span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background-color: var(--green-accent);
+    transition: width 0.4s ease;
+}
+
+.fc-aviso:empty {
+    display: none;
+}
+
+.fc-aviso {
+    background-color: var(--card-bg);
+    border-left: 4px solid var(--green-accent);
+    border-radius: 10px;
+    padding: 0.625rem 0.875rem;
+    margin-bottom: 1.125rem;
+    font-size: 0.9375rem;
+}
+
+.fc-aviso--erro {
+    border-left-color: var(--fc-erro);
+}
+
+.fc-tentar {
+    margin: 0 0 1.125rem;
+}
+
+/* ---------- Legenda dos estados (seleção) ---------- */
+.fc-legenda {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 18px;
+    margin-bottom: 1.125rem;
+    color: var(--text-muted);
+}
+
+.fc-legenda summary {
+    display: flex;
+    align-items: center;
+    min-height: var(--fc-alvo);
+    padding: 0.5rem 1.25rem;
+    border-radius: 18px;
+    color: var(--text-white);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+}
+
+.fc-legenda summary::-webkit-details-marker {
+    display: none;
+}
+
+.fc-legenda summary::after {
+    content: "▸";
+    content: "▸" / "";
+    margin-left: auto;
+    font-size: 1rem;
+}
+
+.fc-legenda[open] summary::after {
+    content: "▾";
+    content: "▾" / "";
+}
+
+.fc-legenda-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+    gap: 0.5rem 0.75rem;
+    padding: 0.25rem 1.25rem 0;
+}
+
+.fc-legenda-lista > div {
+    background-color: var(--inner-box);
+    border-radius: 10px;
+    padding: 0.5rem 0.75rem;
+}
+
+.fc-legenda-lista dt {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--text-white);
+}
+
+.fc-legenda-lista > div:nth-child(2) dt {
+    color: var(--fc-erro);
+}
+
+.fc-legenda-lista > div:nth-child(3) dt {
+    color: var(--fc-atencao);
+}
+
+.fc-legenda-lista > div:nth-child(4) dt {
+    color: var(--green-accent);
+}
+
+.fc-legenda-lista dd {
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+.fc-legenda-regra {
+    padding: 0.75rem 1.25rem 1rem;
+    color: #d1d5db;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+}
+
+/* ---------- Carregamento (esqueleto) ---------- */
+.fc-esqueleto {
+    height: 7.5rem;
+    border-radius: 18px;
+    background: linear-gradient(90deg, var(--card-bg) 0%, #1a2238 50%, var(--card-bg) 100%);
+    background-size: 200% 100%;
+    animation: fc-brilho 1.4s linear infinite;
+}
+
+@keyframes fc-brilho {
+    from { background-position: 100% 0; }
+    to { background-position: -100% 0; }
+}
+
+/* ---------- Formulário de seleção ---------- */
+.fc-selecao fieldset {
+    border: none;
+    min-width: 0;
+}
+
+.fc-selecao legend {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.fc-selecionados {
+    color: var(--fc-texto-suave);
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+
+.fc-modos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin-bottom: 1.5rem;
+}
+
+.fc-modos legend {
+    width: 100%;
+}
+
+.fc-modo {
+    position: relative;
+    cursor: pointer;
+}
+
+.fc-modo input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+.fc-modo span {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--fc-alvo);
+    background-color: #1f2937;
+    border: 1px solid var(--fc-borda);
+    color: var(--text-white);
+    padding: 0.5rem 1.375rem;
+    border-radius: 24px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.fc-modo:hover span {
+    background-color: #374151;
+}
+
+.fc-modo input:checked + span {
+    border-color: var(--green-accent);
+    color: var(--green-accent);
+    box-shadow: inset 0 0 0 1px var(--green-accent);
+}
+
+.fc-modo input:focus-visible + span {
+    outline: 3px solid var(--green-accent);
+    outline-offset: 3px;
+}
+
+.fc-modo input:disabled + span {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.fc-modo:has(input:disabled) {
+    cursor: not-allowed;
+}
+
+.fc-temas:disabled .fc-grid {
+    opacity: 0.45;
+}
+
+.fc-dica {
+    color: var(--fc-texto-suave);
+    font-size: 0.9375rem;
+    margin-bottom: 0.75rem;
+}
+
+.fc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15.625rem), 1fr));
+    gap: 1.125rem;
+}
+
+.fc-tema {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 18px;
+    padding: 1.125rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    container-type: inline-size;
+}
+
+.fc-tema:hover {
+    border-color: rgba(0, 255, 102, 0.3);
+}
+
+.fc-tema:has(input:checked) {
+    border-color: var(--green-accent);
+    box-shadow: inset 0 0 0 1px var(--green-accent);
+}
+
+.fc-tema:has(input:focus-visible) {
+    outline: 3px solid var(--green-accent);
+    outline-offset: 3px;
+}
+
+.fc-tema--indisponivel,
+.fc-temas:disabled .fc-tema {
+    cursor: not-allowed;
+}
+
+.fc-tema--indisponivel {
+    opacity: 0.55;
+}
+
+.fc-tema--indisponivel:hover {
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+.fc-tema-cabecalho {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+/* A caixa de marcar tem 24 px e a área clicável é o cartão inteiro (bem acima de 44 px). */
+.fc-tema-cabecalho input {
+    accent-color: var(--green-accent);
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+    margin: 0;
+    cursor: inherit;
+}
+
+.fc-tema-titulo {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.35;
+    padding-top: 0.125rem;
+}
+
+.fc-tema-percentual {
+    flex-shrink: 0;
+    color: var(--green-accent);
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding-top: 0.125rem;
+}
+
+.fc-tema-aviso {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* ---------- Contadores ---------- */
+.fc-contadores {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+}
+
+/* O número vem antes do rótulo na tela; no HTML o rótulo (dt) continua antes do valor (dd). */
+.fc-contador {
+    background-color: var(--inner-box);
+    border-radius: 10px;
+    padding: 0.5rem 0.625rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.125rem;
+}
+
+.fc-contador dt {
+    order: 2;
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+}
+
+.fc-contador dd {
+    order: 1;
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+/* 2 x 2 (Novos | Errados / Em aprendizado | Dominados); 4 em linha só quando cabem os rótulos inteiros. */
+.fc-tema .fc-contadores {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fc-tema .fc-contador dt {
+    overflow-wrap: anywhere;
+}
+
+@container (min-width: 440px) {
+    .fc-tema .fc-contadores {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.fc-contador--aprendendo dd {
+    color: var(--fc-atencao);
+}
+
+.fc-contador--dominados dd {
+    color: var(--green-accent);
+}
+
+.fc-contador--erros dd {
+    color: var(--fc-erro);
+}
+
+/* ---------- Botões ---------- */
+.fc-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.875rem;
+    margin-top: 1.75rem;
+}
+
+/* Barra de ação fixa no pé da seleção: o Começar fica à vista nas listas longas. Fundo opaco, sem desfoque. */
+.fc-selecao > .fc-acoes {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    margin-top: 1.25rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--fc-borda);
+    border-radius: 18px;
+    box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.fc-comecar,
+.fc-secundario,
+.fc-resposta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    min-height: var(--fc-alvo);
+    min-width: var(--fc-alvo);
+    padding: 0.625rem 1.75rem;
+    border-radius: 24px;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.fc-comecar {
+    background-color: var(--green-accent);
+    color: var(--inner-box);
+    border: 1px solid transparent;
+    font-weight: 700;
+}
+
+.fc-comecar:disabled {
+    background-color: #1f2937;
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.fc-comecar[aria-busy="true"] {
+    cursor: progress;
+}
+
+.fc-comecar-aviso {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.fc-motivo {
+    flex-basis: 100%;
+    color: var(--fc-texto-suave);
+    border-left: 4px solid var(--fc-atencao);
+    padding-left: 0.625rem;
+    font-size: 0.9375rem;
+}
+
+.fc-secundario {
+    background-color: #1f2937;
+    color: var(--text-white);
+    border: 1px solid var(--fc-borda);
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.fc-secundario:hover {
+    background-color: #374151;
+}
+
+.pagina-flashcards kbd {
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 1px solid currentColor;
+    border-radius: 5px;
+    padding: 0 0.3125rem;
+    margin-left: 0.375rem;
+    opacity: 0.8;
+}
+
+/* ---------- Sessão de estudo ---------- */
+.fc-sessao-topo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.375rem 1.125rem;
+    margin-bottom: 0.625rem;
+}
+
+.fc-sessao-modo {
+    font-size: 1.0625rem;
+    font-weight: 600;
+}
+
+.fc-sessao-contador {
+    color: var(--fc-texto-suave);
+    font-size: 0.9375rem;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Resultado da última resposta: texto e ícone, nunca só cor. Reserva a altura para o cartão não pular. */
+.fc-feedback {
+    min-height: 1.75rem;
+    margin-top: 0.625rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--fc-texto-suave);
+}
+
+.fc-feedback:not(:empty) {
+    animation: fc-entrada 0.18s ease-out;
+}
+
+.fc-feedback--sabia::before {
+    content: "✓ ";
+    content: "✓ " / "";
+    color: var(--green-accent);
+}
+
+.fc-feedback--nao::before {
+    content: "✕ ";
+    content: "✕ " / "";
+    color: #fca5a5;
+}
+
+.fc-cartao-area {
+    perspective: 1400px;
+    margin: 0.5rem 0 1.375rem;
+}
+
+.fc-cartao {
+    border-radius: 22px;
+}
+
+.fc-cartao:focus-visible {
+    outline: 3px solid var(--green-accent);
+    outline-offset: 4px;
+}
+
+.fc-cartao:not(.is-virado) {
+    cursor: pointer;
+}
+
+.fc-cartao-interno {
+    display: grid;
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fc-cartao.is-virado .fc-cartao-interno {
+    transform: rotateY(180deg);
+}
+
+.fc-cartao.sem-transicao .fc-cartao-interno {
+    transition: none;
+}
+
+/* As duas faces ocupam a mesma célula: a altura acompanha a face maior. */
+.fc-face {
+    grid-area: 1 / 1;
+    min-height: 17.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 22px;
+    padding: 1.875rem 2.125rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    overflow-wrap: anywhere;
+}
+
+.fc-face--verso {
+    transform: rotateY(180deg);
+    border-color: rgba(0, 255, 102, 0.35);
+}
+
+.fc-cartao-tema {
+    color: var(--green-accent);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.fc-cartao-rotulo {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+}
+
+.fc-cartao-texto {
+    font-size: 1.375rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+/* Verso: a resposta ganha a faixa verde; explicação e fonte ficam em camadas abaixo dela. */
+.fc-face--verso .fc-cartao-texto {
+    border-left: 4px solid var(--green-accent);
+    padding-left: 0.875rem;
+}
+
+.fc-cartao-detalhe {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.fc-cartao-explicacao {
+    color: #d1d5db;
+    font-size: 1rem;
+    line-height: 1.55;
+}
+
+.fc-cartao-fonte {
+    margin-top: auto;
+    padding-top: 0.625rem;
+    border-top: 1px solid var(--fc-borda);
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+}
+
+.fc-cartao-imagem img {
+    max-width: 100%;
+    max-height: 13.75rem;
+    border-radius: 12px;
+}
+
+.fc-sessao-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.fc-respostas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.fc-resposta {
+    border: 1px solid transparent;
+    font-weight: 700;
+}
+
+.fc-resposta--nao {
+    background-color: #3b1f24;
+    color: #fca5a5;
+    border-color: rgba(248, 113, 113, 0.45);
+}
+
+.fc-resposta--nao:hover {
+    background-color: #4c2329;
+}
+
+.fc-resposta--sim {
+    background-color: var(--green-accent);
+    color: var(--inner-box);
+}
+
+.fc-resposta:disabled {
+    opacity: 0.55;
+    cursor: progress;
+}
+
+#fc-encerrar {
+    margin-left: auto;
+}
+
+.fc-atalhos {
+    margin-top: 0.875rem;
+}
+
+/* ---------- Resumo ---------- */
+.fc-fim {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 18px;
+    padding: 1.625rem 1.75rem;
+}
+
+.fc-fim h2 {
+    font-size: 1.375rem;
+    margin-bottom: 0.375rem;
+}
+
+.fc-fim h2:focus {
+    outline: none;
+}
+
+.fc-fim .fc-dica {
+    color: var(--text-muted);
+}
+
+.fc-fim-contadores {
+    margin-top: 0.5rem;
+}
+
+.fc-fim-subtitulo {
+    margin-top: 1.125rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+.fc-fim-respostas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Orientação quando há cartões em aprendizado: texto, com a faixa na cor do estado. */
+.fc-orientacao {
+    margin-top: 0.875rem;
+    padding-left: 0.75rem;
+    border-left: 4px solid var(--fc-atencao);
+    color: #d1d5db;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.fc-fim-contadores dd {
+    font-size: 1.625rem;
+}
+
+.fc-fim .fc-motivo {
+    margin-top: 0.75rem;
+}
+
+/* ---------- Confirmação ao usar Voltar do navegador ---------- */
+.fc-dialogo {
+    width: min(92vw, 27.5rem);
+    margin: auto;
+    padding: 1.625rem;
+    color: var(--text-white);
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+}
+
+.fc-dialogo::backdrop {
+    background: rgba(5, 8, 20, 0.7);
+}
+
+.fc-dialogo h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+}
+
+.fc-dialogo p {
+    margin-bottom: 1.125rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.fc-dialogo .fc-acoes {
+    margin-top: 0;
+}
+
+/* ---------- Preferências do usuário ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .fc-barra span,
+    .fc-tema,
+    .fc-modo span,
+    .fc-secundario {
+        transition: none;
+    }
+
+    #fc-estado-selecao,
+    #fc-estado-sessao,
+    #fc-estado-fim,
+    .fc-feedback:not(:empty),
+    .fc-esqueleto {
+        animation: none;
+    }
+
+    /* Sem giro 3D: a face escondida some e a outra aparece no lugar. */
+    .fc-cartao-interno,
+    .fc-cartao.is-virado .fc-cartao-interno,
+    .fc-face--verso {
+        transform: none;
+        transition: none;
+    }
+
+    .fc-face[inert] {
+        visibility: hidden;
+    }
+}
+
+/* Telas de toque: as dicas de teclado não ajudam. */
+@media (pointer: coarse) {
+    .pagina-flashcards kbd,
+    .fc-atalhos {
+        display: none;
+    }
+}
+
+@media (prefers-contrast: more) {
+    .fc-tema,
+    .fc-face,
+    .fc-resumo,
+    .fc-legenda,
+    .fc-fim,
+    .fc-modo span,
+    .fc-secundario {
+        border-color: rgba(255, 255, 255, 0.55);
+    }
+}
+
+@media (forced-colors: active) {
+    .fc-barra {
+        border: 1px solid CanvasText;
+    }
+
+    .fc-barra span {
+        background-color: Highlight;
+    }
+
+    .fc-modo input:checked + span,
+    .fc-tema:has(input:checked) {
+        outline: 2px solid Highlight;
+    }
+}
+
+/* ---------- Telas estreitas (a partir de 360 px) ---------- */
+@media (max-width: 600px) {
+    /* O cabeçalho segue a responsividade comum de menu-temas.css. */
+    .pagina-flashcards .main-container {
+        padding: 0.75rem 1rem 2rem;
+    }
+
+    .pagina-flashcards .top-header-row {
+        gap: 1rem;
+        margin-bottom: 1.375rem;
+    }
+
+    .pagina-flashcards .page-title {
+        font-size: 1.625rem;
+    }
+
+    .fc-resumo {
+        padding: 1.125rem;
+    }
+
+    .fc-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.875rem;
+    }
+
+    /* Cartões de tema mais baixos: número e rótulo na mesma linha. */
+    .fc-tema {
+        padding: 0.875rem 1rem;
+        gap: 0.625rem;
+    }
+
+    .fc-tema .fc-contador {
+        flex-direction: row;
+        align-items: baseline;
+        gap: 0.5rem;
+        padding: 0.375rem 0.625rem;
+    }
+
+    .fc-tema .fc-contador dd {
+        font-size: 1.0625rem;
+    }
+
+    .fc-selecao > .fc-acoes {
+        padding: 0.625rem 0.75rem;
+        gap: 0.5rem 0.75rem;
+        margin-inline: -0.25rem;
+    }
+
+    .fc-face {
+        min-height: 15rem;
+        padding: 1.375rem 1.25rem;
+    }
+
+    .fc-cartao-texto {
+        font-size: 1.1875rem;
+    }
+
+    .fc-sessao-acoes,
+    .fc-respostas,
+    .fc-fim .fc-acoes {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .fc-respostas > *,
+    .fc-sessao-acoes > button,
+    .fc-fim .fc-acoes > * {
+        width: 100%;
+        justify-content: center;
+    }
+
+    #fc-encerrar {
+        margin-left: 0;
+    }
+
+    .fc-fim {
+        padding: 1.25rem 1.125rem;
+    }
+
+    .fc-fim-contadores dd {
+        font-size: 1.375rem;
+    }
+
+    .fc-dialogo .fc-acoes {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
