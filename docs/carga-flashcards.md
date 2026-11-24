@@ -1,5 +1,7 @@
 # Carga de flashcards
 
+Este documento trata da carga do catálogo. Para a visão geral da funcionalidade, a regra Leitner, a API e a tela, veja [flashcards.md](flashcards.md); para o roteiro de teste, [homologacao-task-003.md](homologacao-task-003.md).
+
 Os flashcards ficam em `database/flashcards/tema-NN.json`, um arquivo por tema, com **exatamente 10 cartões** cada. Eles são armazenados como as questões (JSON versionado, código de origem, hash SHA-256 e importação transacional), mas em tabelas próprias: `tbflashcard` (catálogo) e `tbprogresso_flashcard` (caixa de 1 a 3 de cada candidato, na repetição espaçada Leitner). Nada em `tbquestao`, `tbalternativa` ou nas respostas dos exames é alterado.
 
 ## Formato do arquivo
@@ -123,7 +125,7 @@ Invoke-RestMethod "http://localhost:3000/api/flashcards/tema-01-fc01/resultado" 
 
 ## Tela de flashcards
 
-`frontend/pages/flashcards.html` tem três estados: seleção (modo e temas), sessão (cartão com frente e verso, teclas Enter/Espaço para virar e 1/2 para Não sabia/Sabia depois de virar) e resumo (sabia, não sabia, cartões que chegaram à caixa 3 e o atalho para revisar os errados, desabilitado quando não há cartões na caixa 1). `?tema=N` na URL já marca o tema na seleção.
+A tela `frontend/pages/flashcards.html` (seleção, sessão, resumo, retomada ao recarregar, Voltar do navegador, nova tentativa e feedback ao responder) está descrita em [flashcards.md](flashcards.md#modos-de-sessão-e-fluxo-da-tela).
 
 ## Testes
 
