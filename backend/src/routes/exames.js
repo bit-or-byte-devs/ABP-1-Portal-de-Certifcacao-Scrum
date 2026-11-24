@@ -62,7 +62,8 @@ router.get("/progresso", async (req, res) => {
         const idcertificacao = certificacao.rows[0]?.id ?? null;
         if (idcertificacao !== null) await reconciliar(db, idcertificacao);
         const resultadoCertificacao = idcertificacao === null ? null : await db.query(`SELECT c.total_acertos,
-            c.percentual_acertos, c.nota_final, cert.codigo_validacao
+            c.percentual_acertos, c.nota_final, cert.codigo_validacao, cert.data_hora_emissao,
+            cert.nome_completo_emitido, cert.cpf_emitido, cert.email_emitido
             FROM tbcertificacao c LEFT JOIN tbcertificado cert ON cert.idcertificacao=c.id
             WHERE c.id=$1`, [idcertificacao]);
         const { rows: temas } = await db.query(`SELECT t.ordem, t.nome, r.id AS id_resposta,
@@ -91,6 +92,10 @@ router.get("/progresso", async (req, res) => {
             percentual_minimo_certificado: PERCENTUAL_MINIMO_CERTIFICADO,
             apto_certificado: aprovado,
             codigo_validacao: resultadoCertificacao?.rows[0]?.codigo_validacao ?? null,
+            data_hora_emissao: resultadoCertificacao?.rows[0]?.data_hora_emissao ?? null,
+            nome_emitido: resultadoCertificacao?.rows[0]?.nome_completo_emitido ?? null,
+            cpf_emitido: resultadoCertificacao?.rows[0]?.cpf_emitido ?? null,
+            email_emitido: resultadoCertificacao?.rows[0]?.email_emitido ?? null,
         } : null;
         await db.query("COMMIT");
         res.json({ temas, proximo_tema: proximoTema,

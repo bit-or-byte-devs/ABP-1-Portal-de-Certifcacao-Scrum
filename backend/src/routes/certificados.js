@@ -1,8 +1,10 @@
 const express = require("express");
+const path = require("node:path");
 const pool = require("../config/db");
 const PDFDocument = require("pdfkit");
 const QRCode = require("qrcode");
 const { PERCENTUAL_MINIMO_CERTIFICADO } = require("../services/certificacao");
+const { exigirSessao } = require("../middlewares/autenticacao");
 
 const router = express.Router();
 
@@ -20,44 +22,42 @@ function urlConsultaPublica(req, codigo) {
 
 function criarPdfCertificado(certificado, codigo, qr) {
     return new Promise((resolve, reject) => {
-        const pdf = new PDFDocument({ size: "A4", layout: "landscape", margin: 48 });
+        const pdf = new PDFDocument({ size: [1020, 612], margin: 0 });
         const partes = [];
         pdf.on("data", parte => partes.push(parte));
         pdf.on("end", () => resolve(Buffer.concat(partes)));
         pdf.on("error", reject);
 
-        const { width, height } = pdf.page;
-        pdf.rect(24, 24, width - 48, height - 48).lineWidth(3).strokeColor("#123b6d").stroke();
-        pdf.fillColor("#0d2448").font("Helvetica-Bold").fontSize(13)
-            .text("PORTAL BORB - CERTIFICACAO SCRUM", 60, 62, { width: width - 120, align: "center" });
-        pdf.fontSize(30).text("CERTIFICADO", 60, 112, { width: width - 120, align: "center" });
-        pdf.font("Helvetica").fontSize(14).text("Este certificado confirma que", 80, 180, {
-            width: width - 160, align: "center",
-        });
+        const width = 816;
+        const fundo = path.join(__dirname, "../../../imagens/questoes/Certificado2.png");
+        pdf.image(fundo, 0, 0, { width, height: 612 });
+        pdf.rect(816, 0, 204, 612).fill("#f3faf9");
+        pdf.moveTo(816, 0).lineTo(816, 612).lineWidth(2).strokeColor("#14958e").stroke();
+        const escrever = (texto, x, y, w, h, tamanho = 10, alinhamento = "center", negrito = false) => {
+            pdf.fillColor("#173f43").font(negrito ? "Helvetica-Bold" : "Helvetica").fontSize(tamanho)
+                .text(String(texto), x, y, {
+                    width: w, height: h, align: alinhamento, ellipsis: true,
+                    lineBreak: false,
+                });
+        };
+        const emissao = new Date(certificado.data_hora_emissao);
         const nome = certificado.nome_completo_emitido;
-        const opcoesNome = { width: width - 160, align: "center" };
-        let tamanhoNome = 24;
-        pdf.font("Helvetica-Bold").fontSize(tamanhoNome);
-        while (pdf.heightOfString(nome, opcoesNome) > 48) {
-            pdf.fontSize(--tamanhoNome);
-        }
-        pdf.text(nome, 80, 216, opcoesNome);
-        pdf.font("Helvetica").fontSize(13).text("concluiu a certificacao Scrum do Portal BorB.", 80, 270, {
-            width: width - 160, align: "center",
-        });
-        pdf.fontSize(12).text(`Nota final: ${Number(certificado.nota_final_emitida).toFixed(2)} / 100`, 100, 326, {
-            width: width - 200, align: "center",
-        });
-        pdf.text(`Percentual de acertos: ${Number(certificado.percentual_acertos_emitido).toFixed(2)}%`, 100, 350, {
-            width: width - 200, align: "center",
-        });
-        const emissao = new Intl.DateTimeFormat("pt-BR", { dateStyle: "long", timeZone: "UTC" })
-            .format(new Date(certificado.data_hora_emissao));
-        pdf.text(`Emitido em ${emissao}`, 100, 374, { width: width - 200, align: "center" });
-        const linhaRodape = pdf.page.maxY() - 14;
-        pdf.fontSize(8).text(`Codigo de validacao: ${codigo}`, 56, linhaRodape, { width: width - 250 });
-        pdf.image(qr, width - 164, linhaRodape - 118, { width: 112, height: 112 });
-        pdf.fontSize(8).text("Escaneie para validar", width - 186, linhaRodape, { width: 156, align: "center" });
+        let tamanhoNome = 17;
+        pdf.font("Helvetica-Bold");
+        while (tamanhoNome > 10 && pdf.widthOfString(nome, { fontSize: tamanhoNome }) > 508) tamanhoNome--;
+        escrever(nome, 144, 228, 508, 28, tamanhoNome, "center", true);
+        const cpf = String(certificado.cpf_emitido || "").replace(/\D/g, "");
+        escrever(cpf.length === 11 ? cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4") : "CPF não informado", 145, 265, 210, 18, 9);
+        escrever(certificado.email_emitido, 429, 265, 220, 18, 9);
+        escrever(new Intl.DateTimeFormat("pt-BR", { dateStyle: "long", timeZone: "America/Sao_Paulo" }).format(emissao), 220, 363, 185, 21, 10);
+        escrever("Não informada", 430, 363, 190, 21, 10);
+        escrever(new Intl.DateTimeFormat("pt-BR", { timeStyle: "short", timeZone: "America/Sao_Paulo" }).format(emissao), 210, 401, 105, 16, 8);
+        escrever(Number(certificado.nota_final_emitida).toFixed(2), 342, 401, 105, 16, 8);
+        escrever(`${Number(certificado.percentual_acertos_emitido).toFixed(2)}%`, 476, 401, 102, 16, 8);
+        escrever("VALIDAÇÃO DO CERTIFICADO", 830, 378, 176, 28, 10, "center", true);
+        pdf.image(qr, 862, 416, { width: 112, height: 112 });
+        escrever("Escaneie para validar", 830, 536, 176, 18, 9);
+        escrever(`Código ${codigo.slice(0, 12)}`, 830, 558, 176, 16, 7);
         pdf.end();
     });
 }
@@ -88,7 +88,7 @@ router.post("/validar", async (req, res) => {
     }
 });
 
-router.get("/:codigo/pdf", async (req, res) => {
+router.get("/:codigo/pdf", exigirSessao, async (req, res) => {
     res.set("Cache-Control", "no-store");
     const codigo = req.params.codigo.toLowerCase();
     if (!/^[a-f0-9]{64}$/.test(codigo)) {
@@ -96,10 +96,12 @@ router.get("/:codigo/pdf", async (req, res) => {
     }
 
     try {
-        const { rows } = await pool.query(`SELECT nome_completo_emitido, nota_final_emitida,
-            percentual_acertos_emitido, data_hora_emissao FROM tbcertificado
-            WHERE codigo_validacao=$1 AND percentual_acertos_emitido >= $2`,
-        [codigo, PERCENTUAL_MINIMO_CERTIFICADO]);
+        const { rows } = await pool.query(`SELECT cert.nome_completo_emitido, cert.cpf_emitido,
+            cert.email_emitido, cert.nota_final_emitida, cert.percentual_acertos_emitido,
+            cert.data_hora_emissao FROM tbcertificado cert
+            JOIN tbcertificacao c ON c.id=cert.idcertificacao
+            WHERE cert.codigo_validacao=$1 AND cert.percentual_acertos_emitido >= $2 AND c.idcandidato=$3`,
+        [codigo, PERCENTUAL_MINIMO_CERTIFICADO, req.candidato.id]);
         if (!rows.length) return res.status(404).json({ mensagem: "Certificado inválido ou não encontrado." });
 
         const qr = await QRCode.toBuffer(urlConsultaPublica(req, codigo), {
