@@ -349,7 +349,7 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round
     .marca-logo { width: 50px; height: 48px; }
     .marca-logo img { width: 32px; }
     .marca-letra { font-size: 46px; }
-    .marca-texto { font-size: 17px; }
+    .marca-texto { font-size: 18px; }
     .btn-topo { padding: 0 12px; min-height: 38px; font-size: 13px; }
     .btn-topo svg { display: none; }
     .painel { width: calc(100% - 32px); padding: 28px 0 56px; }
