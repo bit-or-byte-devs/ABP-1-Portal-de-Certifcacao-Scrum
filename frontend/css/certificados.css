@@ -592,3 +592,30 @@
         scroll-behavior: auto;
     }
 }
+
+.pagina-certificados .top-nav,
+.pagina-certificados .main-container,
+.pagina-certificados .footer-bar {
+    position: relative;
+    z-index: 1;
+}
+
+.pagina-certificados .btn-dark {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 18px;
+    border: 1px solid rgba(31, 184, 154, 0.45);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-white);
+    font: 600 14px var(--fonte-menu);
+    text-decoration: none;
+    transition: background 0.18s, border-color 0.18s, color 0.18s;
+}
+
+.pagina-certificados .btn-dark:hover {
+    border-color: var(--menu-teal);
+    background: rgba(31, 184, 154, 0.16);
+}
