@@ -1,0 +1,338 @@
+/* Tela de seleção dos flashcards. Usa as variáveis e componentes de menu-temas.css. */
+
+.pagina-flashcards a.btn-nav {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.pagina-flashcards :is(a, button, input):focus-visible {
+    outline: 2px solid var(--green-accent);
+    outline-offset: 3px;
+}
+
+/* Resumo geral */
+.fc-resumo {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 18px;
+    padding: 22px 28px;
+    margin-bottom: 18px;
+}
+
+.fc-resumo h2 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.fc-resumo p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.fc-barra {
+    height: 8px;
+    border-radius: 8px;
+    background-color: var(--inner-box);
+    overflow: hidden;
+}
+
+.fc-barra[hidden] {
+    display: none;
+}
+
+.fc-barra span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background-color: var(--green-accent);
+    transition: width 0.4s ease;
+}
+
+.fc-aviso:empty {
+    display: none;
+}
+
+.fc-aviso {
+    background-color: var(--card-bg);
+    border-left: 3px solid var(--green-accent);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 18px;
+    font-size: 14px;
+}
+
+.fc-aviso--erro {
+    border-left-color: #f87171;
+}
+
+/* Formulário de seleção */
+.fc-selecao fieldset {
+    border: none;
+    min-width: 0;
+}
+
+.fc-selecao legend {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.fc-selecionados {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.fc-modos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.fc-modos legend {
+    width: 100%;
+}
+
+.fc-modo {
+    position: relative;
+    cursor: pointer;
+}
+
+.fc-modo input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+.fc-modo span {
+    display: inline-block;
+    background-color: #1f2937;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-white);
+    padding: 8px 22px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.fc-modo:hover span {
+    background-color: #374151;
+}
+
+.fc-modo input:checked + span {
+    border-color: var(--green-accent);
+    color: var(--green-accent);
+}
+
+.fc-modo input:focus-visible + span {
+    outline: 2px solid var(--green-accent);
+    outline-offset: 3px;
+}
+
+.fc-temas:disabled .fc-grid {
+    opacity: 0.45;
+}
+
+.fc-dica {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    margin-bottom: 12px;
+}
+
+.fc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 18px;
+}
+
+.fc-tema {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 18px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.fc-tema:hover {
+    border-color: rgba(0, 255, 102, 0.3);
+}
+
+.fc-tema:has(input:checked) {
+    border-color: var(--green-accent);
+}
+
+.fc-tema:has(input:focus-visible) {
+    outline: 2px solid var(--green-accent);
+    outline-offset: 3px;
+}
+
+.fc-tema--indisponivel,
+.fc-temas:disabled .fc-tema {
+    cursor: not-allowed;
+}
+
+.fc-tema--indisponivel {
+    opacity: 0.55;
+}
+
+.fc-tema--indisponivel:hover {
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+.fc-tema-cabecalho {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.fc-tema-cabecalho input {
+    accent-color: var(--green-accent);
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.fc-tema-titulo {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.fc-tema-percentual {
+    color: var(--green-accent);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.fc-tema-aviso {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.fc-contadores {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.fc-contador {
+    background-color: var(--inner-box);
+    border-radius: 10px;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 2px;
+}
+
+.fc-contador dt {
+    color: var(--text-muted);
+    font-size: 11.5px;
+}
+
+.fc-contador dd {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.fc-contador--dominados dd {
+    color: var(--green-accent);
+}
+
+.fc-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+.fc-comecar {
+    background-color: var(--green-accent);
+    color: var(--inner-box);
+    border: none;
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.fc-comecar:disabled {
+    background-color: #1f2937;
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.fc-comecar-aviso {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fc-barra span,
+    .fc-tema,
+    .fc-modo span {
+        transition: none;
+    }
+}
+
+/* Cabeçalho, conteúdo e rodapé cabem em telas a partir de 360 px. */
+@media (max-width: 600px) {
+    .pagina-flashcards .top-nav {
+        margin: 12px 16px;
+        padding: 10px 14px;
+    }
+
+    .pagina-flashcards .nav-buttons {
+        gap: 8px;
+    }
+
+    .pagina-flashcards .btn-nav {
+        padding: 8px 14px;
+    }
+
+    .pagina-flashcards .main-container {
+        padding: 12px 16px 32px;
+    }
+
+    .pagina-flashcards .top-header-row {
+        gap: 16px;
+        margin-bottom: 22px;
+    }
+
+    .pagina-flashcards .page-title {
+        font-size: 26px;
+    }
+
+    .fc-resumo {
+        padding: 18px;
+    }
+
+    .fc-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pagina-flashcards .footer-bar,
+    .pagina-flashcards .footer-left,
+    .pagina-flashcards .footer-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .pagina-flashcards .footer-bar {
+        padding: 18px 16px;
+    }
+}

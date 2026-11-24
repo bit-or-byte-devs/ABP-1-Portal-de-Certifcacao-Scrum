@@ -231,6 +231,24 @@ body {
     background-color: #61b844;
 }
 
+.sidebar-actions .btn-flashcards {
+    margin-top: 10px;
+    background-color: transparent;
+    color: #2f7a1f;
+    border: 2px solid #72cc53;
+    font-size: 14px;
+    padding: 10px 0;
+}
+
+.sidebar-actions .btn-flashcards:hover {
+    background-color: #c8ecd9;
+}
+
+.sidebar-actions .btn-exam:focus-visible {
+    outline: 2px solid #111827;
+    outline-offset: 2px;
+}
+
 /* --- Área de Conteúdo Principal --- */
 .content-body {
     background-color: #ddf5eb;

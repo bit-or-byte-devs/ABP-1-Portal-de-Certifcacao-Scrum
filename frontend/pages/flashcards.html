@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BorB - Flashcards</title>
+    <link rel="stylesheet" href="../css/menu-temas.css">
+    <link rel="stylesheet" href="../css/flashcards.css">
+</head>
+<body class="pagina-flashcards">
+
+    <header class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">B</div>
+            <div class="logo-text">
+                <h2>BorB</h2>
+                <small>SCRUM_v0.1</small>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <a class="btn-nav" href="perfil.html">Perfil</a>
+            <button class="btn-nav" type="button" data-logout>Log Out</button>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="top-header-row">
+            <a href="menu.html" class="btn-voltar">&larr; Voltar</a>
+            <h1 class="page-title">Flashcards</h1>
+        </div>
+
+        <section class="fc-resumo" aria-labelledby="fc-resumo-titulo">
+            <h2 id="fc-resumo-titulo">Seu domínio geral</h2>
+            <p id="fc-resumo-texto">Carregando seus flashcards…</p>
+            <div class="fc-barra" id="fc-resumo-barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-labelledby="fc-resumo-titulo" hidden><span></span></div>
+        </section>
+
+        <p id="aviso-flashcards" class="fc-aviso" role="status" aria-live="polite"></p>
+
+        <form id="fc-selecao" class="fc-selecao" hidden>
+            <fieldset class="fc-modos">
+                <legend>Modo de estudo</legend>
+                <label class="fc-modo">
+                    <input type="radio" name="modo" value="tema" checked>
+                    <span>Por tema</span>
+                </label>
+                <label class="fc-modo">
+                    <input type="radio" name="modo" value="aleatorio">
+                    <span>Aleatório geral</span>
+                </label>
+            </fieldset>
+
+            <fieldset class="fc-temas" id="fc-temas">
+                <legend>Escolha os temas <span id="fc-selecionados" class="fc-selecionados"></span></legend>
+                <p class="fc-dica" id="fc-dica-aleatorio" hidden>No modo aleatório geral, os cartões de todos os temas disponíveis entram na sessão.</p>
+                <div class="fc-grid" id="fc-grid"></div>
+            </fieldset>
+
+            <div class="fc-acoes">
+                <button type="submit" class="fc-comecar" id="fc-comecar" disabled aria-describedby="fc-comecar-aviso">Começar</button>
+                <span class="fc-comecar-aviso" id="fc-comecar-aviso">Disponível em breve</span>
+            </div>
+        </form>
+    </main>
+
+    <footer class="footer-bar">
+        <div class="footer-left">
+            <span class="footer-brand">BorB</span>
+            <span class="footer-copy">&copy; 2026 Scrum Learning Platform. Todos os direitos reservados.</span>
+        </div>
+        <div class="footer-right">
+            <span>STATUS: <span class="green-text">SECURE_MATRIX</span></span>
+            <span>FRAMEWORK: <span class="green-text">SCRUM.ORG COMPLIANT</span></span>
+        </div>
+    </footer>
+
+    <script src="../js/logout.js"></script>
+    <script src="../js/sessao-estudos.js"></script>
+    <script src="../js/flashcards.js"></script>
+</body>
+</html>
