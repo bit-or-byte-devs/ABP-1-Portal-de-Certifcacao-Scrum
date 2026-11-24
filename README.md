@@ -27,18 +27,18 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 | **2** | Alta (5) | **US25 - Registrar histórico das respostas:** Como candidato, quero que as tentativas da certificação sejam registradas de forma durável para manter um histórico fiel do que realizei. | 2 | 3 | RF20 / RP04 | Concluída |
 | **3** | Média (3) | **US26 - Consultar histórico da certificação:** Como candidato, quero consultar meu histórico para visualizar as informações das questões que já realizei. | 2 | 3 | RF20 | Concluída |
 | **4** | Alta (5) | **US27 - Calcular resultado final da certificação:** Como candidato, quero que meu resultado seja calculado automaticamente após concluir todos os temas para conhecer meu desempenho na certificação. | 2 | 3 | RF16 | Concluída |
-| **5** | Alta (3) | **US28 - Visualizar resultado da certificação:** Como candidato, quero visualizar meu resultado ao concluir a certificação para conhecer meu desempenho. | 2 | 3 | RF16 / RF17 | Em progresso |
-| **6** | Alta (3) | **US29 - Verificar aprovação para certificação:** Como candidato, quero iniciar a questão de um tema pendente para avançar na certificação. | 2 | 3 | RF17 / RF18 | Em progresso |
-| **7** | Alta (8) | **US30 - Emitir certificado eletrônico:** Como candidato aprovado, quero receber meu certificado eletrônico para comprovar minha aprovação na certificação. | 2 | 3 | RF17 / RF18 | Em progresso |
-| **8** | Alta (5) | **US31 - Gerar QR Code para validação do certificado:** Como candidato aprovado, quero que meu certificado possua um QR Code para permitir a validação de sua autenticidade. | 2 | 3 | RF18 / RP08 | Em progresso |
-| **9** | Alta (3) | **US32 - Acessar validação pública do certificado:** Como pessoa interessada em verificar um certificado, quero acessar sua página de validação através do QR Code para verificar sua autenticidade. | 3 | 3 | RF19 / RP08 | Em progresso |
-| **10** | Alta (5) | **US33 - Validar autenticidade do certificado:** Como pessoa interessada em verificar um certificado, quero saber se o certificado consultado é autêntico para confirmar sua validade. | 3 | 3 | RF19 | Em progresso |
-| **11** | Alta (5) | **US34 - Garantir responsividade da interface:** Como candidato, quero utilizar o portal em diferentes tamanhos de tela para conseguir acessar suas funcionalidades também em dispositivos móveis. | 5 | 3 | RNF01 | Em progresso |
-| **12** | Alta (8) | **US35 - Garantir segurança dos dados e resultados:** Como responsável pelo sistema, quero proteger os dados e resultados da certificação para evitar acessos e alterações indevidas. | 8 | 3 | RNF03 / RNF04 | Em progresso |
+| **5** | Alta (3) | **US28 - Visualizar resultado da certificação:** Como candidato, quero visualizar meu resultado ao concluir a certificação para conhecer meu desempenho. | 2 | 3 | RF16 / RF17 | Concluída |
+| **6** | Alta (3) | **US29 - Verificar aprovação para certificação:** Como candidato, quero iniciar a questão de um tema pendente para avançar na certificação. | 2 | 3 | RF17 / RF18 | Concluída |
+| **7** | Alta (8) | **US30 - Emitir certificado eletrônico:** Como candidato aprovado, quero receber meu certificado eletrônico para comprovar minha aprovação na certificação. | 2 | 3 | RF17 / RF18 | Concluída |
+| **8** | Alta (5) | **US31 - Gerar QR Code para validação do certificado:** Como candidato aprovado, quero que meu certificado possua um QR Code para permitir a validação de sua autenticidade. | 2 | 3 | RF18 / RP08 | Concluída |
+| **9** | Alta (3) | **US32 - Acessar validação pública do certificado:** Como pessoa interessada em verificar um certificado, quero acessar sua página de validação através do QR Code para verificar sua autenticidade. | 3 | 3 | RF19 / RP08 | Concluída |
+| **10** | Alta (5) | **US33 - Validar autenticidade do certificado:** Como pessoa interessada em verificar um certificado, quero saber se o certificado consultado é autêntico para confirmar sua validade. | 3 | 3 | RF19 | Concluída |
+| **11** | Alta (5) | **US34 - Garantir responsividade da interface:** Como candidato, quero utilizar o portal em diferentes tamanhos de tela para conseguir acessar suas funcionalidades também em dispositivos móveis. | 5 | 3 | RNF01 | Concluída |
+| **12** | Alta (8) | **US35 - Garantir segurança dos dados e resultados:** Como responsável pelo sistema, quero proteger os dados e resultados da certificação para evitar acessos e alterações indevidas. | 8 | 3 | RNF03 / RNF04 | Concluída |
 | **13** | Alta (5) | **US38 - Executar aplicação com Docker:** Como equipe de desenvolvimento, queremos executar o portal utilizando containers para padronizar o ambiente da aplicação. | 8 | 3 | RNF07 / RP05 | Concluída |
 | **14** | Média (2) | **US39 - Documentar a aplicação:** Como equipe de desenvolvimento, queremos documentar a aplicação para permitir compreender, instalar e utilizar tecnicamente o projeto. | 2 | 3 | RNF06 | Concluída |
-| **15** | Alta (8) | **Task - Finalizar função de recuperação de senha:** Finalizar a função de recuperação de senha existente no Portal de Certificação Scrum, considerando as pendências identificadas desde a última alteração da feature. | 2 | 3 | RF03 / RF04 | Em progresso |
-| **16** | Alta (3) | **Task-002 - Criar as páginas de Política de Privacidade (LGPD) e Termos de Uso:** Criar as páginas públicas de Política de Privacidade (LGPD) e Termos de Uso do Portal de Certificação Scrum e ligá-las ao cadastro e ao rodapé do menu.| 2 | 3 | RF03 / RF04 | Em progresso |
+| **15** | Alta (8) | **Task - Finalizar função de recuperação de senha:** Finalizar a função de recuperação de senha existente no Portal de Certificação Scrum, considerando as pendências identificadas desde a última alteração da feature. | 2 | 3 | RF03 / RF04 |  Concluída |
+| **16** | Alta (3) | **Task-002 - Criar as páginas de Política de Privacidade (LGPD) e Termos de Uso:** Criar as páginas públicas de Política de Privacidade (LGPD) e Termos de Uso do Portal de Certificação Scrum e ligá-las ao cadastro e ao rodapé do menu.| 2 | 3 | RF03 / RF04 | Concluída |
 ---
 
 ## 📈 Cronograma de Evolução do Projeto
@@ -59,7 +59,7 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 | --- | --- | --- | --- | --- |
 | 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1](https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/blob/main/docs-sprint-1/documento%20Sprint1.pdf) | [Vídeo de Apresentação 1](https://youtu.be/FVt_IMNGXu8) | Concluído |
 | 🔖 **Sprint 2** | 23/10/2026 - 05/11/2026 | [Documentação Sprint 2](https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/blob/main/docs-sprint-1/Documento%20Sprint%202-%20BitorByte.pdf) | [Vídeo de Apresentação 2](https://youtu.be/K_Tbho3OMi8?is=4hczwcMjw8u2Ketj) | Concluído |
-| 🔖 **Sprint 3** | 06/11 - 25/11/2026 | [Documentação Sprint 3](em andamento) | [Vídeo de Apresentação 3](em andamento) | Em andamento |
+| 🔖 **Sprint 3** | 06/11 - 25/11/2026 | [Documentação Sprint 3](https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/blob/main/docs-sprint-1/Sprint%203%20-%20Bit%20or%20Byte.pdf) | [Vídeo de Apresentação 3](em andamento) | Em andamento |
 
 
 ## 💻 Tecnologias Utilizadas
@@ -207,7 +207,7 @@ Observações:
 ## 📂 Link para Pasta de Documentação 
 
 Toda a documentação complementar, checklists, manuais e critérios de qualidade do projeto estão centralizados em nossa pasta oficial:
-👉 https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/blob/main/docs-sprint-1/Documento%20Sprint%202-%20BitorByte.pdf
+👉 https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/blob/main/docs-sprint-1/Sprint%203%20-%20Bit%20or%20Byte.pdf
 
 Para acessar a pasta com a documentação das questões do exame:
 👉 https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/tree/develop/docs/questoes/questoes-pdf
