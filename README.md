@@ -59,7 +59,7 @@ A falta de ferramentas práticas e interativas para mensurar o aprendizado gera 
 | --- | --- | --- | --- | --- |
 | 🔖 **Sprint 1** | 28/09/2026 - 22/10/2026 | [Documentação Sprint 1](https://1drv.ms/w/c/e8fba6c9b965020d/IQDOWyoHSerXRZCcQcG9aSZqAfishYPsgG40xmFV8EMGJ0I) | [Vídeo de Apresentação 1](https://youtu.be/FVt_IMNGXu8) | Concluído |
 | 🔖 **Sprint 2** | 23/10/2026 - 05/11/2026 | [Documentação Sprint 2](https://1drv.ms/w/c/e8fba6c9b965020d/IQAEdC8AzIp_QbojhheMglW7AZ6KTPoo0g9ohUsBH44cuIs) | [Vídeo de Apresentação 2](https://youtu.be/K_Tbho3OMi8?is=4hczwcMjw8u2Ketj) | Concluído |
-| 🔖 **Sprint 3** | 06/11/2026 - 25/11/2026 | [Documentação Sprint 2](https://1drv.ms/w/c/e8fba6c9b965020d/IQAEdC8AzIp_QbojhheMglW7AZ6KTPoo0g9ohUsBH44cuIs) | [Vídeo de Apresentação 2](https://youtu.be/K_Tbho3OMi8?is=4hczwcMjw8u2Ketj) | Concluído |
+| 🔖 **Sprint 3** | 06/11/2026 - 25/11/2026 | [Documentação Sprint 3](https://github.com/bit-or-byte-devs/ABP-1-Portal-de-Certifcacao-Scrum/blob/main/docs-sprint-1/Sprint%203%20-%20Bit%20or%20Byte.pdf) | [Vídeo de Apresentação 3](https://youtu.be/GvxeIV8RmTw) | Concluído |
 
 
 ## 💻 Tecnologias Utilizadas
